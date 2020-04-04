@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">painal</string>
+    <string name="emailHint">Correo o Usuario</string>
+    <string name="passHint">Contraseña</string>
+    <string name="loginBtn">Iniciar Sesión</string>
+    <string name="eres_nuevo_registrate">¿Eres nuevo? Registrate</string>
 </resources>
