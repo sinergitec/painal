@@ -9,4 +9,6 @@
     <color name="colorComplementary">#1547AA</color>
     <color name="colorComplementaryDark">#0D3586</color>
     <color name="colorComplementaryAccent">#082969</color>
+
+    <color name="colorTextWhite">#FFFFFF</color>
 </resources>
