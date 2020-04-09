@@ -25,6 +25,7 @@ public class User {
     @SerializedName("credentialsNonExpired")
     @Expose
     private Boolean credentialsNonExpired;
+
     @SerializedName("enabled")
     @Expose
     private Boolean enabled;
@@ -83,6 +84,20 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("password=").append(password);
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", authorities=").append(authorities);
+        sb.append(", accountNonExpired=").append(accountNonExpired);
+        sb.append(", accountNonLocked=").append(accountNonLocked);
+        sb.append(", credentialsNonExpired=").append(credentialsNonExpired);
+        sb.append(", enabled=").append(enabled);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

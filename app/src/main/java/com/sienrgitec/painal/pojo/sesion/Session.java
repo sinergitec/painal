@@ -41,10 +41,11 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session{" +
-                "mensaje='" + mensaje + '\'' +
-                ", user=" + user +
-                ", token='" + token + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Session{");
+        sb.append("mensaje='").append(mensaje).append('\'');
+        sb.append(", user=").append(user);
+        sb.append(", token='").append(token).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

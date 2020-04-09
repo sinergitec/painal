@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.constante.Constantes;
+import com.sienrgitec.painal.pojo.error.Error;
 import com.sienrgitec.painal.pojo.sesion.Session;
 import com.sienrgitec.painal.servicio.Painal;
 
@@ -68,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Session> call, Response<Session> response) {
                     Session session = response.body();
-                    System.out.println(session.toString());
+                    if(session == null){
+                        System.out.println("Sesion no iniciada");
+                    } else {
+                        System.out.println(session.toString());
+                    }
                 }
 
                 @Override

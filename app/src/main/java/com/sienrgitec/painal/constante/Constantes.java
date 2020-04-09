@@ -1,5 +1,5 @@
 package com.sienrgitec.painal.constante;
 
 public class Constantes {
-    public static final String URL_BASE_WS = "http://localhost:8080/api/";
+    public static final String URL_BASE_WS = "http://10.108.162.210:8080/api/";
 }
