@@ -11,4 +11,5 @@
     <color name="colorComplementaryAccent">#082969</color>
 
     <color name="colorTextWhite">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

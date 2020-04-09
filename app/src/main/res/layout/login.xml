@@ -84,7 +84,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
-        android:text="Recupera contraseña"
+        android:text="@string/forgot"
         android:textColor="@color/colorComplementaryAccent"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

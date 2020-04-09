@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Login -->
+    <string name="app_name">painal</string>
+    <string name="emailHint">Username</string>
+    <string name="passHint">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="eres_nuevo_registrate">Sing up</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="loading">Loading</string>
+
+    <!-- Mensajes error -->
+    <string name="msgErrorUser">Required Username</string>
+    <string name="msgErrorPass">Required Password</string>
+    <string name="msgErrorLogin">Verifique datos</string>
+    <string name="msgErrorWSLogin">Service Not Available</string>
+</resources>

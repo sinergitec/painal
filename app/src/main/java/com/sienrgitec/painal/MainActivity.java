@@ -3,13 +3,13 @@ package com.sienrgitec.painal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.constante.Constantes;
-import com.sienrgitec.painal.pojo.error.Error;
 import com.sienrgitec.painal.pojo.sesion.Session;
 import com.sienrgitec.painal.servicio.Painal;
 
@@ -26,51 +26,50 @@ import static com.sienrgitec.painal.R.id.password;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnLogin;
-    private EditText usuario, contrasena;
+    private EditText usernameET, passwordET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         btnLogin = findViewById(loginBtn);
-        usuario = findViewById(email);
-        contrasena = findViewById(password);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        usernameET = findViewById(email);
+        passwordET = findViewById(password);
+        btnLogin.setOnClickListener(v -> login());
     }
 
     public void login() {
+        String usr = usernameET.getText().toString();
+        String pwd = passwordET.getText().toString();
 
-        String usr = usuario.getText().toString();
-        String pwd = contrasena.getText().toString();
-
-        if(usr == null || usr.isEmpty()){
-            usuario.setError("Usuario requerido");
-            usuario.requestFocus();
+        if(usr.isEmpty()){
+            usernameET.setError(getString(R.string.msgErrorUser));
+            usernameET.requestFocus();
         }
 
-        if(pwd == null || pwd.isEmpty()){
-            contrasena.setError("Contraseña requerida");
-            contrasena.requestFocus();
+        if(pwd.isEmpty()){
+            passwordET.setError(getString(R.string.msgErrorPass));
+            passwordET.requestFocus();
         }
 
-        if(usr != null && !usr.isEmpty() && pwd != null && !pwd.isEmpty()){
-            Retrofit retro = new Retrofit.Builder()
+        if(!usr.isEmpty() && !pwd.isEmpty()){
+
+            final Loading loading = new Loading(MainActivity.this);
+            loading.iniciaDialogo("alert");
+
+            final Retrofit retro = new Retrofit.Builder()
                     .baseUrl(Constantes.URL_BASE_WS)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            final Painal sesion = retro.create(Painal.class);
-            Call<Session> sesionCall = sesion.login(usr,pwd);
-            sesionCall.enqueue(new Callback<Session>() {
+            final Painal session = retro.create(Painal.class);
+            final Call<Session> sessionCall = session.login(usr,pwd);
+            sessionCall.enqueue(new Callback<Session>() {
                 @Override
                 public void onResponse(Call<Session> call, Response<Session> response) {
-                    Session session = response.body();
+                    loading.detenDialogo("alert");
+                    final Session session = response.body();
                     if(session == null){
-                        System.out.println("Sesion no iniciada");
+                        Toast.makeText(MainActivity.this, getString(R.string.msgErrorLogin), Toast.LENGTH_LONG).show();
                     } else {
                         System.out.println(session.toString());
                     }
@@ -78,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Session> call, Throwable t) {
-                    System.out.println("Fallo el llamado al WS");
-                    System.out.println(t.getMessage());
+                    loading.detenDialogo("alert");
+                    Toast.makeText(MainActivity.this, getString(R.string.msgErrorWSLogin), Toast.LENGTH_LONG).show();
                 }
             });
 
         } else
             return;
+
     }
 
 }

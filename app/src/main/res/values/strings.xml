@@ -1,7 +1,17 @@
 <resources>
+    <!-- Inicio Sesion -->
     <string name="app_name">painal</string>
     <string name="emailHint">Correo o Usuario</string>
     <string name="passHint">Contraseña</string>
     <string name="loginBtn">Iniciar Sesión</string>
     <string name="eres_nuevo_registrate">¿Eres nuevo? Registrate</string>
+    <string name="forgot">Recuperar Contraseña</string>
+    <string name="loading">Cargando</string>
+
+
+    <!-- Mensajes error -->
+    <string name="msgErrorUser">Usuario requerido</string>
+    <string name="msgErrorPass">Contraseña requerida</string>
+    <string name="msgErrorLogin">Verifique datos</string>
+    <string name="msgErrorWSLogin">Servicio no disponible</string>
 </resources>
