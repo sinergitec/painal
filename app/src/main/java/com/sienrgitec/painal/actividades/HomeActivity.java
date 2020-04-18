@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home);
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
+        data.put("iplActivo","true");
         final Call<Respuesta> call = service.consulta(data);
 
         call.enqueue(new Callback<Respuesta>() {
@@ -48,14 +49,13 @@ public class HomeActivity extends AppCompatActivity {
                     Respuesta res = response.body();
                     System.out.println(res.toString());
                 } else {
-                    /*try {
+                    try {
                         Errors error = ErrorUtils.parseError(response);
                         Toast.makeText(HomeActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                         Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }*/
-
+                    }
                 }
             }
 
