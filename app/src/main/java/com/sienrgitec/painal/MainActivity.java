@@ -2,12 +2,13 @@ package com.sienrgitec.painal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.sienrgitec.painal.actividades.HomeActivity;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.sesion.Session;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, getString(R.string.msgErrorLogin), Toast.LENGTH_LONG).show();
                     } else {
                         System.out.println(session.toString());
+                        Intent vistaNueva = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(vistaNueva);
                     }
                 }
 
