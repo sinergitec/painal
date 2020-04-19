@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.error.ErrorUtils;
 import com.sienrgitec.painal.pojo.error.Errors;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
@@ -21,6 +24,8 @@ import retrofit2.Response;
 
 
 public class HomeActivity extends AppCompatActivity {
+
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,14 @@ public class HomeActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Respuesta res = response.body();
                     System.out.println(res.toString());
+
+                    rv = findViewById(R.id.rv);
+
+                    LinearLayoutManager llm = new LinearLayoutManager(HomeActivity.this);
+                    rv.setLayoutManager(llm);
+                    RVAdapter adapter = new RVAdapter(res.getResponse().getTtCtGiro().getTtCtGiro());
+                    rv.setAdapter(adapter);
+
                 } else {
                     try {
                         Errors error = ErrorUtils.parseError(response);
