@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.RVAdapter;
+import com.sienrgitec.painal.componente.recycler.GirosAdapter;
 import com.sienrgitec.painal.pojo.error.ErrorUtils;
 import com.sienrgitec.painal.pojo.error.Errors;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
@@ -42,15 +43,12 @@ public class HomeActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     Respuesta res = response.body();
-                    System.out.println(res.toString());
-
                     rv = findViewById(R.id.rv);
-
                     LinearLayoutManager llm = new LinearLayoutManager(HomeActivity.this);
                     rv.setLayoutManager(llm);
-                    RVAdapter adapter = new RVAdapter(res.getResponse().getTtCtGiro().getTtCtGiro());
-                    rv.setAdapter(adapter);
-
+                    GirosAdapter girosAdapter = new GirosAdapter(HomeActivity.this,null);
+                    girosAdapter.setList(res.getResponse().getTtCtGiro().getTtCtGiro());
+                    rv.setAdapter(girosAdapter);
                 } else {
                     try {
                         Errors error = ErrorUtils.parseError(response);

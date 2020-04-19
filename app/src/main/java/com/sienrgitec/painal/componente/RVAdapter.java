@@ -1,41 +1,101 @@
 package com.sienrgitec.painal.componente;
 
-import android.view.LayoutInflater;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ListViewHolder> {
+public abstract class RVAdapter<T> extends RecyclerView.Adapter<RVAdapter.ListViewHolder> {
 
-    private List<TtCtGiro_> list;
+    private List<T> list;
+    private Context context;
+    private OnViewHolderClick<T> listener;
 
-    public RVAdapter(List<TtCtGiro_> list){
+    public interface OnViewHolderClick<T> {
+        void onClick(View view, int position, T item);
+    }
+
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+
+        private Map<Integer, View> views;
+
+        public ListViewHolder(View view, OnViewHolderClick listener) {
+            super(view);
+            views = new HashMap<>();
+            views.put(0, view);
+
+            if (listener != null)
+                view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null)
+                listener.onClick(v, getAdapterPosition(), getItem(getAdapterPosition()));
+        }
+
+        public void initViewList(int[] idList) {
+            for (int id : idList)
+                initViewById(id);
+        }
+
+        public void initViewById(int id) {
+            View view = (getView() != null ? getView().findViewById(id) : null);
+
+            if (view != null)
+                views.put(id, view);
+        }
+
+        public View getView() {
+            return getView(0);
+        }
+
+        public View getView(int id) {
+            if (views.containsKey(id))
+                return views.get(id);
+            else
+                initViewById(id);
+
+            return views.get(id);
+        }
+    }
+
+    protected abstract View createView(Context context, ViewGroup viewGroup, int viewType);
+
+    protected abstract void bindView(T item, RVAdapter.ListViewHolder viewHolder);
+
+    public RVAdapter(Context context){
+        this(context, null);
+    }
+
+    public RVAdapter(Context context, OnViewHolderClick<T> listener) {
+        super();
+        this.context = context;
+        this.listener = listener;
+        list = new ArrayList<>();
+    }
+
+    public RVAdapter(Context context, OnViewHolderClick<T> listener, List<T> list) {
+        super();
+        this.context = context;
+        this.listener = listener;
         this.list = list;
     }
 
-    @NonNull
     @Override
-    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler, parent, false);
-        ListViewHolder lvh = new ListViewHolder(v);
-        return lvh;
+    public ListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        return new ListViewHolder(createView(context, viewGroup, viewType), listener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getCGiro());
-        holder.subTitle.setText("");
-        holder.photo.setImageResource(R.drawable.ic_cafe);
+    public void onBindViewHolder(RVAdapter.ListViewHolder holder, int position) {
+        bindView(getItem(position), holder);
     }
 
     @Override
@@ -43,18 +103,41 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ListViewHolder> {
         return list.size();
     }
 
-    public static class ListViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView title;
-        TextView subTitle;
-        ImageView photo;
+    public T getItem(int index) {
+        return ((list != null && index < list.size()) ? list.get(index) : null);
+    }
 
-        ListViewHolder(View itemView) {
-            super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            title = (TextView)itemView.findViewById(R.id.title);
-            subTitle = (TextView)itemView.findViewById(R.id.subTitle);
-            photo = (ImageView)itemView.findViewById(R.id.photo);
-        }
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public OnViewHolderClick<T> getListener() {
+        return listener;
+    }
+
+    public void setListener(OnViewHolderClick<T> listener) {
+        this.listener = listener;
+    }
+
+    public void addAll(List<T> list) {
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void reset() {
+        this.list.clear();
+        notifyDataSetChanged();
     }
 }
