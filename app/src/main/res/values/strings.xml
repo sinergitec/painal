@@ -8,6 +8,10 @@
     <string name="forgot">Recuperar Contraseña</string>
     <string name="loading">Cargando</string>
 
+    <!-- Home -->
+    <string name="entregar_en">Entregar en:</string>
+    <string name="buscador">Buscador</string>
+
 
     <!-- Mensajes error -->
     <string name="msgErrorUser">Usuario requerido</string>
