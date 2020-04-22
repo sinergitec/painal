@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.actividades.HomeActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.GirosAdapter;
