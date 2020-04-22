@@ -13,6 +13,11 @@
     <string name="entregar_en">Entregar en:</string>
     <string name="buscador">Buscador</string>
 
+    <!-- Menu -->
+    <string name="inicio">Inicio</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="config">Configuración</string>
+
     <!-- Mensajes error -->
     <string name="msgErrorUser">Required Username</string>
     <string name="msgErrorPass">Required Password</string>

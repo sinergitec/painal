@@ -2,16 +2,22 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.GirosAdapter;
+import com.sienrgitec.painal.fragmentos.HomeFragment;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 import com.sienrgitec.painal.pojo.error.ErrorUtils;
@@ -33,59 +39,45 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView rv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-        final Painal service = ServiceGenerator.createService(Painal.class);
-        Map<String, String> data = new HashMap<>();
-        data.put("iplActivo","true");
-        final Call<Respuesta> call = service.consultaGiro(data);
 
-        call.enqueue(new Callback<Respuesta>() {
-            @Override
-            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-                if(response.isSuccessful()){
-                    Respuesta res = response.body();
-                    rv = findViewById(R.id.rv);
-                    LinearLayoutManager llm = new LinearLayoutManager(HomeActivity.this);
-                    rv.setLayoutManager(llm);
-                    GirosAdapter girosAdapter = new GirosAdapter(HomeActivity.this, new RVAdapter.OnViewHolderClick() {
-                        @Override
-                        public void onClick(View view, int position, Object item) {
-                            List<TtCtSubGiro_> listSubGiro = new ArrayList<TtCtSubGiro_>();
-                            for (TtCtSubGiro_ subgiro : res.getResponse().getTtCtSubGiro().getTtCtSubGiro()) {
-                                if(subgiro.getIGiro() == ((TtCtGiro_) item).getIGiro())
-                                    listSubGiro.add(subgiro);
-                            }
-                            System.out.println(listSubGiro.toString());
-                            Intent vistaNueva = new Intent(HomeActivity.this, SubGirosActivity.class);
-                            vistaNueva.putExtra("list", (Serializable) listSubGiro);
-                            startActivity(vistaNueva);
-                        }
-                    });
-                    girosAdapter.setList(res.getResponse().getTtCtGiro().getTtCtGiro());
-                    rv.setAdapter(girosAdapter);
-                } else {
-                    try {
-                        Errors error = ErrorUtils.parseError(response);
-                        Toast.makeText(HomeActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = item -> {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.navigation_shop:
+                        fragment = new HomeFragment();
+                        loadFragment(fragment);
+                        System.out.println("Inicio");
+                        return true;
+                    case R.id.navigation_cart:
+                        /*fragment = new CartFragment();
+                        loadFragment(fragment);*/
+                        System.out.println("Pedidos");
+                        return true;
+                    case R.id.navigation_profile:
+                        /*fragment = new ProfileFragment();
+                        loadFragment(fragment);*/
+                        System.out.println("Configuracion");
+                        return true;
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Respuesta> call, Throwable t) {
-                System.out.println("Error: " + t.getMessage());
-            }
-        });
+                return false;
+            };
 
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }
