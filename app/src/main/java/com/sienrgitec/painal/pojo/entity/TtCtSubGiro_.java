@@ -3,7 +3,9 @@ package com.sienrgitec.painal.pojo.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TtCtSubGiro_ {
+import java.io.Serializable;
+
+public class TtCtSubGiro_ implements Serializable {
     @SerializedName("iGiro")
     @Expose
     private Integer iGiro;

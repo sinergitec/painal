@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".actividades.HomeActivity" />
+        <activity android:name=".actividades.SubGirosActivity" />
     </application>
 
 </manifest>

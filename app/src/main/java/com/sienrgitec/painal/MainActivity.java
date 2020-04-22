@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     if(session == null){
                         Toast.makeText(MainActivity.this, getString(R.string.msgErrorLogin), Toast.LENGTH_LONG).show();
                     } else {
-                        System.out.println(session.toString());
                         Intent vistaNueva = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(vistaNueva);
                     }

@@ -19,6 +19,9 @@ public interface Painal {
     Call<Session> login(@Field("username") String username, @Field("password") String password);
 
     @GET("ctGiro")
-    Call<Respuesta> consulta(@QueryMap Map<String, String> options);
+    Call<Respuesta> consultaGiro(@QueryMap Map<String, String> options);
+
+    @GET("ctGiro")
+    Call<Respuesta> consultaSubGiro(@QueryMap Map<String, String> options);
 
 }

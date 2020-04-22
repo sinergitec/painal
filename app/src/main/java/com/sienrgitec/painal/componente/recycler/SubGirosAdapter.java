@@ -13,12 +13,11 @@ import androidx.cardview.widget.CardView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
-import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
+import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 
-public class GirosAdapter extends RVAdapter<TtCtGiro_> {
-
-    public GirosAdapter(Context context, OnViewHolderClick listener){
-        super(context, listener);
+public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
+    public SubGirosAdapter(Context context, OnViewHolderClick listener) {
+        super(context,listener);
     }
 
     @Override
@@ -29,19 +28,18 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
     }
 
     @Override
-    protected void bindView(TtCtGiro_ item, RVAdapter.ListViewHolder viewHolder) {
+    protected void bindView(TtCtSubGiro_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
             CardView cardView = (CardView) viewHolder.getView(R.id.cv);
-            TextView  title = (TextView)viewHolder.getView(R.id.title);
+            TextView title = (TextView)viewHolder.getView(R.id.title);
             TextView  subTitle = (TextView)viewHolder.getView(R.id.subTitle);
             ImageView photo = (ImageView)viewHolder.getView(R.id.photo);
 
             cardView.setCardBackgroundColor(Color.RED);
-            title.setText(item.getCGiro());
+            title.setText(item.getCSubGiro());
             subTitle.setText("");
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
         }
     }
-
 }
