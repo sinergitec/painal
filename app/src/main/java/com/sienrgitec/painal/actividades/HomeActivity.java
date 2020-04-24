@@ -20,6 +20,10 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
+        }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -41,9 +45,11 @@ public class HomeActivity extends AppCompatActivity {
                         loadFragment(fragment);*/
                         System.out.println("Configuracion");
                         return true;
+                    default:
+                        fragment = new HomeFragment();
+                        loadFragment(fragment);
+                        return true;
                 }
-
-                return false;
             };
 
     private void loadFragment(Fragment fragment) {

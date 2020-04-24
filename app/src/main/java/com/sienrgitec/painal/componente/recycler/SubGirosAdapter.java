@@ -23,7 +23,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
     @Override
     protected View createView(Context context, ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.recycler, viewGroup, false);
+        View view = inflater.inflate(R.layout.recycler_mosaic, viewGroup, false);
         return view;
     }
 
@@ -32,13 +32,11 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
         if (item != null) {
 
             CardView cardView = (CardView) viewHolder.getView(R.id.cv);
-            TextView title = (TextView)viewHolder.getView(R.id.title);
-            TextView  subTitle = (TextView)viewHolder.getView(R.id.subTitle);
-            ImageView photo = (ImageView)viewHolder.getView(R.id.photo);
+            TextView title = (TextView)viewHolder.getView(R.id.titleMosaic);
+            ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
             cardView.setCardBackgroundColor(Color.RED);
             title.setText(item.getCSubGiro());
-            subTitle.setText("");
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
         }
     }
