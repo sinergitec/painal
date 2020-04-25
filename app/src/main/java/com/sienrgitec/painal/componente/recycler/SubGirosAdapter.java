@@ -44,13 +44,13 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
     protected void bindView(TtCtSubGiro_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
-            CardView cardView = (CardView) viewHolder.getView(R.id.cv);
+            //CardView cardView = (CardView) viewHolder.getView(R.id.cv);
             TextView title = (TextView)viewHolder.getView(R.id.titile);
             TextView subTitle = (TextView)viewHolder.getView(R.id.subTitle);
             final RecyclerView rv = (RecyclerView) viewHolder.getView(R.id.rvH);
             //ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
-            cardView.setCardBackgroundColor(Color.RED);
+            //cardView.setCardBackgroundColor(Color.RED);
             title.setText(item.getCSubGiro());
             subTitle.setText("Algo para llevar");
             //new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
