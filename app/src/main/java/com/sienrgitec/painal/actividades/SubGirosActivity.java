@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
@@ -29,7 +30,7 @@ public class SubGirosActivity extends AppCompatActivity {
                 .getSerializableExtra("list");
 
         rvSubGiros = findViewById(R.id.rvSubGrio);
-        GridLayoutManager llm = new GridLayoutManager(SubGirosActivity.this,3);
+        LinearLayoutManager llm = new LinearLayoutManager(SubGirosActivity.this);
         rvSubGiros.setLayoutManager(llm);
         SubGirosAdapter subGirosAdapter = new SubGirosAdapter(SubGirosActivity.this, null);
         subGirosAdapter.setList(list);

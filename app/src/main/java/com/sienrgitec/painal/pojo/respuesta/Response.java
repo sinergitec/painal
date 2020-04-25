@@ -3,6 +3,7 @@ package com.sienrgitec.painal.pojo.respuesta;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
+import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 
 public class Response {
@@ -13,6 +14,9 @@ public class Response {
     @SerializedName("tt_ctSubGiro")
     @Expose
     private TtCtSubGiro ttCtSubGiro;
+    @SerializedName("tt_ctProveedor")
+    @Expose
+    private TtCtProveedor ttCtProveedor;
     @SerializedName("oplError")
     @Expose
     private String oplError;
@@ -52,11 +56,20 @@ public class Response {
         this.opcError = opcError;
     }
 
+    public TtCtProveedor getTtCtProveedor() {
+        return ttCtProveedor;
+    }
+
+    public void setTtCtProveedor(TtCtProveedor ttCtProveedor) {
+        this.ttCtProveedor = ttCtProveedor;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Response{");
         sb.append("ttCtGiro=").append(ttCtGiro);
         sb.append(", ttCtSubGiro=").append(ttCtSubGiro);
+        sb.append(", ttCtProveedor=").append(ttCtProveedor);
         sb.append(", oplError='").append(oplError).append('\'');
         sb.append(", opcError='").append(opcError).append('\'');
         sb.append('}');

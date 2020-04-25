@@ -24,4 +24,7 @@ public interface Painal {
     @GET("ctGiro")
     Call<Respuesta> consultaSubGiro(@QueryMap Map<String, String> options);
 
+    @GET("ctProveedorCli")
+    Call<Respuesta> consultaProveedor(@QueryMap Map<String, String> options);
+
 }
