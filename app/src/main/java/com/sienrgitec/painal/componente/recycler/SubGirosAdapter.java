@@ -23,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.Random;
+
 public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
     public SubGirosAdapter(Context context, OnViewHolderClick listener) {
         super(context,listener);
@@ -46,6 +48,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
             //ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
             //cardView.setCardBackgroundColor(Color.RED);
+            //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCSubGiro());
             subTitle.setText("Algo para llevar");
             //new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
