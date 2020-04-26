@@ -44,7 +44,12 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
             cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCGiro());
             subTitle.setText("");
-            new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+            //new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+            if(item.getCGiro().equals("RESTAURANTES")){
+                photo.setImageResource(R.drawable.ic_mesarestaurante);
+            } else if (item.getCGiro().equals("MERCADOS")){
+                photo.setImageResource(R.drawable.ic_market);
+            }
         }
     }
 
