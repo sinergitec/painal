@@ -13,7 +13,10 @@ import androidx.cardview.widget.CardView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
+import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
+
+import java.util.Random;
 
 public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
 
@@ -36,7 +39,7 @@ public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
             TextView title = (TextView)viewHolder.getView(R.id.titleMosaic);
             ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
-            cardView.setCardBackgroundColor(Color.RED);
+            cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCRazonS());
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
         }
