@@ -35,12 +35,12 @@ public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
     protected void bindView(TtCtProveedor_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
-            CardView cardView = (CardView) viewHolder.getView(R.id.cv);
+            //CardView cardView = (CardView) viewHolder.getView(R.id.cv);
             TextView title = (TextView)viewHolder.getView(R.id.titleMosaic);
             ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
-            cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
-            title.setText(item.getCRazonS());
+            //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
+            title.setText(item.getCNegocio());
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
         }
     }
