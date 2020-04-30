@@ -86,10 +86,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
         data.put("iplActivo","true");
@@ -112,7 +110,6 @@ public class HomeFragment extends Fragment {
                                 if(subgiro.getIGiro() == ((TtCtGiro_) item).getIGiro())
                                     listSubGiro.add(subgiro);
                             }
-                            System.out.println(listSubGiro.toString());
                             Intent vistaNueva = new Intent(getActivity(), SubGirosActivity.class);
                             vistaNueva.putExtra("list", (Serializable) listSubGiro);
                             startActivity(vistaNueva);
@@ -132,8 +129,8 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Respuesta> call, Throwable t) {
-                System.out.println("Error: " + t.getMessage());
+            public void onFailure(Call<Respuesta> call, Throwable t) { ;
+                Toast.makeText(getActivity(), "Error Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
