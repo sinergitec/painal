@@ -23,4 +23,13 @@
     <string name="msgErrorPass">Required Password</string>
     <string name="msgErrorLogin">Verifique datos</string>
     <string name="msgErrorWSLogin">Service Not Available</string>
+
+    <!--Registro-->
+    <string name="registro" >REGISTRO</string>
+    <string name="nombreHint">Nombre</string>
+    <string name="apellidoPHint">Apellido Paterno</string>
+    <string name="apellidoMHint">Apellido Materno</string>
+    <string name="correoHint">Correo electronico</string>
+    <string name="passwordHint">Contraseña</string>
+    <string name="telefonoHint">Telefono Celular</string>
 </resources>

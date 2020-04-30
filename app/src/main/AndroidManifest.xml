@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".actividades.HomeActivity" />
         <activity android:name=".actividades.SubGirosActivity" />
+        <activity android:name=".actividades.RegistroActivity" />
     </application>
 
 </manifest>
