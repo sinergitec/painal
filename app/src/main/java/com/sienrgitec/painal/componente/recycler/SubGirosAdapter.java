@@ -1,11 +1,11 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.RVAdapter;
-import com.sienrgitec.painal.constante.Constantes;
+import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
@@ -25,8 +25,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.util.Random;
 
 public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
     public SubGirosAdapter(Context context, OnViewHolderClick listener) {
@@ -72,7 +70,36 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                         Respuesta res = response.body();
                         LinearLayoutManager llm = new LinearLayoutManager(viewHolder.getView().getContext(), LinearLayoutManager.HORIZONTAL, false);
                         rv.setLayoutManager(llm);
-                        ProveedorAdapter proveedorAdapter = new ProveedorAdapter(viewHolder.getView().getContext(),null);
+                        ProveedorAdapter proveedorAdapter = new ProveedorAdapter(viewHolder.getView().getContext(),new RVAdapter.OnViewHolderClick(){
+                            @Override
+                            public void onClick(View view, int position, Object item) {
+                                System.out.println("Entro en el clic del proveedor");
+                                final Painal service = ServiceGenerator.createService(Painal.class);
+                                final Map<String, String> data = new HashMap<>();
+                                final TtCtProveedor_ proveedor = (TtCtProveedor_) item;
+                                data.put("ipiProveedor",String.valueOf(proveedor.getIProveedor()));
+                                data.put("ipiNivelClasifica","1");
+
+                                final Call<Respuesta> call = service.consultaClasifProveedor(data);
+                                call.enqueue(new Callback<Respuesta>() {
+                                    @Override
+                                    public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                                        if(response.isSuccessful()){
+                                            Respuesta res = response.body();
+                                            System.out.println(res.getResponse().getTtCtCategoriaProv().toString());
+                                        } else {
+                                            Toast.makeText(viewHolder.getView().getContext(), "Error al cargar la lista de productos del proveedor " , Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Respuesta> call, Throwable t) {
+                                        Toast.makeText(viewHolder.getView().getContext(), "Error Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        });
+
                         proveedorAdapter.setList(res.getResponse().getTtCtProveedor().getTtCtProveedor());
                         rv.setAdapter(proveedorAdapter);
                     } else {
@@ -82,7 +109,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
 
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
-                    System.out.println("Error: " + t.getMessage());
+                    Toast.makeText(viewHolder.getView().getContext(), "Error Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
 

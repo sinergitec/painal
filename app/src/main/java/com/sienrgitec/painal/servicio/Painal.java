@@ -27,4 +27,7 @@ public interface Painal {
     @GET("ctProveedorCli")
     Call<Respuesta> consultaProveedor(@QueryMap Map<String, String> options);
 
+    @GET("ctClasificaArt")
+    Call<Respuesta> consultaClasifProveedor(@QueryMap Map<String, String> options);
+
 }
