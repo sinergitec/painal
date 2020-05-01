@@ -1,6 +1,6 @@
 <resources>
     <!-- Inicio Sesion -->
-    <string name="app_name">painal</string>
+    <string name="app_name">Painal</string>
     <string name="emailHint">Correo o Usuario</string>
     <string name="passHint">Contraseña</string>
     <string name="loginBtn">Iniciar Sesión</string>
