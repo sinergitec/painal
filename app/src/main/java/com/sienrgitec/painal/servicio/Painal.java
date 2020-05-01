@@ -30,4 +30,7 @@ public interface Painal {
     @GET("ctClasificaArt")
     Call<Respuesta> consultaClasifProveedor(@QueryMap Map<String, String> options);
 
+    @GET("recuperapw")
+    Call<Respuesta> recuperapw(@QueryMap Map<String, String> options);
+
 }

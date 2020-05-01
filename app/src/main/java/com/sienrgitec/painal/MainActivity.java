@@ -1,10 +1,16 @@
 package com.sienrgitec.painal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.actividades.HomeActivity;
+import com.sienrgitec.painal.actividades.RecuperaPassword;
 import com.sienrgitec.painal.actividades.RegistroActivity;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.constante.Constantes;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.pojo.sesion.Session;
 import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,12 +40,13 @@ import static com.sienrgitec.painal.R.id.email;
 import static com.sienrgitec.painal.R.id.loginBtn;
 import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.registro;
+import static com.sienrgitec.painal.R.id.recupera;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText usernameET, passwordET;
-    private TextView btnRegistro;
+    private TextView btnRegistro, btnRecupera;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -46,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro = findViewById(registro);
         btnLogin.setOnClickListener(v -> login());
         btnRegistro.setOnClickListener(v -> registrate());
+        btnRecupera = findViewById(recupera);
+        btnRecupera.setOnClickListener(v -> recuperaPassword());
     }
 
     public void login() {
@@ -95,11 +110,22 @@ public class MainActivity extends AppCompatActivity {
 
         } else
             return;
-
     }
 
     private void registrate() {
         Intent registrarse = new Intent(MainActivity.this, RegistroActivity.class);
         startActivity(registrarse);
+    }
+
+
+    private void recuperaPassword() {
+        openDialog();
+    }
+
+    private void openDialog() {
+
+        RecuperaPassword recuperaPassword = new RecuperaPassword();
+        recuperaPassword.show(getSupportFragmentManager(),"Recupera Contraseña");
+
     }
 }
