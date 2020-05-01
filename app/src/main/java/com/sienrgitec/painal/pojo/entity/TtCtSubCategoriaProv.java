@@ -3,7 +3,9 @@ package com.sienrgitec.painal.pojo.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TtCtSubCategoriaProv {
+import java.io.Serializable;
+
+public class TtCtSubCategoriaProv implements Serializable {
     @SerializedName("iProveedor")
     @Expose
     private Integer iProveedor;

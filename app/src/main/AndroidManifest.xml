@@ -24,12 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".actividades.RegistroActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".actividades.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".actividades.SubGirosActivity"
             android:parentActivityName=".actividades.HomeActivity"/>
+        <activity android:name=".actividades.ProveedoresActivity"
+            android:parentActivityName=".actividades.SubGirosActivity"/>
 
-        <activity android:name=".actividades.RegistroActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.ProveedoresActivity;
+import com.sienrgitec.painal.actividades.SubGirosActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
@@ -19,6 +22,7 @@ import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,7 +77,6 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                         ProveedorAdapter proveedorAdapter = new ProveedorAdapter(viewHolder.getView().getContext(),new RVAdapter.OnViewHolderClick(){
                             @Override
                             public void onClick(View view, int position, Object item) {
-                                System.out.println("Entro en el clic del proveedor");
                                 final Painal service = ServiceGenerator.createService(Painal.class);
                                 final Map<String, String> data = new HashMap<>();
                                 final TtCtProveedor_ proveedor = (TtCtProveedor_) item;
@@ -86,7 +89,10 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                                     public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                                         if(response.isSuccessful()){
                                             Respuesta res = response.body();
-                                            System.out.println(res.getResponse().getTtCtCategoriaProv().toString());
+                                            Intent vistaNueva = new Intent(view.getContext(), ProveedoresActivity.class);
+                                            vistaNueva.putExtra("listCatProv", (Serializable) res.getResponse().getTtCtCategoriaProv().getTtCtCategoriaProv());
+                                            vistaNueva.putExtra("listSubCatProv", (Serializable) res.getResponse().getTtCtSubCategoria().getTtCtSubCategoriaProv());
+                                            view.getContext().startActivity(vistaNueva);
                                         } else {
                                             Toast.makeText(viewHolder.getView().getContext(), "Error al cargar la lista de productos del proveedor " , Toast.LENGTH_LONG).show();
                                         }
