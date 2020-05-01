@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Login -->
-    <string name="app_name">painal</string>
+    <string name="app_name">Painal</string>
     <string name="emailHint">Username</string>
     <string name="passHint">Password</string>
     <string name="loginBtn">Login</string>
