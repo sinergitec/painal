@@ -28,6 +28,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".actividades.SubGirosActivity"
             android:parentActivityName=".actividades.HomeActivity"/>
+
+        <activity android:name=".actividades.RegistroActivity"/>
     </application>
 
 </manifest>
