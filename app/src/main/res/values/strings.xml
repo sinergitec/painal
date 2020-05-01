@@ -32,6 +32,6 @@
     <string name="correoHint">Correo electronico</string>
     <string name="passwordHint">Contraseña</string>
     <string name="telefonoHint">Telefono Celular</string>
-
+    <string name="registroBtn">Registrarte</string>
 
 </resources>
