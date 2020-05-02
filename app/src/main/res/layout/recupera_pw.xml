@@ -15,15 +15,25 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:autofillHints=""
-        android:background="@drawable/rounded_corners"
         android:ems="10"
         android:hint="@string/correoHint"
         android:inputType="textEmailAddress"
-        android:textColor="@color/colorTextWhite"
+        android:textColor="@color/colorComplementaryAccent"
+        android:textColorHint="@color/colorComplementaryAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:src="@drawable/password_background"
+        android:layout_below="@+id/correo"
+        android:layout_margin="5dip"
+        android:id="@+id/imageView1"
+        tools:ignore="MissingConstraints">
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

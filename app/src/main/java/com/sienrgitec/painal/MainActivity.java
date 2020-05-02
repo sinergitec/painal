@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
         String pwd = passwordET.getText().toString();
 
         if(usr.isEmpty()){
-            usernameET.setError(getString(R.string.msgErrorUser));
+            usernameET.setError("Usuario requerido");
             usernameET.requestFocus();
         }
 
         if(pwd.isEmpty()){
-            passwordET.setError(getString(R.string.msgErrorPass));
+            passwordET.setError("Contraseña requerida");
             passwordET.requestFocus();
         }
 
