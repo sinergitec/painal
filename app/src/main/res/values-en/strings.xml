@@ -23,6 +23,7 @@
     <string name="msgErrorPass">Required Password</string>
     <string name="msgErrorLogin">Verifique datos</string>
     <string name="msgErrorWSLogin">Service Not Available</string>
+    <string name="msgErrorEmail">Correo requerido</string>
 
     <!--Registro-->
     <string name="registro" >REGISTRO</string>
