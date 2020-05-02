@@ -2,6 +2,7 @@ package com.sienrgitec.painal.pojo.respuesta;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
@@ -22,9 +23,12 @@ public class Response {
     @SerializedName("tt_ctCategoriaProv")
     @Expose
     private TtCtCategoriaProv ttCtCategoriaProv;
-    @SerializedName("tt_ctSubCategoria")
+    @SerializedName("tt_ctSubCategoriaProv")
     @Expose
     private TtCtSubCategoria ttCtSubCategoria;
+    @SerializedName("tt_ctArtProveedor")
+    @Expose
+    private TtCtArtProveedor ttCtArtProveedor;
     @SerializedName("oplError")
     @Expose
     private String oplError;
@@ -88,6 +92,14 @@ public class Response {
         this.ttCtSubCategoria = ttCtSubCategoria;
     }
 
+    public TtCtArtProveedor getTtCtArtProveedor() {
+        return ttCtArtProveedor;
+    }
+
+    public void setTtCtArtProveedor(TtCtArtProveedor ttCtArtProveedor) {
+        this.ttCtArtProveedor = ttCtArtProveedor;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Response{");
@@ -96,6 +108,7 @@ public class Response {
         sb.append(", ttCtProveedor=").append(ttCtProveedor);
         sb.append(", ttCtCategoriaProv=").append(ttCtCategoriaProv);
         sb.append(", ttCtSubCategoria=").append(ttCtSubCategoria);
+        sb.append(", ttCtArtProveedor=").append(ttCtArtProveedor);
         sb.append(", oplError='").append(oplError).append('\'');
         sb.append(", opcError='").append(opcError).append('\'');
         sb.append('}');

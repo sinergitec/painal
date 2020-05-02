@@ -89,10 +89,19 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                                     public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                                         if(response.isSuccessful()){
                                             Respuesta res = response.body();
-                                            Intent vistaNueva = new Intent(view.getContext(), ProveedoresActivity.class);
-                                            vistaNueva.putExtra("listCatProv", (Serializable) res.getResponse().getTtCtCategoriaProv().getTtCtCategoriaProv());
-                                            vistaNueva.putExtra("listSubCatProv", (Serializable) res.getResponse().getTtCtSubCategoria().getTtCtSubCategoriaProv());
-                                            view.getContext().startActivity(vistaNueva);
+                                            if(res.getResponse().getTtCtCategoriaProv() != null &&
+                                                    res.getResponse().getTtCtCategoriaProv().getTtCtCategoriaProv() != null &&
+                                                    res.getResponse().getTtCtCategoriaProv().getTtCtCategoriaProv().size() > 0 &&
+                                                    res.getResponse().getTtCtSubCategoria() != null &&
+                                                    res.getResponse().getTtCtSubCategoria().getTtCtSubCategoriaProv() != null &&
+                                                    res.getResponse().getTtCtSubCategoria().getTtCtSubCategoriaProv().size() > 0){
+                                                Intent vistaNueva = new Intent(view.getContext(), ProveedoresActivity.class);
+                                                vistaNueva.putExtra("listCatProv", (Serializable) res.getResponse().getTtCtCategoriaProv().getTtCtCategoriaProv());
+                                                vistaNueva.putExtra("listSubCatProv", (Serializable) res.getResponse().getTtCtSubCategoria().getTtCtSubCategoriaProv());
+                                                view.getContext().startActivity(vistaNueva);
+                                            } else{
+                                                Toast.makeText(viewHolder.getView().getContext(), "Sin productos disponibles" , Toast.LENGTH_LONG).show();
+                                            }
                                         } else {
                                             Toast.makeText(viewHolder.getView().getContext(), "Error al cargar la lista de productos del proveedor " , Toast.LENGTH_LONG).show();
                                         }

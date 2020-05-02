@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.recycler.ProvClasifAdapter;
-import com.sienrgitec.painal.componente.recycler.SubGirosAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoriaProv;
 
@@ -34,7 +33,7 @@ public class ProveedoresActivity  extends AppCompatActivity {
         rvCatProv = findViewById(R.id.rvCatProv);
         LinearLayoutManager llm = new LinearLayoutManager(ProveedoresActivity.this);
         rvCatProv.setLayoutManager(llm);
-        ProvClasifAdapter subGirosAdapter = new ProvClasifAdapter(ProveedoresActivity.this,null, listSubCatProv);
+        ProvClasifAdapter subGirosAdapter = new ProvClasifAdapter(ProveedoresActivity.this, listSubCatProv, null);
         subGirosAdapter.setList(listCatProv);
         rvCatProv.setAdapter(subGirosAdapter);
 
