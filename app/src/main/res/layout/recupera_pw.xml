@@ -26,14 +26,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:src="@drawable/password_background"
-        android:layout_below="@+id/correo"
-        android:layout_margin="5dip"
-        android:id="@+id/imageView1"
-        tools:ignore="MissingConstraints">
-    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
