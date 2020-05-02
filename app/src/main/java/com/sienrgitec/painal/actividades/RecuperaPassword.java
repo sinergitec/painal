@@ -15,7 +15,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RecuperaPassword extends AppCompatDialogFragment {
@@ -46,8 +58,41 @@ public class RecuperaPassword extends AppCompatDialogFragment {
                             userRecupera.requestFocus();
 
                         } else {
+                            final Painal service = ServiceGenerator.createService(Painal.class);
+                            Map<String, String> data = new HashMap<>();
+                            data.put("ipcEmail", usr);
+                            data.put("ipcPersona","5");
+                            final Call<Respuesta> call = service.recuperapw(data);
 
-                            Toast.makeText(getActivity(), "La contraseña es:", Toast.LENGTH_LONG).show();
+                            call.enqueue(new Callback<Respuesta>() {
+                                @Override
+                                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+
+                                    if(response.isSuccessful()) {
+                                        Respuesta res = response.body();
+                                        if (res.getResponse().getOplError().equals("true"))
+                                            System.out.println("Error");
+                                        else {
+                                            if (res.getResponse().getTtCtUsuario() != null
+                                                    && res.getResponse().getTtCtUsuario().getTtCtUsuario().size() > 0) {
+
+                                                System.out.println("La constraseña es:" + res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcPassword());
+                                            }
+                                        }
+                                    }else{
+                                        System.out.println("Error en la respuesta");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Respuesta> call, Throwable t) {
+                                    Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
+
+
                         }
                     }
                 });

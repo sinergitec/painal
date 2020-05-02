@@ -8,6 +8,8 @@ import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
+import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
+import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
 public class Response {
 
@@ -29,6 +31,10 @@ public class Response {
     @SerializedName("tt_ctArtProveedor")
     @Expose
     private TtCtArtProveedor ttCtArtProveedor;
+    @SerializedName("tt_ctUsuario")
+    @Expose
+    private TtCtUsuario ttCtUsuario;
+
     @SerializedName("oplError")
     @Expose
     private String oplError;
@@ -100,18 +106,26 @@ public class Response {
         this.ttCtArtProveedor = ttCtArtProveedor;
     }
 
+    public TtCtUsuario getTtCtUsuario() {
+        return ttCtUsuario;
+    }
+
+    public void setTtCtUsuario(TtCtUsuario ttCtUsuario) {
+        this.ttCtUsuario = ttCtUsuario;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Response{");
-        sb.append("ttCtGiro=").append(ttCtGiro);
-        sb.append(", ttCtSubGiro=").append(ttCtSubGiro);
-        sb.append(", ttCtProveedor=").append(ttCtProveedor);
-        sb.append(", ttCtCategoriaProv=").append(ttCtCategoriaProv);
-        sb.append(", ttCtSubCategoria=").append(ttCtSubCategoria);
-        sb.append(", ttCtArtProveedor=").append(ttCtArtProveedor);
-        sb.append(", oplError='").append(oplError).append('\'');
-        sb.append(", opcError='").append(opcError).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Response{" +
+                "ttCtGiro=" + ttCtGiro +
+                ", ttCtSubGiro=" + ttCtSubGiro +
+                ", ttCtProveedor=" + ttCtProveedor +
+                ", ttCtCategoriaProv=" + ttCtCategoriaProv +
+                ", ttCtSubCategoria=" + ttCtSubCategoria +
+                ", ttCtArtProveedor=" + ttCtArtProveedor +
+                ", ttCtUsuario=" + ttCtUsuario +
+                ", oplError='" + oplError + '\'' +
+                ", opcError='" + opcError + '\'' +
+                '}';
     }
 }

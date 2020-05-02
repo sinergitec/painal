@@ -3,7 +3,7 @@ package com.sienrgitec.painal.pojo.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TtctUsuario {
+public class TtCtUsuario_ {
 
     @SerializedName("cUsuario")
     @Expose
