@@ -32,6 +32,8 @@
             android:parentActivityName=".actividades.HomeActivity"/>
         <activity android:name=".actividades.ProveedoresActivity"
             android:parentActivityName=".actividades.SubGirosActivity"/>
+        <activity android:name=".actividades.ArticuloActivity"
+            android:parentActivityName=".actividades.ProveedoresActivity"/>
 
     </application>
 
