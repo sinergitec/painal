@@ -42,4 +42,14 @@ public class Carrito implements Serializable {
     public void setMonto(Double monto) {
         this.monto = monto;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Carrito{");
+        sb.append("articulo=").append(articulo);
+        sb.append(", cantidadArticulo=").append(cantidadArticulo);
+        sb.append(", monto=").append(monto);
+        sb.append('}');
+        return sb.toString();
+    }
 }

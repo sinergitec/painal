@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -36,9 +37,8 @@ public class HomeActivity extends AppCompatActivity {
                         System.out.println("Inicio");
                         return true;
                     case R.id.navigation_cart:
-                        /*fragment = new CartFragment();
-                        loadFragment(fragment);*/
-                        System.out.println("Pedidos");
+                        fragment = new CarritoFragment();
+                        loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
                         /*fragment = new ProfileFragment();

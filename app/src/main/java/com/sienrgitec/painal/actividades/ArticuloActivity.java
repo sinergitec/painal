@@ -33,7 +33,6 @@ public class ArticuloActivity extends AppCompatActivity {
         ArticulosAdapter articulosAdapter = new ArticulosAdapter(ArticuloActivity.this, null);
         articulosAdapter.setList(listArt);
         rvArt.setAdapter(articulosAdapter);
-
     }
 
 }

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.carrito.CarritoDBHelper;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;

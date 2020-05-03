@@ -108,11 +108,18 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if(db != null) {
             ContentValues valores = new ContentValues();
+            valores.put("_idArt", idArt);
             valores.put("cantidadArticulo", carrito.getCantidadArticulo());
             valores.put("monto", carrito.getMonto());
             db.insert("pedido", null, valores);
             db.close();
         }
+    }
+
+    public void vaciaCarrito(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from pedido");
+        db.execSQL("delete from articulo");
     }
 
     public List<Carrito> recuperarPedidos() {
@@ -121,12 +128,14 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         String[] valores_recuperar = {"_id", "_idArt", "cantidadArticulo", "monto"};
         Cursor c = db.query("pedido", valores_recuperar,
                 null, null, null, null, null, null);
-        c.moveToFirst();
-        do {
-            Carrito carrito = new Carrito(recuperarArticulo(c.getInt(1)),
-                    c.getDouble(2), c.getDouble(3));
-            lista_pedido.add(carrito);
-        } while (c.moveToNext());
+        if(c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                Carrito carrito = new Carrito(recuperarArticulo(c.getInt(1)),
+                        c.getDouble(2), c.getDouble(3));
+                lista_pedido.add(carrito);
+            } while (c.moveToNext());
+        }
         db.close();
         c.close();
         return lista_pedido;
@@ -141,32 +150,32 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
 
         Cursor c = db.query("articulo", valores_recuperar, "_idArt=" + id,
                 null, null, null, null, null);
-        if(c != null) {
-            c.moveToFirst();
-        }
         TtCtArtProveedor_ articulo = new TtCtArtProveedor_();
-        articulo.setIProveedor(c.getInt(1));
-        articulo.setIArticulo(c.getInt(2));
-        articulo.setCArticulo(c.getString(3));
-        articulo.setCAplicaciones(c.getString(4));
-        articulo.setCPresentacion(c.getString(5));
-        articulo.setCDescripcion(c.getString(6));
-        articulo.setIImpuesto(c.getInt(7));
-        articulo.setICategoria(c.getInt(8));
-        articulo.setISubCategoria(c.getInt(9));
-        articulo.setIClasificacion(c.getInt(10));
-        articulo.setISubClasificacion(c.getInt(11));
-        articulo.setIMarca(c.getInt(12));
-        articulo.setLActivo(c.getInt(13) == 1 ? true : false);
-        articulo.setDePeso(c.getDouble(14));
-        articulo.setDeLargo(true);
-        articulo.setDeAncho(c.getDouble(16));
-        articulo.setDeProfundo(c.getDouble(17));
-        articulo.setDtCreado(c.getString(18));
-        articulo.setDtModificado(c.getString(19));
-        articulo.setCUsuCrea(c.getString(20));
-        articulo.setCUsuModifica(c.getString(21));
-        articulo.setDePrecioVta(c.getDouble(22));
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            articulo.setIProveedor(c.getInt(1));
+            articulo.setIArticulo(c.getInt(2));
+            articulo.setCArticulo(c.getString(3));
+            articulo.setCAplicaciones(c.getString(4));
+            articulo.setCPresentacion(c.getString(5));
+            articulo.setCDescripcion(c.getString(6));
+            articulo.setIImpuesto(c.getInt(7));
+            articulo.setICategoria(c.getInt(8));
+            articulo.setISubCategoria(c.getInt(9));
+            articulo.setIClasificacion(c.getInt(10));
+            articulo.setISubClasificacion(c.getInt(11));
+            articulo.setIMarca(c.getInt(12));
+            articulo.setLActivo(c.getInt(13) == 1 ? true : false);
+            articulo.setDePeso(c.getDouble(14));
+            articulo.setDeLargo(true);
+            articulo.setDeAncho(c.getDouble(16));
+            articulo.setDeProfundo(c.getDouble(17));
+            articulo.setDtCreado(c.getString(18));
+            articulo.setDtModificado(c.getString(19));
+            articulo.setCUsuCrea(c.getString(20));
+            articulo.setCUsuModifica(c.getString(21));
+            articulo.setDePrecioVta(c.getDouble(22));
+        }
         db.close();
         c.close();
         return articulo;

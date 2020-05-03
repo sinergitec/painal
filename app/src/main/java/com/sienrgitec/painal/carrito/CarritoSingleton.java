@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.carrito;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 
@@ -30,7 +31,8 @@ public class CarritoSingleton {
         // Persisten en caso de que se salgan de la aplicacion
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         carritoDBHelper.insertarPedido(item);
-        // Dispara la visualizacion del carrito
+        // Se muestra toast
+        Toast.makeText(context, item.getArticulo().getCDescripcion() + " agregado al carrito", Toast.LENGTH_SHORT).show();
     }
 
     public void consultaItemCarrito(Context context){
@@ -38,4 +40,14 @@ public class CarritoSingleton {
         this.listaCarrito = carritoDBHelper.recuperarPedidos();
     }
 
+    public List<Carrito> getListaCarrito() {
+        return listaCarrito;
+    }
+
+    public void vaciarCarrito(Context context){
+        CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
+        carritoDBHelper.vaciaCarrito();
+        // Se muestra toast
+        Toast.makeText(context,"Carrito vacio", Toast.LENGTH_LONG).show();
+    }
 }

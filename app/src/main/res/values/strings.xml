@@ -14,7 +14,7 @@
 
     <!-- Menu -->
     <string name="inicio">Inicio</string>
-    <string name="pedidos">Pedidos</string>
+    <string name="pedidos">Carrito</string>
     <string name="config">Configuración</string>
 
 
@@ -26,7 +26,7 @@
     <string name="msgErrorEmail">Correo requerido</string>
 
     <!-- Registro -->
-    <string name="registro" >REGISTRO</string>
+    <string name="registro">REGISTRO</string>
     <string name="nombreHint">Nombre</string>
     <string name="apellidoPHint">Apellido Paterno</string>
     <string name="apellidoMHint">Apellido Materno</string>
@@ -37,8 +37,11 @@
 
 
     <!-- Recupera contraseña -->
-    <string name="recuperaCon" >RECUPERA CONTRASEÑA</string>
+    <string name="recuperaCon">RECUPERA CONTRASEÑA</string>
     <string name="btnConsulta">Recupera Contraseña</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -272,5 +272,35 @@ public class TtCtArtProveedor_ implements Serializable {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TtCtArtProveedor_{");
+        sb.append("iProveedor=").append(iProveedor);
+        sb.append(", iArticulo=").append(iArticulo);
+        sb.append(", cArticulo='").append(cArticulo).append('\'');
+        sb.append(", cAplicaciones='").append(cAplicaciones).append('\'');
+        sb.append(", cPresentacion='").append(cPresentacion).append('\'');
+        sb.append(", cDescripcion='").append(cDescripcion).append('\'');
+        sb.append(", iImpuesto=").append(iImpuesto);
+        sb.append(", iCategoria=").append(iCategoria);
+        sb.append(", iSubCategoria=").append(iSubCategoria);
+        sb.append(", iClasificacion=").append(iClasificacion);
+        sb.append(", iSubClasificacion=").append(iSubClasificacion);
+        sb.append(", iMarca=").append(iMarca);
+        sb.append(", lActivo=").append(lActivo);
+        sb.append(", bImagen=").append(bImagen);
+        sb.append(", dePeso=").append(dePeso);
+        sb.append(", deLargo=").append(deLargo);
+        sb.append(", deAncho=").append(deAncho);
+        sb.append(", deProfundo=").append(deProfundo);
+        sb.append(", dtCreado='").append(dtCreado).append('\'');
+        sb.append(", dtModificado='").append(dtModificado).append('\'');
+        sb.append(", cUsuCrea='").append(cUsuCrea).append('\'');
+        sb.append(", cUsuModifica='").append(cUsuModifica).append('\'');
+        sb.append(", dePrecioVta=").append(dePrecioVta);
+        sb.append(", id=").append(id);
+        sb.append('}');
+        return sb.toString();
+    }
 }
 
