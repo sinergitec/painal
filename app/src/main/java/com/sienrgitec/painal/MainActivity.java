@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.actividades.HomeActivity;
+import com.sienrgitec.painal.actividades.IngresaPasswordActivity;
 import com.sienrgitec.painal.actividades.RecuperaPassword;
 import com.sienrgitec.painal.actividades.RegistroActivity;
 import com.sienrgitec.painal.componente.Loading;
@@ -78,15 +79,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!usr.isEmpty() && !pwd.isEmpty()){
-
-            final Loading loading = new Loading(MainActivity.this);
-            loading.iniciaDialogo("alert");
-
-            final Retrofit retro = new Retrofit.Builder()
+            /*final Retrofit retro = new Retrofit.Builder()
                     .baseUrl(Constantes.URL_BASE_WS)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            final Painal session = retro.create(Painal.class);
+                    .build();*/
+
+            /* final Painal session = retro.create(Painal.class);
             final Call<Session> sessionCall = session.login(usr,pwd);
             sessionCall.enqueue(new Callback<Session>() {
                 @Override
@@ -106,8 +104,49 @@ public class MainActivity extends AppCompatActivity {
                     loading.detenDialogo("alert");
                     Toast.makeText(MainActivity.this, getString(R.string.msgErrorWSLogin), Toast.LENGTH_LONG).show();
                 }
-            });
+            });*/
 
+            final Painal service = ServiceGenerator.createService(Painal.class);
+            Map<String, String> data = new HashMap<>();
+            data.put("ipcUsuario", usr);
+            data.put("ipcPassword", pwd);
+            final Call<Respuesta> call = service.login(data);
+            call.enqueue(new Callback<Respuesta>() {
+
+                final Loading loading = new Loading(MainActivity.this);
+
+                @Override
+                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                    Respuesta res = response.body();
+                    
+                    if(response.isSuccessful()) {
+                        if (res.getResponse().getOplError().equals("true"))
+                            Toast.makeText(MainActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                        else {
+                            if (res.getResponse().getTtCtUsuario() != null
+                                    && res.getResponse().getTtCtUsuario().getTtCtUsuario().size() > 0) {
+
+                                loading.iniciaDialogo("alert");
+
+                                Toast.makeText(MainActivity.this,
+                                        "BIENVENIDO" + res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcUsuario(),
+                                        Toast.LENGTH_LONG).show();
+
+                                Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(inicio);
+                            }
+                        }
+                    }else{
+                        Toast.makeText(MainActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Respuesta> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    loading.detenDialogo("alert");
+                }
+            });
         } else
             return;
     }
@@ -119,13 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void recuperaPassword() {
-        openDialog();
-    }
-
-    private void openDialog() {
-
-        RecuperaPassword recuperaPassword = new RecuperaPassword();
-        recuperaPassword.show(getSupportFragmentManager(),"Recupera Contraseña");
-
+        Intent ingresaPw = new Intent(MainActivity.this, IngresaPasswordActivity.class);
+        startActivity(ingresaPw);
     }
 }

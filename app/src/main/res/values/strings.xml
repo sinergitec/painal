@@ -35,4 +35,10 @@
     <string name="telefonoHint">Telefono Celular</string>
     <string name="registroBtn">Registrarte</string>
 
+
+    <!-- Recupera contraseña -->
+    <string name="recuperaCon" >RECUPERA CONTRASEÑA</string>
+    <string name="btnConsulta">Recupera Contraseña</string>
+
+
 </resources>
