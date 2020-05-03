@@ -10,7 +10,7 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="10dp"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
         app:cardPreventCornerOverlap="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,32 +29,29 @@
         android:id="@+id/descripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-    <TextView
-        android:id="@+id/presentacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/descripcion"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <TextView
         android:id="@+id/precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/presentacion"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
     <Button
         android:id="@+id/agregar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -64,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/presentacion" />
+        app:layout_constraintTop_toBottomOf="@+id/precio" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
