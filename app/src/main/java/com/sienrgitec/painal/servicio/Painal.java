@@ -14,9 +14,9 @@ import retrofit2.http.QueryMap;
 
 public interface Painal {
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("login")
-    Call<Session> login(@Field("username") String username, @Field("password") String password);
+    Call<Session> login(@Field("username") String username, @Field("password") String password);*/
 
     @GET("ctGiro")
     Call<Respuesta> consultaGiro(@QueryMap Map<String, String> options);
@@ -35,5 +35,10 @@ public interface Painal {
 
     @GET("buscaArticulos")
     Call<Respuesta> consultaArticulos(@QueryMap Map<String, String> options);
+
+    @GET("login")
+    Call<Respuesta> login(@QueryMap Map<String, String> options);
+
+
 
 }
