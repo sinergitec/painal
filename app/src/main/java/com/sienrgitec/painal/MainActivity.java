@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                     Respuesta res = response.body();
-                    
+
                     if(response.isSuccessful()) {
                         if (res.getResponse().getOplError().equals("true"))
                             Toast.makeText(MainActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
