@@ -15,7 +15,7 @@
 
     <!-- Menu -->
     <string name="inicio">Inicio</string>
-    <string name="pedidos">Pedidos</string>
+    <string name="pedidos">Carrito</string>
     <string name="config">Configuración</string>
 
     <!-- Mensajes error -->
