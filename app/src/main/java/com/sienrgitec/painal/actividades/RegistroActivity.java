@@ -1,6 +1,5 @@
 package com.sienrgitec.painal.actividades;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +7,21 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.pojo.entity.TtCtCliente;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
+import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
+import com.sienrgitec.painal.pojo.peticion.DsCtCliente;
+import com.sienrgitec.painal.pojo.peticion.Peticion;
+import com.sienrgitec.painal.pojo.peticion.Request;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
@@ -22,10 +36,8 @@ public class RegistroActivity extends AppCompatActivity {
     private Button btnRegistro;
     private EditText nombreET, aPaternoET, aMaternoET, correoET, pwET, telefonoET;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Dentro de registro");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_usuario);
 
@@ -82,14 +94,82 @@ public class RegistroActivity extends AppCompatActivity {
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !aMaterno.isEmpty() && !correo.isEmpty() && !pw.isEmpty() && !telefono.isEmpty()){
 
-        }
+            TtCtCliente objctCliente = new TtCtCliente();
 
-        System.out.println("nombre" + nombre);
-        System.out.println("aPaterno" + aPaterno);
-        System.out.println("aMaterno" + aMaterno);
-        System.out.println("correo" + correo);
-        System.out.println("pw" + pw);
-        System.out.println("telefono" + telefono);
+            objctCliente.setcClave("");
+            objctCliente.setcNombre(nombre);
+            objctCliente.setcApellidos(aPaterno + aMaterno);
+            objctCliente.setDtRegistro(null);
+            objctCliente.setDtUltCompra(null);
+            objctCliente.setDeUltCompra(null);
+            objctCliente.setDePorcUltComision(null);
+            objctCliente.setDeUltCompra(null);
+            objctCliente.setDePorcUltPropina(null);
+            objctCliente.setDeUltPropina(null);
+            objctCliente.setICPCP(null);
+            objctCliente.setcEmail(correo);
+            objctCliente.setDtCreado(null);
+            objctCliente.setDtModificado(null);
+            objctCliente.setcUsuCrea("");
+            objctCliente.setcUsuModifica("");
+
+            TtCtUsuario_ ObjctUsuario = new TtCtUsuario_();
+            ObjctUsuario.setcUsuario(nombre);
+            ObjctUsuario.setcPassword(pw);
+            ObjctUsuario.setiPersona(0);
+            ObjctUsuario.setiTipoPersona(5);
+            ObjctUsuario.setlActivo(true);
+            ObjctUsuario.setDtCreado(null);
+            ObjctUsuario.setDtModificado(null);
+            ObjctUsuario.setUsuarioC("");
+
+
+            TtCtTelefono objctTelefono = new TtCtTelefono();
+
+            objctTelefono.setiPersona(0);
+            objctTelefono.setiTelefono(0);
+            objctTelefono.setiTipoPersona(5);
+            objctTelefono.setiTipoTelefono(1);
+            objctTelefono.setcTelefono(telefono);
+            objctTelefono.setlActivo(true);
+            objctTelefono.setDtCreado(null);
+            objctTelefono.setDtModificado(null);
+            objctTelefono.setcUsuCrea(null);
+            objctTelefono.setcUsuModifica(null);
+
+            Peticion peticion = new Peticion(new Request(new DsCtCliente(new ArrayList<TtCtCliente>() {
+                {
+                    add(objctCliente);
+                }
+            }, new ArrayList<TtCtUsuario_>() {
+                {
+                    add(ObjctUsuario);
+                }
+            }, new ArrayList<TtCtTelefono>() {
+                {
+                    add(objctTelefono);
+                }
+            } )));
+
+
+
+            final Painal service = ServiceGenerator.createService(Painal.class);
+            final Call<Respuesta> call = service.ctCliente(peticion);
+            //System.out.println(call.);
+
+            call.enqueue(new Callback<Respuesta>() {
+                @Override
+                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                    System.out.println(response.toString());
+                }
+
+                @Override
+                public void onFailure(Call<Respuesta> call, Throwable t) {
+                    System.out.println(t.getMessage());
+                }
+            });
+
+        }
 
     }
 }

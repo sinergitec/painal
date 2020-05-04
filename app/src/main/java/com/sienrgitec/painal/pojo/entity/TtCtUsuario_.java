@@ -37,6 +37,15 @@ public class TtCtUsuario_ {
     @Expose
     private String cUsuCrea;
 
+    @SerializedName("cUsuModifica")
+    @Expose
+    private String cUsuModifica;
+
+    @SerializedName("UsuarioC")
+    @Expose
+    private String UsuarioC;
+
+
     public String getcUsuario() {
         return cUsuario;
     }
@@ -109,7 +118,11 @@ public class TtCtUsuario_ {
         this.cUsuModifica = cUsuModifica;
     }
 
-    @SerializedName("cUsuModifica")
-    @Expose
-    private String cUsuModifica;
+    public String getUsuarioC() {
+        return UsuarioC;
+    }
+
+    public void setUsuarioC(String usuarioC) {
+        UsuarioC = usuarioC;
+    }
 }

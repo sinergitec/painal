@@ -4,10 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
+import com.sienrgitec.painal.pojo.entity.TtCtCliente;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
@@ -34,6 +36,12 @@ public class Response {
     @SerializedName("tt_ctUsuario")
     @Expose
     private TtCtUsuario ttCtUsuario;
+    @SerializedName("tt_ctCliente")
+    @Expose
+    private TtCtCliente ttCtCliente;
+    @SerializedName("tt_ctTelefono")
+    @Expose
+    private TtCtTelefono ttCtTelefono;
 
     @SerializedName("oplError")
     @Expose
@@ -114,6 +122,22 @@ public class Response {
         this.ttCtUsuario = ttCtUsuario;
     }
 
+    public TtCtCliente getTtCtCliente() {
+        return ttCtCliente;
+    }
+
+    public void setTtCtCliente(TtCtCliente ttCtCliente) {
+        this.ttCtCliente = ttCtCliente;
+    }
+
+    public TtCtTelefono getTtCtTelefono() {
+        return ttCtTelefono;
+    }
+
+    public void setTtCtTelefono(TtCtTelefono ttCtTelefono) {
+        this.ttCtTelefono = ttCtTelefono;
+    }
+
     @Override
     public String toString() {
         return "Response{" +
@@ -124,6 +148,8 @@ public class Response {
                 ", ttCtSubCategoria=" + ttCtSubCategoria +
                 ", ttCtArtProveedor=" + ttCtArtProveedor +
                 ", ttCtUsuario=" + ttCtUsuario +
+                ", ttCtCliente=" + ttCtCliente +
+                ", ttCtTelefono=" + ttCtTelefono +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
                 '}';

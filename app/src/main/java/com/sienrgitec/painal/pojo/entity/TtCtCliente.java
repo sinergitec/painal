@@ -89,7 +89,7 @@ public class TtCtCliente {
         this.cClave = cClave;
     }
 
-    public String getcNombre() {
+    public String getcNombre(String nombre) {
         return cNombre;
     }
 
@@ -97,7 +97,7 @@ public class TtCtCliente {
         this.cNombre = cNombre;
     }
 
-    public String getcApellidos() {
+    public String getcApellidos(String s) {
         return cApellidos;
     }
 

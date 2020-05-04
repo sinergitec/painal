@@ -15,17 +15,18 @@ public class ServiceGenerator {
 
     private final static Gson gson = new GsonBuilder().setLenient().create();
 
-    private final static Retrofit.Builder retro = new Retrofit.Builder()
-            .baseUrl(URL_BASE)
-            .addConverterFactory(GsonConverterFactory.create(gson));
-
-    public final static Retrofit retrofit = retro.build();
-
     private final static HttpLoggingInterceptor loggingInterceptor =
             new HttpLoggingInterceptor()
-                    .setLevel(HttpLoggingInterceptor.Level.BASIC);
+                    .setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    private final static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private final static OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
+
+    private final static Retrofit.Builder retro = new Retrofit.Builder()
+            .baseUrl(URL_BASE)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(httpClient.build());
+
+    public final static Retrofit retrofit = retro.build();
 
     public static <S> S createService(Class<S> serviceClass) {
         if (!httpClient.interceptors().contains(loggingInterceptor)) {

@@ -1,11 +1,13 @@
 package com.sienrgitec.painal.servicio;
 
+import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.pojo.sesion.Session;
 
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -38,6 +40,9 @@ public interface Painal {
 
     @GET("login")
     Call<Respuesta> login(@QueryMap Map<String, String> options);
+
+    @POST("ctCliente")
+    Call<Respuesta> ctCliente(@Body Peticion peticion);
 
 
 

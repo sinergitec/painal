@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(registrarse);
     }
 
-
     private void recuperaPassword() {
         Intent ingresaPw = new Intent(MainActivity.this, IngresaPasswordActivity.class);
         startActivity(ingresaPw);

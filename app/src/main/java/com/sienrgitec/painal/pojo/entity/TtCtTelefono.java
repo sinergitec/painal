@@ -21,7 +21,7 @@ public class TtCtTelefono {
     @Expose
     private Integer iTipoTelefono;
 
-    @SerializedName("iTipoTelefono")
+    @SerializedName("cTelefono")
     @Expose
     private String cTelefono;
 
