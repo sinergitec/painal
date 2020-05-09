@@ -43,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
-                        /*fragment = new ProfileFragment();
-                        loadFragment(fragment);*/
+                        fragment = new ConfiguracionFragment();
+                        loadFragment(fragment);
                         System.out.println("Configuracion");
                         return true;
                     default:
