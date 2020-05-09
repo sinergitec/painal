@@ -13,9 +13,17 @@ public class Request {
         this.dsCtCliente = dsCtCliente;
     }
 
+    public Request (DsNvoPedido dsNvoPedido){
+        this.dsNvoPedido = dsNvoPedido;
+    }
+
     @SerializedName("ds_ctCliente")
     @Expose
     private DsCtCliente dsCtCliente;
+
+    @SerializedName("ds_NvoPedido")
+    @Expose
+    private DsNvoPedido dsNvoPedido;
 
     public DsCtCliente getDsCtCliente() {
         return dsCtCliente;
@@ -23,5 +31,13 @@ public class Request {
 
     public void setDsCtCliente(DsCtCliente dsCtCliente) {
         this.dsCtCliente = dsCtCliente;
+    }
+
+    public DsNvoPedido getDsNvoPedido() {
+        return dsNvoPedido;
+    }
+
+    public void setDsNvoPedido(DsNvoPedido dsNvoPedido) {
+        this.dsNvoPedido = dsNvoPedido;
     }
 }

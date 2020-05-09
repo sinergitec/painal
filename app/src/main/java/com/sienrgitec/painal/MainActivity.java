@@ -1,17 +1,10 @@
 package com.sienrgitec.painal;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,12 +12,10 @@ import android.widget.Toast;
 
 import com.sienrgitec.painal.actividades.HomeActivity;
 import com.sienrgitec.painal.actividades.IngresaPasswordActivity;
-import com.sienrgitec.painal.actividades.RecuperaPassword;
 import com.sienrgitec.painal.actividades.RegistroActivity;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
-import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
-import com.sienrgitec.painal.pojo.sesion.Session;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
@@ -34,8 +25,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.sienrgitec.painal.R.id.email;
 import static com.sienrgitec.painal.R.id.loginBtn;
@@ -65,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login() {
+        final Loading loading = new Loading(MainActivity.this);
+        loading.iniciaDialogo("alert");
         String usr = usernameET.getText().toString();
         String pwd = passwordET.getText().toString();
 
@@ -112,13 +103,10 @@ public class MainActivity extends AppCompatActivity {
             data.put("ipcPassword", pwd);
             final Call<Respuesta> call = service.login(data);
             call.enqueue(new Callback<Respuesta>() {
-
-                final Loading loading = new Loading(MainActivity.this);
-
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                     Respuesta res = response.body();
-
+                    loading.detenDialogo("alert");
                     if(response.isSuccessful()) {
                         if (res.getResponse().getOplError().equals("true"))
                             Toast.makeText(MainActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -126,11 +114,12 @@ public class MainActivity extends AppCompatActivity {
                             if (res.getResponse().getTtCtUsuario() != null
                                     && res.getResponse().getTtCtUsuario().getTtCtUsuario().size() > 0) {
 
-                                loading.iniciaDialogo("alert");
-
                                 Toast.makeText(MainActivity.this,
-                                        "BIENVENIDO" + res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcUsuario(),
+                                        "BIENVENIDO " + res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcUsuario(),
                                         Toast.LENGTH_LONG).show();
+
+                                CarritoSingleton.getInstance().setCliente
+                                        (res.getResponse().getTtCtCliente().getTtCtCliente_().get(0));
 
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);

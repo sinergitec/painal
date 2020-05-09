@@ -11,6 +11,7 @@ import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
+import com.sienrgitec.painal.fragmentos.MapsFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -42,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
-                        fragment = new ConfiguracionFragment();
-                        loadFragment(fragment);
+                        /*fragment = new ProfileFragment();
+                        loadFragment(fragment);*/
                         System.out.println("Configuracion");
                         return true;
                     default:

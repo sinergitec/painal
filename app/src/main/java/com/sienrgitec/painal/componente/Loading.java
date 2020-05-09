@@ -2,6 +2,7 @@ package com.sienrgitec.painal.componente;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -16,6 +17,10 @@ public class Loading {
 
     public Loading(Activity activity){
         this.activity = activity;
+    }
+
+    public Loading(Context context){
+        this.activity = (Activity) context;
     }
 
     public void iniciaDialogo(String tipo){

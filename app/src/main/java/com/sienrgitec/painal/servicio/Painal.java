@@ -44,6 +44,7 @@ public interface Painal {
     @POST("ctCliente")
     Call<Respuesta> ctCliente(@Body Peticion peticion);
 
-
+    @POST("opPedidoCrea")
+    Call<Respuesta> creaPedido(@Body Peticion peticion);
 
 }

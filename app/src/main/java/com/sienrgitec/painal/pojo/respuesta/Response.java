@@ -11,7 +11,6 @@ import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
-import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
 public class Response {
 
