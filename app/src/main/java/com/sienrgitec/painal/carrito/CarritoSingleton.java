@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.pojo.carrito.Carrito;
+import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class CarritoSingleton {
 
     private static volatile CarritoSingleton sSoleInstance = new CarritoSingleton();
     private List<Carrito> listaCarrito = new ArrayList<>();
+    private TtCtCliente_ cliente = new TtCtCliente_();
 
     private CarritoSingleton(){
         if (sSoleInstance != null){
@@ -49,5 +51,13 @@ public class CarritoSingleton {
         carritoDBHelper.vaciaCarrito();
         // Se muestra toast
         Toast.makeText(context,"Carrito vacio", Toast.LENGTH_LONG).show();
+    }
+
+    public TtCtCliente_ getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(TtCtCliente_ cliente) {
+        this.cliente = cliente;
     }
 }

@@ -1,21 +1,40 @@
 package com.sienrgitec.painal.fragmentos;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
+import com.sienrgitec.painal.pojo.entity.TtOpPedido;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoDomicilio;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoPago;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoProveedor;
+import com.sienrgitec.painal.pojo.peticion.DsNvoPedido;
+import com.sienrgitec.painal.pojo.peticion.Peticion;
+import com.sienrgitec.painal.pojo.peticion.Request;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
 import com.sienrgitec.painal.util.Funcionalidades;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -69,12 +88,19 @@ public class CarritoFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_carrito, container, false);
         final TextView vaciar = view.findViewById(R.id.vaciar);
+        final Button button = view.findViewById(R.id.realizaPedido);
         cargaInfoCarrito(view);
         vaciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CarritoSingleton.getInstance().vaciarCarrito(v.getContext());
                 cargaInfoCarrito(view);
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realizaPedido(v);
             }
         });
         // Inflate the layout for this fragment
@@ -88,11 +114,7 @@ public class CarritoFragment extends Fragment {
         // Se invoca al llenado de la lista
         CarritoSingleton.getInstance().consultaItemCarrito(view.getContext());
         Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
-        Double totalD = 0.0;
-        for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
-            System.out.println(articulo.toString());
-            totalD += articulo.getMonto();
-        }
+        Double totalD = subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito());
 
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         rvListaCarrito.setLayoutManager(llm);
@@ -102,5 +124,122 @@ public class CarritoFragment extends Fragment {
 
         totalArticulos.setText("Cantidad de articulos: " + sizeList);
         total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
+    }
+
+    private Double subTotalCarrito (List<Carrito> carritoList){
+        Double totalD = 0.0;
+        for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
+            totalD += articulo.getMonto();
+        }
+        return  totalD;
+    }
+
+    private Double totalCarrtio(Double subTotal, Double impuesto){
+        return subTotal * (1+impuesto);
+    }
+
+    private void realizaPedido(View v){
+
+        final TtOpPedido pedido =
+                new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                        "TODAY", "1", "1", String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
+                        String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
+                        "0", "16", String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
+                        "1", "1", "1", "1", "", "",
+                        "NOW", "", "AUTO", "", "", "", "0");
+
+        final TtOpPedidoProveedor opPedidoProveedor = new TtOpPedidoProveedor("0","1","1","TODAY","0",
+                "1",String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
+                String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
+                "16",String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
+                "","FALSE","TRUE","NOW","FALSE",
+                "10","0","0","FALSE","",
+                "0","FALSE","","0","0",
+                "NOW","","AUTO","");
+
+        List<TtOpPedidoDet> listDetalle = new ArrayList<TtOpPedidoDet>();
+        Integer partida = 1;
+        for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
+            listDetalle.add(new TtOpPedidoDet("0",
+                    String.valueOf(partida),
+                    String.valueOf(articulo.getArticulo().getIProveedor()),
+                    "TODAY",
+                    String.valueOf(articulo.getArticulo().getIArticulo()),
+                    articulo.getArticulo().getCArticulo(),
+                    articulo.getArticulo().getCDescripcion(),
+                    "",
+                    "FALSE",
+                    "",
+                    "16",
+                    "",
+                    String.valueOf(articulo.getArticulo().getDePrecioVta()),
+                    "0",
+                    "0",
+                    String.valueOf(articulo.getArticulo().getDePrecioVta()),
+                    String.valueOf(articulo.getCantidadArticulo()),
+                    String.valueOf(articulo.getMonto()),
+                    "0",
+                    "",
+                    "0",
+                    "0",
+                    "",
+                    "NOW",
+                    "",
+                    "AUTO",
+                    ""));
+            partida ++;
+        }
+
+        final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
+                "1",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                "TRUE","NOW","","AUTO","");
+
+        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
+                String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
+                "0","0","0","NOW","",
+                "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                "1","1050125");
+
+        final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
+            {
+                add(pedido);
+            }
+        },
+        new ArrayList<TtOpPedidoProveedor>(){
+            {
+                add(opPedidoProveedor);
+            }
+        }, listDetalle,
+         new ArrayList<TtOpPedidoDomicilio>(){
+             {
+                 add(opPedidoDomicilio);
+             }
+         },
+         new ArrayList<TtOpPedidoPago>(){
+             {
+                 add(opPedidoPago);
+             }
+         })));
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        final Call<Respuesta> call = service.creaPedido(peticion);
+
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(v.getContext(), "Pedido realizado", Toast.LENGTH_LONG).show();
+                    CarritoSingleton.getInstance().vaciarCarrito(v.getContext());
+                } else {
+                    Toast.makeText(v.getContext(), "Pedido no realizado", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }

@@ -7,7 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.pojo.entity.TtCtCliente;
+import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 import com.sienrgitec.painal.pojo.peticion.DsCtCliente;
@@ -94,7 +94,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !aMaterno.isEmpty() && !correo.isEmpty() && !pw.isEmpty() && !telefono.isEmpty()){
 
-            TtCtCliente objctCliente = new TtCtCliente();
+            TtCtCliente_ objctCliente = new TtCtCliente_();
 
             objctCliente.setcClave("");
             objctCliente.setcNombre(nombre);
@@ -137,7 +137,7 @@ public class RegistroActivity extends AppCompatActivity {
             objctTelefono.setcUsuCrea(null);
             objctTelefono.setcUsuModifica(null);
 
-            Peticion peticion = new Peticion(new Request(new DsCtCliente(new ArrayList<TtCtCliente>() {
+            Peticion peticion = new Peticion(new Request(new DsCtCliente(new ArrayList<TtCtCliente_>() {
                 {
                     add(objctCliente);
                 }
