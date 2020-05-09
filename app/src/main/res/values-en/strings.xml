@@ -38,4 +38,29 @@
     <!-- Recupera contraseña -->
     <string name="recuperaCon" >RECUPERA CONTRASEÑA</string>
     <string name="btnConsulta">Recupera Contraseña</string>
+
+    <!-- Menu -->
+    <string name="menu">MENU</string>
+    <string name="perfil">PERFIL</string>
+    <string name="contacto2">CONTACTO</string>
+    <string name="family">FAMILY</string>
+    <string name="referidos">REFERIDOS</string>
+
+    <!-- Crea contacto -->
+    <string name="contacto" >REGISTRO DE CONTACTO</string>
+
+    <!-- Perfil -->
+    <string name="titlePerfil">PERFIL</string>
+
+    <!-- Family -->
+    <string name="titleFamily">REGISTRO FAMILY</string>
+    <string name="descFamily">Personas que pueden pedir con tu cuenta</string>
+
+    <!-- Referidos  -->
+    <string name="titleRef">REFERIDOS</string>
+    <string name="regRef">REGISTRO DE REFERIDOS</string>
+    <string name="agregar">Agregar</string>
+    <string name="sw">Esta Afiliado</string>
+    <string name="btnReferir">Guardar</string>
+
 </resources>
