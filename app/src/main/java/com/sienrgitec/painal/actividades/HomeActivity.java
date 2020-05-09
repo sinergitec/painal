@@ -11,7 +11,6 @@ import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
-import com.sienrgitec.painal.fragmentos.MapsFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
