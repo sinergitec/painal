@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 CarritoSingleton.getInstance().setCliente
                                         (res.getResponse().getTtCtCliente().getTtCtCliente_().get(0));
+                                CarritoSingleton.getInstance().setUsuario_
+                                        (res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0));
 
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);

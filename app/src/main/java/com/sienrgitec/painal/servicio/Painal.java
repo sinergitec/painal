@@ -47,4 +47,7 @@ public interface Painal {
     @POST("opPedidoCrea")
     Call<Respuesta> creaPedido(@Body Peticion peticion);
 
+    @POST("ctDomicilio")
+    Call<Respuesta> creaDomicilio(@Body Peticion peticion);
+
 }

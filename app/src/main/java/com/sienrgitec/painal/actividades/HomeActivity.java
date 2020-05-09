@@ -10,7 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
-import com.sienrgitec.painal.fragmentos.MapsFragment;
+import com.sienrgitec.painal.fragmentos.MapaFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
-                        fragment = new MapsFragment();
+                        fragment = new MapaFragment();
                         loadFragment(fragment);
                         return true;
                     default:
