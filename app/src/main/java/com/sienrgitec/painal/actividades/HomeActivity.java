@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
@@ -41,8 +42,8 @@ public class HomeActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
-                        /*fragment = new ProfileFragment();
-                        loadFragment(fragment);*/
+                        fragment = new ConfiguracionFragment();
+                        loadFragment(fragment);
                         System.out.println("Configuracion");
                         return true;
                     default:

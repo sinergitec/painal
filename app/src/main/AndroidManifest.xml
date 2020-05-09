@@ -36,6 +36,13 @@
             android:parentActivityName=".actividades.SubGirosActivity"/>
         <activity android:name=".actividades.ArticuloActivity"
             android:parentActivityName=".actividades.ProveedoresActivity"/>
+        <activity android:name=".actividades.ContactoActivity"   />
+        <activity android:name=".actividades.ContactoListActivity"   />
+        <activity android:name=".actividades.PerfilActivity"   />
+        <activity android:name=".actividades.ReferidosListActivity"   />
+        <activity android:name=".actividades.ReferidosActivity"   />
+        <activity android:name=".actividades.FamilyActivity"   />
+        <activity android:name=".actividades.FamilyListActivity"   />
 
     </application>
 
