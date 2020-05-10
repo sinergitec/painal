@@ -48,13 +48,19 @@
 
     <!-- Crea contacto -->
     <string name="contacto" >REGISTRO DE CONTACTO</string>
+    <string name="obs">Observaciones</string>
 
     <!-- Perfil -->
     <string name="titlePerfil">PERFIL</string>
 
     <!-- Family -->
-    <string name="titleFamily">REGISTRO FAMILY</string>
+    <string name="titleFamily">CLIENTES AUTORIZADOS</string>
+    <string name="titleFam">REGISTRO DE CLIENTES AUTORIZADOS</string>
     <string name="descFamily">Personas que pueden pedir con tu cuenta</string>
+    <string name="edad">Edad</string>
+    <string name="parentesco">Parentesco</string>
+    <string name="sw1">Solicita Autorizacion</string>
+    <string name="btnFamily">Guardar</string>
 
     <!-- Referidos  -->
     <string name="titleRef">REFERIDOS</string>

@@ -21,6 +21,19 @@ public class Request {
         this.dsCtDomicilio = dsCtDomicilio;
     }
 
+    public Request (DsCtContacto dsCtContacto) {
+        this.dsCtContacto = dsCtContacto;
+    }
+
+    public Request (DsCtClienteAutorizados dsAutorizados) {
+        this.dsAutorizados = dsAutorizados;
+    }
+
+    public Request (DsOpClienteReferidos dsClienteRef) {
+        this.dsClienteRef = dsClienteRef;
+    }
+
+
     @SerializedName("ds_ctCliente")
     @Expose
     private DsCtCliente dsCtCliente;
@@ -32,6 +45,18 @@ public class Request {
     @SerializedName("ds_ctDomicilio")
     @Expose
     private DsCtDomicilio dsCtDomicilio;
+
+    @SerializedName("ds_ctContacto")
+    @Expose
+    private DsCtContacto dsCtContacto;
+
+    @SerializedName("ds_ClienteRef")
+    @Expose
+    private DsOpClienteReferidos dsClienteRef;
+
+    @SerializedName("ds_Autorizados")
+    @Expose
+    private DsCtClienteAutorizados dsAutorizados;
 
     public DsCtCliente getDsCtCliente() {
         return dsCtCliente;
@@ -57,4 +82,27 @@ public class Request {
         this.dsCtDomicilio = dsCtDomicilio;
     }
 
+    public DsCtContacto getDsCtContacto() {
+        return dsCtContacto;
+    }
+
+    public void setDsCtContacto(DsCtContacto dsCtContacto) {
+        this.dsCtContacto = dsCtContacto;
+    }
+
+    public DsOpClienteReferidos getDsClienteRef() {
+        return dsClienteRef;
+    }
+
+    public void setDsClienteRef(DsOpClienteReferidos dsClienteRef) {
+        this.dsClienteRef = dsClienteRef;
+    }
+
+    public DsCtClienteAutorizados getDsAutorizados() {
+        return dsAutorizados;
+    }
+
+    public void setDsAutorizados(DsCtClienteAutorizados dsAutorizados) {
+        this.dsAutorizados = dsAutorizados;
+    }
 }

@@ -50,4 +50,13 @@ public interface Painal {
     @POST("ctDomicilio")
     Call<Respuesta> creaDomicilio(@Body Peticion peticion);
 
+    @POST("ctContacto")
+    Call<Respuesta> ctContacto(@Body Peticion peticion);
+
+    @POST("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizado(@Body Peticion peticion);
+
+    @POST("opClienteReferidos")
+    Call<Respuesta> opClienteReferidos(@Body Peticion peticion);
+
 }
