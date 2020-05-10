@@ -142,12 +142,17 @@ public class CarritoFragment extends Fragment {
 
         final TtOpPedido pedido =
                 new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                        "TODAY", "1", "1", String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
+                        "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()),
+                        String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         "0", "16", String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                         "1", "1", "1", "1", "", "",
-                        "NOW", "", "AUTO", "", "", "", "0");
+                        "NOW", "", "AUTO", "", CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
+                        CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0");
 
+        List<TtOpPedidoProveedor> listaOpPedidoProveedor = new ArrayList<>();
+        List<TtOpPedidoDet> listaOpPedidoDet = new ArrayList<>();
+        
         final TtOpPedidoProveedor opPedidoProveedor = new TtOpPedidoProveedor("0","1","1","TODAY","0",
                 "1",String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
                 String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
