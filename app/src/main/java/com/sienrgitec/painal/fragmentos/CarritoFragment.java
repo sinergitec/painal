@@ -141,7 +141,7 @@ public class CarritoFragment extends Fragment {
     private void realizaPedido(View v){
 
         final TtOpPedido pedido =
-                new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                new TtOpPedido("1", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                         "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()),
                         String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
@@ -155,11 +155,11 @@ public class CarritoFragment extends Fragment {
 
         llenaListaOpPedidoProveedorYOpPedidoDet(listaOpPedidoProveedor, listaOpPedidoDet);
 
-        final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
+        final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("2",
                 "1",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "TRUE","NOW","","AUTO","");
 
-        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
+        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("3","1","1",
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                 "0","0","0","NOW","",
                 "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
@@ -217,7 +217,7 @@ public class CarritoFragment extends Fragment {
             Double totalPedidoProveedor = 0.0;
             for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
                 if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0){
-                    listDetalle.add(new TtOpPedidoDet("0",
+                    listDetalle.add(new TtOpPedidoDet(String.valueOf(partida * 4),
                             String.valueOf(partida),
                             String.valueOf(proveedorPedido),
                             "TODAY",
@@ -249,7 +249,7 @@ public class CarritoFragment extends Fragment {
                 }
             }
 
-            listaOpPedidoProveedor.add(new TtOpPedidoProveedor("0",String.valueOf(proveedorPedido),
+            listaOpPedidoProveedor.add(new TtOpPedidoProveedor(String.valueOf(proveedorPedido * 6),String.valueOf(proveedorPedido),
                     String.valueOf(CarritoSingleton.getInstance().getPilaProveedores().get(i)),
                     "TODAY","0",
                     "1",String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
