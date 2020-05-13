@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.ArticuloDetalleActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 import com.sienrgitec.painal.util.Funcionalidades;
+
+import java.io.Serializable;
 
 public class ArticulosAdapter extends RVAdapter<TtCtArtProveedor_> {
 
@@ -51,6 +55,11 @@ public class ArticulosAdapter extends RVAdapter<TtCtArtProveedor_> {
                 }
             });
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+            photo.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), ArticuloDetalleActivity.class);
+                intent.putExtra("articulo", (Serializable) item);
+                v.getContext().startActivity(intent);
+            });
         }
     }
 }
