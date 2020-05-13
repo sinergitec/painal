@@ -41,11 +41,11 @@ public class ArticulosAdapter extends RVAdapter<TtCtArtProveedor_> {
 
             descripcion.setText(item.getCDescripcion());
             //presentacion.setText(item.getCPresentacion());
-            precio.setText(Funcionalidades.retornaDoubleEnMoneda(item.getDePrecioVta()));
+            precio.setText(Funcionalidades.retornaDoubleEnMoneda(item.getDePrecioVtaPza()));
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Carrito carrito = new Carrito(item, 1.0, item.getDePrecioVta());
+                    Carrito carrito = new Carrito(item, 1.0, item.getDePrecioVtaPza());
                     carrito.setMonto(carrito.getCantidadArticulo() * carrito.getMonto());
                     CarritoSingleton.getInstance().agregaCarrito(v.getContext(), carrito);
                 }

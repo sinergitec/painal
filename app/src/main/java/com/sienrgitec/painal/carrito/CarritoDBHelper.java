@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CarritoDBHelper extends SQLiteOpenHelper {
 
-    private static final int VERSION_BASEDATOS = 1;
+    private static final int VERSION_BASEDATOS = 2;
 
     // Nombre de nuestro archivo de base de datos
     private static final String NOMBRE_BASEDATOS = "carrito.db";
@@ -25,28 +25,37 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
 
     private static final String TABLA_ARTICULO = "CREATE TABLE articulo (\n" +
             "    _idArt INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    iProveedor INT,    \n" +
-            "    iArticulo INT,    \n" +
-            "    cArticulo TEXT,    \n" +
-            "    cAplicaciones TEXT,\n" +
-            "    cPresentacion TEXT,\n" +
-            "    cDescripcion TEXT,\n" +
-            "    iImpuesto INT,\n" +
-            "    iCategoria INT,\n" +
-            "    iSubCategoria INT,\n" +
-            "    iClasificacion INT,\n" +
-            "    iSubClasificacion INT,\n" +
-            "    iMarca INT,\n" +
-            "    lActivo INT,\n" +
-            "    dePeso DECIMAL(10,2) ,\n" +
-            "    deLargo DECIMAL(10,2) ,\n" +
-            "    deAncho DECIMAL(10,2) ,\n" +
-            "    deProfundo DECIMAL(10,2) ,\n" +
-            "    dtCreado TEXT ,\n" +
-            "    dtModificado TEXT ,\n" +
-            "    cUsuCrea TEXT ,\n" +
-            "    cUsuModifica TEXT ,\n" +
-            "    dePrecioVta DECIMAL(10,2)\n" +
+            "iProveedor INT, " +
+            "iArticulo INT, " +
+            "cArticulo TEXT, " +
+            "cAplicaciones TEXT, " +
+            "cPresentacion TEXT, " +
+            "cDescripcion TEXT, " +
+            "iImpuesto INT, " +
+            "iCategoria INT, " +
+            "iSubCategoria INT, " +
+            "iClasificacion INT, " +
+            "iSubClasificacion INT,  " +
+            "iMarca INT, " +
+            "lActivo INT, " +
+            "lAgotado INT, " +
+            "dePeso DECIMAL(10,2) , " +
+            "deLargo DECIMAL(10,2) , " +
+            "deAncho DECIMAL(10,2) , " +
+            "deProfundo DECIMAL(10,2) , " +
+            "cUsuCrea TEXT, " +
+            "cUsuModifica TEXT, " +
+            "dePrecioVtaPza DECIMAL(10,2) , " +
+            "deImpuestoPza DECIMAL(10,2) , " +
+            "dePrecioVtaGranel DECIMAL(10,2) , " +
+            "deImpuestoGranel DECIMAL(10,2) , " +
+            "iUMedida INT, " +
+            "cUnidadM TEXT, " +
+            "cMarca TEXT, " +
+            "cCategoria TEXT, " +
+            "cSubCategoria TEXT, " +
+            "cClasificacion TEXT, " +
+            "cSubClasificacion TEXT " +
             ")";
 
     // CONSTRUCTOR de la clase
@@ -72,28 +81,37 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         long idArt = 0L;
         if(db != null){
             ContentValues valores = new ContentValues();
-            valores.put("iProveedor", articulo.getIProveedor());
-            valores.put("iArticulo", articulo.getIArticulo());
-            valores.put("cArticulo", articulo.getCArticulo());
-            valores.put("cAplicaciones", articulo.getCAplicaciones());
-            valores.put("cPresentacion", articulo.getCPresentacion());
-            valores.put("cDescripcion", articulo.getCDescripcion());
-            valores.put("iImpuesto", articulo.getIImpuesto());
-            valores.put("iCategoria", articulo.getICategoria());
-            valores.put("iSubCategoria", articulo.getISubCategoria());
-            valores.put("iClasificacion", articulo.getIClasificacion());
-            valores.put("iSubClasificacion", articulo.getISubClasificacion());
-            valores.put("iMarca", articulo.getIMarca());
-            valores.put("lActivo", articulo.getLActivo() ? 1 : 0);
-            valores.put("dePeso", articulo.getDePeso());
-            valores.put("deLargo", articulo.getDeLargo());
-            valores.put("deAncho", articulo.getDeAncho());
-            valores.put("deProfundo", articulo.getDeProfundo());
-            valores.put("dtCreado", articulo.getDtCreado());
-            valores.put("dtModificado", articulo.getDtModificado());
-            valores.put("cUsuCrea", articulo.getCUsuCrea());
-            valores.put("cUsuModifica", articulo.getCUsuModifica());
-            valores.put("dePrecioVta", articulo.getDePrecioVta());
+            valores.put("iProveedor",articulo.getIProveedor());
+            valores.put("iArticulo",articulo.getIArticulo());
+            valores.put("cArticulo",articulo.getCArticulo());
+            valores.put("cAplicaciones",articulo.getCAplicaciones());
+            valores.put("cPresentacion",articulo.getCPresentacion());
+            valores.put("cDescripcion",articulo.getCDescripcion());
+            valores.put("iImpuesto",articulo.getIImpuesto());
+            valores.put("iCategoria",articulo.getICategoria());
+            valores.put("iSubCategoria",articulo.getISubCategoria());
+            valores.put("iClasificacion",articulo.getIClasificacion());
+            valores.put("iSubClasificacion",articulo.getISubClasificacion());
+            valores.put("iMarca",articulo.getIMarca());
+            valores.put("lActivo",articulo.getLActivo());
+            valores.put("lAgotado",articulo.getLAgotado());
+            valores.put("dePeso",articulo.getDePeso());
+            valores.put("deLargo",articulo.getDeLargo());
+            valores.put("deAncho",articulo.getDeAncho());
+            valores.put("deProfundo",articulo.getDeProfundo());
+            valores.put("cUsuCrea",articulo.getCUsuCrea());
+            valores.put("cUsuModifica",articulo.getCUsuModifica());
+            valores.put("dePrecioVtaPza",articulo.getDePrecioVtaPza());
+            valores.put("deImpuestoPza",articulo.getDeImpuestoPza());
+            valores.put("dePrecioVtaGranel",articulo.getDePrecioVtaGranel());
+            valores.put("deImpuestoGranel",articulo.getDeImpuestoGranel());
+            valores.put("iUMedida",articulo.getIUMedida());
+            valores.put("cUnidadM",articulo.getCUnidadM());
+            valores.put("cMarca",articulo.getCMarca());
+            valores.put("cCategoria",articulo.getCCategoria());
+            valores.put("cSubCategoria",articulo.getCSubCategoria());
+            valores.put("cClasificacion",articulo.getCClasificacion());
+            valores.put("cSubClasificacion",articulo.getCSubClasificacion());
             idArt = db.insert("articulo", null, valores);
             db.close();
         }
@@ -143,10 +161,37 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
 
     public TtCtArtProveedor_ recuperarArticulo(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        String[] valores_recuperar = {"_idArt","iProveedor","iArticulo","cArticulo","cAplicaciones",
-                "cPresentacion","cDescripcion","iImpuesto","iCategoria","iSubCategoria",
-                "iClasificacion","iSubClasificacion","iMarca","lActivo","dePeso","deLargo","deAncho",
-                "deProfundo","dtCreado","dtModificado","cUsuCrea","cUsuModifica","dePrecioVta"};
+        String[] valores_recuperar = {"_idArt", "iProveedor",
+                "iArticulo",
+                "cArticulo",
+                "cAplicaciones",
+                "cPresentacion",
+                "cDescripcion",
+                "iImpuesto",
+                "iCategoria",
+                "iSubCategoria",
+                "iClasificacion",
+                "iSubClasificacion",
+                "iMarca",
+                "lActivo",
+                "lAgotado",
+                "dePeso",
+                "deLargo",
+                "deAncho",
+                "deProfundo",
+                "cUsuCrea",
+                "cUsuModifica",
+                "dePrecioVtaPza",
+                "deImpuestoPza",
+                "dePrecioVtaGranel",
+                "deImpuestoGranel",
+                "iUMedida",
+                "cUnidadM",
+                "cMarca",
+                "cCategoria",
+                "cSubCategoria",
+                "cClasificacion",
+                "cSubClasificacion"};
 
         Cursor c = db.query("articulo", valores_recuperar, "_idArt=" + id,
                 null, null, null, null, null);
@@ -166,15 +211,24 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
             articulo.setISubClasificacion(c.getInt(11));
             articulo.setIMarca(c.getInt(12));
             articulo.setLActivo(c.getInt(13) == 1 ? true : false);
-            articulo.setDePeso(c.getDouble(14));
+            articulo.setLAgotado(c.getInt(14) == 1 ? true : false);
+            articulo.setDePeso(c.getDouble(15));
             articulo.setDeLargo(true);
-            articulo.setDeAncho(c.getDouble(16));
-            articulo.setDeProfundo(c.getDouble(17));
-            articulo.setDtCreado(c.getString(18));
-            articulo.setDtModificado(c.getString(19));
-            articulo.setCUsuCrea(c.getString(20));
-            articulo.setCUsuModifica(c.getString(21));
-            articulo.setDePrecioVta(c.getDouble(22));
+            articulo.setDeAncho(c.getDouble(17));
+            articulo.setDeProfundo(c.getDouble(18));
+            articulo.setCUsuCrea(c.getString(19));
+            articulo.setCUsuModifica(c.getString(20));
+            articulo.setDePrecioVtaPza(c.getDouble(21));
+            articulo.setDeImpuestoPza(c.getDouble(22));
+            articulo.setDePrecioVtaGranel(c.getDouble(23));
+            articulo.setDeImpuestoGranel(c.getDouble(24));
+            articulo.setIUMedida(c.getInt(25));
+            articulo.setCUnidadM(c.getString(26));
+            articulo.setCMarca(c.getString(27));
+            articulo.setCCategoria(c.getString(28));
+            articulo.setCSubCategoria(c.getString(29));
+            articulo.setCClasificacion(c.getString(30));
+            articulo.setCSubClasificacion(c.getString(31));
         }
         db.close();
         c.close();

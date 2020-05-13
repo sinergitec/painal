@@ -229,10 +229,10 @@ public class CarritoFragment extends Fragment {
                             "",
                             "16",
                             "",
-                            String.valueOf(item.getArticulo().getDePrecioVta()),
+                            String.valueOf(item.getArticulo().getDePrecioVtaPza()),
                             "0",
                             "0",
-                            String.valueOf(item.getArticulo().getDePrecioVta()),
+                            String.valueOf(item.getArticulo().getDePrecioVtaPza()),
                             String.valueOf(item.getCantidadArticulo()),
                             String.valueOf(item.getMonto()),
                             "0",
@@ -245,7 +245,7 @@ public class CarritoFragment extends Fragment {
                             "AUTO",
                             ""));
                     partida ++;
-                    totalPedidoProveedor += item.getArticulo().getDePrecioVta();
+                    totalPedidoProveedor += item.getArticulo().getDePrecioVtaPza();
                 }
             }
 

@@ -46,6 +46,9 @@ public class TtCtArtProveedor_ implements Serializable {
     @SerializedName("lActivo")
     @Expose
     private Boolean lActivo;
+    @SerializedName("lAgotado")
+    @Expose
+    private Boolean lAgotado;
     @SerializedName("bImagen")
     @Expose
     private Object bImagen;
@@ -63,19 +66,49 @@ public class TtCtArtProveedor_ implements Serializable {
     private Double deProfundo;
     @SerializedName("dtCreado")
     @Expose
-    private String dtCreado;
+    private Object dtCreado;
     @SerializedName("dtModificado")
     @Expose
-    private String dtModificado;
+    private Object dtModificado;
     @SerializedName("cUsuCrea")
     @Expose
     private String cUsuCrea;
     @SerializedName("cUsuModifica")
     @Expose
     private String cUsuModifica;
-    @SerializedName("dePrecioVta")
+    @SerializedName("dePrecioVtaPza")
     @Expose
-    private Double dePrecioVta;
+    private Double dePrecioVtaPza;
+    @SerializedName("deImpuestoPza")
+    @Expose
+    private Double deImpuestoPza;
+    @SerializedName("dePrecioVtaGranel")
+    @Expose
+    private Double dePrecioVtaGranel;
+    @SerializedName("deImpuestoGranel")
+    @Expose
+    private Double deImpuestoGranel;
+    @SerializedName("iUMedida")
+    @Expose
+    private Integer iUMedida;
+    @SerializedName("cUnidadM")
+    @Expose
+    private String cUnidadM;
+    @SerializedName("cMarca")
+    @Expose
+    private String cMarca;
+    @SerializedName("cCategoria")
+    @Expose
+    private String cCategoria;
+    @SerializedName("cSubCategoria")
+    @Expose
+    private String cSubCategoria;
+    @SerializedName("cClasificacion")
+    @Expose
+    private String cClasificacion;
+    @SerializedName("cSubClasificacion")
+    @Expose
+    private String cSubClasificacion;
     @SerializedName("Id")
     @Expose
     private Object id;
@@ -184,6 +217,14 @@ public class TtCtArtProveedor_ implements Serializable {
         this.lActivo = lActivo;
     }
 
+    public Boolean getLAgotado() {
+        return lAgotado;
+    }
+
+    public void setLAgotado(Boolean lAgotado) {
+        this.lAgotado = lAgotado;
+    }
+
     public Object getBImagen() {
         return bImagen;
     }
@@ -224,19 +265,19 @@ public class TtCtArtProveedor_ implements Serializable {
         this.deProfundo = deProfundo;
     }
 
-    public String getDtCreado() {
+    public Object getDtCreado() {
         return dtCreado;
     }
 
-    public void setDtCreado(String dtCreado) {
+    public void setDtCreado(Object dtCreado) {
         this.dtCreado = dtCreado;
     }
 
-    public String getDtModificado() {
+    public Object getDtModificado() {
         return dtModificado;
     }
 
-    public void setDtModificado(String dtModificado) {
+    public void setDtModificado(Object dtModificado) {
         this.dtModificado = dtModificado;
     }
 
@@ -256,12 +297,92 @@ public class TtCtArtProveedor_ implements Serializable {
         this.cUsuModifica = cUsuModifica;
     }
 
-    public Double getDePrecioVta() {
-        return dePrecioVta;
+    public Double getDePrecioVtaPza() {
+        return dePrecioVtaPza;
     }
 
-    public void setDePrecioVta(Double dePrecioVta) {
-        this.dePrecioVta = dePrecioVta;
+    public void setDePrecioVtaPza(Double dePrecioVtaPza) {
+        this.dePrecioVtaPza = dePrecioVtaPza;
+    }
+
+    public Double getDeImpuestoPza() {
+        return deImpuestoPza;
+    }
+
+    public void setDeImpuestoPza(Double deImpuestoPza) {
+        this.deImpuestoPza = deImpuestoPza;
+    }
+
+    public Double getDePrecioVtaGranel() {
+        return dePrecioVtaGranel;
+    }
+
+    public void setDePrecioVtaGranel(Double dePrecioVtaGranel) {
+        this.dePrecioVtaGranel = dePrecioVtaGranel;
+    }
+
+    public Double getDeImpuestoGranel() {
+        return deImpuestoGranel;
+    }
+
+    public void setDeImpuestoGranel(Double deImpuestoGranel) {
+        this.deImpuestoGranel = deImpuestoGranel;
+    }
+
+    public Integer getIUMedida() {
+        return iUMedida;
+    }
+
+    public void setIUMedida(Integer iUMedida) {
+        this.iUMedida = iUMedida;
+    }
+
+    public String getCUnidadM() {
+        return cUnidadM;
+    }
+
+    public void setCUnidadM(String cUnidadM) {
+        this.cUnidadM = cUnidadM;
+    }
+
+    public String getCMarca() {
+        return cMarca;
+    }
+
+    public void setCMarca(String cMarca) {
+        this.cMarca = cMarca;
+    }
+
+    public String getCCategoria() {
+        return cCategoria;
+    }
+
+    public void setCCategoria(String cCategoria) {
+        this.cCategoria = cCategoria;
+    }
+
+    public String getCSubCategoria() {
+        return cSubCategoria;
+    }
+
+    public void setCSubCategoria(String cSubCategoria) {
+        this.cSubCategoria = cSubCategoria;
+    }
+
+    public String getCClasificacion() {
+        return cClasificacion;
+    }
+
+    public void setCClasificacion(String cClasificacion) {
+        this.cClasificacion = cClasificacion;
+    }
+
+    public String getCSubClasificacion() {
+        return cSubClasificacion;
+    }
+
+    public void setCSubClasificacion(String cSubClasificacion) {
+        this.cSubClasificacion = cSubClasificacion;
     }
 
     public Object getId() {
@@ -288,16 +409,27 @@ public class TtCtArtProveedor_ implements Serializable {
         sb.append(", iSubClasificacion=").append(iSubClasificacion);
         sb.append(", iMarca=").append(iMarca);
         sb.append(", lActivo=").append(lActivo);
+        sb.append(", lAgotado=").append(lAgotado);
         sb.append(", bImagen=").append(bImagen);
         sb.append(", dePeso=").append(dePeso);
         sb.append(", deLargo=").append(deLargo);
         sb.append(", deAncho=").append(deAncho);
         sb.append(", deProfundo=").append(deProfundo);
-        sb.append(", dtCreado='").append(dtCreado).append('\'');
-        sb.append(", dtModificado='").append(dtModificado).append('\'');
+        sb.append(", dtCreado=").append(dtCreado);
+        sb.append(", dtModificado=").append(dtModificado);
         sb.append(", cUsuCrea='").append(cUsuCrea).append('\'');
         sb.append(", cUsuModifica='").append(cUsuModifica).append('\'');
-        sb.append(", dePrecioVta=").append(dePrecioVta);
+        sb.append(", dePrecioVtaPza=").append(dePrecioVtaPza);
+        sb.append(", deImpuestoPza=").append(deImpuestoPza);
+        sb.append(", dePrecioVtaGranel=").append(dePrecioVtaGranel);
+        sb.append(", deImpuestoGranel=").append(deImpuestoGranel);
+        sb.append(", iUMedida=").append(iUMedida);
+        sb.append(", cUnidadM='").append(cUnidadM).append('\'');
+        sb.append(", cMarca='").append(cMarca).append('\'');
+        sb.append(", cCategoria='").append(cCategoria).append('\'');
+        sb.append(", cSubCategoria='").append(cSubCategoria).append('\'');
+        sb.append(", cClasificacion='").append(cClasificacion).append('\'');
+        sb.append(", cSubClasificacion='").append(cSubClasificacion).append('\'');
         sb.append(", id=").append(id);
         sb.append('}');
         return sb.toString();

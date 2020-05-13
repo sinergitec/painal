@@ -1,36 +1,20 @@
 package com.sienrgitec.painal.actividades;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.pojo.respuesta.Respuesta;
-import com.sienrgitec.painal.servicio.Painal;
-import com.sienrgitec.painal.servicio.ServiceGenerator;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class RecuperaPassword extends AppCompatDialogFragment {
