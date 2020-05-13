@@ -61,6 +61,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     private String codigoPostal;
     private Double latitud;
     private Double longitud;
+    private String colonia;
+    private String numeroExterior;
+    private String direccionTxt;
 
 
     public MapaFragment() {
@@ -78,16 +81,15 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         final TextView alias = view.findViewById(R.id.alias);
         final Button guardar = view.findViewById(R.id.guardarDireccion);
         guardar.setOnClickListener(v -> {
-            System.out.println("Guardando dirección");
             TtCtDomicilio ttCtDomicilio = new TtCtDomicilio(
                     String.valueOf(CarritoSingleton.getInstance().getUsuario_().getiPersona()),
                     String.valueOf(0),
                     String.valueOf(CarritoSingleton.getInstance().getUsuario_().getiTipoPersona()),
                     String.valueOf(1),
                     this.calle,
+                    this.numeroExterior,
                     "",
-                    "",
-                    "",
+                    this.colonia,
                     this.municipio,
                     this.estado,
                     this.codigoPostal,
@@ -130,7 +132,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             });
 
         });
-
         return view;
     }
 
@@ -180,15 +181,19 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         }
 
         if(direccion != null && direccion.size() > 0){
-            calle = direccion.get(0).getAddressLine(0);
+            direccionTxt = direccion.get(0).getAddressLine(0);
+            calle = direccion.get(0).getThoroughfare();
             municipio = direccion.get(0).getLocality();
             estado = direccion.get(0).getAdminArea();
             codigoPostal = direccion.get(0).getPostalCode();
             latitud = marker.getPosition().latitude;
             longitud =marker.getPosition().longitude;
-            calleTxt.setText(calle);
+            calleTxt.setText(direccionTxt);
+            colonia = direccion.get(0).getSubLocality();
+            numeroExterior = direccion.get(0).getSubThoroughfare();
+        } else {
+            Toast.makeText(getContext(), "No se ha podido crear la dirección", Toast.LENGTH_LONG).show();
         }
-
     }
 
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView rv;
+    private TextView calleEntregar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,6 +90,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+        calleEntregar = view.findViewById(R.id.calleEntregar);
+        abrirMapa(calleEntregar);
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
         data.put("iplActivo","true");
@@ -133,7 +137,17 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Error Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
         return view;
     }
+
+    private void abrirMapa(TextView calleEntregar){
+        calleEntregar.setOnClickListener(v -> {
+            MapaFragment nextFrag= new MapaFragment();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_container, nextFrag, "findThisFragment")
+                    .addToBackStack(null)
+                    .commit();
+        });
+    }
+
 }
