@@ -25,7 +25,7 @@ public class TtOpPedidoDet implements Serializable {
     @SerializedName("cArticulo")
     @Expose
     private String cArticulo;
-    @SerializedName("cDescricpcion")
+    @SerializedName("cDescripcion")
     @Expose
     private String cDescricpcion;
     @SerializedName("cObs")
