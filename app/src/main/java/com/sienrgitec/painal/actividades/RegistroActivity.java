@@ -3,9 +3,11 @@ package com.sienrgitec.painal.actividades;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
@@ -160,6 +162,20 @@ public class RegistroActivity extends AppCompatActivity {
             call.enqueue(new Callback<Respuesta>() {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+
+                    if(response.isSuccessful()){
+                        Respuesta res = response.body();
+
+                        if(res.getResponse().getOplError().equals("true")){
+                            Toast.makeText(RegistroActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        Toast.makeText(RegistroActivity.this, "Usuario Creado" + " " + nombre, Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(RegistroActivity.this, "No se pudo crear el usuario", Toast.LENGTH_LONG).show();
+                    }
+
                     System.out.println(response.toString());
                 }
 

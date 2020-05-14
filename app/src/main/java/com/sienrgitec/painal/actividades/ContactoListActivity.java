@@ -19,6 +19,8 @@ public class ContactoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_contacto);
 
+
+
         btnAgregar = findViewById(agregar);
         btnAgregar.setOnClickListener(v -> agregarContacto());
     }
