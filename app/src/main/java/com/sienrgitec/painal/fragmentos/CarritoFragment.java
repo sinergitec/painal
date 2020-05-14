@@ -159,7 +159,7 @@ public class CarritoFragment extends Fragment {
                 "1",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "TRUE","NOW","","AUTO","");
 
-        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("3","1","1",
+        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                 "0","0","0","NOW","",
                 "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
