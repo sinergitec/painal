@@ -51,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(v -> registrate());
         btnRecupera = findViewById(recupera);
         btnRecupera.setOnClickListener(v -> recuperaPassword());
+
+        Intent i = getIntent();
+        String usuario = (String) i.getSerializableExtra("usuario");
+        String password = (String) i.getSerializableExtra("password");
+
+        if(usuario != null && !usuario.equals("") && password != null && !password.equals("")){
+            usernameET.setText(usuario);
+            passwordET.setText(password);
+        }
+
     }
 
     public void login() {

@@ -71,24 +71,24 @@ public class IngresaPasswordActivity extends AppCompatActivity {
                 }
 
                 private void openDialog(Respuesta res) {
-                    RecuperaPassword recuperaPassword = new RecuperaPassword(res.getResponse().getOpcError());
+                    RecuperaPassword recuperaPassword = new RecuperaPassword(res.getResponse().getOpcError(),"");
                     recuperaPassword.show(getSupportFragmentManager(),null);
                 }
 
                 private void openDialog1(Respuesta res) {
-                    RecuperaPassword recuperaPassword = new RecuperaPassword("La Contraseña es: "
-                            + res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcPassword());
+                    RecuperaPassword recuperaPassword = new RecuperaPassword(res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcPassword(),
+                            res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0).getcUsuario());
                     recuperaPassword.show(getSupportFragmentManager(), null);
                 }
 
                 private void openDialog2(Respuesta res) {
-                    RecuperaPassword recuperaPassword = new RecuperaPassword( res.getResponse().getOpcError());
+                    RecuperaPassword recuperaPassword = new RecuperaPassword(res.getResponse().getOpcError(),"");
                     recuperaPassword.show(getSupportFragmentManager(),null);
                 }
 
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
-                    RecuperaPassword recuperaPassword = new RecuperaPassword(t.getMessage());
+                    RecuperaPassword recuperaPassword = new RecuperaPassword(t.getMessage(),"");
                     recuperaPassword.show(getSupportFragmentManager(),null);
                 }
             });

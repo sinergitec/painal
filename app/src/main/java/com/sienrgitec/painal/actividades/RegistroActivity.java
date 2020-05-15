@@ -1,5 +1,6 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -172,6 +173,12 @@ public class RegistroActivity extends AppCompatActivity {
                         }
 
                         Toast.makeText(RegistroActivity.this, "Usuario Creado" + " " + nombre, Toast.LENGTH_LONG).show();
+
+                        Intent inicio = new Intent(RegistroActivity.this, MainActivity.class);
+                        inicio.putExtra("usuario", nombre);
+                        inicio.putExtra("password", pw);
+                        startActivity(inicio);
+
                     }else{
                         Toast.makeText(RegistroActivity.this, "No se pudo crear el usuario", Toast.LENGTH_LONG).show();
                     }
