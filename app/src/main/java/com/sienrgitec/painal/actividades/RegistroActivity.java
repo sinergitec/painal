@@ -117,7 +117,7 @@ public class RegistroActivity extends AppCompatActivity {
             objctCliente.setcUsuModifica("");
 
             TtCtUsuario_ ObjctUsuario = new TtCtUsuario_();
-            ObjctUsuario.setcUsuario(nombre);
+            ObjctUsuario.setcUsuario(correo);
             ObjctUsuario.setcPassword(pw);
             ObjctUsuario.setiPersona(0);
             ObjctUsuario.setiTipoPersona(5);
@@ -175,7 +175,7 @@ public class RegistroActivity extends AppCompatActivity {
                         Toast.makeText(RegistroActivity.this, "Usuario Creado" + " " + nombre, Toast.LENGTH_LONG).show();
 
                         Intent inicio = new Intent(RegistroActivity.this, MainActivity.class);
-                        inicio.putExtra("usuario", nombre);
+                        inicio.putExtra("usuario", correo);
                         inicio.putExtra("password", pw);
                         startActivity(inicio);
 
