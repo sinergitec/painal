@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
@@ -39,6 +40,9 @@ public class IngresaPasswordActivity extends AppCompatActivity {
 
     private void recuperaPassword() {
 
+        final Loading loading = new Loading(IngresaPasswordActivity.this);
+        loading.iniciaDialogo("alert");
+
         String usr = password.getText().toString();
 
         System.out.println("usuario" + usr);
@@ -55,6 +59,7 @@ public class IngresaPasswordActivity extends AppCompatActivity {
             call.enqueue(new Callback<Respuesta>() {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                    loading.detenDialogo("alert");
                     Respuesta res = response.body();
                     if(response.isSuccessful()) {
                         if (res.getResponse().getOplError().equals("true"))
@@ -88,6 +93,7 @@ public class IngresaPasswordActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
+                    loading.detenDialogo("alert");
                     RecuperaPassword recuperaPassword = new RecuperaPassword(t.getMessage(),"");
                     recuperaPassword.show(getSupportFragmentManager(),null);
                 }

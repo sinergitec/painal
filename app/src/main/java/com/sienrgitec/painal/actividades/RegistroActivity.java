@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
@@ -57,6 +58,9 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void registraCliente() {
+        final Loading loading = new Loading(RegistroActivity.this);
+        loading.iniciaDialogo("alert");
+
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
         String aMaterno = aMaternoET.getText().toString();
@@ -163,7 +167,7 @@ public class RegistroActivity extends AppCompatActivity {
             call.enqueue(new Callback<Respuesta>() {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-
+                    loading.detenDialogo("alert");
                     if(response.isSuccessful()){
                         Respuesta res = response.body();
 
@@ -189,6 +193,7 @@ public class RegistroActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    loading.detenDialogo("alert");
                 }
             });
 

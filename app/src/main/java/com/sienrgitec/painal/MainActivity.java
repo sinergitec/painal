@@ -153,11 +153,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registrate() {
+        Toast.makeText(MainActivity.this, "Trasladando a pantalla de Registro", Toast.LENGTH_LONG).show();
+
         Intent registrarse = new Intent(MainActivity.this, RegistroActivity.class);
         startActivity(registrarse);
     }
 
     private void recuperaPassword() {
+        Toast.makeText(MainActivity.this, "Trasladando a pantalla de Recupera Contraseña", Toast.LENGTH_LONG).show();
+
         Intent ingresaPw = new Intent(MainActivity.this, IngresaPasswordActivity.class);
         startActivity(ingresaPw);
     }

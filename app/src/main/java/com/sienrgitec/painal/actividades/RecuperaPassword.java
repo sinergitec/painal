@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.Loading;
 
 
 public class RecuperaPassword extends AppCompatDialogFragment {
@@ -54,6 +55,8 @@ public class RecuperaPassword extends AppCompatDialogFragment {
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        final Loading loading = new Loading(getActivity());
+                        loading.iniciaDialogo("alert");
 
                         Intent inicio = new Intent(getActivity(), MainActivity.class);
                         inicio.putExtra("usuario", usuario);
