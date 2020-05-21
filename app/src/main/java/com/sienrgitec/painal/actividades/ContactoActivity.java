@@ -1,5 +1,6 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
-import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
+import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
-import com.sienrgitec.painal.pojo.peticion.DsCtCliente;
 import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
@@ -53,6 +53,9 @@ public class ContactoActivity extends AppCompatActivity {
     }
 
     private void registraContacto() {
+
+        final Loading loading = new Loading(ContactoActivity.this);
+        loading.iniciaDialogo("alert");
 
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
@@ -104,11 +107,16 @@ public class ContactoActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                     System.out.println(response.toString());
+                    loading.detenDialogo("alert");
+
+                    Intent inicio = new Intent(ContactoActivity.this, ContactoListActivity.class);
+                    startActivity(inicio);
                 }
 
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    loading.detenDialogo("alert");
                 }
             });
         }

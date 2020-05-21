@@ -41,6 +41,15 @@ public interface Painal {
     @GET("login")
     Call<Respuesta> login(@QueryMap Map<String, String> options);
 
+    @GET("ctContacto")
+    Call<Respuesta> ctContacto(@QueryMap Map<String, String> options);
+
+    @GET("opClienteReferidos")
+    Call<Respuesta> opClienteReferidos(@QueryMap Map<String, String> options);
+
+    @GET("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizados(@QueryMap Map<String, String> options);
+
     @POST("ctCliente")
     Call<Respuesta> ctCliente(@Body Peticion peticion);
 

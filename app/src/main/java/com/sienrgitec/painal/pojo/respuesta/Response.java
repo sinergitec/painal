@@ -5,12 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente;
+import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados;
+import com.sienrgitec.painal.pojo.entity.TtCtContacto;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
+import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
 
 public class Response {
 
@@ -41,6 +44,18 @@ public class Response {
     @SerializedName("tt_ctTelefono")
     @Expose
     private TtCtTelefono ttCtTelefono;
+
+    @SerializedName("tt_ctContacto")
+    @Expose
+    private TtCtContacto tt_ctContacto;
+
+    @SerializedName("tt_ctClienteAutorizados")
+    @Expose
+    private TtCtClienteAutorizados tt_ctClienteAutorizados;
+
+    @SerializedName("tt_opClienteReferidos")
+    @Expose
+    private Tt_OpClienteReferidos tt_opClienteReferidos;
 
     @SerializedName("oplError")
     @Expose
@@ -135,6 +150,22 @@ public class Response {
 
     public void setTtCtTelefono(TtCtTelefono ttCtTelefono) {
         this.ttCtTelefono = ttCtTelefono;
+    }
+
+    public TtCtContacto getTt_ctContacto() {
+        return tt_ctContacto;
+    }
+
+    public void setTt_ctContacto(TtCtContacto tt_ctContacto) {
+        this.tt_ctContacto = tt_ctContacto;
+    }
+
+    public TtCtClienteAutorizados getTt_ctClienteAutorizados() {
+        return tt_ctClienteAutorizados;
+    }
+
+    public void setTt_ctClienteAutorizados(TtCtClienteAutorizados tt_ctClienteAutorizados) {
+        this.tt_ctClienteAutorizados = tt_ctClienteAutorizados;
     }
 
     @Override

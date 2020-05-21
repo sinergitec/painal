@@ -1,14 +1,18 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
+import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
@@ -58,6 +62,8 @@ public class ReferidosActivity extends AppCompatActivity {
     }
 
     private void registraReferidos() {
+        final Loading loading = new Loading(ReferidosActivity.this);
+        loading.iniciaDialogo("alert");
 
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
@@ -124,11 +130,17 @@ public class ReferidosActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                     System.out.println(response.toString());
+                    loading.detenDialogo("alert");
+
+                    Intent inicio = new Intent(ReferidosActivity.this, ReferidosListActivity.class);
+                    startActivity(inicio);
+
                 }
 
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    loading.detenDialogo("alert");
                 }
             });
         }
