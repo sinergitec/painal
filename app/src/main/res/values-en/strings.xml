@@ -61,6 +61,10 @@
     <string name="parentesco">Parentesco</string>
     <string name="sw1">Solicita Autorizacion</string>
     <string name="btnFamily">Guardar</string>
+    <string name="nombre">Nombre:</string>
+    <string name="edadN">de</string>
+    <string name="solAuto">Autorizacion?:</string>
+    <string name="parentescoN">años</string>
 
     <!-- Referidos  -->
     <string name="titleRef">REFERIDOS</string>
