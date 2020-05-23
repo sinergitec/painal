@@ -82,14 +82,14 @@ public class ConfiguracionFragment extends Fragment {
                 startActivity(perfil);
             }
         });
-        final TextView contacto = view.findViewById(R.id.contacto);
+        /*final TextView contacto = view.findViewById(R.id.contacto);
         contacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent contacto = new Intent(getActivity(), ContactoListActivity.class);
                 startActivity(contacto);
             }
-        });
+        });*/
         final TextView family = view.findViewById(R.id.family);
         family.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,7 +12,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/regRef"
+        android:text="@string/titleRef"
         android:textColor="@color/colorComplementaryAccent"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

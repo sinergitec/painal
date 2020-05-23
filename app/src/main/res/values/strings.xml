@@ -50,6 +50,7 @@
 
     <!-- Crea contacto -->
     <string name="contacto">REGISTRO DE CONTACTO</string>
+    <string name="titlecontacto" >CONTACTOS</string>
     <string name="obs">Observaciones</string>
 
     <!-- Perfil -->

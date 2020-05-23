@@ -6,11 +6,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
+import com.sienrgitec.painal.componente.recycler.ContactoAdapter;
+import com.sienrgitec.painal.componente.recycler.FamilyAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
@@ -32,15 +35,14 @@ public class ContactoListActivity extends AppCompatActivity {
 
     private ImageView btnAgregar;
     private RecyclerView recyclerContactos;
-    private List<TtCtContacto_> list =  new ArrayList<TtCtContacto_>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_contacto);
+        listContacto();
         btnAgregar = findViewById(agregar);
         btnAgregar.setOnClickListener(v -> agregarContacto());
-        recyclerContactos = findViewById(R.id.recyclerContactos);
     }
 
     private void agregarContacto() {
@@ -52,6 +54,9 @@ public class ContactoListActivity extends AppCompatActivity {
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
+        data.put("ipiPersona", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()));
+        data.put("ipcPersona", String.valueOf("cliente"));
+
 
         final Call<Respuesta> call = service.ctContacto(data);
         call.enqueue(new Callback<Respuesta>() {
@@ -63,7 +68,11 @@ public class ContactoListActivity extends AppCompatActivity {
                     if (res.getResponse().getOplError().equals("true"))
                         Toast.makeText(ContactoListActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
                     else {
-                        list = res.getResponse().getTt_ctContacto().getTtCtContacto_();
+                        recyclerContactos = findViewById(R.id.listContacto);
+                        recyclerContactos.setLayoutManager(new LinearLayoutManager(ContactoListActivity.this));
+                        ContactoAdapter fm = new ContactoAdapter(ContactoListActivity.this, null);
+                        fm.setList(res.getResponse().getTt_ctContacto().getTtCtContacto_());
+                        recyclerContactos.setAdapter(fm);
                     }
                 } else {
                     Toast.makeText(ContactoListActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -73,7 +82,6 @@ public class ContactoListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Respuesta> call, Throwable t) {
                 Toast.makeText(ContactoListActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
             }
         });
     }
