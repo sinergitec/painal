@@ -168,6 +168,14 @@ public class Response {
         this.tt_ctClienteAutorizados = tt_ctClienteAutorizados;
     }
 
+    public Tt_OpClienteReferidos getTt_opClienteReferidos() {
+        return tt_opClienteReferidos;
+    }
+
+    public void setTt_opClienteReferidos(Tt_OpClienteReferidos tt_opClienteReferidos) {
+        this.tt_opClienteReferidos = tt_opClienteReferidos;
+    }
+
     @Override
     public String toString() {
         return "Response{" +

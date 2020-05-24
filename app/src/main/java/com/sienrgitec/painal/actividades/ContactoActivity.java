@@ -26,11 +26,8 @@ import retrofit2.Response;
 
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
-import static com.sienrgitec.painal.R.id.email;
 import static com.sienrgitec.painal.R.id.nombre;
 import static com.sienrgitec.painal.R.id.obs;
-import static com.sienrgitec.painal.R.id.password;
-import static com.sienrgitec.painal.R.id.telefono;
 
 public class ContactoActivity extends AppCompatActivity {
 

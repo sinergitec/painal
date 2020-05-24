@@ -19,11 +19,11 @@ public class Tt_OpClienteReferidos_ {
 
     @SerializedName("cApellidos")
     @Expose
-    private String cApellidos;
+    private String capellidos;
 
     @SerializedName("cEmail")
     @Expose
-    private String cEmail;
+    private String cEMail;
 
     @SerializedName("cTelefono")
     @Expose
@@ -78,20 +78,12 @@ public class Tt_OpClienteReferidos_ {
         this.cNombre = cNombre;
     }
 
-    public String getcApellidos() {
-        return cApellidos;
+    public String getCapellidos() {
+        return capellidos;
     }
 
-    public void setcApellidos(String cApellidos) {
-        this.cApellidos = cApellidos;
-    }
-
-    public String getcEmail() {
-        return cEmail;
-    }
-
-    public void setcEmail(String cEmail) {
-        this.cEmail = cEmail;
+    public void setCapellidos(String capellidos) {
+        this.capellidos = capellidos;
     }
 
     public String getcTelefono() {
@@ -148,5 +140,13 @@ public class Tt_OpClienteReferidos_ {
 
     public void setcUsuModifica(String cUsuModifica) {
         this.cUsuModifica = cUsuModifica;
+    }
+
+    public String getcEMail() {
+        return cEMail;
+    }
+
+    public void setcEMail(String cEMail) {
+        this.cEMail = cEMail;
     }
 }

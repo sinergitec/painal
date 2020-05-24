@@ -11,15 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.actividades.ContactoActivity;
-import com.sienrgitec.painal.actividades.ContactoListActivity;
-import com.sienrgitec.painal.actividades.FamilyActivity;
 import com.sienrgitec.painal.actividades.FamilyListActivity;
 import com.sienrgitec.painal.actividades.PerfilActivity;
-import com.sienrgitec.painal.actividades.ReferidosActivity;
 import com.sienrgitec.painal.actividades.ReferidosListActivity;
-import com.sienrgitec.painal.actividades.SubGirosActivity;
-import com.sienrgitec.painal.carrito.CarritoSingleton;
 
 
 /**
