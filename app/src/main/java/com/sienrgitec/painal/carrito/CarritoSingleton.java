@@ -9,7 +9,6 @@ import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -19,7 +18,6 @@ public class CarritoSingleton {
     private List<Carrito> listaCarrito = new ArrayList<>();
     private TtCtCliente_ cliente = new TtCtCliente_();
     private TtCtUsuario_ usuario_ = new TtCtUsuario_();
-    private Integer numeroProveedores = 0;
     private Stack<Integer> pilaProveedores = new Stack<>();
 
     private CarritoSingleton(){
@@ -28,24 +26,24 @@ public class CarritoSingleton {
         }
     }
 
-    public static CarritoSingleton getInstance(){
+    public synchronized static CarritoSingleton getInstance(){
         if (sSoleInstance == null){
             sSoleInstance = new CarritoSingleton();
         }
         return sSoleInstance;
     }
 
-    public void agregaCarrito(Context context, Carrito item){
-        //Determina si el numero de proveedores es mayor al maximo permitido
-        if(numeroProveedores.compareTo(Constantes.CANTIDAD_MAX_PROVEEDORES) > 0){
-            Toast.makeText(context, "Alcanzo el maximo de proveedores", Toast.LENGTH_LONG).show();
-            return;
-        }
+    public synchronized void agregaCarrito(Context context, Carrito item){
 
         //Agrega a la pila de proveedores
         if(!pilaProveedores.contains(item.getArticulo().getIProveedor())){
             pilaProveedores.push(item.getArticulo().getIProveedor());
-            numeroProveedores++;
+        }
+
+        //Determina si el numero de proveedores es mayor al maximo permitido
+        if(pilaProveedores.size() > Constantes.CANTIDAD_MAX_PROVEEDORES){
+            Toast.makeText(context, "Alcanzo el maximo de proveedores", Toast.LENGTH_LONG).show();
+            return;
         }
 
         this.listaCarrito.add(item);
@@ -56,21 +54,23 @@ public class CarritoSingleton {
         Toast.makeText(context, item.getArticulo().getCDescripcion() + " agregado al carrito", Toast.LENGTH_SHORT).show();
     }
 
-    public void consultaItemCarrito(Context context){
+    public synchronized void consultaItemCarrito(Context context){
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         this.listaCarrito = carritoDBHelper.recuperarPedidos();
         for (Carrito item: listaCarrito) {
             if(!pilaProveedores.contains(item.getArticulo().getIProveedor())){
                 pilaProveedores.push(item.getArticulo().getIProveedor());
-                numeroProveedores ++;
             }
         }
     }
 
-    public void vaciarCarrito(Context context){
+    public synchronized void vaciarCarrito(Context context){
         listaCarrito.clear();
-        pilaProveedores.empty();
-        numeroProveedores = 0;
+        boolean changed = pilaProveedores.removeAll(pilaProveedores);
+        if (changed)
+            System.out.println("Limpieza ");
+        else
+            System.out.println("Limpieza no hecha");
         // Vacia la base de datos
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         carritoDBHelper.vaciaCarrito();
@@ -97,8 +97,8 @@ public class CarritoSingleton {
         this.usuario_ = usuario_;
     }
 
-    public Integer getNumeroProveedores() {
-        return numeroProveedores;
+    public synchronized Integer getNumeroProveedores() {
+        return pilaProveedores.size();
     }
 
     public Stack<Integer> getPilaProveedores() {
