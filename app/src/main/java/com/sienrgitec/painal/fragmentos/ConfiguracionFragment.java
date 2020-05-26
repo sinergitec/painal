@@ -8,12 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.FamilyListActivity;
 import com.sienrgitec.painal.actividades.PerfilActivity;
 import com.sienrgitec.painal.actividades.ReferidosListActivity;
+
+import static com.sienrgitec.painal.R.id.agregar;
+import static com.sienrgitec.painal.R.id.imageView;
+import static com.sienrgitec.painal.R.id.imageView2;
+import static com.sienrgitec.painal.R.id.imageView4;
+import static com.sienrgitec.painal.R.id.referidos;
 
 
 /**
@@ -26,6 +33,10 @@ public class ConfiguracionFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ImageView btnPerfil;
+    private ImageView btnAutorizado;
+    private ImageView btnReferidos;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,11 +73,35 @@ public class ConfiguracionFragment extends Fragment {
         }
     }
 
+    private void perfil() {
+        Intent perfil = new Intent(getActivity(), PerfilActivity.class);
+        startActivity(perfil);
+    }
+
+    private void referidos() {
+        Intent ref = new Intent(getActivity(), ReferidosListActivity.class);
+        startActivity(ref);
+    }
+
+    private void autorizados() {
+        Intent family = new Intent(getActivity(), FamilyListActivity.class);
+        startActivity(family);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+
+        btnPerfil = view.findViewById(imageView);
+        btnPerfil.setOnClickListener(v -> perfil());
+
+        btnReferidos = view.findViewById(imageView4);
+        btnReferidos.setOnClickListener(v -> referidos());
+
+        btnAutorizado = view.findViewById(imageView2);
+        btnAutorizado.setOnClickListener(v -> autorizados());
 
         final TextView perfil = view.findViewById(R.id.perfil);
         perfil.setOnClickListener(new View.OnClickListener() {
