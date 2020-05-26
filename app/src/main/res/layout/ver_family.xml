@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/fam"
-        android:layout_width="84dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/family"
+        android:text="@string/titleFamily"
         android:textColor="@color/colorComplementaryAccent"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

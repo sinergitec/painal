@@ -106,8 +106,8 @@ public class ReferidosActivity extends AppCompatActivity {
             objopReferidos.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
             objopReferidos.setiReferido(0);
             objopReferidos.setcNombre(nombre);
-            objopReferidos.setcApellidos(aPaterno + " " + aMaterno);
-            objopReferidos.setcEmail(correo);
+            objopReferidos.setCapellidos(aPaterno + " " + aMaterno);
+            objopReferidos.setcEMail(correo);
             objopReferidos.setcTelefono(telefono);
             objopReferidos.setcCveReferido("");
             objopReferidos.setlAfiliado(autoriza);

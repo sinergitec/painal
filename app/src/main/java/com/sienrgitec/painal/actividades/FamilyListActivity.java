@@ -12,15 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.FamilyAdapter;
-import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
-import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;

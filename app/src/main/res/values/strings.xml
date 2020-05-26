@@ -50,6 +50,7 @@
 
     <!-- Crea contacto -->
     <string name="contacto">REGISTRO DE CONTACTO</string>
+    <string name="titlecontacto" >CONTACTOS</string>
     <string name="obs">Observaciones</string>
 
     <!-- Perfil -->
@@ -74,6 +75,7 @@
     <string name="agregar">Agregar</string>
     <string name="sw">Esta Afiliado</string>
     <string name="btnReferir">Guardar</string>
+    <string name="afiliado">Es Afiliado?</string>
 
 
 
