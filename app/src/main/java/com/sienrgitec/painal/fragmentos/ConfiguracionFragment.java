@@ -66,15 +66,6 @@ public class ConfiguracionFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        btnPerfil = btnPerfil.findViewById(imageView);
-        btnPerfil.setOnClickListener(v -> perfil());
-
-        btnReferidos = btnReferidos.findViewById(imageView4);
-        btnReferidos.setOnClickListener(v -> referidos());
-
-        btnAutorizado = btnAutorizado.findViewById(imageView2);
-        btnAutorizado.setOnClickListener(v -> autorizados());
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -102,6 +93,15 @@ public class ConfiguracionFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+
+        btnPerfil = view.findViewById(imageView);
+        btnPerfil.setOnClickListener(v -> perfil());
+
+        btnReferidos = view.findViewById(imageView4);
+        btnReferidos.setOnClickListener(v -> referidos());
+
+        btnAutorizado = view.findViewById(imageView2);
+        btnAutorizado.setOnClickListener(v -> autorizados());
 
         final TextView perfil = view.findViewById(R.id.perfil);
         perfil.setOnClickListener(new View.OnClickListener() {
