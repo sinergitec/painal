@@ -5,18 +5,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
-import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
-import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
-import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
 import com.sienrgitec.painal.pojo.peticion.DsOpClienteReferidos;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
@@ -33,8 +28,7 @@ import retrofit2.Response;
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
 import static com.sienrgitec.painal.R.id.email;
-import static com.sienrgitec.painal.R.id.nombre;
-import static com.sienrgitec.painal.R.id.password;
+import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.switch1;
 import static com.sienrgitec.painal.R.id.telefono;
 
@@ -49,7 +43,7 @@ public class ReferidosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.referidos);
 
-        nombreET   = findViewById(nombre);
+        nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         emailET   = findViewById(email);

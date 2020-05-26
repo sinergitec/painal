@@ -27,7 +27,7 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
     protected void bindView(Tt_OpClienteReferidos_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
-            TextView nombre = (TextView)viewHolder.getView(R.id.nombre);
+            TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
             nombre.setText(item.getcNombre() + ' ' + item.getCapellidos());
 
             TextView correo = (TextView)viewHolder.getView(R.id.correo);

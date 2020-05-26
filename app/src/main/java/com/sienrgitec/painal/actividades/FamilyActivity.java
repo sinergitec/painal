@@ -12,9 +12,7 @@ import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
-import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
 import com.sienrgitec.painal.pojo.peticion.DsCtClienteAutorizados;
-import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
@@ -30,7 +28,7 @@ import retrofit2.Response;
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
 import static com.sienrgitec.painal.R.id.edad;
-import static com.sienrgitec.painal.R.id.nombre;
+import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.parentesco;
 import static com.sienrgitec.painal.R.id.switch2;
 
@@ -45,7 +43,7 @@ public class FamilyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.family);
 
-        nombreET   = findViewById(nombre);
+        nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         edadET = findViewById(edad);

@@ -27,7 +27,7 @@ public class FamilyAdapter extends RVAdapter<TtCtClienteAutorizados_> {
     protected void bindView(TtCtClienteAutorizados_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
-            TextView nombre = (TextView)viewHolder.getView(R.id.nombre);
+            TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
             nombre.setText(item.getcNombre() + ' ' + item.getcApellidos());
 
             TextView edad = (TextView)viewHolder.getView(R.id.edad);

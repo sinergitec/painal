@@ -30,7 +30,7 @@ import retrofit2.Response;
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
 import static com.sienrgitec.painal.R.id.email;
-import static com.sienrgitec.painal.R.id.nombre;
+import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.telefono;
 
@@ -45,7 +45,7 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_usuario);
 
-        nombreET   = findViewById(nombre);
+        nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         correoET   = findViewById(email);

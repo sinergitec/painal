@@ -38,7 +38,7 @@ public class ArticulosAdapter extends RVAdapter<TtCtArtProveedor_> {
         if (item != null) {
 
             ImageView photo = (ImageView)viewHolder.getView(R.id.imageButton);
-            TextView descripcion = (TextView)viewHolder.getView(R.id.nombre);
+            TextView descripcion = (TextView)viewHolder.getView(R.id.descripcion);
             //TextView presentacion = (TextView)viewHolder.getView(R.id.presentacion);
             TextView precio = (TextView)viewHolder.getView(R.id.precio);
             Button agregar = (Button)viewHolder.getView(R.id.agregar);
