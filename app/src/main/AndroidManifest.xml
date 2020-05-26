@@ -37,7 +37,8 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,25 +46,28 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".actividades.RegistroActivity"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".actividades.IngresaPasswordActivity"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".actividades.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".actividades.SubGirosActivity" />
-        <activity android:name=".actividades.ProveedoresActivity" />
-        <activity android:name=".actividades.ArticuloActivity" />
-        <activity android:name=".actividades.ContactoActivity"   />
-        <activity android:name=".actividades.ContactoListActivity"   />
-        <activity android:name=".actividades.PerfilActivity"   />
-        <activity android:name=".actividades.ReferidosListActivity"   />
-        <activity android:name=".actividades.ReferidosActivity"   />
-        <activity android:name=".actividades.FamilyActivity"   />
-        <activity android:name=".actividades.FamilyListActivity"   />
-        <activity android:name=".actividades.ArticuloDetalleActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.SubGirosActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ProveedoresActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ArticuloActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ContactoActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ContactoListActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.PerfilActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ReferidosListActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ReferidosActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.FamilyActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.FamilyListActivity"   />
+        <activity android:screenOrientation="portrait" android:name=".actividades.ArticuloDetalleActivity" />
     </application>
 
 </manifest>

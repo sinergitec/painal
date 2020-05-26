@@ -213,7 +213,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
             articulo.setLActivo(c.getInt(13) == 1 ? true : false);
             articulo.setLAgotado(c.getInt(14) == 1 ? true : false);
             articulo.setDePeso(c.getDouble(15));
-            articulo.setDeLargo(true);
+            articulo.setDeLargo(c.getDouble(16));
             articulo.setDeAncho(c.getDouble(17));
             articulo.setDeProfundo(c.getDouble(18));
             articulo.setCUsuCrea(c.getString(19));

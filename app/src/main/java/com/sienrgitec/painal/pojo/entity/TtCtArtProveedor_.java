@@ -57,7 +57,7 @@ public class TtCtArtProveedor_ implements Serializable {
     private Double dePeso;
     @SerializedName("deLargo")
     @Expose
-    private Boolean deLargo;
+    private Double deLargo;
     @SerializedName("deAncho")
     @Expose
     private Double deAncho;
@@ -241,11 +241,11 @@ public class TtCtArtProveedor_ implements Serializable {
         this.dePeso = dePeso;
     }
 
-    public Boolean getDeLargo() {
+    public Double getDeLargo() {
         return deLargo;
     }
 
-    public void setDeLargo(Boolean deLargo) {
+    public void setDeLargo(Double deLargo) {
         this.deLargo = deLargo;
     }
 
