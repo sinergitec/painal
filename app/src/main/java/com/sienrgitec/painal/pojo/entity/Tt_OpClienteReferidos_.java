@@ -17,11 +17,11 @@ public class Tt_OpClienteReferidos_ {
     @Expose
     private String cNombre;
 
-    @SerializedName("cApellidos")
+    @SerializedName("capellidos")
     @Expose
     private String capellidos;
 
-    @SerializedName("cEmail")
+    @SerializedName("cEMail")
     @Expose
     private String cEMail;
 
