@@ -26,6 +26,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.sienrgitec.painal.R.id.agregar;
+import static com.sienrgitec.painal.R.id.imageView10;
+import static com.sienrgitec.painal.R.id.imageView8;
 import static com.sienrgitec.painal.R.id.recupera;
 import static com.sienrgitec.painal.R.id.referidos;
 

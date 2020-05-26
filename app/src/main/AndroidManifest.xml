@@ -68,6 +68,7 @@
         <activity android:screenOrientation="portrait" android:name=".actividades.FamilyActivity"   />
         <activity android:screenOrientation="portrait" android:name=".actividades.FamilyListActivity"   />
         <activity android:screenOrientation="portrait" android:name=".actividades.ArticuloDetalleActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.RefActualizaActivity" />
     </application>
 
 </manifest>
