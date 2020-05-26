@@ -1,12 +1,9 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
@@ -29,7 +26,7 @@ public class ContactoAdapter  extends RVAdapter<TtCtContacto_> {
     protected void bindView(TtCtContacto_ item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
 
-            TextView nombre = (TextView)viewHolder.getView(R.id.nombre);
+            TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
             nombre.setText(item.getcNombre() + ' ' + item.getcApellidos());
         }
     }

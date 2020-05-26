@@ -40,7 +40,7 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
 
 
-            TextView nombre = (TextView)viewHolder.getView(R.id.nombre);
+            TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
             nombre.setText(item.getcNombre() + ' ' + item.getCapellidos());
 
             TextView correo = (TextView)viewHolder.getView(R.id.correo);

@@ -30,7 +30,7 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
     protected void bindView(Carrito item, RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
             ImageView photo = (ImageView)viewHolder.getView(R.id.artImg);
-            TextView descripcion = (TextView)viewHolder.getView(R.id.nombre);
+            TextView descripcion = (TextView)viewHolder.getView(R.id.descripcion);
             TextView precio = (TextView)viewHolder.getView(R.id.precio);
 
             descripcion.setText(item.getArticulo().getCDescripcion());

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/nombre"
+        android:id="@+id/descripcion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -28,7 +28,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/nombre"
+        app:layout_constraintStart_toEndOf="@+id/descripcion"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_lapiz"
         tools:ignore="VectorDrawableCompat" />
@@ -89,7 +89,7 @@
         android:text="@string/correoHint"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
     <TextView
         android:id="@+id/textView7"

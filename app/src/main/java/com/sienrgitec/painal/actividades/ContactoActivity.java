@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
-import static com.sienrgitec.painal.R.id.nombre;
+import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.obs;
 
 public class ContactoActivity extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class ContactoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacto);
 
-        nombreET   = findViewById(nombre);
+        nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         obsET      = findViewById(obs);
