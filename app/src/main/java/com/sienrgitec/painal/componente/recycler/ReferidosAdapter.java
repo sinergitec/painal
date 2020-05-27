@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.RefActualizaActivity;
-import com.sienrgitec.painal.actividades.ReferidosActivity;
-import com.sienrgitec.painal.actividades.ReferidosListActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
 
@@ -33,7 +31,9 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
         if (item != null) {
             ImageView btnEditar  = (ImageView)viewHolder.getView(R.id.imageView8);
             btnEditar.setOnClickListener(v -> {
+
                 Intent actualiza = new Intent(viewHolder.getView().getContext(), RefActualizaActivity.class);
+                actualiza.putExtra("objActualizar", item);
                 viewHolder.getView().getContext().startActivity(actualiza);
             });
 

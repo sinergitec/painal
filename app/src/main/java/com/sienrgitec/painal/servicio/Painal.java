@@ -8,10 +8,12 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.QueryMap;
 
 public interface Painal {
@@ -67,5 +69,22 @@ public interface Painal {
 
     @POST("opClienteReferidos")
     Call<Respuesta> opClienteReferidos(@Body Peticion peticion);
+
+    @PUT("ctCliente")
+    Call<Respuesta> ctClientePut(@Body Peticion peticion);
+
+    @PUT("opClienteReferidos")
+    Call<Respuesta> opClienteReferidosPut(@Body Peticion peticion);
+
+    @DELETE("opClienteReferidos")
+    Call<Respuesta> opClienteReferidosDelete(@Body Peticion peticion);
+
+    @PUT("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizadosPut(@Body Peticion peticion);
+
+    @DELETE("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizadosDelete(@Body Peticion peticion);
+
+
 
 }

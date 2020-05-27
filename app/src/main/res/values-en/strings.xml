@@ -66,6 +66,7 @@
     <string name="edadN">de</string>
     <string name="solAuto">Autorizacion?:</string>
     <string name="parentescoN">años</string>
+    <string name="actAuto">ACTUALIZA CLIENTES AUTORIZADOS</string>
 
     <!-- Referidos  -->
     <string name="titleRef">REFERIDOS</string>
@@ -76,6 +77,7 @@
     <string name="afiliado">Es Afiliado?</string>
     <string name="actRef">ACTUALIZA REFERIDOS</string>
     <string name="act">Actualiza</string>
+    <string name="apellidos">Apellidos</string>
 
 
 </resources>
