@@ -43,47 +43,51 @@ public interface Painal {
     @GET("login")
     Call<Respuesta> login(@QueryMap Map<String, String> options);
 
-    @GET("ctContacto")
-    Call<Respuesta> ctContacto(@QueryMap Map<String, String> options);
-
-    @GET("opClienteReferidos")
-    Call<Respuesta> opClienteReferidos(@QueryMap Map<String, String> options);
-
-    @GET("ctClienteAutorizados")
-    Call<Respuesta> ctClienteAutorizados(@QueryMap Map<String, String> options);
-
-    @POST("ctCliente")
-    Call<Respuesta> ctCliente(@Body Peticion peticion);
-
     @POST("opPedidoCrea")
     Call<Respuesta> creaPedido(@Body Peticion peticion);
 
     @POST("ctDomicilio")
     Call<Respuesta> creaDomicilio(@Body Peticion peticion);
 
-    @POST("ctContacto")
-    Call<Respuesta> ctContacto(@Body Peticion peticion);
-
-    @POST("ctClienteAutorizados")
-    Call<Respuesta> ctClienteAutorizado(@Body Peticion peticion);
-
-    @POST("opClienteReferidos")
-    Call<Respuesta> opClienteReferidos(@Body Peticion peticion);
+    //Cliente
+    @POST("ctCliente")
+    Call<Respuesta> ctCliente(@Body Peticion peticion);
 
     @PUT("ctCliente")
     Call<Respuesta> ctClientePut(@Body Peticion peticion);
 
-    @PUT("opClienteReferidos")
-    Call<Respuesta> opClienteReferidosPut(@Body Peticion peticion);
+    //Contacto
+    @POST("ctContacto")
+    Call<Respuesta> ctContacto(@Body Peticion peticion);
 
-    @DELETE("opClienteReferidos")
-    Call<Respuesta> opClienteReferidosDelete(@Body Peticion peticion);
+    @GET("ctContacto")
+    Call<Respuesta> ctContacto(@QueryMap Map<String, String> options);
+
+    //Clientes autorizados
+    @GET("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizados(@QueryMap Map<String, String> options);
+
+    @POST("ctClienteAutorizados")
+    Call<Respuesta> ctClienteAutorizado(@Body Peticion peticion);
 
     @PUT("ctClienteAutorizados")
     Call<Respuesta> ctClienteAutorizadosPut(@Body Peticion peticion);
 
     @DELETE("ctClienteAutorizados")
     Call<Respuesta> ctClienteAutorizadosDelete(@Body Peticion peticion);
+
+    //Clientes Referidos
+    @GET("opClienteReferidos")
+    Call<Respuesta> opClienteReferidos(@QueryMap Map<String, String> options);
+
+    @POST("opClienteReferidos")
+    Call<Respuesta> opClienteReferidos(@Body Peticion peticion);
+
+    @PUT("opClienteReferidos")
+    Call<Respuesta> opClienteReferidosPut(@Body Peticion peticion);
+
+    @DELETE("opClienteReferidos")
+    Call<Respuesta> opClienteReferidosDelete(@Body Peticion peticion);
 
 
 

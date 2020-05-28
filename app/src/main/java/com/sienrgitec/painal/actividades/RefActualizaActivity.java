@@ -20,9 +20,7 @@ import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
-import java.sql.Ref;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +37,8 @@ public class RefActualizaActivity extends AppCompatActivity {
 
     private Button btnRegActualiza;
     private EditText nombreET, aPaternoET, aMaternoET, emailET, telefonoET ;
-    private Switch autoriza;
+    private Switch autorizaET;
+    private Integer iReferido = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +50,17 @@ public class RefActualizaActivity extends AppCompatActivity {
         aMaternoET = findViewById(apellidoM);
         emailET   = findViewById(email);
         telefonoET = findViewById(telefono);
-        autoriza = findViewById(switch1);
+        autorizaET = findViewById(switch1);
 
         Intent i = getIntent();
         Tt_OpClienteReferidos_ ref = (Tt_OpClienteReferidos_) i.getSerializableExtra("objActualizar");
+        iReferido = ref.getiReferido();
 
         nombreET.setText(ref.getcNombre());
         aPaternoET.setText(ref.getCapellidos());
         emailET.setText(ref.getcEMail());
         telefonoET.setText(ref.getcTelefono());
-        autoriza.setChecked(ref.getlAfiliado());
+        autorizaET.setChecked(ref.getlAfiliado());
 
         btnRegActualiza = findViewById(R.id.referirBtn);
         btnRegActualiza.setOnClickListener(v -> actualizaReferidos());
@@ -75,7 +75,7 @@ public class RefActualizaActivity extends AppCompatActivity {
         String correo   = emailET.getText().toString();
         String telefono = telefonoET.getText().toString();
 
-        Boolean autoriza = this.autoriza.isChecked();
+        Boolean autoriza = autorizaET.isChecked();
 
         if(nombre.isEmpty()){
             nombreET.setError("Nombre requerido");
@@ -83,7 +83,7 @@ public class RefActualizaActivity extends AppCompatActivity {
         }
 
         if(aPaterno.isEmpty()){
-            aPaternoET.setError("Apellidos requerido");
+            aPaternoET.setError("Apellidos requeridos");
             aPaternoET.requestFocus();
         }
 
@@ -97,13 +97,12 @@ public class RefActualizaActivity extends AppCompatActivity {
             telefonoET.requestFocus();
         }
 
-
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !correo.isEmpty()  && !telefono.isEmpty()){
 
             Tt_OpClienteReferidos_ objopReferidos = new Tt_OpClienteReferidos_();
 
             objopReferidos.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
-            objopReferidos.setiReferido(0);
+            objopReferidos.setiReferido(iReferido);
             objopReferidos.setcNombre(nombre);
             objopReferidos.setCapellidos(aPaterno);
             objopReferidos.setcEMail(correo);
@@ -122,8 +121,7 @@ public class RefActualizaActivity extends AppCompatActivity {
             })));
 
             final Painal service = ServiceGenerator.createService(Painal.class);
-            final Call<Respuesta> call = service.opClienteReferidos(peticion);
-            //System.out.println(call.);
+            final Call<Respuesta> call = service.opClienteReferidosPut(peticion);
 
             call.enqueue(new Callback<Respuesta>() {
                 @Override
@@ -133,7 +131,6 @@ public class RefActualizaActivity extends AppCompatActivity {
 
                     Intent inicio = new Intent(RefActualizaActivity.this, ReferidosListActivity.class);
                     startActivity(inicio);
-
                 }
 
                 @Override

@@ -53,6 +53,9 @@
 
     <!-- Perfil -->
     <string name="titlePerfil">PERFIL</string>
+    <string name="actPeril">ACTUALIZA PERFIL</string>
+    <string name="editaDatos">EDITA DATOS</string>
+    <string name="direccion">DIRECCIONES</string>
 
     <!-- Family -->
     <string name="titleFamily">CLIENTES AUTORIZADOS</string>

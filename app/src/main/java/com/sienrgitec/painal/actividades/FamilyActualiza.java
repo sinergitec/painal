@@ -38,6 +38,7 @@ public class FamilyActualiza extends AppCompatActivity {
     private Button btnRegActualiza;
     private EditText nombreET, aPaternoET, aMaternoET, edadET, parentescoET ;
     private Switch solAutoET;
+    private Integer iAutorizado = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class FamilyActualiza extends AppCompatActivity {
 
         Intent i = getIntent();
         TtCtClienteAutorizados_ fm = (TtCtClienteAutorizados_) i.getSerializableExtra("objActualizar");
+
+        iAutorizado = fm.getiAutorizado();
 
         nombreET.setText(fm.getcNombre());
         aPaternoET.setText(fm.getcApellidos());
@@ -75,7 +78,6 @@ public class FamilyActualiza extends AppCompatActivity {
         String parentesco = parentescoET.getText().toString();
         Boolean solAuto = solAutoET.isChecked();
 
-
         if(nombre.isEmpty()){
             nombreET.setError("Nombre requerido");
             nombreET.requestFocus();
@@ -87,13 +89,13 @@ public class FamilyActualiza extends AppCompatActivity {
         }
 
         if(edad.isEmpty()){
-            aMaternoET.setError("Apellido Materno requerido");
-            aMaternoET.requestFocus();
+            edadET.setError("Edad requerida");
+            edadET.requestFocus();
         }
 
         if(parentesco.isEmpty()){
-            aMaternoET.setError("Apellido Materno requerido");
-            aMaternoET.requestFocus();
+            parentescoET.setError("Parentesco requerido");
+            parentescoET.requestFocus();
         }
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !edad.isEmpty() && !parentesco.isEmpty()){
@@ -101,7 +103,7 @@ public class FamilyActualiza extends AppCompatActivity {
             TtCtClienteAutorizados_ objctCliAuto = new TtCtClienteAutorizados_();
 
             objctCliAuto.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
-            objctCliAuto.setiAutorizado(0);
+            objctCliAuto.setiAutorizado(iAutorizado);
             objctCliAuto.setcNombre(nombre);
             objctCliAuto.setcApellidos(aPaterno);
             objctCliAuto.setcEdad(edad);
@@ -120,7 +122,7 @@ public class FamilyActualiza extends AppCompatActivity {
             })));
 
             final Painal service = ServiceGenerator.createService(Painal.class);
-            final Call<Respuesta> call = service.ctClienteAutorizado(peticion);
+            final Call<Respuesta> call = service.ctClienteAutorizadosPut(peticion);
             //System.out.println(call.);
 
             call.enqueue(new Callback<Respuesta>() {
