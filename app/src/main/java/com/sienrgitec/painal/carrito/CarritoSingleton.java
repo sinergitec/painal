@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CarritoSingleton {
     private List<Carrito> listaCarrito = new ArrayList<>();
     private TtCtCliente_ cliente = new TtCtCliente_();
     private TtCtUsuario_ usuario_ = new TtCtUsuario_();
+    private TtCtTelefono telefono = new TtCtTelefono();
     private Stack<Integer> pilaProveedores = new Stack<>();
 
     private CarritoSingleton(){
@@ -95,6 +97,14 @@ public class CarritoSingleton {
 
     public void setUsuario_(TtCtUsuario_ usuario_) {
         this.usuario_ = usuario_;
+    }
+
+    public TtCtTelefono getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(TtCtTelefono telefono) {
+        this.telefono = telefono;
     }
 
     public synchronized Integer getNumeroProveedores() {

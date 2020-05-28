@@ -70,6 +70,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/correoHint"
+        android:focusable="false"
         android:inputType="textEmailAddress"
         android:textColor="@color/colorComplementaryAccent"
         android:textColorHint="@color/colorComplementaryAccent"

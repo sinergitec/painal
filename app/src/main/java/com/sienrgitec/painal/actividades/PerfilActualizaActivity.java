@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
@@ -46,11 +47,18 @@ public class PerfilActualizaActivity extends AppCompatActivity {
 
         nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
+        correoET   = findViewById(email);
         pwET       = findViewById(password);
         telefonoET = findViewById(telefono);
 
         btnRegistro = findViewById(R.id.registroBtn);
         btnRegistro.setOnClickListener(v -> actualizaCliente());
+
+        nombreET.setText(CarritoSingleton.getInstance().getCliente().getcNombre());
+        aPaternoET.setText(CarritoSingleton.getInstance().getCliente().getcApellidos());
+        correoET.setText(CarritoSingleton.getInstance().getCliente().getcEmail());
+        pwET.setText(CarritoSingleton.getInstance().getUsuario_().getcPassword());
+        telefonoET.setText(CarritoSingleton.getInstance().getTelefono().getcTelefono());
 
     }
 
@@ -69,26 +77,31 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         if(nombre.isEmpty()){
             nombreET.setError("Nombre requerido");
             nombreET.requestFocus();
+            loading.detenDialogo("alert");
         }
 
         if(aPaterno.isEmpty()){
             aPaternoET.setError("Apellido Paterno requerido");
             aPaternoET.requestFocus();
+            loading.detenDialogo("alert");
         }
 
         if(correo.isEmpty()){
             correoET.setError("Correo requerido");
             correoET.requestFocus();
+            loading.detenDialogo("alert");
         }
 
         if(pw.isEmpty()){
             pwET.setError("Contraseña requerido");
             pwET.requestFocus();
+            loading.detenDialogo("alert");
         }
 
         if(telefono.isEmpty()){
             telefonoET.setError("Telefono requerido");
             telefonoET.requestFocus();
+            loading.detenDialogo("alert");
         }
 
 
@@ -168,14 +181,6 @@ public class PerfilActualizaActivity extends AppCompatActivity {
                             Toast.makeText(PerfilActualizaActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
                             return;
                         }
-
-                        Toast.makeText(PerfilActualizaActivity.this, "Usuario Creado" + " " + nombre, Toast.LENGTH_LONG).show();
-
-                        Intent inicio = new Intent(PerfilActualizaActivity.this, MainActivity.class);
-                        inicio.putExtra("usuario", correo);
-                        inicio.putExtra("password", pw);
-                        startActivity(inicio);
-
                     }else{
                         Toast.makeText(PerfilActualizaActivity.this, "No se pudo actualizar el usuario", Toast.LENGTH_LONG).show();
                     }
@@ -189,9 +194,6 @@ public class PerfilActualizaActivity extends AppCompatActivity {
                     loading.detenDialogo("alert");
                 }
             });
-
         }
     }
-
-
 }
