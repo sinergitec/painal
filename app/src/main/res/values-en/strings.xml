@@ -56,6 +56,7 @@
     <string name="actPeril">ACTUALIZA PERFIL</string>
     <string name="editaDatos">EDITA DATOS</string>
     <string name="direccion">DIRECCIONES</string>
+    <string name="question">¿Esta seguro de Eliminar el registro?</string>
 
     <!-- Family -->
     <string name="titleFamily">CLIENTES AUTORIZADOS</string>

@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.RefActualizaActivity;
+import com.sienrgitec.painal.actividades.RefEliminaActivity;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
 
@@ -38,6 +42,10 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
             });
 
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
+            btnEliminar.setOnClickListener(v ->{
+                RefEliminaActivity dialogoEliminar = new RefEliminaActivity(item.getiCliente());
+                dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
+            });
 
 
             TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);

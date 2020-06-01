@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.FamEliminaActivity;
 import com.sienrgitec.painal.actividades.FamilyActualiza;
 import com.sienrgitec.painal.actividades.RefActualizaActivity;
+import com.sienrgitec.painal.actividades.RefEliminaActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
 
@@ -39,7 +43,12 @@ public class FamilyAdapter extends RVAdapter<TtCtClienteAutorizados_> {
                 viewHolder.getView().getContext().startActivity(actualiza);
             });
 
+
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
+            btnEliminar.setOnClickListener(v ->{
+                FamEliminaActivity dialogoEliminar = new FamEliminaActivity(item.getiCliente());
+                dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
+            });
 
             TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
             nombre.setText(item.getcNombre() + ' ' + item.getcApellidos());

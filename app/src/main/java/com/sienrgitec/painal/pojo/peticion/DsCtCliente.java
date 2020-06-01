@@ -3,9 +3,10 @@ package com.sienrgitec.painal.pojo.peticion;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
-import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DsCtCliente {
@@ -15,10 +16,14 @@ public class DsCtCliente {
     }
 
     public DsCtCliente (List<TtCtCliente_> clientes, List<TtCtUsuario_> usuarios,
-                        List<TtCtTelefono> telefonos){
+                        List<TtCtTelefono_> telefonos){
         this.clientes = clientes;
         this.usuarios = usuarios;
         this.telefonos = telefonos;
+    }
+
+    public DsCtCliente(List<TtCtCliente_> clientes) {
+        this.clientes = clientes;
     }
 
     @SerializedName("tt_ctCliente")
@@ -31,7 +36,7 @@ public class DsCtCliente {
 
     @SerializedName("tt_ctTelefono")
     @Expose
-    private List<TtCtTelefono> telefonos = null;
+    private List<TtCtTelefono_> telefonos = null;
 
     public List<TtCtCliente_> getClientes() {
         return clientes;
@@ -49,11 +54,11 @@ public class DsCtCliente {
         this.usuarios = usuarios;
     }
 
-    public List<TtCtTelefono> getTelefonos() {
+    public List<TtCtTelefono_> getTelefonos() {
         return telefonos;
     }
 
-    public void setTelefonos(List<TtCtTelefono> telefonos) {
+    public void setTelefonos(List<TtCtTelefono_> telefonos) {
         this.telefonos = telefonos;
     }
 

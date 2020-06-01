@@ -8,12 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
+import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
-import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 import com.sienrgitec.painal.pojo.peticion.DsCtCliente;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
@@ -28,7 +28,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.sienrgitec.painal.R.id.apellidoM;
 import static com.sienrgitec.painal.R.id.apellidoP;
 import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.email;
@@ -48,7 +47,6 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         nombreET   = findViewById(descripcion);
         aPaternoET = findViewById(apellidoP);
         correoET   = findViewById(email);
-        pwET       = findViewById(password);
         telefonoET = findViewById(telefono);
 
         btnRegistro = findViewById(R.id.registroBtn);
@@ -57,8 +55,9 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         nombreET.setText(CarritoSingleton.getInstance().getCliente().getcNombre());
         aPaternoET.setText(CarritoSingleton.getInstance().getCliente().getcApellidos());
         correoET.setText(CarritoSingleton.getInstance().getCliente().getcEmail());
-        pwET.setText(CarritoSingleton.getInstance().getUsuario_().getcPassword());
         telefonoET.setText(CarritoSingleton.getInstance().getTelefono().getcTelefono());
+
+        System.out.println("cliente" + CarritoSingleton.getInstance().getCliente().getiCliente());
 
     }
 
@@ -70,7 +69,6 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
         String correo   = correoET.getText().toString();
-        String pw       = pwET.getText().toString();
         String telefono = telefonoET.getText().toString();
 
 
@@ -86,83 +84,37 @@ public class PerfilActualizaActivity extends AppCompatActivity {
             loading.detenDialogo("alert");
         }
 
-        if(correo.isEmpty()){
-            correoET.setError("Correo requerido");
-            correoET.requestFocus();
-            loading.detenDialogo("alert");
-        }
-
-        if(pw.isEmpty()){
-            pwET.setError("Contraseña requerido");
-            pwET.requestFocus();
-            loading.detenDialogo("alert");
-        }
-
-        if(telefono.isEmpty()){
-            telefonoET.setError("Telefono requerido");
-            telefonoET.requestFocus();
-            loading.detenDialogo("alert");
-        }
-
-
-        if(!nombre.isEmpty() && !aPaterno.isEmpty() && !correo.isEmpty() && !pw.isEmpty() && !telefono.isEmpty()){
+        if(!nombre.isEmpty() && !aPaterno.isEmpty() && !correo.isEmpty() && !telefono.isEmpty()){
 
             TtCtCliente_ objctCliente = new TtCtCliente_();
 
-            objctCliente.setcClave("");
-            objctCliente.setcNombre(nombre);
-            objctCliente.setcApellidos(aPaterno);
-            objctCliente.setDtRegistro(null);
-            objctCliente.setDtUltCompra(null);
-            objctCliente.setDeUltCompra(null);
-            objctCliente.setDePorcUltComision(null);
-            objctCliente.setDeUltCompra(null);
-            objctCliente.setDePorcUltPropina(null);
-            objctCliente.setDeUltPropina(null);
-            objctCliente.setICPCP(null);
-            objctCliente.setcEmail(correo);
-            objctCliente.setDtCreado(null);
-            objctCliente.setDtModificado(null);
-            objctCliente.setcUsuCrea("");
-            objctCliente.setcUsuModifica("");
+            objctCliente.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
+            objctCliente.setcClave(CarritoSingleton.getInstance().getCliente().getcClave());
 
-            TtCtUsuario_ ObjctUsuario = new TtCtUsuario_();
-            ObjctUsuario.setcUsuario(correo);
-            ObjctUsuario.setcPassword(pw);
-            ObjctUsuario.setiPersona(0);
-            ObjctUsuario.setiTipoPersona(5);
-            ObjctUsuario.setlActivo(true);
-            ObjctUsuario.setDtCreado(null);
-            ObjctUsuario.setDtModificado(null);
-            ObjctUsuario.setUsuarioC("");
+            CarritoSingleton.getInstance().getCliente().setcNombre(nombre);
+            CarritoSingleton.getInstance().getCliente().setcApellidos(aPaterno);
+            objctCliente.setcNombre(CarritoSingleton.getInstance().getCliente().getcNombre());
+            objctCliente.setcApellidos(CarritoSingleton.getInstance().getCliente().getcApellidos());
+            objctCliente.setDtRegistro(CarritoSingleton.getInstance().getCliente().getDtRegistro());
+            objctCliente.setDtUltCompra(CarritoSingleton.getInstance().getCliente().getDtUltCompra());
+            objctCliente.setDeUltCompra(CarritoSingleton.getInstance().getCliente().getDeUltCompra());
+            objctCliente.setDePorcUltComision(CarritoSingleton.getInstance().getCliente().getDePorcUltComision());
+            objctCliente.setDeUltCompra(CarritoSingleton.getInstance().getCliente().getDeUltCompra());
+            objctCliente.setDePorcUltPropina(CarritoSingleton.getInstance().getCliente().getDePorcUltPropina());
+            objctCliente.setDeUltPropina(CarritoSingleton.getInstance().getCliente().getDeUltPropina());
+            objctCliente.setICPCP(CarritoSingleton.getInstance().getCliente().getICPCP());
+            objctCliente.setcEmail(CarritoSingleton.getInstance().getCliente().getcEmail());
+            objctCliente.setDtCreado(CarritoSingleton.getInstance().getCliente().getDtCreado());
+            objctCliente.setDtModificado(CarritoSingleton.getInstance().getCliente().getDtModificado());
+            objctCliente.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+            objctCliente.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuModifica());
 
-
-            TtCtTelefono objctTelefono = new TtCtTelefono();
-
-            objctTelefono.setiPersona(0);
-            objctTelefono.setiTelefono(0);
-            objctTelefono.setiTipoPersona(5);
-            objctTelefono.setiTipoTelefono(1);
-            objctTelefono.setcTelefono(telefono);
-            objctTelefono.setlActivo(true);
-            objctTelefono.setDtCreado(null);
-            objctTelefono.setDtModificado(null);
-            objctTelefono.setcUsuCrea(null);
-            objctTelefono.setcUsuModifica(null);
 
             Peticion peticion = new Peticion(new Request(new DsCtCliente(new ArrayList<TtCtCliente_>() {
                 {
                     add(objctCliente);
                 }
-            }, new ArrayList<TtCtUsuario_>() {
-                {
-                    add(ObjctUsuario);
-                }
-            }, new ArrayList<TtCtTelefono>() {
-                {
-                    add(objctTelefono);
-                }
-            } )));
+            }), 0));
 
 
 
@@ -181,10 +133,14 @@ public class PerfilActualizaActivity extends AppCompatActivity {
                             Toast.makeText(PerfilActualizaActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
                             return;
                         }
+                        else{
+                            Toast.makeText(PerfilActualizaActivity.this, "Registro Actualizado", Toast.LENGTH_LONG).show();
+                            Intent perfil = new Intent(PerfilActualizaActivity.this, PerfilActivity.class);
+                            startActivity(perfil);
+                        }
                     }else{
-                        Toast.makeText(PerfilActualizaActivity.this, "No se pudo actualizar el usuario", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PerfilActualizaActivity.this, response.message(), Toast.LENGTH_LONG).show();
                     }
-
                     System.out.println(response.toString());
                 }
 

@@ -12,6 +12,7 @@ import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
 

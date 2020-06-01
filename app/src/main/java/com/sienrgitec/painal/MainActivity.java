@@ -133,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
                                 CarritoSingleton.getInstance().setUsuario_
                                         (res.getResponse().getTtCtUsuario().getTtCtUsuario().get(0));
 
+                                CarritoSingleton.getInstance().setTelefono
+                                        (res.getResponse().getTtCtTelefono().getTtCtTelefono().get(0));
+
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);
                             }
