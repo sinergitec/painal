@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.FamilyListActivity;
@@ -107,6 +108,7 @@ public class ConfiguracionFragment extends Fragment {
         perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "Entrando a Perfil.. ", Toast.LENGTH_LONG).show();
                 Intent perfil = new Intent(getActivity(), PerfilActivity.class);
                 startActivity(perfil);
             }
@@ -123,6 +125,7 @@ public class ConfiguracionFragment extends Fragment {
         family.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "Entrando a Clientes Autorizados.. ", Toast.LENGTH_LONG).show();
                 Intent family = new Intent(getActivity(), FamilyListActivity.class);
                 startActivity(family);
             }
@@ -131,6 +134,7 @@ public class ConfiguracionFragment extends Fragment {
         referidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "Entrando a Referidos.. ", Toast.LENGTH_LONG).show();
                 Intent ref = new Intent(getActivity(), ReferidosListActivity.class);
                 startActivity(ref);
             }

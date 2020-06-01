@@ -5,18 +5,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
-import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
-import com.sienrgitec.painal.pojo.entity.TtCtContacto_;
+import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
-import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
 import com.sienrgitec.painal.pojo.peticion.DsOpClienteReferidos;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
@@ -37,40 +33,49 @@ import static com.sienrgitec.painal.R.id.nombre;
 import static com.sienrgitec.painal.R.id.switch1;
 import static com.sienrgitec.painal.R.id.telefono;
 
-public class ReferidosActivity extends AppCompatActivity {
+public class RefActualizaActivity extends AppCompatActivity {
 
-    private Button btnReferir;
+    private Button btnRegActualiza;
     private EditText nombreET, aPaternoET, aMaternoET, emailET, telefonoET ;
-    private Switch autoriza;
+    private Switch autorizaET;
+    private Integer iReferido = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.referidos);
+        setContentView(R.layout.referidos_actualiza);
 
         nombreET   = findViewById(nombre);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         emailET   = findViewById(email);
         telefonoET = findViewById(telefono);
-        autoriza = findViewById(switch1);
+        autorizaET = findViewById(switch1);
 
+        Intent i = getIntent();
+        Tt_OpClienteReferidos_ ref = (Tt_OpClienteReferidos_) i.getSerializableExtra("objActualizar");
+        iReferido = ref.getiReferido();
 
-        btnReferir = findViewById(R.id.referirBtn);
-        btnReferir.setOnClickListener(v -> registraReferidos());
+        nombreET.setText(ref.getcNombre());
+        aPaternoET.setText(ref.getCapellidos());
+        emailET.setText(ref.getcEMail());
+        telefonoET.setText(ref.getcTelefono());
+        autorizaET.setChecked(ref.getlAfiliado());
+
+        btnRegActualiza = findViewById(R.id.referirBtn);
+        btnRegActualiza.setOnClickListener(v -> actualizaReferidos());
     }
 
-    private void registraReferidos() {
-        final Loading loading = new Loading(ReferidosActivity.this);
+    private void actualizaReferidos() {
+        final Loading loading = new Loading(RefActualizaActivity.this);
         loading.iniciaDialogo("alert");
 
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
-        String aMaterno = aMaternoET.getText().toString();
         String correo   = emailET.getText().toString();
         String telefono = telefonoET.getText().toString();
 
-        Boolean autoriza = this.autoriza.isChecked();
+        Boolean autoriza = autorizaET.isChecked();
 
         if(nombre.isEmpty()){
             nombreET.setError("Nombre requerido");
@@ -78,13 +83,8 @@ public class ReferidosActivity extends AppCompatActivity {
         }
 
         if(aPaterno.isEmpty()){
-            aPaternoET.setError("Apellido Paterno requerido");
+            aPaternoET.setError("Apellidos requeridos");
             aPaternoET.requestFocus();
-        }
-
-        if(aMaterno.isEmpty()){
-            aMaternoET.setError("Apellido Materno requerido");
-            aMaternoET.requestFocus();
         }
 
         if(correo.isEmpty()){
@@ -97,15 +97,14 @@ public class ReferidosActivity extends AppCompatActivity {
             telefonoET.requestFocus();
         }
 
-
-        if(!nombre.isEmpty() && !aPaterno.isEmpty() && !aMaterno.isEmpty() && !correo.isEmpty()  && !telefono.isEmpty()){
+        if(!nombre.isEmpty() && !aPaterno.isEmpty() && !correo.isEmpty()  && !telefono.isEmpty()){
 
             Tt_OpClienteReferidos_ objopReferidos = new Tt_OpClienteReferidos_();
 
             objopReferidos.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
-            objopReferidos.setiReferido(0);
+            objopReferidos.setiReferido(iReferido);
             objopReferidos.setcNombre(nombre);
-            objopReferidos.setCapellidos(aPaterno + " " + aMaterno);
+            objopReferidos.setCapellidos(aPaterno);
             objopReferidos.setcEMail(correo);
             objopReferidos.setcTelefono(telefono);
             objopReferidos.setcCveReferido("");
@@ -122,8 +121,7 @@ public class ReferidosActivity extends AppCompatActivity {
             })));
 
             final Painal service = ServiceGenerator.createService(Painal.class);
-            final Call<Respuesta> call = service.opClienteReferidos(peticion);
-            //System.out.println(call.);
+            final Call<Respuesta> call = service.opClienteReferidosPut(peticion);
 
             call.enqueue(new Callback<Respuesta>() {
                 @Override
@@ -131,9 +129,8 @@ public class ReferidosActivity extends AppCompatActivity {
                     System.out.println(response.toString());
                     loading.detenDialogo("alert");
 
-                    Intent inicio = new Intent(ReferidosActivity.this, ReferidosListActivity.class);
+                    Intent inicio = new Intent(RefActualizaActivity.this, ReferidosListActivity.class);
                     startActivity(inicio);
-
                 }
 
                 @Override

@@ -55,6 +55,11 @@
 
     <!-- Perfil -->
     <string name="titlePerfil">PERFIL</string>
+    <string name="actPeril">ACTUALIZA PERFIL</string>
+    <string name="editaDatos">EDITA DATOS</string>
+    <string name="direccion">DIRECCIONES</string>
+    <string name="question">¿Esta seguro de Eliminar el registro?</string>
+
 
     <!-- Family -->
     <string name="titleFamily">CLIENTES AUTORIZADOS</string>
@@ -68,6 +73,8 @@
     <string name="edadN">de</string>
     <string name="solAuto">Autorizacion?:</string>
     <string name="parentescoN">años</string>
+    <string name="actAuto">ACTUALIZA CLIENTES AUTORIZADOS</string>
+
 
     <!-- Referidos  -->
     <string name="titleRef">REFERIDOS</string>
@@ -76,6 +83,9 @@
     <string name="sw">Esta Afiliado</string>
     <string name="btnReferir">Guardar</string>
     <string name="afiliado">Es Afiliado?</string>
+    <string name="actRef">ACTUALIZA REFERIDOS</string>
+    <string name="act">Actualiza</string>
+    <string name="apellidos">Apellidos</string>
 
 
 

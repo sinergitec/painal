@@ -12,7 +12,7 @@ import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
-import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
+import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 import com.sienrgitec.painal.pojo.peticion.DsCtCliente;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
@@ -131,7 +131,7 @@ public class RegistroActivity extends AppCompatActivity {
             ObjctUsuario.setUsuarioC("");
 
 
-            TtCtTelefono objctTelefono = new TtCtTelefono();
+            TtCtTelefono_ objctTelefono = new TtCtTelefono_();
 
             objctTelefono.setiPersona(0);
             objctTelefono.setiTelefono(0);
@@ -152,7 +152,7 @@ public class RegistroActivity extends AppCompatActivity {
                 {
                     add(ObjctUsuario);
                 }
-            }, new ArrayList<TtCtTelefono>() {
+            }, new ArrayList<TtCtTelefono_>() {
                 {
                     add(objctTelefono);
                 }

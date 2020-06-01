@@ -53,7 +53,7 @@ public class TtCtCliente_ {
     @Expose
     private Object ICPCP;
 
-    @SerializedName("cEmail")
+    @SerializedName("cEMail")
     @Expose
     private String cEmail;
 
@@ -89,7 +89,7 @@ public class TtCtCliente_ {
         this.cClave = cClave;
     }
 
-    public String getcNombre(String nombre) {
+    public String getcNombre() {
         return cNombre;
     }
 
@@ -97,7 +97,7 @@ public class TtCtCliente_ {
         this.cNombre = cNombre;
     }
 
-    public String getcApellidos(String s) {
+    public String getcApellidos() {
         return cApellidos;
     }
 

@@ -13,6 +13,10 @@ public class Request {
         this.dsCtCliente = dsCtCliente;
     }
 
+    public Request (DsCtCliente dsCtClienteActualiza, Integer num){
+        this.dsCtClienteActualiza = dsCtClienteActualiza;
+    }
+
     public Request (DsNvoPedido dsNvoPedido){
         this.dsNvoPedido = dsNvoPedido;
     }
@@ -37,6 +41,10 @@ public class Request {
     @SerializedName("ds_ctCliente")
     @Expose
     private DsCtCliente dsCtCliente;
+
+    @SerializedName("ds_CtCliente")
+    @Expose
+    private DsCtCliente dsCtClienteActualiza;
 
     @SerializedName("ds_NvoPedido")
     @Expose
@@ -104,5 +112,13 @@ public class Request {
 
     public void setDsAutorizados(DsCtClienteAutorizados dsAutorizados) {
         this.dsAutorizados = dsAutorizados;
+    }
+
+    public DsCtCliente getDsCtClienteActualiza() {
+        return dsCtClienteActualiza;
+    }
+
+    public void setDsCtClienteActualiza(DsCtCliente dsCtClienteActualiza) {
+        this.dsCtClienteActualiza = dsCtClienteActualiza;
     }
 }
