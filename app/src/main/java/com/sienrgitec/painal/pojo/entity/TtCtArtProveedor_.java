@@ -10,6 +10,9 @@ public class TtCtArtProveedor_ implements Serializable {
     @SerializedName("iProveedor")
     @Expose
     private Integer iProveedor;
+    @SerializedName("iDomicilio")
+    @Expose
+    private Integer iDomicilio;
     @SerializedName("iArticulo")
     @Expose
     private Integer iArticulo;
@@ -393,10 +396,19 @@ public class TtCtArtProveedor_ implements Serializable {
         this.id = id;
     }
 
+    public Integer getiDomicilio() {
+        return iDomicilio;
+    }
+
+    public void setiDomicilio(Integer iDomicilio) {
+        this.iDomicilio = iDomicilio;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TtCtArtProveedor_{");
         sb.append("iProveedor=").append(iProveedor);
+        sb.append(", iDomicilio=").append(iDomicilio);
         sb.append(", iArticulo=").append(iArticulo);
         sb.append(", cArticulo='").append(cArticulo).append('\'');
         sb.append(", cAplicaciones='").append(cAplicaciones).append('\'');

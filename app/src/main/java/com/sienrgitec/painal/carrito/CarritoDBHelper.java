@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CarritoDBHelper extends SQLiteOpenHelper {
 
-    private static final int VERSION_BASEDATOS = 2;
+    private static final int VERSION_BASEDATOS = 3;
 
     // Nombre de nuestro archivo de base de datos
     private static final String NOMBRE_BASEDATOS = "carrito.db";
@@ -26,6 +26,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
     private static final String TABLA_ARTICULO = "CREATE TABLE articulo (\n" +
             "    _idArt INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "iProveedor INT, " +
+            "iDomicilio INT, " +
             "iArticulo INT, " +
             "cArticulo TEXT, " +
             "cAplicaciones TEXT, " +
@@ -82,6 +83,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         if(db != null){
             ContentValues valores = new ContentValues();
             valores.put("iProveedor",articulo.getIProveedor());
+            valores.put("iDomicilio",articulo.getiDomicilio());
             valores.put("iArticulo",articulo.getIArticulo());
             valores.put("cArticulo",articulo.getCArticulo());
             valores.put("cAplicaciones",articulo.getCAplicaciones());
@@ -161,7 +163,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
 
     public TtCtArtProveedor_ recuperarArticulo(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        String[] valores_recuperar = {"_idArt", "iProveedor",
+        String[] valores_recuperar = {"_idArt", "iProveedor", "iDomicilio",
                 "iArticulo",
                 "cArticulo",
                 "cAplicaciones",
@@ -199,36 +201,37 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             articulo.setIProveedor(c.getInt(1));
-            articulo.setIArticulo(c.getInt(2));
-            articulo.setCArticulo(c.getString(3));
-            articulo.setCAplicaciones(c.getString(4));
-            articulo.setCPresentacion(c.getString(5));
-            articulo.setCDescripcion(c.getString(6));
-            articulo.setIImpuesto(c.getInt(7));
-            articulo.setICategoria(c.getInt(8));
-            articulo.setISubCategoria(c.getInt(9));
-            articulo.setIClasificacion(c.getInt(10));
-            articulo.setISubClasificacion(c.getInt(11));
-            articulo.setIMarca(c.getInt(12));
-            articulo.setLActivo(c.getInt(13) == 1 ? true : false);
-            articulo.setLAgotado(c.getInt(14) == 1 ? true : false);
-            articulo.setDePeso(c.getDouble(15));
-            articulo.setDeLargo(c.getDouble(16));
-            articulo.setDeAncho(c.getDouble(17));
-            articulo.setDeProfundo(c.getDouble(18));
-            articulo.setCUsuCrea(c.getString(19));
-            articulo.setCUsuModifica(c.getString(20));
-            articulo.setDePrecioVtaPza(c.getDouble(21));
-            articulo.setDeImpuestoPza(c.getDouble(22));
-            articulo.setDePrecioVtaGranel(c.getDouble(23));
-            articulo.setDeImpuestoGranel(c.getDouble(24));
-            articulo.setIUMedida(c.getInt(25));
-            articulo.setCUnidadM(c.getString(26));
-            articulo.setCMarca(c.getString(27));
-            articulo.setCCategoria(c.getString(28));
-            articulo.setCSubCategoria(c.getString(29));
-            articulo.setCClasificacion(c.getString(30));
-            articulo.setCSubClasificacion(c.getString(31));
+            articulo.setiDomicilio(c.getInt(2));
+            articulo.setIArticulo(c.getInt(3));
+            articulo.setCArticulo(c.getString(4));
+            articulo.setCAplicaciones(c.getString(5));
+            articulo.setCPresentacion(c.getString(6));
+            articulo.setCDescripcion(c.getString(7));
+            articulo.setIImpuesto(c.getInt(8));
+            articulo.setICategoria(c.getInt(9));
+            articulo.setISubCategoria(c.getInt(10));
+            articulo.setIClasificacion(c.getInt(11));
+            articulo.setISubClasificacion(c.getInt(12));
+            articulo.setIMarca(c.getInt(13));
+            articulo.setLActivo(c.getInt(14) == 1 ? true : false);
+            articulo.setLAgotado(c.getInt(15) == 1 ? true : false);
+            articulo.setDePeso(c.getDouble(16));
+            articulo.setDeLargo(c.getDouble(17));
+            articulo.setDeAncho(c.getDouble(18));
+            articulo.setDeProfundo(c.getDouble(19));
+            articulo.setCUsuCrea(c.getString(20));
+            articulo.setCUsuModifica(c.getString(21));
+            articulo.setDePrecioVtaPza(c.getDouble(22));
+            articulo.setDeImpuestoPza(c.getDouble(23));
+            articulo.setDePrecioVtaGranel(c.getDouble(24));
+            articulo.setDeImpuestoGranel(c.getDouble(25));
+            articulo.setIUMedida(c.getInt(26));
+            articulo.setCUnidadM(c.getString(27));
+            articulo.setCMarca(c.getString(28));
+            articulo.setCCategoria(c.getString(29));
+            articulo.setCSubCategoria(c.getString(30));
+            articulo.setCClasificacion(c.getString(31));
+            articulo.setCSubClasificacion(c.getString(32));
         }
         db.close();
         c.close();
