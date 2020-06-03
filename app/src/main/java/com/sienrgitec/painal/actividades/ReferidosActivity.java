@@ -48,7 +48,7 @@ public class ReferidosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.referidos);
 
-        nombreET   = findViewById(nombre);
+        nombreET   = findViewById(R.id.descripcion);
         aPaternoET = findViewById(apellidoP);
         aMaternoET = findViewById(apellidoM);
         emailET   = findViewById(email);

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.Loading;
+import com.sienrgitec.painal.fragmentos.HomeFragment;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
@@ -59,49 +60,54 @@ public class RefEliminaActivity  extends AppCompatDialogFragment {
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final Loading loading = new Loading(getActivity());
-                        loading.iniciaDialogo("alert");
 
-                        System.out.println(cliente);
-                        System.out.println(referido);
-
-                        final Painal service = ServiceGenerator.createService(Painal.class);
-                        Map<String, Integer> data = new HashMap<>();
-                        data.put("ipiCliente", cliente);
-                        data.put("ipiReferido", referido);
-                        final Call<Respuesta> call = service.opClienteReferidosDelete(data);
-
-                        call.enqueue(new Callback<Respuesta>() {
-                            @Override
-                            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                                loading.detenDialogo("alert");
-                                Respuesta res = response.body();
-                                System.out.println(getActivity());
-                                if (response.isSuccessful()) {
-                                    if (res.getResponse().getOplError().equals("true")){
-                                        Toast.makeText(getActivity(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
-                                    }else{
-                                        Intent inicio = new Intent(context, ReferidosListActivity.class);
-                                        context.startActivity(inicio);
-                                    }
-                                } else {
-                                    Toast.makeText(getActivity(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Respuesta> call, Throwable t) {
-                                loading.detenDialogo("alert");
-                                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
+                        eliminar(cliente,referido);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        Intent inicio = new Intent(getContext(), HomeFragment.class);
+                        getContext().startActivity(inicio);
                     }
                 });
         return builder.create();
+    }
+
+    private void eliminar(Integer cliente, Integer referido) {
+
+        final Loading loading = new Loading(getActivity());
+        loading.iniciaDialogo("alert");
+
+
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, Integer> data = new HashMap<>();
+        data.put("ipiCliente", cliente);
+        data.put("ipiReferido", referido);
+        final Call<Respuesta> call = service.opClienteReferidosDelete(data);
+
+        call.enqueue(new Callback<Respuesta>() {
+
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                loading.detenDialogo("alert");
+                Respuesta res = response.body();
+                System.out.println(getActivity());
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")){
+                        Toast.makeText(getContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                    }else{
+
+                    }
+                } else {
+                    Toast.makeText(getContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                loading.detenDialogo("alert");
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

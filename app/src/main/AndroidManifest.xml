@@ -76,6 +76,8 @@
         <activity android:screenOrientation="portrait" android:name=".actividades.PerfilActualizaActivity" />
         <activity android:screenOrientation="portrait" android:name=".actividades.RefEliminaActivity" />
         <activity android:screenOrientation="portrait" android:name=".actividades.FamEliminaActivity" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.EliminaRef" />
+        <activity android:screenOrientation="portrait" android:name=".actividades.EliminaAutorizados" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.EliminaRef;
 import com.sienrgitec.painal.actividades.RefActualizaActivity;
 import com.sienrgitec.painal.actividades.RefEliminaActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
@@ -43,8 +44,14 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
 
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
             btnEliminar.setOnClickListener(v ->{
-                RefEliminaActivity dialogoEliminar = new RefEliminaActivity(item.getiCliente(), item.getiReferido());
-                dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
+
+                Intent elimina = new Intent(viewHolder.getView().getContext(), EliminaRef.class);
+                elimina.putExtra("objEliminar", item);
+                viewHolder.getView().getContext().startActivity(elimina);
+
+
+                //RefEliminaActivity dialogoEliminar = new RefEliminaActivity(item.getiCliente(), item.getiReferido());
+                //dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
             });
 
 

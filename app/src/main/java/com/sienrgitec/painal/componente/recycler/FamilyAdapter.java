@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.EliminaAutorizados;
+import com.sienrgitec.painal.actividades.EliminaRef;
 import com.sienrgitec.painal.actividades.FamEliminaActivity;
 import com.sienrgitec.painal.actividades.FamilyActualiza;
 import com.sienrgitec.painal.actividades.RefActualizaActivity;
@@ -46,8 +48,12 @@ public class FamilyAdapter extends RVAdapter<TtCtClienteAutorizados_> {
 
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
             btnEliminar.setOnClickListener(v ->{
-                FamEliminaActivity dialogoEliminar = new FamEliminaActivity(item.getiCliente());
-                dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
+                Intent elimina = new Intent(viewHolder.getView().getContext(), EliminaAutorizados.class);
+                elimina.putExtra("objEliminar", item);
+                viewHolder.getView().getContext().startActivity(elimina);
+
+                //FamEliminaActivity dialogoEliminar = new FamEliminaActivity(item.getiCliente());
+                //dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
             });
 
             TextView nombre = (TextView)viewHolder.getView(R.id.descripcion);
