@@ -15,9 +15,12 @@ public class TtCtDomicilio implements Serializable {
     @SerializedName("iTipoPersona")
     @Expose
     private String iTipoPersona;
-    @SerializedName("itipoDomicilio")
+    @SerializedName("iTipoDomicilio")
     @Expose
     private String itipoDomicilio;
+    @SerializedName("cDomicilio")
+    @Expose
+    private String cDomicilio;
     @SerializedName("cCalle")
     @Expose
     private String cCalle;
@@ -70,11 +73,12 @@ public class TtCtDomicilio implements Serializable {
     @Expose
     private String cUsuModifca;
 
-    public TtCtDomicilio(String iPersona, String iDomicilio, String iTipoPersona, String itipoDomicilio, String cCalle, String cNumeroExt, String cNumeroInt, String cColonia, String cMpioDeleg, String cEstado, String cCP, String cPais, String cReferencia, String cObs, String deLongitud, String deLatitud, Boolean lActivo, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifca) {
+    public TtCtDomicilio(String iPersona, String iDomicilio, String iTipoPersona, String itipoDomicilio, String cDomicilio, String cCalle, String cNumeroExt, String cNumeroInt, String cColonia, String cMpioDeleg, String cEstado, String cCP, String cPais, String cReferencia, String cObs, String deLongitud, String deLatitud, Boolean lActivo, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifca) {
         this.iPersona = iPersona;
         this.iDomicilio = iDomicilio;
         this.iTipoPersona = iTipoPersona;
         this.itipoDomicilio = itipoDomicilio;
+        this.cDomicilio = cDomicilio;
         this.cCalle = cCalle;
         this.cNumeroExt = cNumeroExt;
         this.cNumeroInt = cNumeroInt;
@@ -262,6 +266,14 @@ public class TtCtDomicilio implements Serializable {
         this.cUsuModifca = cUsuModifca;
     }
 
+    public String getcDomicilio() {
+        return cDomicilio;
+    }
+
+    public void setcDomicilio(String cDomicilio) {
+        this.cDomicilio = cDomicilio;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TtCtDomicilio{");
@@ -269,6 +281,7 @@ public class TtCtDomicilio implements Serializable {
         sb.append(", iDomicilio='").append(iDomicilio).append('\'');
         sb.append(", iTipoPersona='").append(iTipoPersona).append('\'');
         sb.append(", itipoDomicilio='").append(itipoDomicilio).append('\'');
+        sb.append(", cDomicilio='").append(cDomicilio).append('\'');
         sb.append(", cCalle='").append(cCalle).append('\'');
         sb.append(", cNumeroExt='").append(cNumeroExt).append('\'');
         sb.append(", cNumeroInt='").append(cNumeroInt).append('\'');
