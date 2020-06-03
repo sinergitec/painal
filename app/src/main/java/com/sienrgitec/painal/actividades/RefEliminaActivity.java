@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.actividades;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,27 +9,40 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.Loading;
-import com.sienrgitec.painal.componente.recycler.ReferidosAdapter;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RefEliminaActivity  extends AppCompatDialogFragment {
 
     private TextView clienteBorrar;
     private Integer cliente = 0;
+    private Integer referido = 0;
+    private Context context = getActivity();
 
     public RefEliminaActivity(){
     }
 
-    public RefEliminaActivity(Integer iCliente){
+    public RefEliminaActivity(Integer iCliente, Integer ipiReferido){
+
         this.cliente = iCliente;
+        this.referido = ipiReferido;
     }
 
     @NonNull
@@ -48,9 +62,39 @@ public class RefEliminaActivity  extends AppCompatDialogFragment {
                         final Loading loading = new Loading(getActivity());
                         loading.iniciaDialogo("alert");
 
-                        Intent inicio = new Intent(getActivity(), MainActivity.class);
-                        inicio.putExtra("cliente", cliente);
-                        startActivity(inicio);
+                        System.out.println(cliente);
+                        System.out.println(referido);
+
+                        final Painal service = ServiceGenerator.createService(Painal.class);
+                        Map<String, Integer> data = new HashMap<>();
+                        data.put("ipiCliente", cliente);
+                        data.put("ipiReferido", referido);
+                        final Call<Respuesta> call = service.opClienteReferidosDelete(data);
+
+                        call.enqueue(new Callback<Respuesta>() {
+                            @Override
+                            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                                loading.detenDialogo("alert");
+                                Respuesta res = response.body();
+                                System.out.println(getActivity());
+                                if (response.isSuccessful()) {
+                                    if (res.getResponse().getOplError().equals("true")){
+                                        Toast.makeText(getActivity(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Intent inicio = new Intent(context, ReferidosListActivity.class);
+                                        context.startActivity(inicio);
+                                    }
+                                } else {
+                                    Toast.makeText(getActivity(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Respuesta> call, Throwable t) {
+                                loading.detenDialogo("alert");
+                                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -59,8 +103,5 @@ public class RefEliminaActivity  extends AppCompatDialogFragment {
                     }
                 });
         return builder.create();
-    }
-
-    private void setContentView(int recupera_pw) {
     }
 }

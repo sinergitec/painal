@@ -74,7 +74,7 @@ public interface Painal {
     Call<Respuesta> ctClienteAutorizadosPut(@Body Peticion peticion);
 
     @DELETE("ctClienteAutorizados")
-    Call<Respuesta> ctClienteAutorizadosDelete(@Body Peticion peticion);
+    Call<Respuesta> ctClienteAutorizadosDelete(@QueryMap Map<String, Integer> options);
 
     //Clientes Referidos
     @GET("opClienteReferidos")
@@ -87,7 +87,7 @@ public interface Painal {
     Call<Respuesta> opClienteReferidosPut(@Body Peticion peticion);
 
     @DELETE("opClienteReferidos")
-    Call<Respuesta> opClienteReferidosDelete(@Body Peticion peticion);
+    Call<Respuesta> opClienteReferidosDelete(@QueryMap Map<String, Integer> options);
 
 
 

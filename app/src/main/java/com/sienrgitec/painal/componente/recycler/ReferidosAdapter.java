@@ -43,7 +43,7 @@ public class ReferidosAdapter extends RVAdapter<Tt_OpClienteReferidos_> {
 
             ImageView btnEliminar = (ImageView)viewHolder.getView(R.id.imageView10);
             btnEliminar.setOnClickListener(v ->{
-                RefEliminaActivity dialogoEliminar = new RefEliminaActivity(item.getiCliente());
+                RefEliminaActivity dialogoEliminar = new RefEliminaActivity(item.getiCliente(), item.getiReferido());
                 dialogoEliminar.show(((AppCompatActivity) viewHolder.getView().getContext()).getSupportFragmentManager(), null);
             });
 
