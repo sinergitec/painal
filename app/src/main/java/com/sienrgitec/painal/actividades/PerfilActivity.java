@@ -20,6 +20,7 @@ public class PerfilActivity extends AppCompatActivity {
     private TextView btnPerfilText;
     private ImageView btnDirecciones;
     private TextView btnDireccionesText;
+    private TextView btnConsultaSaldo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,19 @@ public class PerfilActivity extends AppCompatActivity {
 
         btnPerfil = findViewById(R.id.imageView3);
         btnPerfil.setOnClickListener(v -> editaPerfil());
+
+        btnConsultaSaldo = findViewById(R.id.textView15);
+        btnConsultaSaldo.setOnClickListener(v -> consultaSaldo());
     }
 
     private void editaPerfil() {
         Intent perfil = new Intent(PerfilActivity.this, PerfilActualizaActivity.class);
         startActivity(perfil);
+    }
+
+    private void consultaSaldo(){
+        Intent getSaldo = new Intent (PerfilActivity.this, SaldosActivity.class);
+        startActivity(getSaldo);
+
     }
 }

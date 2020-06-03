@@ -94,6 +94,9 @@ public class TtOpPedidoProveedor implements Serializable {
     @Expose
     private String cUsuModifica;
 
+    @Expose
+    private String lSurtido;
+
     public TtOpPedidoProveedor (){
 
     }
@@ -128,6 +131,7 @@ public class TtOpPedidoProveedor implements Serializable {
         this.dtModificado = dtModificado;
         this.cUsuCrea = cUsuCrea;
         this.cUsuModifica = cUsuModifica;
+        this.lSurtido = lSurtido;
     }
 
     public String getIPedido() {

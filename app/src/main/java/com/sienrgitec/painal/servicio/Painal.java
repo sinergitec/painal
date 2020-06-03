@@ -89,6 +89,10 @@ public interface Painal {
     @DELETE("opClienteReferidos")
     Call<Respuesta> opClienteReferidosDelete(@QueryMap Map<String, Integer> options);
 
+    /*Andros Consulta de saldos CPC*/
+    @GET("credEncCPCP")
+    Call<Respuesta> credEncCPCP(@QueryMap Map<String, String> options);
+
 
 
 }
