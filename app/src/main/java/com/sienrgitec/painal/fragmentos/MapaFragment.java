@@ -101,8 +101,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                     true,
                     "NOW",
                     "",
-                    "",
-                    ""
+                    CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
+                    CarritoSingleton.getInstance().getUsuario_().getcUsuario()
             );
 
             final Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio>(){
@@ -118,7 +118,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
                     if(response.isSuccessful()){
-                        Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
+                        Respuesta respuesta = response.body();
+                        if(!Boolean.valueOf(respuesta.getResponse().getOplError())){
+                            Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
                     }
