@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public class Carrito implements Serializable {
     private TtCtArtProveedor_ articulo;
-    private Double cantidadArticulo;
-    private Double monto;
+    private Double cantidadArticulo = 0.0 ;
+    private Double monto = 0.0 ;
 
     public Carrito (){
 
