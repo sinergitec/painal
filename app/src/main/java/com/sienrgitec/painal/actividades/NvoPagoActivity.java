@@ -1,0 +1,164 @@
+package com.sienrgitec.painal.actividades;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.sienrgitec.painal.MainActivity;
+import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.Loading;
+import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
+import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
+import com.sienrgitec.painal.pojo.peticion.DsCtClienteAutorizados;
+import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
+import com.sienrgitec.painal.pojo.peticion.Peticion;
+import com.sienrgitec.painal.pojo.peticion.Request;
+import com.sienrgitec.painal.pojo.peticion.ds_NvoPago;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class NvoPagoActivity extends AppCompatActivity {
+
+    private EditText etcCuenta, etdMonto,etcReferencia, etcObservaciones;
+    private Button btnPago;
+    private String vcMovimiento = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_nvo_pago);
+
+        etcCuenta = findViewById(R.id.etCuenta);
+        etdMonto  = findViewById(R.id.etMonto);
+        etcReferencia = findViewById(R.id.etReferencia);
+        etcObservaciones = findViewById(R.id.etObs);
+        btnPago = findViewById(R.id.btnRegistroP);
+
+
+
+
+        btnPago.setOnClickListener(v -> CreaDeposito());
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_pirates:
+                if (checked)
+                    // Pirates are the best
+                    vcMovimiento = "Deposito";
+                    break;
+            case R.id.radio_ninjas:
+                if (checked)
+                    // Ninjas rule
+                    vcMovimiento = "Abono";
+                    break;
+        }
+    }
+
+    private void CreaDeposito(){
+        final Loading loading = new Loading(NvoPagoActivity.this);
+        loading.iniciaDialogo("alert");
+
+
+        if(vcMovimiento == ""){
+            loading.detenDialogo("alert");
+
+        }
+
+
+        String vcCuenta = etcCuenta.getText().toString();
+        String vdeMonto = etdMonto.getText().toString();
+        String vcReferencia = etcReferencia.getText().toString();
+        String vcObservaciones = etcObservaciones.getText().toString();
+
+        /*if (vcCuenta.isEmpty()){
+
+        }
+
+
+        if (vdeMonto.isEmpty()){
+
+        }
+
+        if(vcReferencia.isEmpty()){
+
+        }*/
+
+        TtCredDetCPCP_ objAbono = new TtCredDetCPCP_();
+        objAbono.setcCuenta(vcCuenta);
+        objAbono.setcMov(vcMovimiento);
+        objAbono.setDeMonto(vdeMonto);
+        objAbono.setcReferencia(vcReferencia);
+        objAbono.setcObs(vcObservaciones);
+        objAbono.setlAutorizado(false);
+        objAbono.setcUsuCrea("androscli");
+        objAbono.setcUsuModifica("androsCli");
+
+        Peticion peticion = new Peticion(new Request(new ds_NvoPago(new ArrayList<TtCredDetCPCP_>() {
+            {
+                add(objAbono);
+            }
+        })));
+
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        final Call<Respuesta> call = service.credDetCPCPPost(peticion);
+        //System.out.println(call.);
+
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                System.out.println(response.toString());
+                loading.detenDialogo("alert");
+
+                if(response.isSuccessful()){
+                    Respuesta res = response.body();
+
+                    if(res.getResponse().getOplError().equals("true")){
+                        Toast.makeText(NvoPagoActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    Toast.makeText(NvoPagoActivity.this, "Solicitud Exitosa", Toast.LENGTH_LONG).show();
+
+                    Intent inicio = new Intent(NvoPagoActivity.this, HomeActivity.class);
+                    startActivity(inicio);
+
+                }else{
+                    Toast.makeText(NvoPagoActivity.this, "No se pudo crear la solicitud de abono", Toast.LENGTH_LONG).show();
+                }
+
+                System.out.println(response.toString());
+
+                /**/
+
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                System.out.println(t.getMessage());
+                loading.detenDialogo("alert");
+            }
+        });
+
+
+
+    }
+}

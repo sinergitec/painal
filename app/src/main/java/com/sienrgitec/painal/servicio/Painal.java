@@ -93,6 +93,11 @@ public interface Painal {
     @GET("credEncCPCP")
     Call<Respuesta> credEncCPCP(@QueryMap Map<String, String> options);
 
+    /*Andros Solicitud de Abono*/
+    @POST("credDetCPCP")
+    Call<Respuesta> credDetCPCPPost(@Body Peticion peticion);
+
+
 
 
 }

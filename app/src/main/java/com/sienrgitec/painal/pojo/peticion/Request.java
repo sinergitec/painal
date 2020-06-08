@@ -37,6 +37,14 @@ public class Request {
         this.dsClienteRef = dsClienteRef;
     }
 
+    /**Andros 050620*/
+    public Request (ds_NvoPago dsTtCredDetCPCP){
+        this.dsTtCredDetCPCP = dsTtCredDetCPCP;
+    }
+
+    @SerializedName("ds_NvoPago")
+    @Expose
+    private ds_NvoPago dsTtCredDetCPCP;
 
     @SerializedName("ds_ctCliente")
     @Expose

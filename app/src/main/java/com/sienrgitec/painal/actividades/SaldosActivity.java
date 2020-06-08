@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
@@ -23,11 +24,15 @@ import retrofit2.Response;
 
 public class SaldosActivity extends AppCompatActivity {
 
+    private Button btnAgregar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saldos);
 
+        btnAgregar = findViewById(R.id.btnAgregarF);
+        btnAgregar.setOnClickListener(v -> CreaFondo());
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -42,8 +47,8 @@ public class SaldosActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (res.getResponse().getOplError().equals("true")) {
                         Toast.makeText(SaldosActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
-                        Intent getSaldo = new Intent(SaldosActivity.this, PerfilActivity.class);
-                        startActivity(getSaldo);
+                        /*Intent getSaldo = new Intent(SaldosActivity.this, PerfilActivity.class);
+                        startActivity(getSaldo);*/
                     }else {
 
                     }
@@ -58,5 +63,9 @@ public class SaldosActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void CreaFondo() {
+        Intent nvoFondo = new Intent(SaldosActivity.this, NvoPagoActivity.class);
+        startActivity(nvoFondo);
     }
 }
