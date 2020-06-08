@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
+import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtOpPedido;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
@@ -142,7 +143,7 @@ public class CarritoFragment extends Fragment {
 
         final TtOpPedido pedido =
                 new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                        "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()),
+                        "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores().compareTo(Constantes.CANTIDAD_MAX_PROVEEDORES) > 0 ? CarritoSingleton.getInstance().getNumeroProveedores() - 1 : CarritoSingleton.getInstance().getNumeroProveedores()),
                         String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
@@ -212,11 +213,13 @@ public class CarritoFragment extends Fragment {
 
     private void llenaListaOpPedidoProveedorYOpPedidoDet(List<TtOpPedidoProveedor> listaOpPedidoProveedor, List<TtOpPedidoDet> listDetalle){
         Integer proveedorPedido = 1;
-        for (int i = 0; i < CarritoSingleton.getInstance().getPilaProveedores().size() ; i++) {
+        for (int i = 0; i < CarritoSingleton.getInstance().getPilaDomicilios().size() ; i++) {
             Integer partida = 1;
             Double totalPedidoProveedor = 0.0;
             for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
-                if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0){
+                if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0
+                    && CarritoSingleton.getInstance().getPilaDomicilios().get(i).
+                        equals(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
                     listDetalle.add(new TtOpPedidoDet(String.valueOf(partida * 4),
                             String.valueOf(partida),
                             String.valueOf(proveedorPedido),
@@ -249,10 +252,13 @@ public class CarritoFragment extends Fragment {
                 }
             }
 
+            String [] proveedorDomicilio = CarritoSingleton.getInstance().getPilaDomicilios().get(i).split(",");
+
             listaOpPedidoProveedor.add(new TtOpPedidoProveedor(String.valueOf(proveedorPedido * 6),String.valueOf(proveedorPedido),
-                    String.valueOf(CarritoSingleton.getInstance().getPilaProveedores().get(i)),
+                    proveedorDomicilio[0],
                     "TODAY","0",
-                    "1",String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
+                    proveedorDomicilio[1],
+                    String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
                     String.valueOf(totalPedidoProveedor),
                     "16",String.valueOf(totalPedidoProveedor),
                     "","FALSE","TRUE","NOW","FALSE",

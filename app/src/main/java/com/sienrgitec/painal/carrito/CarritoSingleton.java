@@ -23,6 +23,7 @@ public class CarritoSingleton {
     private TtCtTelefono_ telefono = new TtCtTelefono_();
     private List<TtCtDomicilio_> domicilio = new ArrayList<TtCtDomicilio_>();
     private Stack<Integer> pilaProveedores = new Stack<>();
+    private Stack<String> pilaDomicilios = new Stack<>();
 
     private CarritoSingleton(){
         if (sSoleInstance != null){
@@ -44,9 +45,15 @@ public class CarritoSingleton {
             pilaProveedores.push(item.getArticulo().getIProveedor());
         }
 
+        //Agrega a la pila de domicilios
+        if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
+            pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()));
+        }
+
         //Determina si el numero de proveedores es mayor al maximo permitido
-        if(pilaProveedores.size() > Constantes.CANTIDAD_MAX_PROVEEDORES){
-            Toast.makeText(context, "Alcanzo el maximo de proveedores", Toast.LENGTH_LONG).show();
+        if(pilaProveedores.size() > Constantes.CANTIDAD_MAX_PROVEEDORES
+                || pilaDomicilios.size() > Constantes.CANTIDAD_MAX_PROVEEDORES){
+            Toast.makeText(context, "Alcanzo el máximo de proveedores", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -65,13 +72,17 @@ public class CarritoSingleton {
             if(!pilaProveedores.contains(item.getArticulo().getIProveedor())){
                 pilaProveedores.push(item.getArticulo().getIProveedor());
             }
+            if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
+                pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()));
+            }
         }
     }
 
     public synchronized void vaciarCarrito(Context context){
         listaCarrito.clear();
         boolean changed = pilaProveedores.removeAll(pilaProveedores);
-        if (changed)
+        boolean changed2 = pilaDomicilios.removeAll(pilaDomicilios);
+        if (changed && changed2)
             System.out.println("Limpieza ");
         else
             System.out.println("Limpieza no hecha");
@@ -115,6 +126,14 @@ public class CarritoSingleton {
 
     public Stack<Integer> getPilaProveedores() {
         return pilaProveedores;
+    }
+
+    public synchronized Integer getNumeroDomicilios() {
+        return pilaDomicilios.size();
+    }
+
+    public Stack<String> getPilaDomicilios() {
+        return pilaDomicilios;
     }
 
     public List<TtCtDomicilio_> getDomicilio() {
