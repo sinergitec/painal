@@ -156,7 +156,7 @@ public class CarritoFragment extends Fragment {
         llenaListaOpPedidoProveedorYOpPedidoDet(listaOpPedidoProveedor, listaOpPedidoDet);
 
         final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
-                "1",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                CarritoSingleton.getInstance().getDomicilio().get(0).getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "TRUE","NOW","","AUTO","");
 
         final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",

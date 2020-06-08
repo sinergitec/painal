@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,7 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
-import com.sienrgitec.painal.pojo.entity.TtCtDomicilio;
+import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
 import com.sienrgitec.painal.pojo.peticion.DsCtDomicilio;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
@@ -81,7 +80,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         final TextView alias = view.findViewById(R.id.alias);
         final Button guardar = view.findViewById(R.id.guardarDireccion);
         guardar.setOnClickListener(v -> {
-            TtCtDomicilio ttCtDomicilio = new TtCtDomicilio(
+            TtCtDomicilio_ ttCtDomicilio = new TtCtDomicilio_(
                     String.valueOf(CarritoSingleton.getInstance().getUsuario_().getiPersona()),
                     String.valueOf(0),
                     String.valueOf(CarritoSingleton.getInstance().getUsuario_().getiTipoPersona()),
@@ -106,7 +105,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                     CarritoSingleton.getInstance().getUsuario_().getcUsuario()
             );
 
-            final Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio>(){
+            final Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio_>(){
                 {
                     add(ttCtDomicilio);
                 }

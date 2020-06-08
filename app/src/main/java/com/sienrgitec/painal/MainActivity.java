@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 /*CarritoSingleton.getInstance().setTelefono
                                         (res.getResponse().getTtCtTelefono().getTtCtTelefono().get(0));*/
+                                CarritoSingleton.getInstance().setDomicilio
+                                        (res.getResponse().getTt_ctDomicilio().getTt_ctDomicilio());
 
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);

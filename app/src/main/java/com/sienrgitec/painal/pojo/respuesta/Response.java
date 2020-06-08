@@ -7,6 +7,7 @@ import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados;
 import com.sienrgitec.painal.pojo.entity.TtCtContacto;
+import com.sienrgitec.painal.pojo.entity.TtCtDomicilio;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
@@ -57,6 +58,10 @@ public class Response {
     @SerializedName("tt_opClienteReferidos")
     @Expose
     private Tt_OpClienteReferidos tt_opClienteReferidos;
+
+    @SerializedName("tt_ctDomicilio")
+    @Expose
+    private TtCtDomicilio tt_ctDomicilio;
 
     @SerializedName("oplError")
     @Expose
@@ -175,6 +180,14 @@ public class Response {
 
     public void setTt_opClienteReferidos(Tt_OpClienteReferidos tt_opClienteReferidos) {
         this.tt_opClienteReferidos = tt_opClienteReferidos;
+    }
+
+    public TtCtDomicilio getTt_ctDomicilio() {
+        return tt_ctDomicilio;
+    }
+
+    public void setTt_ctDomicilio(TtCtDomicilio tt_ctDomicilio) {
+        this.tt_ctDomicilio = tt_ctDomicilio;
     }
 
     @Override
