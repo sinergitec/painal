@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".actividades.NvoPagoActivity"></activity>
+        <activity android:name=".AplicaPago"></activity>
+        <activity android:name=".actividades.NvoPagoActivity" />
         <activity android:name=".actividades.SaldosActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -108,7 +109,6 @@
         <activity
             android:name=".actividades.EliminaAutorizados"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".actividades.EvaluacionActivity"
             android:screenOrientation="portrait" />
