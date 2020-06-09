@@ -1,6 +1,8 @@
 package com.sienrgitec.painal.fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.PerfilActivity;
+import com.sienrgitec.painal.actividades.SaldosActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
 import com.sienrgitec.painal.constante.Constantes;
@@ -30,8 +34,11 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 import com.sienrgitec.painal.util.Funcionalidades;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,6 +98,10 @@ public class CarritoFragment extends Fragment {
         final TextView vaciar = view.findViewById(R.id.vaciar);
         final Button button = view.findViewById(R.id.realizaPedido);
         cargaInfoCarrito(view);
+        /**Se agrega para mostrar saldo**/
+        RecuperaSaldo(view);
+
+
         vaciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +115,8 @@ public class CarritoFragment extends Fragment {
                 realizaPedido(v);
             }
         });
+
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -125,6 +138,48 @@ public class CarritoFragment extends Fragment {
 
         totalArticulos.setText("Cantidad de articulos: " + sizeList);
         total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
+
+
+    }
+
+
+    private void RecuperaSaldo(View view ){
+
+        TextView tvSaldo = view.findViewById(R.id.saldo);
+
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, String> data = new HashMap<>();
+        data.put("ipiCliente", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()));
+
+
+        final Call<Respuesta> call = service.credEncCPCP(data);
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                Respuesta res = response.body();
+
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")) {
+                        //Toast.makeText(getContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+
+                    }else {
+
+                        String vdeSaldo = new DecimalFormat("0.00").format(Double.parseDouble(res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getDeSaldo()));
+                        SpannableString txtdeCant = new SpannableString(vdeSaldo);
+                        tvSaldo.setText("Saldo Disponible" + "\n" + txtdeCant);
+
+                    }
+                } else {
+                    Toast.makeText(getContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     private Double subTotalCarrito (List<Carrito> carritoList){
