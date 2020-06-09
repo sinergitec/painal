@@ -103,16 +103,14 @@
             android:name=".actividades.PerfilActualizaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".actividades.RefEliminaActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".actividades.FamEliminaActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".actividades.EliminaRef"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.EliminaAutorizados"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".actividades.EvaluacionActivity"
             android:screenOrientation="portrait" />
     </application>
 

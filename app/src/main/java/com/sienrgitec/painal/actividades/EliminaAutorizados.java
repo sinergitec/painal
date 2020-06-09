@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
-import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;

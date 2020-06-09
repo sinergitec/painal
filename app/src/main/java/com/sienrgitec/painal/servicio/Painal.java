@@ -97,7 +97,9 @@ public interface Painal {
     @POST("credDetCPCP")
     Call<Respuesta> credDetCPCPPost(@Body Peticion peticion);
 
-
+    /*Evaluacion Proveedor / Titlani*/
+    @GET("ctEvaluacion")
+    Call<Respuesta> ctEvaluacionGet(@QueryMap Map<String, String> options);
 
 
 }
