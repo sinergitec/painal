@@ -2,6 +2,8 @@ package com.sienrgitec.painal.pojo.respuesta;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
+import com.sienrgitec.painal.pojo.entity.TtCredEncCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente;
@@ -62,6 +64,11 @@ public class Response {
     @SerializedName("tt_ctDomicilio")
     @Expose
     private TtCtDomicilio tt_ctDomicilio;
+
+
+    @SerializedName("tt_credEncCPCP")
+    @Expose
+    private TtCredEncCPCP tt_credEncCPCP;
 
     @SerializedName("oplError")
     @Expose
@@ -190,6 +197,13 @@ public class Response {
         this.tt_ctDomicilio = tt_ctDomicilio;
     }
 
+    public TtCredEncCPCP getTt_credEncCPCP() {
+        return tt_credEncCPCP;
+    }
+
+
+
+
     @Override
     public String toString() {
         return "Response{" +
@@ -202,6 +216,7 @@ public class Response {
                 ", ttCtUsuario=" + ttCtUsuario +
                 ", ttCtCliente=" + ttCtCliente +
                 ", ttCtTelefono=" + ttCtTelefono +
+                ", tt_credEncCPCP" + tt_credEncCPCP +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
                 '}';

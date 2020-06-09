@@ -79,8 +79,17 @@ public class TtCredDetCPCP_ implements Serializable {
     private Object id;
 
 
+    @SerializedName("cUsuAutoriza")
+    @Expose
+    private Object c_UsuAutoriza;
 
+    public Object getC_UsuAutoriza() {
+        return c_UsuAutoriza;
+    }
 
+    public void setC_UsuAutoriza(Object c_UsuAutoriza) {
+        this.c_UsuAutoriza = c_UsuAutoriza;
+    }
 
     public String getcBeneficiario() {
         return cBeneficiario;

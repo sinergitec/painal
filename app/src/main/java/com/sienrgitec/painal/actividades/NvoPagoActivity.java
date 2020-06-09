@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
@@ -42,16 +43,18 @@ public class NvoPagoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nvo_pago);
 
+
+        Intent i = getIntent();
+        String vcCuenta = getIntent().getExtras().getString("cuenta");
+
         etcCuenta = findViewById(R.id.etCuenta);
         etdMonto  = findViewById(R.id.etMonto);
         etcReferencia = findViewById(R.id.etReferencia);
         etcObservaciones = findViewById(R.id.etObs);
         btnPago = findViewById(R.id.btnRegistroP);
 
-
-
-
-        btnPago.setOnClickListener(v -> CreaDeposito());
+         btnPago.setOnClickListener(v -> CreaDeposito());
+         etcCuenta.setText(vcCuenta);
     }
 
     public void onRadioButtonClicked(View view) {
@@ -77,30 +80,32 @@ public class NvoPagoActivity extends AppCompatActivity {
         final Loading loading = new Loading(NvoPagoActivity.this);
         loading.iniciaDialogo("alert");
 
-
-        if(vcMovimiento == ""){
-            loading.detenDialogo("alert");
-
-        }
-
-
         String vcCuenta = etcCuenta.getText().toString();
         String vdeMonto = etdMonto.getText().toString();
         String vcReferencia = etcReferencia.getText().toString();
         String vcObservaciones = etcObservaciones.getText().toString();
 
-        /*if (vcCuenta.isEmpty()){
 
+        if(vcMovimiento == ""){
+            Toast.makeText(NvoPagoActivity.this, "Debe indicar un tipo de movimiento", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (vcCuenta.isEmpty()){
+            Toast.makeText(NvoPagoActivity.this, "El numero de cuneta no puede estar vacío", Toast.LENGTH_LONG).show();
+            return;
         }
 
 
         if (vdeMonto.isEmpty()){
-
+            Toast.makeText(NvoPagoActivity.this, "El monto debe ser mayor a Cero", Toast.LENGTH_LONG).show();
+            return;
         }
 
         if(vcReferencia.isEmpty()){
-
-        }*/
+            Toast.makeText(NvoPagoActivity.this, "Debe indicar una referencia", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         TtCredDetCPCP_ objAbono = new TtCredDetCPCP_();
         objAbono.setcCuenta(vcCuenta);
@@ -109,8 +114,8 @@ public class NvoPagoActivity extends AppCompatActivity {
         objAbono.setcReferencia(vcReferencia);
         objAbono.setcObs(vcObservaciones);
         objAbono.setlAutorizado(false);
-        objAbono.setcUsuCrea("androscli");
-        objAbono.setcUsuModifica("androsCli");
+        /*objAbono.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+        objAbono.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());*/
 
         Peticion peticion = new Peticion(new Request(new ds_NvoPago(new ArrayList<TtCredDetCPCP_>() {
             {
