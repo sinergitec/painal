@@ -16,11 +16,8 @@ import static com.sienrgitec.painal.R.id.textView14;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private ImageView btnPerfil;
-    private TextView btnPerfilText;
-    private ImageView btnDirecciones;
-    private TextView btnDireccionesText;
-    private TextView btnConsultaSaldo;
+    private ImageView btnPerfil,btnDirecciones;
+    private TextView btnPerfilText, btnDireccionesText, btnConsultaSaldo, btnEvaluaProv, btnEvaluaTitlani;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +35,14 @@ public class PerfilActivity extends AppCompatActivity {
 
         btnConsultaSaldo = findViewById(R.id.textView15);
         btnConsultaSaldo.setOnClickListener(v -> consultaSaldo());
+
+        btnConsultaSaldo = findViewById(R.id.textView15);
+        btnConsultaSaldo.setOnClickListener(v -> evaluaProv());
+
+        btnEvaluaProv = findViewById(R.id.textView9);
+        btnEvaluaProv.setOnClickListener(v -> evaluaTitlani());
+
+
     }
 
     private void editaPerfil() {
@@ -48,6 +53,14 @@ public class PerfilActivity extends AppCompatActivity {
     private void consultaSaldo(){
         Intent getSaldo = new Intent (PerfilActivity.this, SaldosActivity.class);
         startActivity(getSaldo);
+
+    }
+
+    private void evaluaTitlani() {
+
+    }
+
+    private void evaluaProv() {
 
     }
 }
