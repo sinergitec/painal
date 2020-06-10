@@ -78,6 +78,37 @@ public class TtCtProveedor_ {
     @Expose
     private Object id;
 
+    public TtCtProveedor_(){
+
+    }
+
+    public TtCtProveedor_(Integer iProveedor, String cClaveProv, String cRazonS, String cNegocio, String cRFC, Integer iGiro, Integer iSubGiro, String cWhatsApp, String cPaginaWeb, String cEMail, String cTwitter, String cFacebook, Integer iEstadoProv, Boolean lSucursales, Integer iNivelClasifica, Boolean lSistema, String cSistema, String cObs, Object dtAfiliacion, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica, Object id) {
+        this.iProveedor = iProveedor;
+        this.cClaveProv = cClaveProv;
+        this.cRazonS = cRazonS;
+        this.cNegocio = cNegocio;
+        this.cRFC = cRFC;
+        this.iGiro = iGiro;
+        this.iSubGiro = iSubGiro;
+        this.cWhatsApp = cWhatsApp;
+        this.cPaginaWeb = cPaginaWeb;
+        this.cEMail = cEMail;
+        this.cTwitter = cTwitter;
+        this.cFacebook = cFacebook;
+        this.iEstadoProv = iEstadoProv;
+        this.lSucursales = lSucursales;
+        this.iNivelClasifica = iNivelClasifica;
+        this.lSistema = lSistema;
+        this.cSistema = cSistema;
+        this.cObs = cObs;
+        this.dtAfiliacion = dtAfiliacion;
+        this.dtCreado = dtCreado;
+        this.dtModificado = dtModificado;
+        this.cUsuCrea = cUsuCrea;
+        this.cUsuModifica = cUsuModifica;
+        this.id = id;
+    }
+
     public Integer getIProveedor() {
         return iProveedor;
     }
