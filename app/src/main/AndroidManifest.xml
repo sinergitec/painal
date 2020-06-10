@@ -110,7 +110,10 @@
             android:name=".actividades.EliminaAutorizados"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".actividades.EvaluacionActivity"
+            android:name=".actividades.EvaluacionPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".actividades.EvaluacionTActivity"
             android:screenOrientation="portrait" />
     </application>
 

@@ -11,11 +11,13 @@ import com.sienrgitec.painal.R;
 
 import static com.sienrgitec.painal.R.id.textView13;
 import static com.sienrgitec.painal.R.id.textView14;
+import static com.sienrgitec.painal.R.id.textView19;
+import static com.sienrgitec.painal.R.id.textView20;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private ImageView btnPerfil,btnDirecciones, btnEvaluaProv, btnEvaluaTitlani;
-    private TextView btnPerfilText, btnDireccionesText, btnConsultaSaldo ;
+    private ImageView btnPerfil,btnDirecciones, btnSaldo, btnEvaluaProv, btnEvaluaTitlani;
+    private TextView btnPerfilText, btnDireccionesText, btnConsultaSaldo, btnEvaluaPText, btnEvaluaTText ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,17 @@ public class PerfilActivity extends AppCompatActivity {
         btnDireccionesText = findViewById(textView14);
         btnDireccionesText.setOnClickListener(v -> editaPerfil());
 
+        btnEvaluaPText = findViewById(textView19);
+        btnEvaluaPText.setOnClickListener(v -> evaluaProv());
+
+        btnEvaluaTText = findViewById(textView20);
+        btnEvaluaTText.setOnClickListener(v -> evaluaTitlani());
+
         btnPerfil = findViewById(R.id.imageView3);
         btnPerfil.setOnClickListener(v -> editaPerfil());
+
+        btnSaldo = findViewById(R.id.imageView6);
+        btnSaldo.setOnClickListener(v -> consultaSaldo());
 
         btnConsultaSaldo = findViewById(R.id.textView15);
         btnConsultaSaldo.setOnClickListener(v -> consultaSaldo());
@@ -39,7 +50,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         btnEvaluaTitlani = findViewById(R.id.imageView9);
         btnEvaluaTitlani.setOnClickListener(v -> evaluaTitlani());
-
 
     }
 
@@ -54,14 +64,15 @@ public class PerfilActivity extends AppCompatActivity {
 
     }
 
-    private void evaluaTitlani() {
-        Intent perfil = new Intent(PerfilActivity.this, PerfilActualizaActivity.class);
-        startActivity(perfil);
-    }
-
     private void evaluaProv() {
-        Intent perfil = new Intent(PerfilActivity.this, PerfilActualizaActivity.class);
+        Intent perfil = new Intent(PerfilActivity.this, EvaluacionPActivity.class);
         startActivity(perfil);
-
     }
+
+    private void evaluaTitlani() {
+        Intent perfil = new Intent(PerfilActivity.this, EvaluacionTActivity.class);
+        startActivity(perfil);
+    }
+
 }
+

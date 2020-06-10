@@ -100,6 +100,4 @@ public interface Painal {
     /*Evaluacion Proveedor / Titlani*/
     @GET("ctEvaluacion")
     Call<Respuesta> ctEvaluacionGet(@QueryMap Map<String, String> options);
-
-
 }

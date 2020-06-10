@@ -17,6 +17,7 @@ import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
+import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
 
 public class Response {
@@ -64,6 +65,10 @@ public class Response {
     @SerializedName("tt_ctDomicilio")
     @Expose
     private TtCtDomicilio tt_ctDomicilio;
+
+    @SerializedName("tt_ctEvaluacion")
+    @Expose
+    private Tt_CtEvaluacion tt_ctEvaluacion;
 
 
     @SerializedName("tt_credEncCPCP")
@@ -202,7 +207,17 @@ public class Response {
     }
 
 
+    public Tt_CtEvaluacion getTt_ctEvaluacion() {
+        return tt_ctEvaluacion;
+    }
 
+    public void setTt_ctEvaluacion(Tt_CtEvaluacion tt_ctEvaluacion) {
+        this.tt_ctEvaluacion = tt_ctEvaluacion;
+    }
+
+    public void setTt_credEncCPCP(TtCredEncCPCP tt_credEncCPCP) {
+        this.tt_credEncCPCP = tt_credEncCPCP;
+    }
 
     @Override
     public String toString() {

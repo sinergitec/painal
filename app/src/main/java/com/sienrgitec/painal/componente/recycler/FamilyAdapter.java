@@ -8,15 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.EliminaAutorizados;
-import com.sienrgitec.painal.actividades.EliminaRef;
-import com.sienrgitec.painal.actividades.FamEliminaActivity;
 import com.sienrgitec.painal.actividades.FamilyActualiza;
-import com.sienrgitec.painal.actividades.RefActualizaActivity;
-import com.sienrgitec.painal.actividades.RefEliminaActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
 
