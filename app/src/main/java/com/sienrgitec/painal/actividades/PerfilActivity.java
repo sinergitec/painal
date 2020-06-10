@@ -2,7 +2,6 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,17 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
 
-import static com.sienrgitec.painal.R.id.recupera;
 import static com.sienrgitec.painal.R.id.textView13;
 import static com.sienrgitec.painal.R.id.textView14;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private ImageView btnPerfil;
-    private TextView btnPerfilText;
-    private ImageView btnDirecciones;
-    private TextView btnDireccionesText;
-    private TextView btnConsultaSaldo;
+    private ImageView btnPerfil,btnDirecciones, btnEvaluaProv, btnEvaluaTitlani;
+    private TextView btnPerfilText, btnDireccionesText, btnConsultaSaldo ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +33,14 @@ public class PerfilActivity extends AppCompatActivity {
 
         btnConsultaSaldo = findViewById(R.id.textView15);
         btnConsultaSaldo.setOnClickListener(v -> consultaSaldo());
+
+        btnEvaluaProv = findViewById(R.id.imageView7);
+        btnEvaluaProv.setOnClickListener(v -> evaluaProv());
+
+        btnEvaluaTitlani = findViewById(R.id.imageView9);
+        btnEvaluaTitlani.setOnClickListener(v -> evaluaTitlani());
+
+
     }
 
     private void editaPerfil() {
@@ -48,6 +51,17 @@ public class PerfilActivity extends AppCompatActivity {
     private void consultaSaldo(){
         Intent getSaldo = new Intent (PerfilActivity.this, SaldosActivity.class);
         startActivity(getSaldo);
+
+    }
+
+    private void evaluaTitlani() {
+        Intent perfil = new Intent(PerfilActivity.this, PerfilActualizaActivity.class);
+        startActivity(perfil);
+    }
+
+    private void evaluaProv() {
+        Intent perfil = new Intent(PerfilActivity.this, PerfilActualizaActivity.class);
+        startActivity(perfil);
 
     }
 }

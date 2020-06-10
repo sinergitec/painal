@@ -75,7 +75,6 @@
     <string name="parentescoN">años</string>
     <string name="actAuto">ACTUALIZA CLIENTES AUTORIZADOS</string>
 
-
     <!-- Referidos  -->
     <string name="titleRef">REFERIDOS</string>
     <string name="regRef">REGISTRO DE REFERIDOS</string>
@@ -86,6 +85,15 @@
     <string name="actRef">ACTUALIZA REFERIDOS</string>
     <string name="act">Actualiza</string>
     <string name="apellidos">Apellidos</string>
+    <string name="saldo">SALDO</string>
+
+
+    <!-- Evaluacion Proveedor-productos  -->
+    <string name="title1">EVALUACION AL PROVEEDOR</string>
+
+
+    <!-- Evaluacion Titlani  -->
+    <string name="title2">EVALUACION AL  TITLANI</string>
 
 
 </resources>

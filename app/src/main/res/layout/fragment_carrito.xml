@@ -85,16 +85,28 @@
 
         <TextView
             android:id="@+id/vaciar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="95dp"
+            android:layout_height="39dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:text="Vaciar Carrito"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/realizaPedido" />
+
+        <TextView
+            android:id="@+id/saldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:focusable="false"
+            android:textSize="22dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorComplementaryAccent"
+            android:textColorHint="@color/colorComplementaryAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vaciar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
