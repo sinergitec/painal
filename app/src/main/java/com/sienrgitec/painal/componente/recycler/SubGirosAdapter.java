@@ -23,7 +23,9 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -115,10 +117,20 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                             }
                         });
 
-                        proveedorAdapter.setList(res.getResponse().getTtCtProveedor().getTtCtProveedor());
+                        List<TtCtProveedor_> listProveedor = new ArrayList<>();
+                        for (TtCtProveedor_ proveedor : res.getResponse().getTtCtProveedor().getTtCtProveedor()) {
+                            listProveedor.add(proveedor);
+                            if(proveedor.getLSucursales()){
+                                TtCtProveedor_ proveedor1 = new TtCtProveedor_(proveedor.getIProveedor(), proveedor.getCClaveProv(), proveedor.getCRazonS(), proveedor.getCNegocio(), proveedor.getCRFC(), proveedor.getIGiro(), proveedor.getISubGiro(), proveedor.getCWhatsApp(), proveedor.getCPaginaWeb(), proveedor.getCEMail(), proveedor.getCTwitter(), proveedor.getCFacebook(), proveedor.getIEstadoProv(), proveedor.getLSucursales(), proveedor.getINivelClasifica(), proveedor.getLSistema(), proveedor.getCSistema(), proveedor.getCObs(), proveedor.getDtAfiliacion(), proveedor.getDtCreado(), proveedor.getDtModificado(), proveedor.getCUsuCrea(), proveedor.getCUsuModifica(), proveedor.getId());
+                                proveedor1.setCNegocio(proveedor.getCNegocio() + " II");
+                                listProveedor.add(proveedor1);
+                            }
+                        }
+                        proveedorAdapter.setList(listProveedor);
                         rv.setAdapter(proveedorAdapter);
                     } else {
                         System.out.println("Algo paso al cargar la info");
+                        Toast.makeText(viewHolder.getView().getContext(), "Algo salio mal: ", Toast.LENGTH_LONG).show();
                     }
                 }
 
