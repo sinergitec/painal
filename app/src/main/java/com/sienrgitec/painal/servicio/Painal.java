@@ -100,4 +100,13 @@ public interface Painal {
     /*Evaluacion Proveedor / Titlani*/
     @GET("ctEvaluacion")
     Call<Respuesta> ctEvaluacionGet(@QueryMap Map<String, String> options);
+
+    /*Carga formas de Pago / Andros 10-06-20 */
+    @GET("ctFormasPago")
+    Call<Respuesta> ctFormasPago(@QueryMap Map<String, String> options);
+
+    /*Carga ctComisiones / Andros 10-06-20 */
+    @GET("ctComisiones")
+    Call<Respuesta> ctComisiones(@QueryMap Map<String, String> options);
+
 }

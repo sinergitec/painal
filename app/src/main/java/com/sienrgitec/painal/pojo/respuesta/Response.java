@@ -8,8 +8,10 @@ import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados;
+import com.sienrgitec.painal.pojo.entity.TtCtComisiones;
 import com.sienrgitec.painal.pojo.entity.TtCtContacto;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio;
+import com.sienrgitec.painal.pojo.entity.TtCtFormasPago;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
@@ -74,6 +76,14 @@ public class Response {
     @SerializedName("tt_credEncCPCP")
     @Expose
     private TtCredEncCPCP tt_credEncCPCP;
+
+    @SerializedName("tt_ctFormasPago")
+    @Expose
+    private TtCtFormasPago tt_ctFormasPago;
+
+    @SerializedName("tt_ctComisiones")
+    @Expose
+    private TtCtComisiones tt_ctComisiones;
 
     @SerializedName("oplError")
     @Expose
@@ -219,6 +229,15 @@ public class Response {
         this.tt_credEncCPCP = tt_credEncCPCP;
     }
 
+    /*Andros Carga formas de pago*/
+    public TtCtFormasPago getTt_ctFormasPago() {
+        return tt_ctFormasPago;
+    }
+    /*Andros Carga ctComisones*/
+    public TtCtComisiones getTtCtComisiones() {
+        return tt_ctComisiones;
+    }
+
     @Override
     public String toString() {
         return "Response{" +
@@ -232,6 +251,8 @@ public class Response {
                 ", ttCtCliente=" + ttCtCliente +
                 ", ttCtTelefono=" + ttCtTelefono +
                 ", tt_credEncCPCP" + tt_credEncCPCP +
+                ", tt_ctFormasPago" + tt_ctFormasPago +
+                ", tt_ctComisiones" + tt_ctComisiones +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
                 '}';

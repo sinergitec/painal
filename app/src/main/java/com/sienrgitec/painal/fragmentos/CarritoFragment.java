@@ -151,7 +151,6 @@ public class CarritoFragment extends Fragment {
         Map<String, String> data = new HashMap<>();
         data.put("ipiCliente", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()));
 
-
         final Call<Respuesta> call = service.credEncCPCP(data);
         call.enqueue(new Callback<Respuesta>() {
             @Override
