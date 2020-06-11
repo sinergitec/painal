@@ -3,6 +3,7 @@ package com.sienrgitec.painal.fragmentos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.AplicaPago;
+import com.sienrgitec.painal.actividades.NvoPagoActivity;
 import com.sienrgitec.painal.actividades.PerfilActivity;
 import com.sienrgitec.painal.actividades.SaldosActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
@@ -59,6 +62,7 @@ public class CarritoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Double vdeImporte = 0.00;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -185,7 +189,9 @@ public class CarritoFragment extends Fragment {
         Double totalD = 0.0;
         for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
             totalD += articulo.getMonto();
+
         }
+        vdeImporte = totalD;
         return  totalD;
     }
 
@@ -262,6 +268,11 @@ public class CarritoFragment extends Fragment {
                 Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+        /*Log.e("frag", "vdeImporte " + vdeImporte);
+        Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
+        aplicaPago.putExtra("vdeimporte", vdeImporte);
+        startActivity(aplicaPago);*/
 
     }
 

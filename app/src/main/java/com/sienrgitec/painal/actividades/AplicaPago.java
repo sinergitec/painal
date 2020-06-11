@@ -2,8 +2,10 @@ package com.sienrgitec.painal.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,27 +33,42 @@ import retrofit2.Response;
 
 public class AplicaPago extends AppCompatActivity {
 
-    private TextView etContacto, etDomicilio, etMonto;
+    private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal;
     private Button btnPagar;
-    RelativeLayout rlEstadoProc, rlPropinas;
-    private Integer iFormaPago = 0, iComision = 0;
+    RelativeLayout rlEstadoProc, rlPropinas, rlTitlani;
+    private Integer iFormaPago = 0, iComision = 0, iTitlaniP = 0;
+    private double deAporta = 0.0 , dePropina = 0.0, vdeSubtotal = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aplica_pago);
 
-
+        Intent i = getIntent();
+        vdeSubtotal = getIntent().getExtras().getDouble("vdeimporte");
 
         rlEstadoProc = findViewById(R.id.edoproc);
         rlPropinas  = findViewById(R.id.edoprop);
+        rlTitlani   = findViewById(R.id.edtitlani);
         etContacto  = findViewById (R.id.textView28);
         etDomicilio = findViewById(R.id.textView29);
+        etSubtotal  = findViewById(R.id.textView21);
+        etTotal     = findViewById(R.id.tvTotal);
+        etAporta    = findViewById(R.id.tvAporta);
+        etPropina   = findViewById(R.id.tvPropina);
         etMonto     = findViewById(R.id.textView25);
         btnPagar    = findViewById(R.id.btnPagoF);
 
+        btnPagar.setOnClickListener(v -> CreaCompra());
+
         CargaFPagos();
         CargaComisiones();
+
+        etContacto.setText("Contacto: " + String.valueOf(CarritoSingleton.getInstance().getCliente().getcNombre()));
+        etDomicilio.setText(CarritoSingleton.getInstance().getDomicilio().get(0).getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilio().get(0).getCNumeroExt()
+                + " " + CarritoSingleton.getInstance().getDomicilio().get(0).getCColonia());
+        etSubtotal.setText(vdeSubtotal + "0");
+        etTotal.setText(vdeSubtotal + "0");
 
     }
 
@@ -138,6 +155,10 @@ public class AplicaPago extends AppCompatActivity {
                         RadioGroup rgPropinas = new RadioGroup(AplicaPago.this);
                         rgPropinas.setOrientation(RadioGroup.HORIZONTAL);
 
+
+                        RadioGroup rgTitlani = new RadioGroup(AplicaPago.this);
+                        rgTitlani.setOrientation(RadioGroup.HORIZONTAL);
+
                         for (final TtCtComisiones_ objCtComision : res.getResponse().getTtCtComisiones().getTtCtComisiones_()) {
 
                             viPago = viPago + 1;
@@ -145,26 +166,36 @@ public class AplicaPago extends AppCompatActivity {
                             RadioButton rbAgregaP = new RadioButton(AplicaPago.this);
                             rbAgregaP.setText(objCtComision.getDeValor().toString());
                             rbAgregaP.setHeight(75);
-                            rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(180, 50)); //150
+                            rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
+
+
+                            RadioButton rbTitlaniP = new RadioButton(AplicaPago.this);
+                            rbTitlaniP.setText(objCtComision.getDeValor().toString());
+                            rbTitlaniP.setHeight(75);
+                            rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
                             rgPropinas.addView(rbAgregaP);
-
-                            if (viPago % 3 == 0) {
-                                vxMod = 0;
-                                vyMod = vyMod + 35;
-                            } else {
-                                vxMod = vxMod + 80;
-                            }
+                            rgTitlani.addView(rbTitlaniP);
 
                             rbAgregaP.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     iComision =  objCtComision.getiComision();
+                                    CalculaAportacion(objCtComision.getDeValor());
+
+                                }
+                            });
+
+                            rbTitlaniP.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    iTitlaniP =  objCtComision.getiComision();
+                                    CalculaPropina(objCtComision.getDeValor());
 
                                 }
                             });
 
                         }
                         rlPropinas.addView(rgPropinas);
+                        rlTitlani.addView(rgTitlani);
                     }
                 } else {
                     Toast.makeText(AplicaPago.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -179,6 +210,32 @@ public class AplicaPago extends AppCompatActivity {
         });
 
 
+
+    }
+
+    private void CalculaAportacion(double vdeValor){
+        double vdeMonto = 0.00;
+        vdeMonto = ((vdeValor / 100) * vdeSubtotal);
+        deAporta = vdeMonto;
+        String vdeMontoS = new DecimalFormat("0.00").format(vdeMonto);
+        etAporta.setText("$" + vdeMontoS);
+        String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
+        etTotal.setText("$" + (vdeTotalF));
+
+    }
+
+    private void CalculaPropina(double vdeValor){
+        double vdeMonto = 0.00, vdeTotal = 0.00;
+        vdeMonto = ((vdeValor / 100) * vdeSubtotal);
+        dePropina = vdeMonto;
+        String vdeMontoS = new DecimalFormat("0.00").format(vdeMonto);
+        etPropina.setText("$" + vdeMontoS);
+        String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
+        etTotal.setText("$" + (vdeTotalF));
+
+    }
+
+    private void CreaCompra(){
 
     }
 }
