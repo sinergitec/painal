@@ -37,6 +37,7 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 import com.sienrgitec.painal.util.Funcionalidades;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -269,9 +270,10 @@ public class CarritoFragment extends Fragment {
             }
         });
 
-        /*Log.e("frag", "vdeImporte " + vdeImporte);
-        Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
+        //Log.e("frag", "vdeImporte " + vdeImporte);
+       /* Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
         aplicaPago.putExtra("vdeimporte", vdeImporte);
+        aplicaPago.putExtra("listPedido",  pedido);
         startActivity(aplicaPago);*/
 
     }

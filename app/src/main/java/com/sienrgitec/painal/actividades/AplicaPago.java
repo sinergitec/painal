@@ -59,7 +59,7 @@ public class AplicaPago extends AppCompatActivity {
         etMonto     = findViewById(R.id.textView25);
         btnPagar    = findViewById(R.id.btnPagoF);
 
-        btnPagar.setOnClickListener(v -> CreaCompra());
+       // btnPagar.setOnClickListener(v -> CreaCompra());
 
         CargaFPagos();
         CargaComisiones();
@@ -235,7 +235,9 @@ public class AplicaPago extends AppCompatActivity {
 
     }
 
-    private void CreaCompra(){
+    /*private void CreaCompra(){
 
-    }
+
+
+    }*/
 }
