@@ -129,4 +129,12 @@ public class Request {
     public void setDsCtClienteActualiza(DsCtCliente dsCtClienteActualiza) {
         this.dsCtClienteActualiza = dsCtClienteActualiza;
     }
+
+    public ds_NvoPago getDsTtCredDetCPCP() {
+        return dsTtCredDetCPCP;
+    }
+
+    public void setDsTtCredDetCPCP(ds_NvoPago dsTtCredDetCPCP) {
+        this.dsTtCredDetCPCP = dsTtCredDetCPCP;
+    }
 }
