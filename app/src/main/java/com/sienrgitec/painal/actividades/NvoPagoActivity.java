@@ -68,11 +68,11 @@ public class NvoPagoActivity extends AppCompatActivity {
                     // Pirates are the best
                     vcMovimiento = "Deposito";
                     break;
-            case R.id.radio_ninjas:
+           /* case R.id.radio_ninjas:
                 if (checked)
                     // Ninjas rule
                     vcMovimiento = "Abono";
-                    break;
+                    break;*/
         }
     }
 
@@ -114,8 +114,8 @@ public class NvoPagoActivity extends AppCompatActivity {
         objAbono.setcReferencia(vcReferencia);
         objAbono.setcObs(vcObservaciones);
         objAbono.setlAutorizado(false);
-        /*objAbono.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
-        objAbono.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());*/
+        objAbono.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+        objAbono.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
 
         Peticion peticion = new Peticion(new Request(new ds_NvoPago(new ArrayList<TtCredDetCPCP_>() {
             {

@@ -7,4 +7,5 @@ public class Constantes {
     public static final String[] ARRAY_COLORS = {"#DCD3C1", "#F9FA81", "#FEC298", "#B9F6F9", "#96ABFE", "#BAFCBE", "#F4C9FD", "#FEACB6", "#F9D795"};
 
     public static final Integer CANTIDAD_MAX_PROVEEDORES = 3;
+    public static String vcCuenta = "";
 }

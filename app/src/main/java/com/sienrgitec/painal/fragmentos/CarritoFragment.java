@@ -64,6 +64,7 @@ public class CarritoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Double vdeImporte = 0.00;
+    private Constantes constantes;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -117,7 +118,13 @@ public class CarritoFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                realizaPedido(v);
+                //realizaPedido(v);
+
+
+                Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
+                aplicaPago.putExtra("vdeimporte", vdeImporte);
+                //aplicaPago.putExtra("listPedido",  pedido);
+                startActivity(aplicaPago);
             }
         });
 
@@ -171,6 +178,7 @@ public class CarritoFragment extends Fragment {
                         String vdeSaldo = new DecimalFormat("0.00").format(Double.parseDouble(res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getDeSaldo()));
                         SpannableString txtdeCant = new SpannableString(vdeSaldo);
                         tvSaldo.setText("Saldo Disponible" + "\n" + txtdeCant);
+                        constantes.vcCuenta = (res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getcCuenta());
 
                     }
                 } else {
@@ -227,7 +235,8 @@ public class CarritoFragment extends Fragment {
                 "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "1","1050125");
 
-        final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
+
+       final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
             {
                 add(pedido);
             }
@@ -270,11 +279,14 @@ public class CarritoFragment extends Fragment {
             }
         });
 
-        //Log.e("frag", "vdeImporte " + vdeImporte);
-       /* Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
+       /******************************************************************
+
+        Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
         aplicaPago.putExtra("vdeimporte", vdeImporte);
-        aplicaPago.putExtra("listPedido",  pedido);
-        startActivity(aplicaPago);*/
+
+        startActivity(aplicaPago);
+
+        *****************************************************************/
 
     }
 
