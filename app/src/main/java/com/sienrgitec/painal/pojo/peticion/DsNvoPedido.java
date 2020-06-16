@@ -2,6 +2,7 @@ package com.sienrgitec.painal.pojo.peticion;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
 import com.sienrgitec.painal.pojo.entity.TtOpPedido;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDomicilio;
@@ -19,12 +20,14 @@ public class DsNvoPedido implements Serializable {
 
     public DsNvoPedido(List<TtOpPedido> ttOpPedido, List<TtOpPedidoProveedor> ttOpPedidoProveedor,
                        List<TtOpPedidoDet> ttOpPedidoDet, List<TtOpPedidoDomicilio> ttOpPedidoDomicilio,
-                       List<TtOpPedidoPago> ttOpPedidoPago){
+                       List<TtOpPedidoPago> ttOpPedidoPago,
+                       List<TtCredDetCPCP_> ttCredDetCPCP){
         this.ttOpPedido = ttOpPedido;
         this.ttOpPedidoProveedor = ttOpPedidoProveedor;
         this.ttOpPedidoDet = ttOpPedidoDet;
         this.ttOpPedidoDomicilio = ttOpPedidoDomicilio;
         this.ttOpPedidoPago = ttOpPedidoPago;
+        this.ttCredDetCPCP = ttCredDetCPCP;
     }
 
     @SerializedName("tt_opPedido")
@@ -42,6 +45,10 @@ public class DsNvoPedido implements Serializable {
     @SerializedName("tt_opPedidoPago")
     @Expose
     private List<TtOpPedidoPago> ttOpPedidoPago = null;
+
+    @SerializedName("tt_credDetCPCP")
+    @Expose
+    private List<TtCredDetCPCP_> ttCredDetCPCP = null;
 
     public List<TtOpPedido> getTtOpPedido() {
         return ttOpPedido;

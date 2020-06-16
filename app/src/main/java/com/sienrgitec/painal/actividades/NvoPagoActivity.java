@@ -143,6 +143,10 @@ public class NvoPagoActivity extends AppCompatActivity {
 
                     Toast.makeText(NvoPagoActivity.this, "Solicitud Exitosa", Toast.LENGTH_LONG).show();
 
+
+
+
+
                     Intent inicio = new Intent(NvoPagoActivity.this, HomeActivity.class);
                     startActivity(inicio);
 

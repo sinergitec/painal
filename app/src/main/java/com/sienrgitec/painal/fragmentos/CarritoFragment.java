@@ -208,6 +208,7 @@ public class CarritoFragment extends Fragment {
         return subTotal * (1+impuesto);
     }
 
+    /*
     private void realizaPedido(View v){
 
         final TtOpPedido pedido =
@@ -217,7 +218,7 @@ public class CarritoFragment extends Fragment {
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         "1", "1", "1", "1", "", "",
-                        "NOW", "", "AUTO", "", CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
+                        "NOW", "", CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
                         CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0");
 
         final List<TtOpPedidoProveedor> listaOpPedidoProveedor = new ArrayList<>();
@@ -227,13 +228,13 @@ public class CarritoFragment extends Fragment {
 
         final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
                 CarritoSingleton.getInstance().getDomicilio().get(0).getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "TRUE","NOW","","AUTO","");
+                "TRUE","NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea());
 
         final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                 "0","0","0","NOW","",
-                "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "1","1050125");
+                CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                "1","1050125","0");
 
 
        final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
@@ -278,15 +279,6 @@ public class CarritoFragment extends Fragment {
                 Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-       /******************************************************************
-
-        Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
-        aplicaPago.putExtra("vdeimporte", vdeImporte);
-
-        startActivity(aplicaPago);
-
-        *****************************************************************/
 
     }
 
@@ -348,5 +340,5 @@ public class CarritoFragment extends Fragment {
             proveedorPedido ++;
         }
     }
-
+    */
 }

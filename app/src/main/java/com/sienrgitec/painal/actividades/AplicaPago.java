@@ -22,6 +22,8 @@ import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
 import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
+import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
+import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
 import com.sienrgitec.painal.pojo.entity.TtCtComisiones_;
 import com.sienrgitec.painal.pojo.entity.TtCtFormasPago_;
 import com.sienrgitec.painal.pojo.entity.TtOpPedido;
@@ -53,8 +55,8 @@ public class AplicaPago extends AppCompatActivity {
     private Button btnPagar;
     RelativeLayout rlEstadoProc, rlPropinas, rlTitlani;
     private Integer iFormaPago = 0, iComision = 0, iTitlaniP = 0;
-    private double deAporta = 0.0 , dePropina = 0.0, vdeSubtotal = 0.00, vdeMonto =0.00,
-            dePorcCom = 0.00, dePorcProp = 0.00;
+    private double deAporta = 0.00, dePropina = 0.00, vdeSubtotal = 0.00, vdeMonto =0.00,
+            dePorcCom = 0.00, dePorcProp = 0.00, deImporteTotal = 0.00;
     private Constantes constantes;
 
     @Override
@@ -64,8 +66,7 @@ public class AplicaPago extends AppCompatActivity {
 
         Intent i = getIntent();
         vdeSubtotal = getIntent().getExtras().getDouble("vdeimporte");
-        /*List<TtOpPedido> oppedidoList = (List<TtOpPedido>) getIntent().getSerializableExtra("opPedidoList");
-        ArrayList<TtOpPedidoDomicilio> opPedidoDomicilio = (ArrayList<TtOpPedidoDomicilio>) getIntent().getSerializableExtra("opPedidoDomList");*/
+
 
 
 
@@ -268,6 +269,7 @@ public class AplicaPago extends AppCompatActivity {
         etAporta.setText("$" + vdeMontoS);
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
         etTotal.setText("$" + (vdeTotalF));
+        deImporteTotal = vdeSubtotal + deAporta + dePropina;
 
     }
 
@@ -278,7 +280,7 @@ public class AplicaPago extends AppCompatActivity {
         String vdeMontoS = new DecimalFormat("0.00").format(vdeMonto);
         etPropina.setText("$" + vdeMontoS);
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
-        etTotal.setText("$" + (vdeTotalF));
+        deImporteTotal = vdeSubtotal + deAporta + dePropina;
 
     }
 
@@ -290,8 +292,8 @@ public class AplicaPago extends AppCompatActivity {
                         String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
-                        "1", "1", "1", "1", "", "",
-                        "NOW", "", "AUTO", "", CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
+                        String.valueOf(dePorcCom), String.valueOf(deAporta), String.valueOf(dePorcProp), String.valueOf(dePropina), "", "",
+                        "NOW", "", CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
                         CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0");
 
 
@@ -302,13 +304,26 @@ public class AplicaPago extends AppCompatActivity {
 
         final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
                 CarritoSingleton.getInstance().getDomicilio().get(0).getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "TRUE","NOW","","AUTO","");
+                "TRUE","NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea());
 
-        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
+        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1",String.valueOf(iFormaPago),
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
-                "0","0","0","NOW","",
-                "AUTO",String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "1","012021225");
+                String.valueOf(dePorcCom),String.valueOf(deAporta),String.valueOf(dePorcProp),"NOW","",
+                CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                "1",constantes.vcCuenta,String.valueOf(dePropina));
+
+
+
+        final TtCredDetCPCP_ objFPago = new TtCredDetCPCP_();
+        objFPago.setcCuenta(constantes.vcCuenta);
+        objFPago.setcMov("PAGO");
+        objFPago.setDeMonto(String.valueOf(deImporteTotal));
+        objFPago.setcReferencia("");
+        objFPago.setcObs("");
+        objFPago.setlAutorizado(false);
+        objFPago.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+        objFPago.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+
 
 
         final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
@@ -326,7 +341,13 @@ public class AplicaPago extends AppCompatActivity {
                     {
                         add(opPedidoPago);
                     }
-                })));
+                },
+                new ArrayList<TtCredDetCPCP_>(){
+                    {
+                        add(objFPago);
+                    }
+                }
+                )));
         final Painal service = ServiceGenerator.createService(Painal.class);
         final Call<Respuesta> call = service.creaPedido(peticion);
 
@@ -404,8 +425,8 @@ public class AplicaPago extends AppCompatActivity {
                             "",
                             "NOW",
                             "",
-                            "AUTO",
-                            ""));
+                            CarritoSingleton.getInstance().getCliente().getcUsuCrea(),
+                            CarritoSingleton.getInstance().getCliente().getcUsuCrea()));
                     partida ++;
                     totalPedidoProveedor += item.getArticulo().getDePrecioVtaPza();
                 }
@@ -423,7 +444,7 @@ public class AplicaPago extends AppCompatActivity {
                     "","FALSE","TRUE","NOW","FALSE",
                     "10","0","0","FALSE","",
                     "0","FALSE","","0","0",
-                    "NOW","","AUTO",""));
+                    "NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea()));
 
             proveedorPedido ++;
         }

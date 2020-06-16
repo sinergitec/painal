@@ -79,16 +79,28 @@ public class TtCredDetCPCP_ implements Serializable {
     private Object id;
 
 
-   /* @SerializedName("cUsuAutoriza")
-    @Expose
-    private Object c_UsuAutoriza;
+    /*public TtCredDetCPCP_ (){
 
-    public Object getC_UsuAutoriza() {
-        return c_UsuAutoriza;
     }
+    public TtCredDetCPCP_(String cCuenta, Integer iMov, String dtFechaMov, String cMov, String deMonto, String cReferencia,
+                          String cObs, String cBeneficiario, Boolean lAutorizado, String dtAutorizado, String dtCreado, String dtModificado,
+                          String cUsuCrea, String cUsuModifica){
 
-    public void setC_UsuAutoriza(Object c_UsuAutoriza) {
-        this.c_UsuAutoriza = c_UsuAutoriza;
+        this.cCuenta = cCuenta;
+        this.iMov = iMov;
+        this.dtFechaMov = dtFechaMov;
+        this.cMov = cMov;
+        this.deMonto = deMonto;
+        this.cReferencia = cReferencia;
+        this.cObs = cObs;
+        this.cBeneficiario = cBeneficiario;
+        this.lAutorizado = lAutorizado;
+        this.dtAutorizado = dtAutorizado;
+        this.dtCreado = dtCreado;
+        this.dtModificado = dtModificado;
+        this.cUsuCrea = cUsuCrea;
+        this.cUsuModifica = cUsuModifica;
+
     }*/
 
     public String getcBeneficiario() {
@@ -218,4 +230,27 @@ public class TtCredDetCPCP_ implements Serializable {
     public void setId(Object id) {
         this.id = id;
     }
+
+    /*@Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TtCredDetCPCP{");
+        sb.append("iPedido='").append(iPedido).append('\'');
+        sb.append(", iPartida='").append(iPartida).append('\'');
+        sb.append(", iFormaPago='").append(iFormaPago).append('\'');
+        sb.append(", deMonto='").append(deMonto).append('\'');
+        sb.append(", deProcComision='").append(deProcComision).append('\'');
+        sb.append(", deComision='").append(deComision).append('\'');
+        sb.append(", dePorcPropina='").append(dePorcPropina).append('\'');
+        sb.append(", dtCreado='").append(dtCreado).append('\'');
+        sb.append(", dtModificado='").append(dtModificado).append('\'');
+        sb.append(", cUsuario='").append(cUsuario).append('\'');
+        sb.append(", iCliente='").append(iCliente).append('\'');
+        sb.append(", iOrigenFP='").append(iOrigenFP).append('\'');
+        sb.append(", cCuenta='").append(cCuenta).append('\'');
+        sb.append(", dePropina='").append(dePropina).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }*/
+
+
 }

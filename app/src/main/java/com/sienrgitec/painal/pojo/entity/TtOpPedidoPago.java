@@ -33,9 +33,12 @@ public class TtOpPedidoPago implements Serializable {
     @SerializedName("dtModificado")
     @Expose
     private String dtModificado;
-    @SerializedName("cUsuario")
+
+    @SerializedName("cUsuCrea")
     @Expose
-    private String cUsuario;
+    private String cUsuCrea;
+
+
     @SerializedName("iCliente")
     @Expose
     private String iCliente;
@@ -46,11 +49,15 @@ public class TtOpPedidoPago implements Serializable {
     @Expose
     private String cCuenta;
 
+    @SerializedName("dePropina")
+    @Expose
+    private String dePropina;
+
     public TtOpPedidoPago (){
 
     }
 
-    public TtOpPedidoPago(String iPedido, String iPartida, String iFormaPago, String deMonto, String deProcComision, String deComision, String dePorcPropina, String dtCreado, String dtModificado, String cUsuario, String iCliente, String iOrigenFP, String cCuenta) {
+    public TtOpPedidoPago(String iPedido, String iPartida, String iFormaPago, String deMonto, String deProcComision, String deComision, String dePorcPropina, String dtCreado, String dtModificado, String cUsuCrea, String iCliente, String iOrigenFP, String cCuenta, String dePropina) {
         this.iPedido = iPedido;
         this.iPartida = iPartida;
         this.iFormaPago = iFormaPago;
@@ -60,10 +67,11 @@ public class TtOpPedidoPago implements Serializable {
         this.dePorcPropina = dePorcPropina;
         this.dtCreado = dtCreado;
         this.dtModificado = dtModificado;
-        this.cUsuario = cUsuario;
+        this.cUsuCrea = cUsuCrea;
         this.iCliente = iCliente;
         this.iOrigenFP = iOrigenFP;
         this.cCuenta = cCuenta;
+        this.dePropina = dePropina;
     }
 
     public String getIPedido() {
@@ -114,6 +122,15 @@ public class TtOpPedidoPago implements Serializable {
         this.deComision = deComision;
     }
 
+
+    public String getDePropina() {
+        return dePropina;
+    }
+
+    public void setDePropina(String dePropina) {
+        this.dePropina = dePropina;
+    }
+
     public String getDePorcPropina() {
         return dePorcPropina;
     }
@@ -138,12 +155,12 @@ public class TtOpPedidoPago implements Serializable {
         this.dtModificado = dtModificado;
     }
 
-    public String getCUsuario() {
-        return cUsuario;
+    public String getCUsuCrea() {
+        return cUsuCrea;
     }
 
-    public void setCUsuario(String cUsuario) {
-        this.cUsuario = cUsuario;
+    public void setCUsuCrea(String cUsuCrea) {
+        this.cUsuCrea = cUsuCrea;
     }
 
     public String getICliente() {
@@ -182,10 +199,11 @@ public class TtOpPedidoPago implements Serializable {
         sb.append(", dePorcPropina='").append(dePorcPropina).append('\'');
         sb.append(", dtCreado='").append(dtCreado).append('\'');
         sb.append(", dtModificado='").append(dtModificado).append('\'');
-        sb.append(", cUsuario='").append(cUsuario).append('\'');
+        sb.append(", cUsuCrea='").append(cUsuCrea).append('\'');
         sb.append(", iCliente='").append(iCliente).append('\'');
         sb.append(", iOrigenFP='").append(iOrigenFP).append('\'');
         sb.append(", cCuenta='").append(cCuenta).append('\'');
+        sb.append(", dePropina='").append(dePropina).append('\'');
         sb.append('}');
         return sb.toString();
     }
