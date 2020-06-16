@@ -90,7 +90,7 @@
 
     <!-- Evaluacion Proveedor-productos  -->
     <string name="title1">EVALUACION AL PROVEEDOR</string>
-
+    <string name="btnEvaluar">ENVIAR</string>
 
     <!-- Evaluacion Titlani  -->
     <string name="title2">EVALUACION AL  TITLANI</string>

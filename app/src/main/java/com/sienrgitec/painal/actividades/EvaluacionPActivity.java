@@ -1,6 +1,9 @@
 package com.sienrgitec.painal.actividades;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -8,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.recycler.EvaluacionAdapter;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
