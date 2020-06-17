@@ -1,5 +1,7 @@
 package com.sienrgitec.painal.pojo.peticion;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
@@ -102,19 +104,24 @@ public class DsNvoPedido implements Serializable {
     }
 
 
+    public String getVcPassword() {
+        return vcPassword;
+    }
 
-
+    public void setVcPassword(String vcPassword) {
+        this.vcPassword = vcPassword;
+    }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("DsNvoPedido{");
-        sb.append("ttOpPedido=").append(ttOpPedido);
-        sb.append(", ttOpPedidoProveedor=").append(ttOpPedidoProveedor);
-        sb.append(", ttOpPedidoDet=").append(ttOpPedidoDet);
-        sb.append(", ttOpPedidoDomicilio=").append(ttOpPedidoDomicilio);
-        sb.append(", ttOpPedidoPago=").append(ttOpPedidoPago);
-        sb.append('}');
-        sb.append("vcPassword").append(vcPassword);
-        return sb.toString();
+        return "DsNvoPedido{" +
+                "ipcPassword='" + vcPassword + '\'' +
+                ", ttOpPedido=" + ttOpPedido +
+                ", ttOpPedidoProveedor=" + ttOpPedidoProveedor +
+                ", ttOpPedidoDet=" + ttOpPedidoDet +
+                ", ttOpPedidoDomicilio=" + ttOpPedidoDomicilio +
+                ", ttOpPedidoPago=" + ttOpPedidoPago +
+                ", ttCredDetCPCP=" + ttCredDetCPCP +
+                '}' ;
     }
 }

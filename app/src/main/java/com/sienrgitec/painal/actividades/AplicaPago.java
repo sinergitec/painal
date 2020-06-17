@@ -339,7 +339,7 @@ public class AplicaPago extends AppCompatActivity {
                         add(objFPago);
                     }
                 }
-                )), vcPass);
+                ),vcPass) );
 
 
         final Painal service = ServiceGenerator.createService(Painal.class);

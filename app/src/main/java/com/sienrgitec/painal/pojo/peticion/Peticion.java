@@ -7,6 +7,7 @@ public class Peticion {
 
     public Peticion(Request request, String Password){
         this.request = request;
+        this.Password = Password;
 
 
     }
@@ -15,7 +16,13 @@ public class Peticion {
         this.request = request;
     }
 
+    /*@Override
+    public String toString() {
+        return "Peticion{" +
+                "request=" + request +
 
+                '}' + "\n" + " ipcPassword='" + Password ;
+    }*/
 
     @SerializedName("request")
     @Expose
@@ -29,15 +36,17 @@ public class Peticion {
         return request;
     }
 
-    public String getPassword(){
+
+    public String getPassword() {
         return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public void setRequest(Request request) {
         this.request = request;
     }
 
-    public void setPassword(String Password){
-        this.Password = Password;
-    }
 }

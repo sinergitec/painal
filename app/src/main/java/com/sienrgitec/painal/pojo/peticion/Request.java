@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Request {
 
+
+
     public Request (){
 
     }
@@ -17,8 +19,14 @@ public class Request {
         this.dsCtClienteActualiza = dsCtClienteActualiza;
     }
 
-    public Request (DsNvoPedido dsNvoPedido){
+
+
+    public Request (DsNvoPedido dsNvoPedido, String password){
         this.dsNvoPedido = dsNvoPedido;
+        this.ipcPassword = password;
+
+
+
     }
 
     public Request (DsCtDomicilio dsCtDomicilio) {
@@ -40,6 +48,19 @@ public class Request {
     /**Andros 050620*/
     public Request (ds_NvoPago dsTtCredDetCPCP){
         this.dsTtCredDetCPCP = dsTtCredDetCPCP;
+    }
+
+
+    @SerializedName("ipcPassword")
+    @Expose
+    private  String ipcPassword;
+
+    public String getPassword() {
+        return ipcPassword;
+    }
+
+    public void setPassword(String password) {
+        this.ipcPassword = password;
     }
 
     @SerializedName("ds_NvoPago")
@@ -82,13 +103,6 @@ public class Request {
         this.dsCtCliente = dsCtCliente;
     }
 
-    public DsNvoPedido getDsNvoPedido() {
-        return dsNvoPedido;
-    }
-
-    public void setDsNvoPedido(DsNvoPedido dsNvoPedido) {
-        this.dsNvoPedido = dsNvoPedido;
-    }
 
     public DsCtDomicilio getDsCtDomicilio() {
         return dsCtDomicilio;
@@ -122,6 +136,8 @@ public class Request {
         this.dsAutorizados = dsAutorizados;
     }
 
+
+
     public DsCtCliente getDsCtClienteActualiza() {
         return dsCtClienteActualiza;
     }
@@ -136,5 +152,14 @@ public class Request {
 
     public void setDsTtCredDetCPCP(ds_NvoPago dsTtCredDetCPCP) {
         this.dsTtCredDetCPCP = dsTtCredDetCPCP;
+    }
+
+    public DsNvoPedido getDsNvoPedido() {
+        return dsNvoPedido;
+    }
+
+    public void setDsNvoPedido(DsNvoPedido dsNvoPedido) {
+        this.dsNvoPedido = dsNvoPedido;
+
     }
 }
