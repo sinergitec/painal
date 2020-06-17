@@ -67,9 +67,6 @@ public class AplicaPago extends AppCompatActivity {
         Intent i = getIntent();
         vdeSubtotal = getIntent().getExtras().getDouble("vdeimporte");
 
-
-
-
         cargaInfoCarrito(  );
 
         rlEstadoProc = findViewById(R.id.edoproc);
@@ -111,12 +108,6 @@ public class AplicaPago extends AppCompatActivity {
 
         CarritoAdapter carritoAdapter = new CarritoAdapter(AplicaPago.this, null);
         carritoAdapter.setList(CarritoSingleton.getInstance().getListaCarrito());
-
-
-
-
-
-
     }
 
     private void CargaFPagos(){
@@ -257,9 +248,6 @@ public class AplicaPago extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     private void CalculaAportacion(double vdeValor){
@@ -286,6 +274,8 @@ public class AplicaPago extends AppCompatActivity {
     }
 
     private void CreaCompra(View v) {
+        String vcPass = String.valueOf(etPassword.getText());
+        Log.e("aplica pago ", vcPass);
 
         final TtOpPedido pedido =
                 new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
@@ -349,12 +339,12 @@ public class AplicaPago extends AppCompatActivity {
                         add(objFPago);
                     }
                 }
-                )),etPassword.toString());
+                )), vcPass);
 
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         final Call<Respuesta> call = service.creaPedido(peticion);
-       Log.e("peticion", peticion.toString());
+
 
         call.enqueue(new Callback<Respuesta>() {
             @Override

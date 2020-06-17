@@ -14,6 +14,7 @@ import java.util.List;
 
 public class DsNvoPedido implements Serializable {
 
+
     public DsNvoPedido(){
 
     }
@@ -28,20 +29,30 @@ public class DsNvoPedido implements Serializable {
         this.ttOpPedidoDomicilio = ttOpPedidoDomicilio;
         this.ttOpPedidoPago = ttOpPedidoPago;
         this.ttCredDetCPCP = ttCredDetCPCP;
+
+
     }
+
+    @SerializedName("password")
+    @Expose
+    private  String vcPassword;
 
     @SerializedName("tt_opPedido")
     @Expose
     private List<TtOpPedido> ttOpPedido = null;
+
     @SerializedName("tt_opPedidoProveedor")
     @Expose
     private List<TtOpPedidoProveedor> ttOpPedidoProveedor = null;
+
     @SerializedName("tt_opPedidoDet")
     @Expose
     private List<TtOpPedidoDet> ttOpPedidoDet = null;
+
     @SerializedName("tt_opPedidoDomicilio")
     @Expose
     private List<TtOpPedidoDomicilio> ttOpPedidoDomicilio = null;
+
     @SerializedName("tt_opPedidoPago")
     @Expose
     private List<TtOpPedidoPago> ttOpPedidoPago = null;
@@ -90,6 +101,10 @@ public class DsNvoPedido implements Serializable {
         this.ttOpPedidoPago = ttOpPedidoPago;
     }
 
+
+
+
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DsNvoPedido{");
@@ -99,7 +114,7 @@ public class DsNvoPedido implements Serializable {
         sb.append(", ttOpPedidoDomicilio=").append(ttOpPedidoDomicilio);
         sb.append(", ttOpPedidoPago=").append(ttOpPedidoPago);
         sb.append('}');
-        sb.append("ipcPassword").append("1233333");
+        sb.append("vcPassword").append(vcPassword);
         return sb.toString();
     }
 }
