@@ -99,6 +99,7 @@ public class DsNvoPedido implements Serializable {
         sb.append(", ttOpPedidoDomicilio=").append(ttOpPedidoDomicilio);
         sb.append(", ttOpPedidoPago=").append(ttOpPedidoPago);
         sb.append('}');
+        sb.append("ipcPassword").append("1233333");
         return sb.toString();
     }
 }

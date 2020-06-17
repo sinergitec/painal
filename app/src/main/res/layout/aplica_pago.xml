@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
 
     <Button
         android:id="@+id/btnPagoF"
@@ -301,7 +301,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvAporta" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/edPassword"
         android:layout_width="202dp"
         android:layout_height="41dp"
         android:layout_marginStart="24dp"

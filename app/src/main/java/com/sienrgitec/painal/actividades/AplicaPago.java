@@ -51,7 +51,7 @@ import retrofit2.Response;
 
 public class AplicaPago extends AppCompatActivity {
 
-    private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal;
+    private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal, etPassword;
     private Button btnPagar;
     RelativeLayout rlEstadoProc, rlPropinas, rlTitlani;
     private Integer iFormaPago = 0, iComision = 0, iTitlaniP = 0;
@@ -82,6 +82,7 @@ public class AplicaPago extends AppCompatActivity {
         etAporta    = findViewById(R.id.tvAporta);
         etPropina   = findViewById(R.id.tvPropina);
         etMonto     = findViewById(R.id.textView25);
+        etPassword  = findViewById(R.id.edPassword);
         btnPagar    = findViewById(R.id.btnPagoF);
 
         btnPagar.setOnClickListener(v -> CreaCompra(v));
@@ -331,6 +332,7 @@ public class AplicaPago extends AppCompatActivity {
                 add(pedido);
             }
         },
+
                 listaOpPedidoProveedor, listaOpPedidoDet,
                 new ArrayList<TtOpPedidoDomicilio>(){
                     {
@@ -347,9 +349,12 @@ public class AplicaPago extends AppCompatActivity {
                         add(objFPago);
                     }
                 }
-                )));
+                )),etPassword.toString());
+
+
         final Painal service = ServiceGenerator.createService(Painal.class);
         final Call<Respuesta> call = service.creaPedido(peticion);
+       Log.e("peticion", peticion.toString());
 
         call.enqueue(new Callback<Respuesta>() {
             @Override

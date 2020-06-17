@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Peticion {
 
-    public Peticion (){
+    public Peticion(Request request, String s){
 
     }
 
