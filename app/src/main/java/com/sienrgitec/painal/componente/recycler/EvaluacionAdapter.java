@@ -10,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.FamilyActualiza;
 import com.sienrgitec.painal.actividades.FamilyListActivity;
@@ -62,7 +63,6 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
             btnEvaluar.setOnClickListener(v -> {
 
                 String s = String.valueOf(ratingBar.getRating());
-                Toast.makeText(getContext(), "Valor" + s, Toast.LENGTH_LONG).show();
 
                 Tt_OpClienteEvalua_ objEvalua = new Tt_OpClienteEvalua_();
 
@@ -91,17 +91,25 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
                 call.enqueue(new Callback<Respuesta>() {
                     @Override
                     public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                        System.out.println(response.toString());
+                        if(response.isSuccessful()){
+                            Respuesta res = response.body();
+
+                            if (res.getResponse().getOplError().equals("true"))
+                                Toast.makeText(getContext(), "La Evaluación ya fue Realizada", Toast.LENGTH_LONG).show();
+                            else {
+                                Toast.makeText(getContext(), "Evaluación realizada", Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(getContext(), "Problema al realizar la evaluación", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<Respuesta> call, Throwable t) {
                         System.out.println(t.getMessage());
-
+                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
-
             });
         }
     }

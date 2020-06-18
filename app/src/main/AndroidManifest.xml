@@ -121,9 +121,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.EvaluacionPActivity"
+            android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.EvaluacionTActivity"
+            android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
 
 
