@@ -101,6 +101,9 @@ public interface Painal {
     @GET("ctEvaluacion")
     Call<Respuesta> ctEvaluacionGet(@QueryMap Map<String, String> options);
 
+    @POST("opClienteEvalua")
+    Call<Respuesta> ctEvaluacionPost(@Body Peticion peticion);
+
     /*Carga formas de Pago / Andros 10-06-20 */
     @GET("ctFormasPago")
     Call<Respuesta> ctFormasPago(@QueryMap Map<String, String> options);

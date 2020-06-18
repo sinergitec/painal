@@ -41,6 +41,10 @@ public class Request {
         this.dsAutorizados = dsAutorizados;
     }
 
+    public Request (DsNvaEvaluacion dsNvaEvaluacion) {
+        this.dsNvaEvaluacion = dsNvaEvaluacion;
+    }
+
     public Request (DsOpClienteReferidos dsClienteRef) {
         this.dsClienteRef = dsClienteRef;
     }
@@ -94,6 +98,18 @@ public class Request {
     @SerializedName("ds_Autorizados")
     @Expose
     private DsCtClienteAutorizados dsAutorizados;
+
+    @SerializedName("ds_NvaEvaluacion")
+    @Expose
+    private DsNvaEvaluacion dsNvaEvaluacion;
+
+    public DsNvaEvaluacion getDs_NvaEvaluacion() {
+        return dsNvaEvaluacion;
+    }
+
+    public void setDs_NvaEvaluacion(DsNvaEvaluacion ds_NvaEvaluacion) {
+        this.dsNvaEvaluacion = dsNvaEvaluacion;
+    }
 
     public DsCtCliente getDsCtCliente() {
         return dsCtCliente;
