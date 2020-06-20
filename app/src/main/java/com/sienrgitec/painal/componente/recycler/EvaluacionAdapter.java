@@ -50,7 +50,7 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
 
             String tipoP = null;
             if(item.getcTipo().equalsIgnoreCase("Evaluacion al Titlani")){
-                tipoP = "Titlani";
+                tipoP = "Painani";
             }
             if(item.getcTipo().equalsIgnoreCase("Evaluacion al Proveedor")){
                 tipoP = "Proveedor";
@@ -71,7 +71,7 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
                 Tt_OpClienteEvalua_ objEvalua = new Tt_OpClienteEvalua_();
 
                 objEvalua.setiEvalua(item.getiEvalua());
-                objEvalua.setiPedido(4);
+                objEvalua.setiPedido(10);
                 objEvalua.setiPersona(CarritoSingleton.getInstance().getCliente().getiCliente());
                 objEvalua.setiPunto(item.getiPunto());
                 objEvalua.setiTipoPersona(0);
