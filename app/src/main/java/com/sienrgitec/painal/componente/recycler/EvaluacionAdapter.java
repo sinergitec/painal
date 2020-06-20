@@ -71,7 +71,7 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
                 Tt_OpClienteEvalua_ objEvalua = new Tt_OpClienteEvalua_();
 
                 objEvalua.setiEvalua(item.getiEvalua());
-                objEvalua.setiPedido(1);
+                objEvalua.setiPedido(4);
                 objEvalua.setiPersona(CarritoSingleton.getInstance().getCliente().getiCliente());
                 objEvalua.setiPunto(item.getiPunto());
                 objEvalua.setiTipoPersona(0);
@@ -80,14 +80,14 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
                 objEvalua.setcUsuCrea(CarritoSingleton.getInstance().getUsuario_().getcUsuario());
                 objEvalua.setcUsuModifica(CarritoSingleton.getInstance().getUsuario_().getcUsuario());
                 objEvalua.setcValor(s);
-                objEvalua.setDtCreado(null);
-                objEvalua.setDtFecha(null);
+                objEvalua.setDtCreado("");
+                objEvalua.setDtFecha("");
 
                 Peticion peticion = new Peticion(new Request(new DsNvaEvaluacion(new ArrayList<Tt_OpClienteEvalua_>() {
                     {
                         add(objEvalua);
                     }
-                }, finalTipoP)));
+                }), finalTipoP));
 
                 final Painal service = ServiceGenerator.createService(Painal.class);
                 final Call<Respuesta> call = service.ctEvaluacionPost(peticion);

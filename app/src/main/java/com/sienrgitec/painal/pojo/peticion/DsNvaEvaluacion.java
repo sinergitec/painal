@@ -18,6 +18,7 @@ public class DsNvaEvaluacion {
 
     public DsNvaEvaluacion (List<Tt_OpClienteEvalua_> cliEvalua, String ipcPersona){
         this.cliEvaluar = cliEvalua;
+        this.ipcPersona = ipcPersona;
     }
 
     @SerializedName("tt_opClienteEvalua")

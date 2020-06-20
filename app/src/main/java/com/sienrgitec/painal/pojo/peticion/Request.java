@@ -5,46 +5,50 @@ import com.google.gson.annotations.SerializedName;
 
 public class Request {
 
-
-
     public Request (){
 
     }
 
+    //cliente
     public Request (DsCtCliente dsCtCliente){
         this.dsCtCliente = dsCtCliente;
     }
 
+    //Cliente autorizado
     public Request (DsCtCliente dsCtClienteActualiza, Integer num){
         this.dsCtClienteActualiza = dsCtClienteActualiza;
     }
-
-
-
-    public Request (DsNvoPedido dsNvoPedido, String password){
-        this.dsNvoPedido = dsNvoPedido;
-        this.ipcPassword = password;
-
-
-
-    }
-
-    public Request (DsCtDomicilio dsCtDomicilio) {
-        this.dsCtDomicilio = dsCtDomicilio;
-    }
-
-    public Request (DsCtContacto dsCtContacto) {
-        this.dsCtContacto = dsCtContacto;
-    }
-
     public Request (DsCtClienteAutorizados dsAutorizados) {
         this.dsAutorizados = dsAutorizados;
     }
 
+    //nuevo pedido
+    public Request (DsNvoPedido dsNvoPedido, String password){
+        this.dsNvoPedido = dsNvoPedido;
+        this.ipcPassword = password;
+    }
+
+    //Domicilio
+    public Request (DsCtDomicilio dsCtDomicilio) {
+        this.dsCtDomicilio = dsCtDomicilio;
+    }
+
+    //contacto
+    public Request (DsCtContacto dsCtContacto) {
+        this.dsCtContacto = dsCtContacto;
+    }
+
+    //Evaluacion
     public Request (DsNvaEvaluacion dsNvaEvaluacion) {
         this.dsNvaEvaluacion = dsNvaEvaluacion;
     }
 
+    public Request(DsNvaEvaluacion dsNvaEvaluacion, String finalTipoP) {
+        this.dsNvaEvaluacion = dsNvaEvaluacion;
+        this.ipcPersona = finalTipoP;
+    }
+
+    //clientes referidos
     public Request (DsOpClienteReferidos dsClienteRef) {
         this.dsClienteRef = dsClienteRef;
     }
@@ -55,17 +59,14 @@ public class Request {
     }
 
 
+//variables
+    @SerializedName("ipcPersona")
+    @Expose
+    private  String ipcPersona;
+
     @SerializedName("ipcPassword")
     @Expose
     private  String ipcPassword;
-
-    public String getPassword() {
-        return ipcPassword;
-    }
-
-    public void setPassword(String password) {
-        this.ipcPassword = password;
-    }
 
     @SerializedName("ds_NvoPago")
     @Expose
@@ -102,6 +103,14 @@ public class Request {
     @SerializedName("ds_NvaEvaluacion")
     @Expose
     private DsNvaEvaluacion dsNvaEvaluacion;
+
+    public DsNvaEvaluacion getDsNvaEvaluacion() {
+        return dsNvaEvaluacion;
+    }
+
+    public void setDsNvaEvaluacion(DsNvaEvaluacion dsNvaEvaluacion) {
+        this.dsNvaEvaluacion = dsNvaEvaluacion;
+    }
 
     public DsNvaEvaluacion getDs_NvaEvaluacion() {
         return dsNvaEvaluacion;
@@ -177,5 +186,28 @@ public class Request {
     public void setDsNvoPedido(DsNvoPedido dsNvoPedido) {
         this.dsNvoPedido = dsNvoPedido;
 
+    }
+    public String getPassword() {
+        return ipcPassword;
+    }
+
+    public void setPassword(String password) {
+        this.ipcPassword = password;
+    }
+
+    public String getIpcPersona() {
+        return ipcPersona;
+    }
+
+    public void setIpcPersona(String ipcPersona) {
+        this.ipcPersona = ipcPersona;
+    }
+
+    public String getIpcPassword() {
+        return ipcPassword;
+    }
+
+    public void setIpcPassword(String ipcPassword) {
+        this.ipcPassword = ipcPassword;
     }
 }
