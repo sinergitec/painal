@@ -285,7 +285,7 @@ public class AplicaPago extends AppCompatActivity {
                         "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         String.valueOf(dePorcCom), String.valueOf(deAporta), String.valueOf(dePorcProp), String.valueOf(dePropina), "", "",
                         "NOW", "", CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
-                        CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0");
+                        CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0", "0","0");
 
 
         final List<TtOpPedidoProveedor> listaOpPedidoProveedor = new ArrayList<>();
@@ -439,7 +439,7 @@ public class AplicaPago extends AppCompatActivity {
                     "","FALSE","TRUE","NOW","FALSE",
                     "10","0","0","FALSE","",
                     "0","FALSE","","0","0",
-                    "NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea()));
+                    "NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea(),"0","0"));
 
             proveedorPedido ++;
         }

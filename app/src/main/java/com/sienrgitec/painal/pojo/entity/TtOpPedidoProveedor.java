@@ -94,6 +94,14 @@ public class TtOpPedidoProveedor implements Serializable {
     @Expose
     private String cUsuModifica;
 
+    @SerializedName("dePorcCargo")
+    @Expose
+    private String dePorcCargo;
+
+    @SerializedName("deCargoPago")
+    @Expose
+    private String deCargoPago;
+
     @Expose
     private String lSurtido;
 
@@ -101,7 +109,24 @@ public class TtOpPedidoProveedor implements Serializable {
 
     }
 
-    public TtOpPedidoProveedor(String iPedido, String iPedidoProv, String iProveedor, String dtFecha, String iHora, String iDomicilio, String deTotalPzas, String deSubtotal, String deImpuesto, String deImporte, String dtAvisado, String lContestado, String lPagado, String dtPagado, String lVoBoPago, String deAporta, String dePenalizacion, String dePagoNeto, String lCancelado, String dtCancelado, String iRazon, String lEntregado, String dtSurtido, String dePesoTotal, String deVolumenPed, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica) {
+    public String getDePorcCargo() {
+        return dePorcCargo;
+    }
+
+    public void setDePorcCargo(String dePorcCargo) {
+        this.dePorcCargo = dePorcCargo;
+    }
+
+    public String getDeCargoPago() {
+        return deCargoPago;
+    }
+
+    public void setDeCargoPago(String deCargoPago) {
+        this.deCargoPago = deCargoPago;
+    }
+
+    public TtOpPedidoProveedor(String iPedido, String iPedidoProv, String iProveedor, String dtFecha, String iHora, String iDomicilio, String deTotalPzas, String deSubtotal, String deImpuesto, String deImporte, String dtAvisado, String lContestado, String lPagado, String dtPagado, String lVoBoPago, String deAporta, String dePenalizacion, String dePagoNeto, String lCancelado, String dtCancelado, String iRazon, String lEntregado, String dtSurtido, String dePesoTotal, String deVolumenPed,
+                               String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica, String dePorcCargo, String deCargoPago) {
         this.iPedido = iPedido;
         this.iPedidoProv = iPedidoProv;
         this.iProveedor = iProveedor;
@@ -132,6 +157,8 @@ public class TtOpPedidoProveedor implements Serializable {
         this.cUsuCrea = cUsuCrea;
         this.cUsuModifica = cUsuModifica;
         this.lSurtido = lSurtido;
+        this.dePorcCargo = dePorcCargo;
+        this.deCargoPago = deCargoPago;
     }
 
     public String getIPedido() {

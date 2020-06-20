@@ -80,11 +80,22 @@ public class TtOpPedido implements Serializable {
     @Expose
     private String deTiempoLlega;
 
+
+    @SerializedName("dePorcCargo")
+    @Expose
+    private String dePorcCargo;
+
+    @SerializedName("deCargoPago")
+    @Expose
+    private String deCargoPago;
+
     public TtOpPedido(){
 
     }
 
-    public TtOpPedido(String iPedido, String iUnidad, String iCliente, String dtFecha, String iEstadoPedido, String iNegocios, String deTotalPiezas, String deSubtotal, String deDescuento, String deImpuesto, String deImporte, String dePorcComision, String deComision, String dePorcPropina, String dePropina, String dtRegistrado, String dtAsignado, String dtEntregado, String dtModificado, String cUsuCreado, String cUsuModificado, String cUsuCrea, String cUsuModifca, String deTiempoLlega) {
+    public TtOpPedido(String iPedido, String iUnidad, String iCliente, String dtFecha, String iEstadoPedido, String iNegocios, String deTotalPiezas, String deSubtotal, String deDescuento, String deImpuesto,
+                      String deImporte, String dePorcComision, String deComision, String dePorcPropina, String dePropina, String dtRegistrado, String dtAsignado, String dtEntregado, String dtModificado,
+                      String cUsuCreado, String cUsuModificado, String cUsuCrea, String cUsuModifca, String deTiempoLlega, String dePorcCargo, String deCargoPago) {
         this.iPedido = iPedido;
         this.iUnidad = iUnidad;
         this.iCliente = iCliente;
@@ -109,6 +120,24 @@ public class TtOpPedido implements Serializable {
         this.cUsuCrea = cUsuCrea;
         this.cUsuModifca = cUsuModifca;
         this.deTiempoLlega = deTiempoLlega;
+        this.dePorcCargo = dePorcCargo;
+        this.deCargoPago = deCargoPago;
+    }
+
+    public String getDePorcCargo() {
+        return dePorcCargo;
+    }
+
+    public void setDePorcCargo(String dePorcCargo) {
+        this.dePorcCargo = dePorcCargo;
+    }
+
+    public String getDeCargoPago() {
+        return deCargoPago;
+    }
+
+    public void setDeCargoPago(String deCargoPago) {
+        this.deCargoPago = deCargoPago;
     }
 
     public String getIPedido() {
