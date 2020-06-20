@@ -39,6 +39,11 @@ public class TtOpPedidoPago implements Serializable {
     private String cUsuCrea;
 
 
+    @SerializedName("cUsuModifica")
+    @Expose
+    private String cUsuModifica;
+
+
     @SerializedName("iCliente")
     @Expose
     private String iCliente;
@@ -57,7 +62,8 @@ public class TtOpPedidoPago implements Serializable {
 
     }
 
-    public TtOpPedidoPago(String iPedido, String iPartida, String iFormaPago, String deMonto, String deProcComision, String deComision, String dePorcPropina, String dtCreado, String dtModificado, String cUsuCrea, String iCliente, String iOrigenFP, String cCuenta, String dePropina) {
+    public TtOpPedidoPago(String iPedido, String iPartida, String iFormaPago, String deMonto, String deProcComision, String deComision, String dePorcPropina, String dtCreado, String dtModificado,
+                          String cUsuCrea, String cUsuModifica, String iCliente, String iOrigenFP, String cCuenta, String dePropina) {
         this.iPedido = iPedido;
         this.iPartida = iPartida;
         this.iFormaPago = iFormaPago;
@@ -68,10 +74,20 @@ public class TtOpPedidoPago implements Serializable {
         this.dtCreado = dtCreado;
         this.dtModificado = dtModificado;
         this.cUsuCrea = cUsuCrea;
+        this.cUsuModifica = cUsuModifica;
         this.iCliente = iCliente;
         this.iOrigenFP = iOrigenFP;
         this.cCuenta = cCuenta;
         this.dePropina = dePropina;
+    }
+
+
+    public String getcUsuModifica() {
+        return cUsuModifica;
+    }
+
+    public void setcUsuModifica(String cUsuModifica) {
+        this.cUsuModifica = cUsuModifica;
     }
 
     public String getIPedido() {
