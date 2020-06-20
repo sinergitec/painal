@@ -16,7 +16,7 @@ public class DsNvaEvaluacion {
         this.cliEvaluar = cliEvalua;
     }
 
-    public DsNvaEvaluacion (List<Tt_OpClienteEvalua_> cliEvalua, String ipcCliente){
+    public DsNvaEvaluacion (List<Tt_OpClienteEvalua_> cliEvalua, String ipcPersona){
         this.cliEvaluar = cliEvalua;
     }
 
@@ -26,14 +26,14 @@ public class DsNvaEvaluacion {
 
     @SerializedName("ipcPersona")
     @Expose
-    private String ipcCliente = null;
+    private String ipcPersona = null;
 
-    public String getIpcCliente() {
-        return ipcCliente;
+    public String getIpcPersona() {
+        return ipcPersona;
     }
 
-    public void setIpcCliente(String ipcCliente) {
-        this.ipcCliente = ipcCliente;
+    public void setIpcPersona(String ipcPersona) {
+        this.ipcPersona = ipcPersona;
     }
 
     public List<Tt_OpClienteEvalua_> getCliEvaluar() {

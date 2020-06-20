@@ -1,7 +1,6 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
-import com.sienrgitec.painal.actividades.FamilyActualiza;
-import com.sienrgitec.painal.actividades.FamilyListActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
-import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.componente.RVAdapter;
-import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
 import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion_;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteEvalua_;
-import com.sienrgitec.painal.pojo.peticion.DsCtClienteAutorizados;
 import com.sienrgitec.painal.pojo.peticion.DsNvaEvaluacion;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
@@ -29,8 +22,6 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,11 +46,24 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
             TextView evalua = (TextView)viewHolder.getView(R.id.tipo);
             evalua.setText(item.getcEvalua());
 
+            System.out.println("tipo" + item.getcTipo());
+
+            String tipoP = null;
+            if(item.getcTipo().equalsIgnoreCase("Evaluacion al Titlani")){
+                tipoP = "Titlani";
+            }
+            if(item.getcTipo().equalsIgnoreCase("Evaluacion al Proveedor")){
+                tipoP = "Proveedor";
+            }
+
             RatingBar ratingBar;
             Button btnEvaluar;
 
             ratingBar  = (RatingBar)viewHolder.getView(R.id.ratingBar);
             btnEvaluar = (Button)viewHolder.getView(R.id.button);
+            String finalTipoP = tipoP;
+             System.out.println("final" + finalTipoP);
+
             btnEvaluar.setOnClickListener(v -> {
 
                 String s = String.valueOf(ratingBar.getRating());
@@ -83,7 +87,7 @@ public class EvaluacionAdapter extends RVAdapter<Tt_CtEvaluacion_> {
                     {
                         add(objEvalua);
                     }
-                }, "Cliente")));
+                }, finalTipoP)));
 
                 final Painal service = ServiceGenerator.createService(Painal.class);
                 final Call<Respuesta> call = service.ctEvaluacionPost(peticion);
