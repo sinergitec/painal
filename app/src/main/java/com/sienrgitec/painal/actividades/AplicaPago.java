@@ -269,6 +269,7 @@ public class AplicaPago extends AppCompatActivity {
         String vdeMontoS = new DecimalFormat("0.00").format(vdeMonto);
         etPropina.setText("$" + vdeMontoS);
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
+        etTotal.setText("$" + (vdeTotalF));
         deImporteTotal = vdeSubtotal + deAporta + dePropina;
 
     }
@@ -300,7 +301,7 @@ public class AplicaPago extends AppCompatActivity {
         final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1",String.valueOf(iFormaPago),
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                 String.valueOf(dePorcCom),String.valueOf(deAporta),String.valueOf(dePorcProp),"NOW","",
-                CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "1",constantes.vcCuenta,String.valueOf(dePropina));
 
 
