@@ -73,6 +73,10 @@ public class TtCtDomicilio_ implements Serializable {
     @Expose
     private String cUsuModifca;
 
+    public TtCtDomicilio_(){
+
+    }
+
     public TtCtDomicilio_(String iPersona, String iDomicilio, String iTipoPersona, String itipoDomicilio, String cDomicilio, String cCalle, String cNumeroExt, String cNumeroInt, String cColonia, String cMpioDeleg, String cEstado, String cCP, String cPais, String cReferencia, String cObs, String deLongitud, String deLatitud, Boolean lActivo, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifca) {
         this.iPersona = iPersona;
         this.iDomicilio = iDomicilio;

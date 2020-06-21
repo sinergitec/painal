@@ -21,6 +21,7 @@ public class CarritoSingleton {
     private TtCtCliente_ cliente = new TtCtCliente_();
     private TtCtUsuario_ usuario_ = new TtCtUsuario_();
     private TtCtTelefono_ telefono = new TtCtTelefono_();
+    private TtCtDomicilio_ domicilioActual = new TtCtDomicilio_();
     private List<TtCtDomicilio_> domicilio = new ArrayList<TtCtDomicilio_>();
     private Stack<Integer> pilaProveedores = new Stack<>();
     private Stack<String> pilaDomicilios = new Stack<>();
@@ -142,5 +143,13 @@ public class CarritoSingleton {
 
     public void setDomicilio(List<TtCtDomicilio_> domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public TtCtDomicilio_ getDomicilioActual() {
+        return domicilioActual;
+    }
+
+    public void setDomicilioActual(TtCtDomicilio_ domicilioActual) {
+        this.domicilioActual = domicilioActual;
     }
 }

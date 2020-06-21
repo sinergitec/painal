@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.ListaDomicilioActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.GirosAdapter;
@@ -142,11 +143,13 @@ public class HomeFragment extends Fragment {
 
     private void abrirMapa(TextView calleEntregar){
         calleEntregar.setOnClickListener(v -> {
-            MapaFragment nextFrag= new MapaFragment();
+            /*MapaFragment nextFrag= new MapaFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, nextFrag, "findThisFragment")
                     .addToBackStack(null)
-                    .commit();
+                    .commit();*/
+            Intent pantallaListaDomicilios = new Intent(getContext(), ListaDomicilioActivity.class);
+            getActivity().startActivity(pantallaListaDomicilios);
         });
     }
 
