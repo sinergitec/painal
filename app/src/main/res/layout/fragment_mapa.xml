@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#99000000"
     tools:context=".fragmentos.MapaFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Dirección"
+            android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,13 +56,13 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:duplicateParentState="false"
-            android:hint="Dirección"
-            android:textColorHint="@color/colorComplementaryAccent"
             android:ems="10"
             android:enabled="false"
             android:freezesText="false"
             android:gravity="start|top"
+            android:hint="Dirección"
             android:inputType="textMultiLine"
+            android:textColorHint="@color/colorComplementaryAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/map" />
@@ -77,8 +79,8 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="Alias"
-            android:textColorHint="@color/colorComplementaryAccent"
             android:inputType="textMultiLine"
+            android:textColorHint="@color/colorComplementaryAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/direccion" />

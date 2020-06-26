@@ -1,9 +1,13 @@
 package com.sienrgitec.painal.fragmentos;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +38,7 @@ import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +68,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     private String colonia;
     private String numeroExterior;
     private String direccionTxt;
+    private Marker marcador;
 
 
     public MapaFragment() {
@@ -105,7 +111,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                     CarritoSingleton.getInstance().getUsuario_().getcUsuario()
             );
 
-            final Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio_>(){
+            final Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio_>() {
                 {
                     add(ttCtDomicilio);
                 }
@@ -117,9 +123,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             call.enqueue(new Callback<Respuesta>() {
                 @Override
                 public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         Respuesta respuesta = response.body();
-                        if(!Boolean.valueOf(respuesta.getResponse().getOplError())){
+                        if (!Boolean.valueOf(respuesta.getResponse().getOplError())) {
                             Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
@@ -144,7 +150,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mapView = view.findViewById(R.id.map);
-        if(mapView != null){
+        if (mapView != null) {
             mapView.onCreate(null);
             mapView.onResume();
             mapView.getMapAsync(this);
@@ -154,14 +160,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
+        miUbicacion();
 
-        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        LatLng latLng = new LatLng(19.4518112,-99.0740152);
-        gMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
         gMap.setMyLocationEnabled(true);
         gMap.setOnMarkerDragListener(this);
         geocoder = new Geocoder(getContext(), Locale.getDefault());
@@ -180,19 +184,19 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onMarkerDragEnd(Marker marker) {
         try {
-            direccion =  geocoder.getFromLocation(marker.getPosition().latitude,marker.getPosition().longitude,1);
+            direccion = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(direccion != null && direccion.size() > 0){
+        if (direccion != null && direccion.size() > 0) {
             direccionTxt = direccion.get(0).getAddressLine(0);
             calle = direccion.get(0).getThoroughfare();
             municipio = direccion.get(0).getLocality();
             estado = direccion.get(0).getAdminArea();
             codigoPostal = direccion.get(0).getPostalCode();
             latitud = marker.getPosition().latitude;
-            longitud =marker.getPosition().longitude;
+            longitud = marker.getPosition().longitude;
             calleTxt.setText(direccionTxt);
             colonia = direccion.get(0).getSubLocality();
             numeroExterior = direccion.get(0).getSubThoroughfare();
@@ -200,5 +204,53 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             Toast.makeText(getContext(), "No se ha podido crear la dirección", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void ubicacionActual(final Location location) {
+        if (location != null) {
+            latitud = location.getLatitude();
+            longitud = location.getLongitude();
+            agregarMarcador(latitud, longitud);
+        }
+    }
+
+    public void agregarMarcador(final Double latitud, final Double longitud) {
+        LatLng latLng = new LatLng(latitud, longitud);
+        if(marcador != null)
+            marcador.remove();
+        marcador = gMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+    }
+
+    public void miUbicacion() {
+        if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationManager locationManager = (LocationManager) this.getContext().getSystemService(Context.LOCATION_SERVICE);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        ubicacionActual(location);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0,locationListener);
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            ubicacionActual(location);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
 }
