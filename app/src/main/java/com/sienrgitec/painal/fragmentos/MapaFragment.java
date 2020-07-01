@@ -127,6 +127,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                         Respuesta respuesta = response.body();
                         if (!Boolean.valueOf(respuesta.getResponse().getOplError())) {
                             Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
+                            CarritoSingleton.getInstance().setDomicilioActual(ttCtDomicilio);
                         } else {
                             Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
                         }
