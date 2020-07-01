@@ -80,32 +80,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!usr.isEmpty() && !pwd.isEmpty()){
-            /*final Retrofit retro = new Retrofit.Builder()
-                    .baseUrl(Constantes.URL_BASE_WS)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();*/
-
-            /* final Painal session = retro.create(Painal.class);
-            final Call<Session> sessionCall = session.login(usr,pwd);
-            sessionCall.enqueue(new Callback<Session>() {
-                @Override
-                public void onResponse(Call<Session> call, Response<Session> response) {
-                    loading.detenDialogo("alert");
-                    final Session session = response.body();
-                    if(session == null){
-                        Toast.makeText(MainActivity.this, getString(R.string.msgErrorLogin), Toast.LENGTH_LONG).show();
-                    } else {
-                        Intent vistaNueva = new Intent(MainActivity.this, HomeActivity.class);
-                        startActivity(vistaNueva);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Session> call, Throwable t) {
-                    loading.detenDialogo("alert");
-                    Toast.makeText(MainActivity.this, getString(R.string.msgErrorWSLogin), Toast.LENGTH_LONG).show();
-                }
-            });*/
 
             final Painal service = ServiceGenerator.createService(Painal.class);
             Map<String, String> data = new HashMap<>();
