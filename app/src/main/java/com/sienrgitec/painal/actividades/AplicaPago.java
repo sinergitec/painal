@@ -88,8 +88,8 @@ public class AplicaPago extends AppCompatActivity {
         CargaComisiones();
 
         etContacto.setText("Contacto: " + String.valueOf(CarritoSingleton.getInstance().getCliente().getcNombre()));
-        etDomicilio.setText(CarritoSingleton.getInstance().getDomicilio().get(0).getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilio().get(0).getCNumeroExt()
-                + " " + CarritoSingleton.getInstance().getDomicilio().get(0).getCColonia());
+        etDomicilio.setText(CarritoSingleton.getInstance().getDomicilioActual().getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilioActual().getCNumeroExt()
+                + " " + CarritoSingleton.getInstance().getDomicilioActual().getCColonia());
         etSubtotal.setText(vdeSubtotal + "0");
         etTotal.setText(vdeSubtotal + "0");
 
@@ -295,7 +295,7 @@ public class AplicaPago extends AppCompatActivity {
         llenaListaOpPedidoProveedorYOpPedidoDet(listaOpPedidoProveedor, listaOpPedidoDet);
 
         final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
-                CarritoSingleton.getInstance().getDomicilio().get(0).getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
+                CarritoSingleton.getInstance().getDomicilioActual().getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "TRUE","NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea());
 
         final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1",String.valueOf(iFormaPago),
