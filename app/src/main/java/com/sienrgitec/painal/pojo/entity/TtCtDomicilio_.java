@@ -306,4 +306,8 @@ public class TtCtDomicilio_ implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
+    public String calleYNumero(){
+        return this.cCalle + " " + (cNumeroExt != null ? cNumeroExt : "SN");
+    }
 }

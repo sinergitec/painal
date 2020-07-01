@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.ListaDomicilioActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.GirosAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
@@ -92,6 +93,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         calleEntregar = view.findViewById(R.id.calleEntregar);
+        calleEntregar.setText(CarritoSingleton.getInstance().getDomicilioActual().calleYNumero());
         abrirMapa(calleEntregar);
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -143,11 +145,6 @@ public class HomeFragment extends Fragment {
 
     private void abrirMapa(TextView calleEntregar){
         calleEntregar.setOnClickListener(v -> {
-            /*MapaFragment nextFrag= new MapaFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_container, nextFrag, "findThisFragment")
-                    .addToBackStack(null)
-                    .commit();*/
             Intent pantallaListaDomicilios = new Intent(getContext(), ListaDomicilioActivity.class);
             getActivity().startActivity(pantallaListaDomicilios);
         });
