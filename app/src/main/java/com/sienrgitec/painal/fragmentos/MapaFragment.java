@@ -120,6 +120,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             })));
 
             final Map<String, String> data = new HashMap<String, String>();
+            data.put("ipcLatitud",String.valueOf(this.latitud));
+            data.put("ipcLongitud",String.valueOf(this.longitud));
             final Painal service = ServiceGenerator.createService(Painal.class);
             final Call<Respuesta> call = service.validaUbicacion(data);
 
