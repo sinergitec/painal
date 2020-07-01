@@ -28,7 +28,10 @@ public class PerfilActivity extends AppCompatActivity {
         btnPerfilText.setOnClickListener(v -> editaPerfil());
 
         btnDireccionesText = findViewById(textView14);
-        btnDireccionesText.setOnClickListener(v -> editaPerfil());
+        btnDireccionesText.setOnClickListener(v -> editaDireccion());
+
+        btnDirecciones = findViewById(R.id.imageView5);
+        btnDirecciones.setOnClickListener(v -> editaDireccion());
 
         btnEvaluaPText = findViewById(textView19);
         btnEvaluaPText.setOnClickListener(v -> evaluaProv());
@@ -51,6 +54,11 @@ public class PerfilActivity extends AppCompatActivity {
         btnEvaluaTitlani = findViewById(R.id.imageView9);
         btnEvaluaTitlani.setOnClickListener(v -> evaluaTitlani());
 
+    }
+
+    private void editaDireccion() {
+        Intent direccion = new Intent(PerfilActivity.this, ListaDomicilioActivity.class);
+        startActivity(direccion);
     }
 
     private void editaPerfil() {

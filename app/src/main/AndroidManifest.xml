@@ -132,6 +132,11 @@
             android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".actividades.EliminaDirecciones"
+            android:parentActivityName=".actividades.HomeActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
