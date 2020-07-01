@@ -41,8 +41,10 @@ import com.sienrgitec.painal.servicio.ServiceGenerator;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,8 +119,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                 }
             })));
 
+            final Map<String, String> data = new HashMap<String, String>();
             final Painal service = ServiceGenerator.createService(Painal.class);
-            final Call<Respuesta> call = service.creaDomicilio(peticion);
+            final Call<Respuesta> call = service.validaUbicacion(data);
 
             call.enqueue(new Callback<Respuesta>() {
                 @Override
@@ -126,10 +129,32 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                     if (response.isSuccessful()) {
                         Respuesta respuesta = response.body();
                         if (!Boolean.valueOf(respuesta.getResponse().getOplError())) {
-                            Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
-                            CarritoSingleton.getInstance().setDomicilioActual(ttCtDomicilio);
+                            call = service.creaDomicilio(peticion);
+                            call.enqueue(new Callback<Respuesta>() {
+                                @Override
+                                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                                    Respuesta respuesta = response.body();
+                                    if(response.isSuccessful()){
+                                        if(!Boolean.valueOf(respuesta.getResponse().getOplError())){
+                                            Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
+                                            CarritoSingleton.getInstance().setDomicilioActual(ttCtDomicilio);
+                                        } else {
+                                            Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Respuesta> call, Throwable t) {
+                                    System.out.println(t.getMessage());
+                                    Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                         } else {
-                            Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                            Toast.makeText(v.getContext(), "Fuera de zona permitida", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();

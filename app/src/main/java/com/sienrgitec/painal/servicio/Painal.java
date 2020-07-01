@@ -112,4 +112,6 @@ public interface Painal {
     @GET("ctComisiones")
     Call<Respuesta> ctComisiones(@QueryMap Map<String, String> options);
 
+    @GET("validaUbicacion")
+    Call<Respuesta> validaUbicacion(@QueryMap Map<String, String> options);
 }
