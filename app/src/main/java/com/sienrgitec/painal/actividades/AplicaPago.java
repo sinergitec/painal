@@ -138,7 +138,7 @@ public class AplicaPago extends AppCompatActivity {
                             RadioButton rbEdoProceso = new RadioButton(AplicaPago.this);
                             rbEdoProceso.setText(objctFPago.getcFormaPago());
                             rbEdoProceso.setHeight(75);
-                            rbEdoProceso.setLayoutParams(new RadioGroup.LayoutParams(180, 50)); //150
+                            rbEdoProceso.setLayoutParams(new RadioGroup.LayoutParams(180, 95)); //150
 
                             rgEstadoP.addView(rbEdoProceso);
 
