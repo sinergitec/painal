@@ -49,6 +49,9 @@ public interface Painal {
     @POST("ctDomicilio")
     Call<Respuesta> creaDomicilio(@Body Peticion peticion);
 
+    @PUT("ctDomicilio")
+    Call<Respuesta> ctDomicilioPut(@Body Peticion peticion);
+
     @DELETE("ctDomicilio")
     Call<Respuesta> eliminaDomicilio(@QueryMap Map<String, String> options);
 

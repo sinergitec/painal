@@ -12,10 +12,15 @@ import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
+import com.sienrgitec.painal.pojo.peticion.DsCtClienteAutorizados;
+import com.sienrgitec.painal.pojo.peticion.DsCtDomicilio;
+import com.sienrgitec.painal.pojo.peticion.Peticion;
+import com.sienrgitec.painal.pojo.peticion.Request;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,56 +43,46 @@ public class EliminaDirecciones extends AppCompatActivity {
         Intent i = getIntent();
         TtCtDomicilio_ fm = (TtCtDomicilio_) i.getSerializableExtra("objEliminar");
 
-        ipiPersona = CarritoSingleton.getInstance().getCliente().getiCliente();
-        ipiDomicilio = Integer.parseInt(fm.getIDomicilio());
-
         btnAcepta = findViewById(R.id.btnSi);
-        btnAcepta.setOnClickListener(v -> elimino(ipiPersona,ipiDomicilio,ipcPersona));
+        btnAcepta.setOnClickListener(v -> elimino(fm));
 
         BtnRechaza = findViewById(R.id.btnNo);
         BtnRechaza.setOnClickListener(v -> regreso());
 
     }
 
-    private void elimino(Integer ipiPersona, Integer ipiDomicilio, String ipcPersona) {
+    private void elimino(TtCtDomicilio_ domicilio) {
         final Loading loading = new Loading(EliminaDirecciones.this);
         loading.iniciaDialogo("alert");
 
+        domicilio.setLActivo(false);
+
+        Peticion peticion = new Peticion(new Request(new DsCtDomicilio(new ArrayList<TtCtDomicilio_>() {
+            {
+                add(domicilio);
+            }
+        })));
+
         final Painal service = ServiceGenerator.createService(Painal.class);
-        Map<String, String> data = new HashMap<>();
-        data.put("ipiPersona", ipiPersona.toString());
-        data.put("ipiDomicilio", ipiDomicilio.toString());
-        data.put("ipcPersona", ipcPersona);
-        final Call<Respuesta> call = service.eliminaDomicilio(data);
+        final Call<Respuesta> call = service.ctDomicilioPut(peticion);
 
         call.enqueue(new Callback<Respuesta>() {
-
             @Override
             public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                System.out.println(response.toString());
                 loading.detenDialogo("alert");
-                Respuesta res = response.body();
 
-                if (response.isSuccessful()) {
-                    if (res.getResponse().getOplError().equals("true")){
-                        Toast.makeText(EliminaDirecciones.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(EliminaDirecciones.this, "Registro Eliminado", Toast.LENGTH_LONG).show();
+                Intent inicio = new Intent(EliminaDirecciones.this, ListaDomicilioActivity.class);
+                startActivity(inicio);
 
-                        Intent inicio = new Intent(EliminaDirecciones.this, ListaDomicilioActivity.class);
-                        startActivity(inicio);
-                    }
-                } else {
-                    Toast.makeText(EliminaDirecciones.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
-                }
             }
 
             @Override
             public void onFailure(Call<Respuesta> call, Throwable t) {
+                System.out.println(t.getMessage());
                 loading.detenDialogo("alert");
-                Toast.makeText(EliminaDirecciones.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void regreso() {
