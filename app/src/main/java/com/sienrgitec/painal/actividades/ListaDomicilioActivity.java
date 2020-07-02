@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,16 @@ import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.ListaDomicilioAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaDomicilioActivity extends AppCompatActivity {
 
@@ -27,6 +38,7 @@ public class ListaDomicilioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_direcciones);
 
+        recuperaDomicilio();
         ubicacionActual = findViewById(R.id.ubicacionActual);
         rvListaDomicilios = findViewById(R.id.rvListaDomicilios);
         fragmentMapa = findViewById(R.id.fragmentMapa);
@@ -54,6 +66,36 @@ public class ListaDomicilioActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void recuperaDomicilio(){
+
+        final Map<String, String> data = new HashMap<String, String>();
+        data.put("ipiPersona", CarritoSingleton.getInstance().getCliente().getiCliente().toString());
+        data.put("ipcPersona","cliente");
+        data.put("iplActivo","true");
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        final Call<Respuesta> call = service.consultaDomicilio(data);
+
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                if(response.isSuccessful()){
+                    Respuesta respuesta = response.body();
+                    if(respuesta.getResponse().getOplError().equals("false")){
+                        CarritoSingleton.getInstance().setDomicilio(respuesta.getResponse().getTt_ctDomicilio().getTt_ctDomicilio());
+                    }
+                } else {
+                    Toast.makeText(ListaDomicilioActivity.this, "", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(ListaDomicilioActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

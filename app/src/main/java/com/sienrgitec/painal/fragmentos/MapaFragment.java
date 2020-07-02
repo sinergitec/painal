@@ -262,7 +262,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            ubicacionActual(location);
+            //ubicacionActual(location);
         }
 
         @Override
