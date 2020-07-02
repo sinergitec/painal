@@ -121,6 +121,6 @@ public interface Painal {
     @GET("validaUbicacion")
     Call<Respuesta> validaUbicacion(@QueryMap Map<String, String> options);
 
-    @GET("consultaDomicilio")
+    @GET("ctDomicilio")
     Call<Respuesta> consultaDomicilio(@QueryMap Map<String, String> options);
 }
