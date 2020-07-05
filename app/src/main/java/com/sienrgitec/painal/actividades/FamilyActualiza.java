@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,9 +70,6 @@ public class FamilyActualiza extends AppCompatActivity {
     }
 
     private void actualizaFamilia() {
-        final Loading loading = new Loading(FamilyActualiza.this);
-        loading.iniciaDialogo("alert");
-
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
         String edad     = edadET.getText().toString();
@@ -99,6 +97,9 @@ public class FamilyActualiza extends AppCompatActivity {
         }
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !edad.isEmpty() && !parentesco.isEmpty()){
+
+            final Loading loading = new Loading(FamilyActualiza.this);
+            loading.iniciaDialogo("alert");
 
             TtCtClienteAutorizados_ objctCliAuto = new TtCtClienteAutorizados_();
 
@@ -131,6 +132,7 @@ public class FamilyActualiza extends AppCompatActivity {
                     System.out.println(response.toString());
                     loading.detenDialogo("alert");
 
+                    Toast.makeText(FamilyActualiza.this, "Registro Actualizado", Toast.LENGTH_LONG).show();
                     Intent inicio = new Intent(FamilyActualiza.this, FamilyListActivity.class);
                     startActivity(inicio);
 

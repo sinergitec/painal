@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,9 +57,6 @@ public class FamilyActivity extends AppCompatActivity {
     }
 
     private void registroAotorizado() {
-        final Loading loading = new Loading(FamilyActivity.this);
-        loading.iniciaDialogo("alert");
-
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
         String aMaterno = aMaternoET.getText().toString();
@@ -66,7 +64,6 @@ public class FamilyActivity extends AppCompatActivity {
         String parentesco = parentescoET.getText().toString();
 
         Boolean solAuto = solAutoET.isChecked();
-
 
         if(nombre.isEmpty()){
             nombreET.setError("Nombre requerido");
@@ -84,16 +81,19 @@ public class FamilyActivity extends AppCompatActivity {
         }
 
         if(edad.isEmpty()){
-            aMaternoET.setError("Apellido Materno requerido");
-            aMaternoET.requestFocus();
+            edadET.setError("Edad requerida");
+            edadET.requestFocus();
         }
 
         if(parentesco.isEmpty()){
-            aMaternoET.setError("Apellido Materno requerido");
-            aMaternoET.requestFocus();
+            parentescoET.setError("Apellido Materno requerido");
+            parentescoET.requestFocus();
         }
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !aMaterno.isEmpty() && !edad.isEmpty() && !parentesco.isEmpty()){
+
+            final Loading loading = new Loading(FamilyActivity.this);
+            loading.iniciaDialogo("alert");
 
             TtCtClienteAutorizados_ objctCliAuto = new TtCtClienteAutorizados_();
 
@@ -126,6 +126,7 @@ public class FamilyActivity extends AppCompatActivity {
                     System.out.println(response.toString());
                     loading.detenDialogo("alert");
 
+                    Toast.makeText(FamilyActivity.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                     Intent inicio = new Intent(FamilyActivity.this, FamilyListActivity.class);
                     startActivity(inicio);
 

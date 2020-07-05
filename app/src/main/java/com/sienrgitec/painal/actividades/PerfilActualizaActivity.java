@@ -57,7 +57,7 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         correoET.setText(CarritoSingleton.getInstance().getCliente().getcEmail());
         telefonoET.setText(CarritoSingleton.getInstance().getTelefono().getcTelefono());
 
-        System.out.println("cliente" + CarritoSingleton.getInstance().getCliente().getiCliente());
+        System.out.println("cliente" + CarritoSingleton.getInstance().getTelefono().getcTelefono());
 
     }
 

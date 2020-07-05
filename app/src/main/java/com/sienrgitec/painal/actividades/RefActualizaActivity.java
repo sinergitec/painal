@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -67,9 +68,6 @@ public class RefActualizaActivity extends AppCompatActivity {
     }
 
     private void actualizaReferidos() {
-        final Loading loading = new Loading(RefActualizaActivity.this);
-        loading.iniciaDialogo("alert");
-
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
         String correo   = emailET.getText().toString();
@@ -98,6 +96,9 @@ public class RefActualizaActivity extends AppCompatActivity {
         }
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !correo.isEmpty()  && !telefono.isEmpty()){
+
+            final Loading loading = new Loading(RefActualizaActivity.this);
+            loading.iniciaDialogo("alert");
 
             Tt_OpClienteReferidos_ objopReferidos = new Tt_OpClienteReferidos_();
 
@@ -129,6 +130,7 @@ public class RefActualizaActivity extends AppCompatActivity {
                     System.out.println(response.toString());
                     loading.detenDialogo("alert");
 
+                    Toast.makeText(RefActualizaActivity.this, "Registro Actualizado", Toast.LENGTH_LONG).show();
                     Intent inicio = new Intent(RefActualizaActivity.this, ReferidosListActivity.class);
                     startActivity(inicio);
                 }
@@ -136,6 +138,7 @@ public class RefActualizaActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    Toast.makeText(RefActualizaActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     loading.detenDialogo("alert");
                 }
             });

@@ -103,7 +103,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             TtCtCliente_ objctCliente = new TtCtCliente_();
 
-            objctCliente.setcClave("");
+            objctCliente.setcClave("Cliente");
             objctCliente.setcNombre(nombre);
             objctCliente.setcApellidos(aPaterno + aMaterno);
             objctCliente.setDtRegistro(null);

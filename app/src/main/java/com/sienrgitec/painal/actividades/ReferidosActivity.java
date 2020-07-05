@@ -61,8 +61,6 @@ public class ReferidosActivity extends AppCompatActivity {
     }
 
     private void registraReferidos() {
-        final Loading loading = new Loading(ReferidosActivity.this);
-        loading.iniciaDialogo("alert");
 
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
@@ -100,6 +98,9 @@ public class ReferidosActivity extends AppCompatActivity {
 
         if(!nombre.isEmpty() && !aPaterno.isEmpty() && !aMaterno.isEmpty() && !correo.isEmpty()  && !telefono.isEmpty()){
 
+            final Loading loading = new Loading(ReferidosActivity.this);
+            loading.iniciaDialogo("alert");
+
             Tt_OpClienteReferidos_ objopReferidos = new Tt_OpClienteReferidos_();
 
             objopReferidos.setiCliente(CarritoSingleton.getInstance().getCliente().getiCliente());
@@ -131,6 +132,7 @@ public class ReferidosActivity extends AppCompatActivity {
                     System.out.println(response.toString());
                     loading.detenDialogo("alert");
 
+                    Toast.makeText(ReferidosActivity.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                     Intent inicio = new Intent(ReferidosActivity.this, ReferidosListActivity.class);
                     startActivity(inicio);
 

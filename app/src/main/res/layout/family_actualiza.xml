@@ -73,7 +73,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/edad"
-        android:inputType="text"
+        android:inputType="number"
         android:textColor="@color/colorComplementaryAccent"
         android:textColorHint="@color/colorComplementaryAccent"
         app:layout_constraintEnd_toEndOf="parent"
