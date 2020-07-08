@@ -1,10 +1,14 @@
 package com.sienrgitec.painal.actividades;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
@@ -25,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
         }
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

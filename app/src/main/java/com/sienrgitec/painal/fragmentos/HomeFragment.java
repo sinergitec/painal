@@ -7,9 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +57,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView rv;
     private TextView calleEntregar;
 
+    private SearchView buscador;
+    private List<TtCtGiro_> listaGiros = new ArrayList<>();
+    private List<TtCtSubGiro_> listaSubGiros = new ArrayList<>();
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -90,8 +99,29 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+        buscador =  view.findViewById(R.id.buscadorView);
+
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                GirosAdapter girosAdapter = generaObjGirosAdapter(listaSubGiros);
+                girosAdapter.setList(buscaItem(query));
+                rv.setAdapter(girosAdapter);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                GirosAdapter girosAdapter = generaObjGirosAdapter(listaSubGiros);
+                girosAdapter.setList(buscaItem(newText));
+                rv.setAdapter(girosAdapter);
+                return true;
+            }
+        });
+
         calleEntregar = view.findViewById(R.id.calleEntregar);
         calleEntregar.setText(CarritoSingleton.getInstance().getDomicilioActual().calleYNumero());
         abrirMapa(calleEntregar);
@@ -109,19 +139,9 @@ public class HomeFragment extends Fragment {
                     rv = view.findViewById(R.id.rv);
                     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                     rv.setLayoutManager(llm);
-                    GirosAdapter girosAdapter = new GirosAdapter(getActivity(), new RVAdapter.OnViewHolderClick() {
-                        @Override
-                        public void onClick(View view, int position, Object item) {
-                            List<TtCtSubGiro_> listSubGiro = new ArrayList<TtCtSubGiro_>();
-                            for (TtCtSubGiro_ subgiro : res.getResponse().getTtCtSubGiro().getTtCtSubGiro()) {
-                                if(subgiro.getIGiro() == ((TtCtGiro_) item).getIGiro())
-                                    listSubGiro.add(subgiro);
-                            }
-                            Intent vistaNueva = new Intent(getActivity(), SubGirosActivity.class);
-                            vistaNueva.putExtra("list", (Serializable) listSubGiro);
-                            startActivity(vistaNueva);
-                        }
-                    });
+                    GirosAdapter girosAdapter = generaObjGirosAdapter(res.getResponse().getTtCtSubGiro().getTtCtSubGiro());
+                    listaGiros.addAll(res.getResponse().getTtCtGiro().getTtCtGiro());
+                    listaSubGiros.addAll(res.getResponse().getTtCtSubGiro().getTtCtSubGiro());
                     girosAdapter.setList(res.getResponse().getTtCtGiro().getTtCtGiro());
                     rv.setAdapter(girosAdapter);
                 } else {
@@ -148,6 +168,33 @@ public class HomeFragment extends Fragment {
             Intent pantallaListaDomicilios = new Intent(getContext(), ListaDomicilioActivity.class);
             getActivity().startActivity(pantallaListaDomicilios);
         });
+    }
+
+    private List<TtCtGiro_> buscaItem(String valorBuscado){
+        List<TtCtGiro_> listaFiltrada = new ArrayList<>();
+        for (TtCtGiro_ giro: listaGiros) {
+            if(giro.getCGiro().trim().toUpperCase().contains(valorBuscado.trim().toUpperCase()))
+                listaFiltrada.add(giro);
+        }
+        listaFiltrada.toString();
+        return listaFiltrada;
+    }
+
+    private GirosAdapter generaObjGirosAdapter(List<TtCtSubGiro_> listaSubGiro){
+        GirosAdapter girosAdapter = new GirosAdapter(getActivity(), new RVAdapter.OnViewHolderClick() {
+            @Override
+            public void onClick(View view, int position, Object item) {
+                List<TtCtSubGiro_> listSubGiro = new ArrayList<TtCtSubGiro_>();
+                for (TtCtSubGiro_ subgiro : listaSubGiro) {
+                    if(subgiro.getIGiro() == ((TtCtGiro_) item).getIGiro())
+                        listSubGiro.add(subgiro);
+                }
+                Intent vistaNueva = new Intent(getActivity(), SubGirosActivity.class);
+                vistaNueva.putExtra("list", (Serializable) listSubGiro);
+                startActivity(vistaNueva);
+            }
+        });
+        return girosAdapter;
     }
 
 }
