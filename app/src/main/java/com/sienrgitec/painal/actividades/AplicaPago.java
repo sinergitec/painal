@@ -202,13 +202,13 @@ public class AplicaPago extends AppCompatActivity {
                             viPago = viPago + 1;
 
                             RadioButton rbAgregaP = new RadioButton(AplicaPago.this);
-                            rbAgregaP.setText(objCtComision.getDeValor().toString());
+                            rbAgregaP.setText(objCtComision.getDeValor().toString() + "0");
                             rbAgregaP.setHeight(75);
                             rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
 
                             RadioButton rbTitlaniP = new RadioButton(AplicaPago.this);
-                            rbTitlaniP.setText(objCtComision.getDeValor().toString());
+                            rbTitlaniP.setText(objCtComision.getDeValor().toString() + "0");
                             rbTitlaniP.setHeight(75);
                             rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
@@ -358,6 +358,7 @@ public class AplicaPago extends AppCompatActivity {
                     } else {
                         Toast.makeText(v.getContext(), "Pedido realizado", Toast.LENGTH_LONG).show();
                         CarritoSingleton.getInstance().vaciarCarrito(v.getContext());
+                        startActivity(new Intent(AplicaPago.this, HomeActivity.class));
                     }
                 } else {
                     Toast.makeText(v.getContext(), "Pedido no realizado", Toast.LENGTH_LONG).show();
