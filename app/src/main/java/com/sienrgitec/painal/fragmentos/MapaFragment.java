@@ -193,9 +193,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-        if(latitud != null && longitud != null)
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
+        if(latitud != null && longitud != null) {
             agregarMarcador(latitud, longitud);
-        else
+        } else
             miUbicacion();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -204,7 +205,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         }
         gMap.setMyLocationEnabled(true);
         gMap.setOnMarkerDragListener(this);
-        geocoder = new Geocoder(getContext(), Locale.getDefault());
     }
 
     @Override
@@ -254,6 +254,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         if(marcador != null)
             marcador.remove();
         marcador = gMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+        onMarkerDragEnd(marcador);
         gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
     }
 
