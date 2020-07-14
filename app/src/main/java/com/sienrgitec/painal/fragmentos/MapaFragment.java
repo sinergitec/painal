@@ -77,6 +77,11 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         // Required empty public constructor
     }
 
+    public MapaFragment(final Double latitud, final Double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -188,7 +193,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-        miUbicacion();
+        if(latitud != null && longitud != null)
+            agregarMarcador(latitud, longitud);
+        else
+            miUbicacion();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -227,7 +235,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             longitud = marker.getPosition().longitude;
             calleTxt.setText(direccionTxt);
             colonia = direccion.get(0).getSubLocality();
-            numeroExterior = direccion.get(0).getSubThoroughfare();
+            numeroExterior = direccion.get(0).getFeatureName();
         } else {
             Toast.makeText(getContext(), "No se ha podido crear la dirección", Toast.LENGTH_LONG).show();
         }

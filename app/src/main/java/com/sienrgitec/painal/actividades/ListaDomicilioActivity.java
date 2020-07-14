@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.adaptadores.AutoCompleteStreet;
 import com.sienrgitec.painal.componente.recycler.ListaDomicilioAdapter;
+import com.sienrgitec.painal.fragmentos.MapaFragment;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
@@ -49,25 +51,26 @@ public class ListaDomicilioActivity extends AppCompatActivity {
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("Address : " + autoCompleteTextView.getText().toString());
                 LatLng latLng=getLatLngFromAddress(autoCompleteTextView.getText().toString());
                 if(latLng!=null) {
                     System.out.println("Lat Lng : "+" " + latLng.latitude + " " + latLng.longitude);
                     Address address=getAddressFromLatLng(latLng);
                     if(address!=null) {
-                        System.out.println("Address : " + "" + address.toString());
-                        System.out.println("Address Line : " + ""+address.getAddressLine(0));
-                        System.out.println("Phone : "+""+address.getPhone());
-                        System.out.println("Pin Code : "+""+address.getPostalCode());
-                        System.out.println("Feature : "+""+address.getFeatureName());
-                        System.out.println("More : "+""+address.getLocality());
+                        fragmentMapa.setVisibility(View.VISIBLE);
+                        banderaMostrarMapa = true;
+                        // Create new fragment and transaction
+                        MapaFragment newFragment = new MapaFragment(latLng.latitude, latLng.longitude);
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentMapa, newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     }
                     else {
-                        System.out.println("Adddress"+"Address Not Found");
+                        Toast.makeText(ListaDomicilioActivity.this, "Dirección no encontrada", Toast.LENGTH_LONG);
                     }
                 }
                 else {
-                    System.out.println("Lat Lng"+"Lat Lng Not Found");
+                    Toast.makeText(ListaDomicilioActivity.this, "Coordenadas no encontradas", Toast.LENGTH_LONG);
                 }
 
             }
