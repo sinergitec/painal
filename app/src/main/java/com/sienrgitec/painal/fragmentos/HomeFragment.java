@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.HomeActivity;
 import com.sienrgitec.painal.actividades.ListaDomicilioActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
@@ -41,6 +43,8 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.sienrgitec.painal.constante.Constantes.vcMatchArt;
 
 
 /**
@@ -118,9 +122,12 @@ public class HomeFragment extends Fragment {
                 GirosAdapter girosAdapter = generaObjGirosAdapter(listaSubGiros);
                 girosAdapter.setList(buscaItem(newText));
                 rv.setAdapter(girosAdapter);
+                vcMatchArt = newText;
                 return true;
             }
         });
+
+
 
         calleEntregar = view.findViewById(R.id.calleEntregar);
         calleEntregar.setText(CarritoSingleton.getInstance().getDomicilioActual().calleYNumero());
@@ -196,5 +203,7 @@ public class HomeFragment extends Fragment {
         });
         return girosAdapter;
     }
+
+
 
 }

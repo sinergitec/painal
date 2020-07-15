@@ -123,4 +123,8 @@ public interface Painal {
 
     @GET("ctDomicilio")
     Call<Respuesta> consultaDomicilio(@QueryMap Map<String, String> options);
+
+    /*Carga de Articulos por palabras/ Andros 15-07-20*/
+    @GET("matchArt")
+    Call<Respuesta> matchArt(@QueryMap Map<String, String> options);
 }
