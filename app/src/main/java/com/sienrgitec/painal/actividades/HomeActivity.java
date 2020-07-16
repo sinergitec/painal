@@ -1,9 +1,16 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -11,17 +18,39 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
+import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
+import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
+import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
+import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+import com.sienrgitec.painal.servicio.Painal;
+import com.sienrgitec.painal.servicio.ServiceGenerator;
+
+import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.sienrgitec.painal.constante.Constantes.vcMatchArt;
 
 public class HomeActivity extends AppCompatActivity {
+    private List<TtCtArtProveedor_> listaArts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -30,6 +59,53 @@ public class HomeActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
         }
     }
+
+    /*Agregado para buscar por articulos**/
+    public void matchArts(View c){
+        Log.e("press" , "valores" + vcMatchArt);
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, String> data = new HashMap<>();
+        data.put("ipcBuscar",vcMatchArt);
+
+        final Call<Respuesta> call = service.matchArt(data);
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                Respuesta res = response.body();
+
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")) {
+                        Toast.makeText(HomeActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                        return;
+
+                    }else {
+                        listaArts.addAll(res.getResponse().getTtCtArtProveedor().getTtCtArtProveedor());
+                        List<TtCtArtProveedor_> listArtProv = new ArrayList<TtCtArtProveedor_>();
+                        for (TtCtArtProveedor_ artProv : listaArts ) {
+                            Log.e("art-->", artProv.getCDescripcion());
+                            listArtProv.add(artProv);
+                        }
+
+
+                        Intent home = new Intent(HomeActivity.this, ArticuloActivity.class);
+                        home.putExtra("list", (Serializable) listArtProv);
+                        startActivity(home);
+                                            }
+                } else {
+                    Toast.makeText(HomeActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+    }
+    /***/
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {

@@ -138,7 +138,8 @@ public class AplicaPago extends AppCompatActivity {
                             RadioButton rbEdoProceso = new RadioButton(AplicaPago.this);
                             rbEdoProceso.setText(objctFPago.getcFormaPago());
                             rbEdoProceso.setHeight(75);
-                            rbEdoProceso.setLayoutParams(new RadioGroup.LayoutParams(180, 95)); //150
+                            //rbEdoProceso.setLayoutParams(new RadioGroup.LayoutParams(180, 95)); //150
+
 
                             rgEstadoP.addView(rbEdoProceso);
 
@@ -202,15 +203,15 @@ public class AplicaPago extends AppCompatActivity {
                             viPago = viPago + 1;
 
                             RadioButton rbAgregaP = new RadioButton(AplicaPago.this);
-                            rbAgregaP.setText(objCtComision.getDeValor().toString());
+                            rbAgregaP.setText(objCtComision.getDeValor().toString() + "0");
                             rbAgregaP.setHeight(75);
-                            rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
+                            //rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
 
                             RadioButton rbTitlaniP = new RadioButton(AplicaPago.this);
-                            rbTitlaniP.setText(objCtComision.getDeValor().toString());
+                            rbTitlaniP.setText(objCtComision.getDeValor().toString() + "0");
                             rbTitlaniP.setHeight(75);
-                            rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
+                            //rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
                             rgPropinas.addView(rbAgregaP);
                             rgTitlani.addView(rbTitlaniP);
@@ -220,7 +221,6 @@ public class AplicaPago extends AppCompatActivity {
                                     iComision =  objCtComision.getiComision();
                                     dePorcCom =  objCtComision.getDeValor();
                                     CalculaAportacion(objCtComision.getDeValor());
-
                                 }
                             });
 
@@ -358,6 +358,7 @@ public class AplicaPago extends AppCompatActivity {
                     } else {
                         Toast.makeText(v.getContext(), "Pedido realizado", Toast.LENGTH_LONG).show();
                         CarritoSingleton.getInstance().vaciarCarrito(v.getContext());
+                        startActivity(new Intent(AplicaPago.this, HomeActivity.class));
                     }
                 } else {
                     Toast.makeText(v.getContext(), "Pedido no realizado", Toast.LENGTH_LONG).show();
