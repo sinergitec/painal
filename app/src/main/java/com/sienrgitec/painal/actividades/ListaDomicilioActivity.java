@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class ListaDomicilioActivity extends AppCompatActivity {
     private Button ubicacionActual;
     private View fragmentMapa;
     private boolean banderaMostrarMapa = false;
+    private MapaFragment newFragment = new MapaFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +55,11 @@ public class ListaDomicilioActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 LatLng latLng=getLatLngFromAddress(autoCompleteTextView.getText().toString());
                 if(latLng!=null) {
-                    System.out.println("Lat Lng : "+" " + latLng.latitude + " " + latLng.longitude);
                     Address address=getAddressFromLatLng(latLng);
                     if(address!=null) {
+                        loadFragment(new MapaFragment(latLng.latitude, latLng.longitude));
                         fragmentMapa.setVisibility(View.VISIBLE);
                         banderaMostrarMapa = true;
-                        // Create new fragment and transaction
-                        MapaFragment newFragment = new MapaFragment(latLng.latitude, latLng.longitude);
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentMapa, newFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
                     }
                     else {
                         Toast.makeText(ListaDomicilioActivity.this, "Dirección no encontrada", Toast.LENGTH_LONG);
@@ -80,6 +76,7 @@ public class ListaDomicilioActivity extends AppCompatActivity {
         ubicacionActual = findViewById(R.id.ubicacionActual);
         rvListaDomicilios = findViewById(R.id.rvListaDomicilios);
         fragmentMapa = findViewById(R.id.fragmentMapa);
+        loadFragment(newFragment);
         LinearLayoutManager llm = new LinearLayoutManager(ListaDomicilioActivity.this);
         rvListaDomicilios.setLayoutManager(llm);
         ListaDomicilioAdapter listaDomicilioAdapter = new ListaDomicilioAdapter(ListaDomicilioActivity.this, new RVAdapter.OnViewHolderClick() {
@@ -177,6 +174,13 @@ public class ListaDomicilioActivity extends AppCompatActivity {
             return null;
         }
 
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentMapa, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }
