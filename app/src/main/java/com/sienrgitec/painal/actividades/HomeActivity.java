@@ -23,6 +23,7 @@ import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
+import com.sienrgitec.painal.fragmentos.PedidosFragment;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
@@ -124,6 +125,11 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new ConfiguracionFragment();
                         loadFragment(fragment);
                         System.out.println("Configuracion");
+                        return true;
+                    case R.id.navigation_orders:
+                        fragment = new PedidosFragment();
+                        loadFragment(fragment);
+                        System.out.println("Pedidos");
                         return true;
                     default:
                         fragment = new HomeFragment();

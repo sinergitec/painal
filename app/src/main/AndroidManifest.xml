@@ -137,6 +137,18 @@
             android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".actividades.HistoricoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".actividades.SeguimientoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".actividades.TitlaniAsignado"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

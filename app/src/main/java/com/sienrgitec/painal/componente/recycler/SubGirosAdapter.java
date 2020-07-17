@@ -58,7 +58,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
             //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             //rv.setBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCSubGiro());
-            subTitle.setText("Algo para llevar");
+            subTitle.setText(" ");  //aqui se puede añadir alguna anotacion deseada
             //new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
 
             final Painal service = ServiceGenerator.createService(Painal.class);

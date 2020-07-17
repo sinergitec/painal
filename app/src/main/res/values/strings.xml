@@ -16,7 +16,7 @@
     <string name="inicio">Inicio</string>
     <string name="pedidos">Carrito</string>
     <string name="config">Configuración</string>
-
+    <string name="pedido">Pedidos</string>
 
     <!-- Mensajes error -->
     <string name="msgErrorUser">Usuario requerido</string>
@@ -95,5 +95,10 @@
     <!-- Evaluacion Titlani  -->
     <string name="title2">EVALUACION AL  TITLANI</string>
 
+    <!-- Pedidos  -->
+    <string name="ped">INFORMACION DEL PEDIDO</string>
+    <string name="historico">HISTORICO DEL PEDIDO</string>
+    <string name="seguimiento">SEGUIMIENTO DEL PEDIDO</string>
+    <string name="titlaniAsig">TITLANI ASIGNADO</string>
 
 </resources>
