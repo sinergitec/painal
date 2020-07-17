@@ -140,6 +140,14 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("delete from pedido");
         db.execSQL("delete from articulo");
+        db.close();
+    }
+
+    public void eliminarArticuloCarrito(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from articulo where _idArt =" + id);
+        db.execSQL("delete from pedido where _idArt = " + id);
+        db.close();
     }
 
     public List<Carrito> recuperarPedidos() {

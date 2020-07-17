@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,6 +67,8 @@ public class CarritoFragment extends Fragment {
     private String mParam2;
     private Double vdeImporte = 0.00;
     private Constantes constantes;
+    RecyclerView rvListaCarrito;
+    CarritoAdapter carritoAdapter;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -119,22 +123,18 @@ public class CarritoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //realizaPedido(v);
-
-
                 Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
                 aplicaPago.putExtra("vdeimporte", vdeImporte);
                 //aplicaPago.putExtra("listPedido",  pedido);
                 startActivity(aplicaPago);
             }
         });
-
-
         // Inflate the layout for this fragment
         return view;
     }
 
     private void cargaInfoCarrito(View view){
-        RecyclerView rvListaCarrito = view.findViewById(R.id.listaCarrito);
+        rvListaCarrito = view.findViewById(R.id.listaCarrito);
         TextView totalArticulos = view.findViewById(R.id.cantidadArt);
         TextView total = view.findViewById(R.id.total);
         // Se invoca al llenado de la lista
@@ -144,9 +144,12 @@ public class CarritoFragment extends Fragment {
 
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         rvListaCarrito.setLayoutManager(llm);
-        CarritoAdapter carritoAdapter = new CarritoAdapter(view.getContext(), null);
+        carritoAdapter = new CarritoAdapter(view.getContext(), null);
         carritoAdapter.setList(CarritoSingleton.getInstance().getListaCarrito());
         rvListaCarrito.setAdapter(carritoAdapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(rvListaCarrito);
 
         totalArticulos.setText("Cantidad de articulos: " + sizeList);
         total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
@@ -154,6 +157,25 @@ public class CarritoFragment extends Fragment {
 
     }
 
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition() + 1;
+            switch (direction){
+                case ItemTouchHelper.LEFT :
+                    System.out.println("Eliminar: " + position);
+                    CarritoSingleton.getInstance().eliminarArticuloCarrito(viewHolder.itemView.getContext(), position);
+                    carritoAdapter.notifyItemRemoved(position - 1);
+                    Toast.makeText(viewHolder.itemView.getContext(),"Articulo eliminado", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     private void RecuperaSaldo(View view ){
 

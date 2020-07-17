@@ -90,7 +90,13 @@ public class CarritoSingleton {
         // Vacia la base de datos
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         carritoDBHelper.vaciaCarrito();
-        Toast.makeText(context,"Carrito vacio", Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"Carrito vacio", Toast.LENGTH_SHORT).show();
+    }
+
+    public synchronized void eliminarArticuloCarrito(Context context, int id){
+        listaCarrito.remove(id - 1);
+        CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
+        carritoDBHelper.eliminarArticuloCarrito(id);
     }
 
     public List<Carrito> getListaCarrito() {
