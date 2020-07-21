@@ -90,21 +90,21 @@ public class PedidosFragment extends Fragment {
             }
         });
 
-        final TextView seguimiento = view.findViewById(R.id.family);
+        final TextView seguimiento = view.findViewById(R.id.referidos);
         seguimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Entrando a Seguimiento de Pedido.. ", Toast.LENGTH_LONG).show();
-                Intent seguimiento = new Intent(getActivity(), TitlaniAsignado.class);
+                Intent seguimiento = new Intent(getActivity(), SeguimientoActivity.class);
                 startActivity(seguimiento);
             }
         });
-        final TextView titlaniAsig = view.findViewById(R.id.referidos);
+        final TextView titlaniAsig = view.findViewById(R.id.family);
         titlaniAsig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Entrando a Titlani Asignado.. ", Toast.LENGTH_LONG).show();
-                Intent titlaniAsig = new Intent(getActivity(), SeguimientoActivity.class);
+                Intent titlaniAsig = new Intent(getActivity(), TitlaniAsignado.class);
                 startActivity(titlaniAsig);
             }
         });

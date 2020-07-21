@@ -69,6 +69,8 @@ public class CarritoFragment extends Fragment {
     private Constantes constantes;
     RecyclerView rvListaCarrito;
     CarritoAdapter carritoAdapter;
+    TextView totalArticulos;
+    TextView total;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -135,8 +137,8 @@ public class CarritoFragment extends Fragment {
 
     private void cargaInfoCarrito(View view){
         rvListaCarrito = view.findViewById(R.id.listaCarrito);
-        TextView totalArticulos = view.findViewById(R.id.cantidadArt);
-        TextView total = view.findViewById(R.id.total);
+        totalArticulos = view.findViewById(R.id.cantidadArt);
+        total = view.findViewById(R.id.total);
         // Se invoca al llenado de la lista
         CarritoSingleton.getInstance().consultaItemCarrito(view.getContext());
         Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
@@ -171,6 +173,13 @@ public class CarritoFragment extends Fragment {
                     System.out.println("Eliminar: " + position);
                     CarritoSingleton.getInstance().eliminarArticuloCarrito(viewHolder.itemView.getContext(), position);
                     carritoAdapter.notifyItemRemoved(position - 1);
+
+                    Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
+                    Double totalD = subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito());
+
+                    totalArticulos.setText("Cantidad de articulos: " + sizeList );
+                    total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
+
                     Toast.makeText(viewHolder.itemView.getContext(),"Articulo eliminado", Toast.LENGTH_SHORT).show();
                     break;
             }
