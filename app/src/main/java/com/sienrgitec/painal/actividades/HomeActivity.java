@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sienrgitec.painal.componente.recycler.ComparaEvaluacion;
 import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
@@ -23,7 +24,10 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +80,14 @@ public class HomeActivity extends AppCompatActivity {
                         ctProvList.addAll(res.getResponse().getTtCtProveedor().getTtCtProveedor());
 
 
+                        Collections.sort(ctProvList, new ComparaEvaluacion() {
+                            @Override
+                            public int compare(TtCtProveedor_ p1, TtCtProveedor_ p2) {
+
+                                return new Double(p2.getDeEvaluacion()).compareTo(new Double(p1.getDeEvaluacion()));
+
+                            }
+                        });
 
 
 

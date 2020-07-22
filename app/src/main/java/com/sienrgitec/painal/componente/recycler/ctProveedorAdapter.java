@@ -82,6 +82,9 @@ public class ctProveedorAdapter extends PagerAdapter {
         tvEvalua = view.findViewById(R.id.tvEvalua);
 
 
+
+
+
         tvProv.setText(listaPrvo.get(position).getCNegocio());
         tvEvalua.setText(listaPrvo.get(position).getcEvaluacion());
 

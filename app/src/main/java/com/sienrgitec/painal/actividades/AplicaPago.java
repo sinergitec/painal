@@ -202,14 +202,23 @@ public class AplicaPago extends AppCompatActivity {
 
                             viPago = viPago + 1;
 
+
+
+                            String cantArtString = new DecimalFormat("0").format(objCtComision.getDeValor());
+
+
+
+
                             RadioButton rbAgregaP = new RadioButton(AplicaPago.this);
-                            rbAgregaP.setText(objCtComision.getDeValor().toString() + "0");
+                            rbAgregaP.setText(cantArtString + "%");
+                            //rbAgregaP.setText(objCtComision.getDeValor().toString() + "0");
                             rbAgregaP.setHeight(75);
                             //rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
 
                             RadioButton rbTitlaniP = new RadioButton(AplicaPago.this);
-                            rbTitlaniP.setText(objCtComision.getDeValor().toString() + "0");
+                            rbTitlaniP.setText(cantArtString + "%");
+                            //rbTitlaniP.setText(objCtComision.getDeValor().toString() + "0");
                             rbTitlaniP.setHeight(75);
                             //rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
