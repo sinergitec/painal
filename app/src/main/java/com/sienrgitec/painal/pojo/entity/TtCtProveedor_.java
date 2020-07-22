@@ -3,7 +3,9 @@ package com.sienrgitec.painal.pojo.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TtCtProveedor_ {
+import java.io.Serializable;
+
+public class TtCtProveedor_  implements Serializable {
 
     @SerializedName("iProveedor")
     @Expose
@@ -74,15 +76,33 @@ public class TtCtProveedor_ {
     @SerializedName("cUsuModifica")
     @Expose
     private String cUsuModifica;
+
+    @SerializedName("iDomicilio")
+    @Expose
+    private Integer iDomicilio;
+
+    @SerializedName("deEvaluacion")
+    @Expose
+    private Double deEvaluacion;
+
+    @SerializedName("cEvaluacion")
+    @Expose
+    private String cEvaluacion;
+
     @SerializedName("Id")
     @Expose
     private Object id;
+
+
 
     public TtCtProveedor_(){
 
     }
 
-    public TtCtProveedor_(Integer iProveedor, String cClaveProv, String cRazonS, String cNegocio, String cRFC, Integer iGiro, Integer iSubGiro, String cWhatsApp, String cPaginaWeb, String cEMail, String cTwitter, String cFacebook, Integer iEstadoProv, Boolean lSucursales, Integer iNivelClasifica, Boolean lSistema, String cSistema, String cObs, Object dtAfiliacion, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica, Object id) {
+    public TtCtProveedor_(Integer iProveedor, String cClaveProv, String cRazonS, String cNegocio, String cRFC, Integer iGiro, Integer iSubGiro, String cWhatsApp,
+                          String cPaginaWeb, String cEMail, String cTwitter, String cFacebook, Integer iEstadoProv, Boolean lSucursales, Integer iNivelClasifica,
+                          Boolean lSistema, String cSistema, String cObs, Object dtAfiliacion, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica,
+                          Integer iDomicilio, Double deEvaluacion, String cEvaluacion, Object id) {
         this.iProveedor = iProveedor;
         this.cClaveProv = cClaveProv;
         this.cRazonS = cRazonS;
@@ -106,7 +126,34 @@ public class TtCtProveedor_ {
         this.dtModificado = dtModificado;
         this.cUsuCrea = cUsuCrea;
         this.cUsuModifica = cUsuModifica;
+        this.iDomicilio = iDomicilio;
+        this.deEvaluacion = deEvaluacion;
+        this.cEvaluacion = cEvaluacion;
         this.id = id;
+    }
+
+    public String getcEvaluacion() {
+        return cEvaluacion;
+    }
+
+    public void setcEvaluacion(String cEvaluacion) {
+        this.cEvaluacion = cEvaluacion;
+    }
+
+    public Integer getiDomicilio() {
+        return iDomicilio;
+    }
+
+    public void setiDomicilio(Integer iDomicilio) {
+        this.iDomicilio = iDomicilio;
+    }
+
+    public Double getDeEvaluacion() {
+        return deEvaluacion;
+    }
+
+    public void setDeEvaluacion(Double deEvaluacion) {
+        this.deEvaluacion = deEvaluacion;
     }
 
     public Integer getIProveedor() {

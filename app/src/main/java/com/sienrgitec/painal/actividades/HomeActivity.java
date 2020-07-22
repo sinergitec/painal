@@ -2,37 +2,27 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.fragmentos.HomeFragment;
 import com.sienrgitec.painal.fragmentos.PedidosFragment;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
-import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
-import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
+import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,10 +32,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.sienrgitec.painal.constante.Constantes.ctProvList;
 import static com.sienrgitec.painal.constante.Constantes.vcMatchArt;
 
 public class HomeActivity extends AppCompatActivity {
     private List<TtCtArtProveedor_> listaArts = new ArrayList<>();
+    private List<TtCtProveedor_> listProvs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +73,27 @@ public class HomeActivity extends AppCompatActivity {
 
                     }else {
                         listaArts.addAll(res.getResponse().getTtCtArtProveedor().getTtCtArtProveedor());
+                        ctProvList.addAll(res.getResponse().getTtCtProveedor().getTtCtProveedor());
+
+
+
+
+
                         List<TtCtArtProveedor_> listArtProv = new ArrayList<TtCtArtProveedor_>();
-                        for (TtCtArtProveedor_ artProv : listaArts ) {
-                            Log.e("art-->", artProv.getCDescripcion());
+                        for (TtCtArtProveedor_ artProv : listaArts) {
                             listArtProv.add(artProv);
                         }
 
+                        List<TtCtProveedor_> listaFiltrada = new ArrayList<>();
+                        for (TtCtProveedor_ ObjProv: ctProvList) {
+                                listaFiltrada.add(ObjProv);
+                        }
 
-                        Intent home = new Intent(HomeActivity.this, ArticuloActivity.class);
-                        home.putExtra("list", (Serializable) listArtProv);
+                        Intent home = new Intent(HomeActivity.this, ctProveedores.class);
+                        home.putExtra("listProvs", (Serializable) listaFiltrada);
+                        home.putExtra("listArts", (Serializable) listArtProv);
                         startActivity(home);
-                                            }
+                    }
                 } else {
                     Toast.makeText(HomeActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
                 }

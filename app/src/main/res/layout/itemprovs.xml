@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="8dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="290dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                app:srcCompat="@android:drawable/ic_menu_mapmode"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <TextView
+                android:id="@+id/tvProv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView"
+                android:hint="Negocio"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+
+
+
+
+            <TextView
+                android:id="@+id/tvEvalua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Evalua"
+                android:layout_below="@id/tvProv"
+                android:layout_marginLeft="16dp"
+                android:textSize="15sp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+
+            <Button
+                android:id="@+id/btnVisitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="246dp"
+                android:layout_marginEnd="44dp"
+                android:layout_marginRight="44dp"
+                android:text="visitar"
+                android:background="@drawable/rounded_corners"
+                android:textColor="@color/colorTextWhite"
+                android:onClick="buscaArt"/>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>
