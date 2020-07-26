@@ -54,7 +54,7 @@ public class TtCtArtProveedor_ implements Serializable {
     private Boolean lAgotado;
     @SerializedName("bImagen")
     @Expose
-    private Object bImagen;
+    private String bImagen;
     @SerializedName("dePeso")
     @Expose
     private Double dePeso;
@@ -67,12 +67,18 @@ public class TtCtArtProveedor_ implements Serializable {
     @SerializedName("deProfundo")
     @Expose
     private Double deProfundo;
+    @SerializedName("deGramosPieza")
+    @Expose
+    private Double deGramosPieza;
+    @SerializedName("dePesoMinimo")
+    @Expose
+    private Double dePesoMinimo;
     @SerializedName("dtCreado")
     @Expose
-    private Object dtCreado;
+    private String dtCreado;
     @SerializedName("dtModificado")
     @Expose
-    private Object dtModificado;
+    private String dtModificado;
     @SerializedName("cUsuCrea")
     @Expose
     private String cUsuCrea;
@@ -122,6 +128,14 @@ public class TtCtArtProveedor_ implements Serializable {
 
     public void setIProveedor(Integer iProveedor) {
         this.iProveedor = iProveedor;
+    }
+
+    public Integer getIDomicilio() {
+        return iDomicilio;
+    }
+
+    public void setIDomicilio(Integer iDomicilio) {
+        this.iDomicilio = iDomicilio;
     }
 
     public Integer getIArticulo() {
@@ -228,11 +242,11 @@ public class TtCtArtProveedor_ implements Serializable {
         this.lAgotado = lAgotado;
     }
 
-    public Object getBImagen() {
+    public String getBImagen() {
         return bImagen;
     }
 
-    public void setBImagen(Object bImagen) {
+    public void setBImagen(String bImagen) {
         this.bImagen = bImagen;
     }
 
@@ -268,19 +282,35 @@ public class TtCtArtProveedor_ implements Serializable {
         this.deProfundo = deProfundo;
     }
 
-    public Object getDtCreado() {
+    public Double getDeGramosPieza() {
+        return deGramosPieza;
+    }
+
+    public void setDeGramosPieza(Double deGramosPieza) {
+        this.deGramosPieza = deGramosPieza;
+    }
+
+    public Double getDePesoMinimo() {
+        return dePesoMinimo;
+    }
+
+    public void setDePesoMinimo(Double dePesoMinimo) {
+        this.dePesoMinimo = dePesoMinimo;
+    }
+
+    public String getDtCreado() {
         return dtCreado;
     }
 
-    public void setDtCreado(Object dtCreado) {
+    public void setDtCreado(String dtCreado) {
         this.dtCreado = dtCreado;
     }
 
-    public Object getDtModificado() {
+    public String getDtModificado() {
         return dtModificado;
     }
 
-    public void setDtModificado(Object dtModificado) {
+    public void setDtModificado(String dtModificado) {
         this.dtModificado = dtModificado;
     }
 
@@ -396,14 +426,6 @@ public class TtCtArtProveedor_ implements Serializable {
         this.id = id;
     }
 
-    public Integer getiDomicilio() {
-        return iDomicilio;
-    }
-
-    public void setiDomicilio(Integer iDomicilio) {
-        this.iDomicilio = iDomicilio;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TtCtArtProveedor_{");
@@ -422,13 +444,15 @@ public class TtCtArtProveedor_ implements Serializable {
         sb.append(", iMarca=").append(iMarca);
         sb.append(", lActivo=").append(lActivo);
         sb.append(", lAgotado=").append(lAgotado);
-        sb.append(", bImagen=").append(bImagen);
+        sb.append(", bImagen='").append(bImagen).append('\'');
         sb.append(", dePeso=").append(dePeso);
         sb.append(", deLargo=").append(deLargo);
         sb.append(", deAncho=").append(deAncho);
         sb.append(", deProfundo=").append(deProfundo);
-        sb.append(", dtCreado=").append(dtCreado);
-        sb.append(", dtModificado=").append(dtModificado);
+        sb.append(", deGramosPieza=").append(deGramosPieza);
+        sb.append(", dePesoMinimo=").append(dePesoMinimo);
+        sb.append(", dtCreado='").append(dtCreado).append('\'');
+        sb.append(", dtModificado='").append(dtModificado).append('\'');
         sb.append(", cUsuCrea='").append(cUsuCrea).append('\'');
         sb.append(", cUsuModifica='").append(cUsuModifica).append('\'');
         sb.append(", dePrecioVtaPza=").append(dePrecioVtaPza);

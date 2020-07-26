@@ -396,7 +396,7 @@ public class AplicaPago extends AppCompatActivity {
             for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
                 if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0
                         && CarritoSingleton.getInstance().getPilaDomicilios().get(i).
-                        equals(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
+                        equals(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()))){
                     listDetalle.add(new TtOpPedidoDet(String.valueOf(partida * 4),
                             String.valueOf(partida),
                             String.valueOf(proveedorPedido),
