@@ -74,12 +74,13 @@ public class ctProveedorAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.itemprovs, container, false);
 
 
-        TextView tvProv, tvEvalua;
+        TextView tvProv, tvEvalua, tvGiro;
         ImageView img;
 
         img = view.findViewById(R.id.imageView);
         tvProv = view.findViewById(R.id.tvProv);
         tvEvalua = view.findViewById(R.id.tvEvalua);
+        tvGiro = view.findViewById(R.id.tvTipoProv);
 
 
 
@@ -87,6 +88,7 @@ public class ctProveedorAdapter extends PagerAdapter {
 
         tvProv.setText(listaPrvo.get(position).getCNegocio());
         tvEvalua.setText(listaPrvo.get(position).getcEvaluacion());
+        tvGiro.setText(listaPrvo.get(position).getcTipoProv());
 
 
 
