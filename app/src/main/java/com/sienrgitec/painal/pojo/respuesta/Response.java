@@ -2,6 +2,7 @@ package com.sienrgitec.painal.pojo.respuesta;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.sienrgitec.painal.pojo.entity.TTOpPedido_;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCredEncCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
@@ -19,6 +20,9 @@ import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
+import com.sienrgitec.painal.pojo.entity.TtOpPedido;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet_;
 import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
 
@@ -51,6 +55,14 @@ public class Response {
     @SerializedName("tt_ctTelefono")
     @Expose
     private TtCtTelefono ttCtTelefono;
+
+    @SerializedName("tt_opPedido")
+    @Expose
+    private TTOpPedido_ ttTtOpPedido;
+
+    @SerializedName("tt_opPedidoDet")
+    @Expose
+    private TtOpPedidoDet_ tt_opPedidoDet;
 
     @SerializedName("tt_ctContacto")
     @Expose
@@ -236,6 +248,22 @@ public class Response {
     /*Andros Carga ctComisones*/
     public TtCtComisiones getTtCtComisiones() {
         return tt_ctComisiones;
+    }
+
+    public TTOpPedido_ getTtTtOpPedido() {
+        return ttTtOpPedido;
+    }
+
+    public void setTtTtOpPedido(TTOpPedido_ ttTtOpPedido) {
+        this.ttTtOpPedido = ttTtOpPedido;
+    }
+
+    public TtOpPedidoDet_ getTt_opPedidoDet() {
+        return tt_opPedidoDet;
+    }
+
+    public void setTt_opPedidoDet(TtOpPedidoDet_ tt_opPedidoDet) {
+        this.tt_opPedidoDet = tt_opPedidoDet;
     }
 
     @Override
