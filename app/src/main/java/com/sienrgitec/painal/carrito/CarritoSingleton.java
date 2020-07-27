@@ -47,8 +47,8 @@ public class CarritoSingleton {
         }
 
         //Agrega a la pila de domicilios
-        if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
-            pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()));
+        if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()))){
+            pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()));
         }
 
         //Determina si el numero de proveedores es mayor al maximo permitido
@@ -73,8 +73,8 @@ public class CarritoSingleton {
             if(!pilaProveedores.contains(item.getArticulo().getIProveedor())){
                 pilaProveedores.push(item.getArticulo().getIProveedor());
             }
-            if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
-                pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()));
+            if(!pilaDomicilios.contains(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()))){
+                pilaDomicilios.push(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()));
             }
         }
     }

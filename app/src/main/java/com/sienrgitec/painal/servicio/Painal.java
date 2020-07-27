@@ -127,4 +127,16 @@ public interface Painal {
     /*Carga de Articulos por palabras/ Andros 15-07-20*/
     @GET("matchArt")
     Call<Respuesta> matchArt(@QueryMap Map<String, String> options);
+
+    /*Carga de pedidos/ Adriana 26-07-20*/
+    @GET("opPedidoCrea")
+    Call<Respuesta> opPedidoCrea(@QueryMap Map<String, String> options);
+
+    /*Carga de estatus de servicio/ Adriana 26-07-20*/
+    @GET("opEdoProc")
+    Call<Respuesta> opEdoProc(@QueryMap Map<String, String> options);
+
+    /*Carga de consulta Titlani asignado al pedido/ Adriana 26-07-20*/
+    @GET("consultaTitlani")
+    Call<Respuesta> consultaTitlani(@QueryMap Map<String, String> options);
 }

@@ -83,7 +83,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         if(db != null){
             ContentValues valores = new ContentValues();
             valores.put("iProveedor",articulo.getIProveedor());
-            valores.put("iDomicilio",articulo.getiDomicilio());
+            valores.put("iDomicilio",articulo.getIDomicilio());
             valores.put("iArticulo",articulo.getIArticulo());
             valores.put("cArticulo",articulo.getCArticulo());
             valores.put("cAplicaciones",articulo.getCAplicaciones());
@@ -209,7 +209,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             articulo.setIProveedor(c.getInt(1));
-            articulo.setiDomicilio(c.getInt(2));
+            articulo.setIDomicilio(c.getInt(2));
             articulo.setIArticulo(c.getInt(3));
             articulo.setCArticulo(c.getString(4));
             articulo.setCAplicaciones(c.getString(5));
