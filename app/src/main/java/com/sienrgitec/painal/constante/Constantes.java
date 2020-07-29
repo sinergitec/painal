@@ -13,6 +13,7 @@ public class Constantes {
     public static final Integer CANTIDAD_MAX_PROVEEDORES = 3;
     public static String vcCuenta = "";
     public static String vcMatchArt = "";
+    public static Double vdeSaldo = 0.00;
 
 
     public static ArrayList<TtCtProveedor_> ctProvList      = new ArrayList<>();

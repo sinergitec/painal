@@ -59,7 +59,9 @@ public class HomeActivity extends AppCompatActivity {
 
     /*Agregado para buscar por articulos**/
     public void matchArts(View c){
-        Log.e("press" , "valores" + vcMatchArt);
+        listaArts.clear();
+        ctProvList.clear();
+
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
         data.put("ipcBuscar",vcMatchArt);
