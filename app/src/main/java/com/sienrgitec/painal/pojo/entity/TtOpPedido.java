@@ -81,6 +81,9 @@ public class TtOpPedido implements Serializable {
     @Expose
     private String deTiempoLlega;
 
+    @SerializedName("cEdoProc")
+    @Expose
+    private String cEdoProc;
 
     @SerializedName("dePorcCargo")
     @Expose
@@ -331,6 +334,14 @@ public class TtOpPedido implements Serializable {
 
     public void setDeTiempoLlega(String deTiempoLlega) {
         this.deTiempoLlega = deTiempoLlega;
+    }
+
+    public String getcEdoProc() {
+        return cEdoProc;
+    }
+
+    public void setcEdoProc(String cEdoProc) {
+        this.cEdoProc = cEdoProc;
     }
 
     @Override
