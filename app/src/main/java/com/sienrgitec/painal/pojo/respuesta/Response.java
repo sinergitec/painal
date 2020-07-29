@@ -3,7 +3,6 @@ package com.sienrgitec.painal.pojo.respuesta;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.sienrgitec.painal.pojo.entity.TTOpPedido_;
-import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCredEncCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
@@ -18,13 +17,12 @@ import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
-import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
-import com.sienrgitec.painal.pojo.entity.TtOpPedido;
-import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet_;
 import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
+import com.sienrgitec.painal.pojo.entity.Tt_ctPainani;
+import com.sienrgitec.painal.pojo.entity.Tt_ctPainani_;
 
 public class Response {
 
@@ -84,7 +82,6 @@ public class Response {
     @Expose
     private Tt_CtEvaluacion tt_ctEvaluacion;
 
-
     @SerializedName("tt_credEncCPCP")
     @Expose
     private TtCredEncCPCP tt_credEncCPCP;
@@ -96,6 +93,10 @@ public class Response {
     @SerializedName("tt_ctComisiones")
     @Expose
     private TtCtComisiones tt_ctComisiones;
+
+    @SerializedName("tt_ctPainani")
+    @Expose
+    private Tt_ctPainani tt_ctPainani;
 
     @SerializedName("oplError")
     @Expose
@@ -264,6 +265,14 @@ public class Response {
 
     public void setTt_opPedidoDet(TtOpPedidoDet_ tt_opPedidoDet) {
         this.tt_opPedidoDet = tt_opPedidoDet;
+    }
+
+    public Tt_ctPainani getTt_ctPainani() {
+        return tt_ctPainani;
+    }
+
+    public void setTt_ctPainani(Tt_ctPainani tt_ctPainani) {
+        this.tt_ctPainani = tt_ctPainani;
     }
 
     @Override
