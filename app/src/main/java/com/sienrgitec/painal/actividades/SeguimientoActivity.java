@@ -34,6 +34,7 @@ public class SeguimientoActivity extends AppCompatActivity {
 
         pedido = findViewById(R.id.ped);
         estatus = findViewById(R.id.estatus);
+        foto = findViewById(R.id.pedido);
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
