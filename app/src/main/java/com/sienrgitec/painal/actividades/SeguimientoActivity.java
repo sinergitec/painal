@@ -1,5 +1,6 @@
 package com.sienrgitec.painal.actividades;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class SeguimientoActivity extends AppCompatActivity {
 
     private TextView pedido, estatus;
     private ImageView foto;
+    public static final int[] IMAGESESTATUS = {R.drawable.ic_pagado, R.drawable.ic_entregar, R.drawable.ic_cancelado,
+                                               R.drawable.ic_surtido, R.drawable.ic_rechazado, R.drawable.ic_entrega_a_domicilio};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,45 @@ public class SeguimientoActivity extends AppCompatActivity {
                     }else {
                         pedido.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getIPedido());
                         estatus.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc());
+
+                        String status = res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc();
+
+                        Drawable d = null;
+                        switch(status) {
+                            case "PAGADO":
+                                d = getResources().getDrawable(IMAGESESTATUS[0]);
+                                foto.setImageDrawable(d);
+                                break;
+                            case "EN RUTA":
+                                d = getResources().getDrawable(IMAGESESTATUS[1]);
+                                foto.setImageDrawable(d);
+                                break;
+
+                            case "CANCELADO":
+                                d = getResources().getDrawable(IMAGESESTATUS[2]);
+                                foto.setImageDrawable(d);
+                                break;
+
+                            case "SURTIDO":
+                                d = getResources().getDrawable(IMAGESESTATUS[3]);
+                                foto.setImageDrawable(d);
+                                break;
+
+                            case "RECHAZADO":
+                                d = getResources().getDrawable(IMAGESESTATUS[4]);
+                                foto.setImageDrawable(d);
+                                break;
+
+                            case "ENTREGADO":
+                                d = getResources().getDrawable(IMAGESESTATUS[5]);
+                                foto.setImageDrawable(d);
+                                break;
+
+                            default:
+                                d = getResources().getDrawable(IMAGESESTATUS[0]);
+                                foto.setImageDrawable(d);
+                                break;
+                        }
                     }
                 } else {
                     Toast.makeText(SeguimientoActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
