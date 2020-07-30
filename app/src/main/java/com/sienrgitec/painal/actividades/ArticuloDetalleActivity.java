@@ -3,6 +3,7 @@ package com.sienrgitec.painal.actividades;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,8 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.articulo_detalle);
 
+
+        Log.e("articulo det", "articulodet");
         nombreArticulo = findViewById(R.id.articulo);
         descripcionArticulo = findViewById(R.id.descripcion);
         precioPieza = findViewById(R.id.piezas);

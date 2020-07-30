@@ -1,9 +1,20 @@
 package com.sienrgitec.painal.carrito;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.Html;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.sienrgitec.painal.actividades.NvoPagoActivity;
+import com.sienrgitec.painal.actividades.RegistroActivity;
+import com.sienrgitec.painal.actividades.SaldosActivity;
 import com.sienrgitec.painal.constante.Constantes;
+import com.sienrgitec.painal.fragmentos.CarritoFragment;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtCtCliente_;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
@@ -13,6 +24,8 @@ import com.sienrgitec.painal.pojo.entity.TtCtUsuario_;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
 
 public class CarritoSingleton {
 
@@ -62,6 +75,52 @@ public class CarritoSingleton {
         // Persisten en caso de que se salgan de la aplicacion
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         carritoDBHelper.insertarPedido(item);
+
+
+        /**AndrosOHG 30/07/2020**/
+        Double totalD = 0.0;
+        for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
+            totalD += articulo.getMonto();
+        }
+
+
+        ProgressDialog nDialog;
+        nDialog = new ProgressDialog(context);
+        nDialog.setMessage("Alerta...");
+        nDialog.setTitle("Alerta");
+        nDialog.setIndeterminate(false);
+        nDialog.show();
+
+
+        if (totalD >= vdeSaldo){
+            AlertDialog.Builder myBuild = new AlertDialog.Builder(context);
+            myBuild.setMessage("No puedes seguir agregando mas productos. "  +  '\n' +  "Tu saldo actual es de: " + vdeSaldo + "0" + '\n' +
+                    "Saldo Total del pedido: " + totalD + "0"
+                    +  '\n' + "Le invitamos a realizar una recarga  o a eliminar productos de la lista para continuar");
+            myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡Saldo Insuficiente! </font>"));
+            myBuild.setPositiveButton("Recargar Saldo", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent recarga = new Intent(context, SaldosActivity.class);
+                    recarga.putExtra("cuenta", "");
+                    context.startActivity(recarga);
+                }
+            });
+            myBuild.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+            AlertDialog dialog = myBuild.create();
+            dialog.show();
+            nDialog.dismiss();
+
+            return;
+        }
+        /************************/
+
+
 
         Toast.makeText(context, item.getArticulo().getCDescripcion() + " agregado al carrito", Toast.LENGTH_SHORT).show();
     }

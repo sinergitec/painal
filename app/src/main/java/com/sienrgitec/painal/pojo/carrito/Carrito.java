@@ -1,5 +1,7 @@
 package com.sienrgitec.painal.pojo.carrito;
 
+import android.util.Log;
+
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 
 import java.io.Serializable;
