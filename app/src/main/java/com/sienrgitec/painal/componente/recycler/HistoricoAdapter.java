@@ -63,31 +63,7 @@ public class HistoricoAdapter extends RVAdapter<TtOpPedido> {
             fecha.setText(item.getDtFecha());
 
             TextView estatus = (TextView)viewHolder.getView(R.id.estatus1);
-
-            String estatusID = item.getIEstadoPedido();
-            switch(estatusID) {
-                case "1":
-                    estatus.setText("PAGADO");
-                    break;
-                case "2":
-                    estatus.setText("EN RUTA");
-                    break;
-                case "3":
-                    estatus.setText("CANCELADO");
-                    break;
-                case "4":
-                    estatus.setText("SURTIDO");
-                    break;
-                case "5":
-                    estatus.setText("RECHAZADO");
-                    break;
-                case "6":
-                    estatus.setText("ENTREGADO");
-                    break;
-                default:
-                    estatus.setText("ENTREGADO");
-                    break;
-            }
+            estatus.setText(item.getcEdoProc());
 
             TextView totalP = (TextView)viewHolder.getView(R.id.total1);
             totalP.setText(item.getDeImporte());
