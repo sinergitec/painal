@@ -104,6 +104,17 @@ public class Response {
     @SerializedName("opcError")
     @Expose
     private String opcError;
+    @SerializedName("opdeSaldo")
+    @Expose
+    private Double opdeSaldo;
+
+    public Double getOpdeSaldo() {
+        return opdeSaldo;
+    }
+
+    public void setOpdeSaldo(Double opdeSaldo) {
+        this.opdeSaldo = opdeSaldo;
+    }
 
     public TtCtGiro getTtCtGiro() {
         return ttCtGiro;
@@ -292,6 +303,7 @@ public class Response {
                 ", tt_ctComisiones" + tt_ctComisiones +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
+                ", opdeSaldo='" + opdeSaldo + '\'' +
                 '}';
     }
 }

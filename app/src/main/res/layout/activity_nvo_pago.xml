@@ -38,12 +38,15 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="244dp"
+        android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22">
 
@@ -52,14 +55,9 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="Deposito" />
+            android:text="Deposito"
+            android:textAlignment="center" />
 
-        <RadioButton
-            android:id="@+id/radio_ninjas"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="Pago" />
     </RadioGroup>
 
     <Button
@@ -72,7 +70,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:background="@drawable/rounded_corners"
-        android:hint="SOLICITAR ABONO"
+        android:text="SOLICITAR RECARGA"
         android:textColor="@android:color/white"
 
         app:layout_constraintEnd_toEndOf="parent"

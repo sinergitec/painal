@@ -1,11 +1,15 @@
 package com.sienrgitec.painal.actividades;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.MainActivity;
@@ -60,6 +64,15 @@ public class RegistroActivity extends AppCompatActivity {
     private void registraCliente() {
         final Loading loading = new Loading(RegistroActivity.this);
         loading.iniciaDialogo("alert");
+
+        /**AndrosOHg 28-07-2020**/
+        ProgressDialog nDialog;
+        nDialog = new ProgressDialog(RegistroActivity.this);
+        nDialog.setMessage("Cargando...");
+        nDialog.setTitle("Inicio");
+        nDialog.setIndeterminate(false);
+        nDialog.show();
+        /**--------------------**/
 
         String nombre   = nombreET.getText().toString();
         String aPaterno = aPaternoET.getText().toString();
@@ -178,10 +191,39 @@ public class RegistroActivity extends AppCompatActivity {
 
                         Toast.makeText(RegistroActivity.this, "Usuario Creado" + " " + nombre, Toast.LENGTH_LONG).show();
 
-                        Intent inicio = new Intent(RegistroActivity.this, MainActivity.class);
+                        /**AndrosOHG 28-07-2020**/
+                        AlertDialog.Builder myBuild = new AlertDialog.Builder(RegistroActivity.this);
+                        myBuild.setMessage("Para empezar a obtener los beneficios de la Comunidad Painal te invitamos a que te registres" +
+                                " con su Forma de Pago. ");
+                        myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡Bienvenido! </font>"));
+                        myBuild.setPositiveButton("Conoce más", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        myBuild.setNegativeButton("Más Tarde", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent inicio = new Intent(RegistroActivity.this, MainActivity.class);
+                                inicio.putExtra("usuario", correo);
+                                inicio.putExtra("password", pw);
+                                startActivity(inicio);
+                                dialog.cancel();
+                            }
+                        });
+
+                        AlertDialog dialog = myBuild.create();
+                        dialog.show();
+                        nDialog.dismiss();
+
+                        /**--------------------**/
+
+
+                        /*Intent inicio = new Intent(RegistroActivity.this, MainActivity.class);
                         inicio.putExtra("usuario", correo);
                         inicio.putExtra("password", pw);
-                        startActivity(inicio);
+                        startActivity(inicio);*/
 
                     }else{
                         Toast.makeText(RegistroActivity.this, "No se pudo crear el usuario", Toast.LENGTH_LONG).show();

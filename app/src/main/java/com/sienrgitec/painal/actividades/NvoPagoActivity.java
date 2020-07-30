@@ -1,9 +1,13 @@
 package com.sienrgitec.painal.actividades;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -77,6 +81,20 @@ public class NvoPagoActivity extends AppCompatActivity {
     }
 
     private void CreaDeposito(){
+
+
+        /**AndrosOHg 28-07-2020**/
+        ProgressDialog nDialog;
+        nDialog = new ProgressDialog(NvoPagoActivity.this);
+        nDialog.setMessage("Cargando...");
+        nDialog.setTitle("Recarga Saldo");
+        nDialog.setIndeterminate(false);
+        nDialog.show();
+        /**--------------------**/
+
+
+
+
         final Loading loading = new Loading(NvoPagoActivity.this);
         loading.iniciaDialogo("alert");
 
@@ -141,10 +159,28 @@ public class NvoPagoActivity extends AppCompatActivity {
                         return;
                     }
 
-                    Toast.makeText(NvoPagoActivity.this, "Solicitud Exitosa", Toast.LENGTH_LONG).show();
+                    /**AndrosOHG 28-07-2020**/
+                    AlertDialog.Builder myBuild = new AlertDialog.Builder(NvoPagoActivity.this);
+                    myBuild.setMessage("En breve será aproada su recarga ");
+                    myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡Solicitud Exitosa! </font>"));
+                    myBuild.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent inicio = new Intent(NvoPagoActivity.this, HomeActivity.class);
+                            startActivity(inicio);
 
+                        }
+                    });
+                    AlertDialog dialog = myBuild.create();
+                    dialog.show();
+                    nDialog.dismiss();
+
+                    /**--------------------**/
+
+
+                    /*Toast.makeText(NvoPagoActivity.this, "Solicitud Exitosa", Toast.LENGTH_LONG).show();
                     Intent inicio = new Intent(NvoPagoActivity.this, HomeActivity.class);
-                    startActivity(inicio);
+                    startActivity(inicio);*/
 
                 }else{
                     Toast.makeText(NvoPagoActivity.this, "No se pudo crear la solicitud de abono", Toast.LENGTH_LONG).show();
