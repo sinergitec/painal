@@ -1,5 +1,7 @@
 package com.sienrgitec.painal.pojo.entity;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -51,7 +53,7 @@ public class Tt_ctPainani_ {
 
     @SerializedName("bImagen")
     @Expose
-    private Object bImagen;
+    private String bImagen;
 
     @SerializedName("iEdoPainani")
     @Expose
@@ -173,11 +175,11 @@ public class Tt_ctPainani_ {
         this.cFoto = cFoto;
     }
 
-    public Object getbImagen() {
+    public String getbImagen() {
         return bImagen;
     }
 
-    public void setbImagen(Object bImagen) {
+    public void setbImagen(String bImagen) {
         this.bImagen = bImagen;
     }
 

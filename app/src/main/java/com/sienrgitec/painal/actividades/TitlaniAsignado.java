@@ -1,8 +1,12 @@
 package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +19,9 @@ import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +42,7 @@ public class TitlaniAsignado extends AppCompatActivity {
 
         nombre = findViewById(R.id.nombreT);
         telefono = findViewById(R.id.telT);
+        foto = findViewById(R.id.imageView11);
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -56,6 +64,10 @@ public class TitlaniAsignado extends AppCompatActivity {
 
                         nombre.setText(nombreP + " " + apellidoP + " " + apellidoM);
                         telefono.setText(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getcWhattsApp());
+
+                        byte[] decodedString = Base64.decode(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getbImagen(), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        foto.setImageBitmap(decodedByte);
                     }
                 } else {
                     Toast.makeText(TitlaniAsignado.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
