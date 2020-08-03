@@ -118,6 +118,9 @@ public class CarritoSingleton {
 
             return;
         }
+
+
+        nDialog.dismiss();
         /************************/
 
 
