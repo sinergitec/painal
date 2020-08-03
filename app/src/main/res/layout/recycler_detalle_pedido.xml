@@ -14,7 +14,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="16dp"
         android:text="@string/articulo"
-        android:textColor="#45B638"
+        android:textColor="#FB800C"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/observacion"
-        android:textColor="#45B638"
+        android:textColor="#FB800C"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pedido" />
@@ -40,7 +40,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/cant"
-        android:textColor="#45B638"
+        android:textColor="#FB800C"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fecha" />
@@ -54,7 +54,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/precio"
-        android:textColor="#45B638"
+        android:textColor="#FB800C"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/estatus" />
@@ -67,7 +67,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/total"
-        android:textColor="#45B638"
+        android:textColor="#FB800C"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalPedido" />

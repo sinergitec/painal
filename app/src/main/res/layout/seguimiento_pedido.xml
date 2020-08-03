@@ -78,5 +78,49 @@
         app:layout_constraintStart_toEndOf="@+id/nombreTitlani"
         app:layout_constraintTop_toBottomOf="@+id/ped" />
 
+    <ImageView
+        android:id="@+id/evaluaProv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pedido"
+         />
+
+    <ImageView
+        android:id="@+id/evaluaTitlani"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/evaluaProv"
+         />
+
+    <TextView
+        android:id="@+id/proveedor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="120dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/evaluaProv"
+        app:layout_constraintTop_toBottomOf="@+id/pedido" />
+
+    <TextView
+        android:id="@+id/titlani"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/evaluaTitlani"
+        app:layout_constraintTop_toBottomOf="@+id/proveedor" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

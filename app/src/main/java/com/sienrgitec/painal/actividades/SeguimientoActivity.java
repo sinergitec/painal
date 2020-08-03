@@ -1,5 +1,6 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -22,10 +23,11 @@ import retrofit2.Response;
 
 public class SeguimientoActivity extends AppCompatActivity {
 
-    private TextView pedido, estatus;
-    private ImageView foto;
+    private TextView pedido, estatus, evaluaP, evaluaT;
+    private ImageView foto, evaluaProv, evaluaTitlani;
     public static final int[] IMAGESESTATUS = {R.drawable.ic_pagado, R.drawable.ic_entregar, R.drawable.ic_cancelado,
-                                               R.drawable.ic_surtido, R.drawable.ic_rechazado, R.drawable.ic_entrega_a_domicilio};
+                                               R.drawable.ic_surtido, R.drawable.ic_rechazado, R.drawable.ic_entrega_a_domicilio,
+                                               R.drawable.ic_vegetal, R.drawable.ic_entrega };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,10 @@ public class SeguimientoActivity extends AppCompatActivity {
         pedido = findViewById(R.id.ped);
         estatus = findViewById(R.id.estatus);
         foto = findViewById(R.id.pedido);
+        evaluaProv = findViewById(R.id.evaluaProv);
+        evaluaTitlani = findViewById(R.id.evaluaTitlani);
+        evaluaP = findViewById(R.id.proveedor);
+        evaluaT = findViewById(R.id.titlani);
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -56,6 +62,8 @@ public class SeguimientoActivity extends AppCompatActivity {
                         String status = res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc();
 
                         Drawable d = null;
+                        Drawable eP = null;
+                        Drawable eT = null;
                         switch(status) {
                             case "PAGADO":
                                 d = getResources().getDrawable(IMAGESESTATUS[0]);
@@ -84,6 +92,20 @@ public class SeguimientoActivity extends AppCompatActivity {
                             case "ENTREGADO":
                                 d = getResources().getDrawable(IMAGESESTATUS[5]);
                                 foto.setImageDrawable(d);
+
+                                eP = getResources().getDrawable(IMAGESESTATUS[6]);
+                                evaluaProv.setImageDrawable(eP);
+                                evaluaProv.setOnClickListener(v -> evaluaProv());
+
+                                eT = getResources().getDrawable(IMAGESESTATUS[7]);
+                                evaluaTitlani.setImageDrawable(eT);
+                                evaluaTitlani.setOnClickListener(v -> evaluaTitlani());
+
+                                evaluaP.setText("Evaluación del Proveedor");
+                                evaluaP.setOnClickListener(v -> evaluaProv());
+
+                                evaluaT.setText("Evaluación del Titlani");
+                                evaluaT.setOnClickListener(v -> evaluaTitlani());
                                 break;
 
                             default:
@@ -102,5 +124,15 @@ public class SeguimientoActivity extends AppCompatActivity {
                 Toast.makeText(SeguimientoActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void evaluaTitlani() {
+        Intent perfil = new Intent(SeguimientoActivity.this,  EvaluacionTActivity .class);
+        startActivity(perfil);
+    }
+
+    private void evaluaProv() {
+        Intent perfil = new Intent(SeguimientoActivity.this, EvaluacionPActivity.class);
+        startActivity(perfil);
     }
 }
