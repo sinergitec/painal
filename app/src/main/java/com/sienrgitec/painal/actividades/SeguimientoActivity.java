@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class SeguimientoActivity extends AppCompatActivity {
 
-    private TextView pedido, estatus, evaluaP, evaluaT;
+    private TextView pedido, estatus, evaluaP, evaluaT,tiempoEntrega, datoTiempo;
     private ImageView foto, evaluaProv, evaluaTitlani;
     public static final int[] IMAGESESTATUS = {R.drawable.ic_pagado, R.drawable.ic_entregar, R.drawable.ic_cancelado,
                                                R.drawable.ic_surtido, R.drawable.ic_rechazado, R.drawable.ic_entrega_a_domicilio,
@@ -41,6 +41,8 @@ public class SeguimientoActivity extends AppCompatActivity {
         evaluaTitlani = findViewById(R.id.evaluaTitlani);
         evaluaP = findViewById(R.id.proveedor);
         evaluaT = findViewById(R.id.titlani);
+        tiempoEntrega = findViewById(R.id.textView19);
+        datoTiempo = findViewById(R.id.textView20);
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -59,7 +61,7 @@ public class SeguimientoActivity extends AppCompatActivity {
                         pedido.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getIPedido());
                         estatus.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc());
 
-                        String status = res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc();
+                       String status = res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getcEdoProc();
 
                         Drawable d = null;
                         Drawable eP = null;
@@ -68,10 +70,22 @@ public class SeguimientoActivity extends AppCompatActivity {
                             case "PAGADO":
                                 d = getResources().getDrawable(IMAGESESTATUS[0]);
                                 foto.setImageDrawable(d);
+
+                                tiempoEntrega.setText("Tiempo de Entrega");
+                                tiempoEntrega.setOnClickListener(v -> evaluaProv());
+
+                                datoTiempo.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getDeTiempoLlega());
+                                datoTiempo.setOnClickListener(v -> evaluaTitlani());
                                 break;
                             case "EN RUTA":
                                 d = getResources().getDrawable(IMAGESESTATUS[1]);
                                 foto.setImageDrawable(d);
+
+                                tiempoEntrega.setText("Tiempo de Entrega");
+                                tiempoEntrega.setOnClickListener(v -> evaluaProv());
+
+                                datoTiempo.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getDeTiempoLlega());
+                                datoTiempo.setOnClickListener(v -> evaluaTitlani());
                                 break;
 
                             case "CANCELADO":
@@ -82,6 +96,12 @@ public class SeguimientoActivity extends AppCompatActivity {
                             case "SURTIDO":
                                 d = getResources().getDrawable(IMAGESESTATUS[3]);
                                 foto.setImageDrawable(d);
+
+                                tiempoEntrega.setText("Tiempo de Entrega");
+                                tiempoEntrega.setOnClickListener(v -> evaluaProv());
+
+                                datoTiempo.setText(res.getResponse().getTtTtOpPedido().getTt_OpPedido().get(0).getDeTiempoLlega());
+                                datoTiempo.setOnClickListener(v -> evaluaTitlani());
                                 break;
 
                             case "RECHAZADO":

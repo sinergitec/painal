@@ -6,13 +6,20 @@ import android.view.View;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.ArticulosAdapter;
 import com.sienrgitec.painal.componente.recycler.SubGirosAdapter;
+import com.sienrgitec.painal.fragmentos.CarritoFragment;
+import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
+import com.sienrgitec.painal.fragmentos.HomeFragment;
+import com.sienrgitec.painal.fragmentos.PedidosFragment;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
