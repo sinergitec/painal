@@ -118,13 +118,8 @@ public class CarritoSingleton {
 
             return;
         }
-
-
         nDialog.dismiss();
         /************************/
-
-
-
         Toast.makeText(context, item.getArticulo().getCDescripcion() + " agregado al carrito", Toast.LENGTH_SHORT).show();
     }
 

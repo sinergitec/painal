@@ -46,7 +46,7 @@ public class TitlaniAsignado extends AppCompatActivity {
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
-        data.put("ipiPedido", "264");
+        data.put("ipiPedido", "102");
 
         final Call<Respuesta> call = service.consultaTitlani(data);
         call.enqueue(new Callback<Respuesta>() {
