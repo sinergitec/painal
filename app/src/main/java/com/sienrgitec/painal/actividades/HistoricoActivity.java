@@ -39,9 +39,6 @@ public class HistoricoActivity extends AppCompatActivity {
         setContentView(R.layout.historico_pedido);
         listHistorico();
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
         }
@@ -80,42 +77,5 @@ public class HistoricoActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-        Fragment fragment;
-        switch (item.getItemId()) {
-            case R.id.navigation_shop:
-                fragment = new HomeFragment();
-                loadFragment(fragment);
-                System.out.println("Inicio");
-                return true;
-            case R.id.navigation_cart:
-                fragment = new CarritoFragment();
-                loadFragment(fragment);
-                return true;
-            case R.id.navigation_profile:
-                fragment = new ConfiguracionFragment();
-                loadFragment(fragment);
-                System.out.println("Configuracion");
-                return true;
-            case R.id.navigation_orders:
-                fragment = new PedidosFragment();
-                loadFragment(fragment);
-                System.out.println("Pedidos");
-                return true;
-            default:
-                fragment = new HomeFragment();
-                loadFragment(fragment);
-                return true;
-        }
-    };
-
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }
