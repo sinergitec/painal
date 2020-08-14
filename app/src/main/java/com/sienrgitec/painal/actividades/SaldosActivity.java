@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -83,6 +84,9 @@ public class SaldosActivity extends AppCompatActivity {
                         Intent home = new Intent(SaldosActivity.this, PerfilActivity.class);
                         startActivity(home);*/
 
+                        etSaldo.setVisibility(View.INVISIBLE);
+                        btnAgregar.setVisibility(View.INVISIBLE);
+
                         AlertDialog.Builder myBuild = new AlertDialog.Builder(SaldosActivity.this);
                         myBuild.setMessage("Aún no tienes ninguna cuenta de pago Comunidad Painal. Te invitamos a que te registres" +
                                 " y conoce sus benebicios. ");
@@ -120,9 +124,14 @@ public class SaldosActivity extends AppCompatActivity {
                         etSaldo.setText(txtdeCant);
 
                         vcCuenta = res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getcCuenta();
+
+                        btnAgregar.setOnClickListener(v -> CreaFondo());
+
+                        nDialog.dismiss();
                     }
                 } else {
                     Toast.makeText(SaldosActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+
                 }
             }
 
