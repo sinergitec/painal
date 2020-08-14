@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class RefActualizaActivity extends AppCompatActivity {
     private EditText nombreET, aPaternoET, aMaternoET, emailET, telefonoET ;
     private Switch autorizaET;
     private Integer iReferido = 0;
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,12 @@ public class RefActualizaActivity extends AppCompatActivity {
         emailET   = findViewById(email);
         telefonoET = findViewById(telefono);
         autorizaET = findViewById(switch1);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
         Intent i = getIntent();
         Tt_OpClienteReferidos_ ref = (Tt_OpClienteReferidos_) i.getSerializableExtra("objActualizar");
@@ -143,5 +151,15 @@ public class RefActualizaActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(RefActualizaActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(RefActualizaActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

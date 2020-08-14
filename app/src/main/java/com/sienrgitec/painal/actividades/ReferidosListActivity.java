@@ -33,9 +33,8 @@ import static com.sienrgitec.painal.R.id.referidos;
 
 public class ReferidosListActivity extends AppCompatActivity {
 
-    private ImageView btnAgregar;
+    private ImageView btnAgregar, back, home;
     private RecyclerView recyclerReferidos;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,13 @@ public class ReferidosListActivity extends AppCompatActivity {
         listReferidos();
         btnAgregar = findViewById(agregar);
         btnAgregar.setOnClickListener(v -> agregarReferidos());
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
     }
 
     private void agregarReferidos() {
@@ -84,5 +90,14 @@ public class ReferidosListActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void pantallaHome() {
+        Intent regresa = new Intent(ReferidosListActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(ReferidosListActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

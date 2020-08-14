@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.sienrgitec.painal.R;
 
@@ -65,7 +64,6 @@ public class PerfilActivity extends AppCompatActivity {
         Intent regresa = new Intent(PerfilActivity.this, HomeActivity.class);
         startActivity(regresa);
     }
-
 
     private void editaDireccion() {
         Intent direccion = new Intent(PerfilActivity.this, ListaDomicilioActivity.class);

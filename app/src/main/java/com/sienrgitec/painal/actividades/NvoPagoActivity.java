@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -41,11 +42,18 @@ public class NvoPagoActivity extends AppCompatActivity {
     private EditText etcCuenta, etdMonto,etcReferencia, etcObservaciones;
     private Button btnPago;
     private String vcMovimiento = "";
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nvo_pago);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
 
         Intent i = getIntent();
@@ -199,4 +207,15 @@ public class NvoPagoActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(NvoPagoActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(NvoPagoActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
 }

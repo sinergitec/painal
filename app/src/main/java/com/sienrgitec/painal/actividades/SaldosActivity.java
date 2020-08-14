@@ -10,6 +10,7 @@ import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
@@ -33,6 +34,7 @@ public class SaldosActivity extends AppCompatActivity {
     private Button btnAgregar;
     private EditText etSaldo;
     private  String vcCuenta = "";
+    private ImageView  back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,12 @@ public class SaldosActivity extends AppCompatActivity {
 
         btnAgregar = findViewById(R.id.btnAgregarF);
         etSaldo    = findViewById(R.id.editTextNumberDecimal);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
         btnAgregar.setOnClickListener(v -> CreaFondo());
 
@@ -70,10 +78,6 @@ public class SaldosActivity extends AppCompatActivity {
                         etSaldo.setText(txtdeCant);
 
                         vcCuenta = res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getcCuenta();
-
-
-
-
                     }
                 } else {
                     Toast.makeText(SaldosActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -91,5 +95,15 @@ public class SaldosActivity extends AppCompatActivity {
         Intent nvoFondo = new Intent(SaldosActivity.this, NvoPagoActivity.class);
         nvoFondo.putExtra("cuenta", vcCuenta);
         startActivity(nvoFondo);
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(SaldosActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(SaldosActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

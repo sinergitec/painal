@@ -27,8 +27,9 @@ import static com.sienrgitec.painal.R.id.agregar;
 
 public class FamilyListActivity  extends AppCompatActivity {
 
-    private ImageView btnAgregar;
+    private ImageView btnAgregar, back, home;;
     private RecyclerView recyclerFamily;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,13 @@ public class FamilyListActivity  extends AppCompatActivity {
         listFamily();
         btnAgregar = findViewById(agregar);
         btnAgregar.setOnClickListener(v -> agregarFamilia());
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
     }
 
     private void agregarFamilia() {
@@ -77,5 +85,15 @@ public class FamilyListActivity  extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(FamilyListActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(FamilyListActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

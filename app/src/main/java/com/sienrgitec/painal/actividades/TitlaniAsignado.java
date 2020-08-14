@@ -33,7 +33,8 @@ import retrofit2.Response;
 public class TitlaniAsignado extends AppCompatActivity {
 
     private TextView nombre, telefono;
-    private ImageView foto;
+    private ImageView foto, back, home;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,13 @@ public class TitlaniAsignado extends AppCompatActivity {
         nombre = findViewById(R.id.nombreT);
         telefono = findViewById(R.id.telT);
         foto = findViewById(R.id.imageView11);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -65,9 +73,11 @@ public class TitlaniAsignado extends AppCompatActivity {
                         nombre.setText(nombreP + " " + apellidoP + " " + apellidoM);
                         telefono.setText(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getcWhattsApp());
 
-                        byte[] decodedString = Base64.decode(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getbImagen(), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        foto.setImageBitmap(decodedByte);
+                        if(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getbImagen() != null){
+                            byte[] decodedString = Base64.decode(res.getResponse().getTt_ctPainani().getTt_ctPainani().get(0).getbImagen(), Base64.DEFAULT);
+                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            foto.setImageBitmap(decodedByte);
+                        }
                     }
                 } else {
                     Toast.makeText(TitlaniAsignado.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -80,5 +90,15 @@ public class TitlaniAsignado extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(TitlaniAsignado.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(TitlaniAsignado.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

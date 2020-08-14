@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class SeguimientoActivity extends AppCompatActivity {
 
     private TextView pedido, estatus, evaluaP, evaluaT,tiempoEntrega, datoTiempo;
-    private ImageView foto, evaluaProv, evaluaTitlani;
+    private ImageView foto, evaluaProv, evaluaTitlani,back, home ;
     public static final int[] IMAGESESTATUS = {R.drawable.ic_pagado, R.drawable.ic_entregar, R.drawable.ic_cancelado,
                                                R.drawable.ic_surtido, R.drawable.ic_rechazado, R.drawable.ic_entrega_a_domicilio,
                                                R.drawable.ic_vegetal, R.drawable.ic_entrega };
@@ -43,6 +43,12 @@ public class SeguimientoActivity extends AppCompatActivity {
         evaluaT = findViewById(R.id.titlani);
         tiempoEntrega = findViewById(R.id.textView19);
         datoTiempo = findViewById(R.id.textView20);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
@@ -154,5 +160,15 @@ public class SeguimientoActivity extends AppCompatActivity {
     private void evaluaProv() {
         Intent perfil = new Intent(SeguimientoActivity.this, EvaluacionPActivity.class);
         startActivity(perfil);
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(SeguimientoActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(SeguimientoActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }
