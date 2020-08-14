@@ -34,11 +34,12 @@ import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.email;
 import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.telefono;
+import static com.sienrgitec.painal.R.id.tvIDCli;
 
 public class PerfilActualizaActivity extends AppCompatActivity {
 
     private Button btnRegistro;
-    private EditText nombreET, aPaternoET, aMaternoET, correoET, pwET, telefonoET;
+    private EditText nombreET, aPaternoET, aMaternoET, correoET, pwET, telefonoET, IDCli;
     private ImageView back, home;
 
     @Override
@@ -50,6 +51,7 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         aPaternoET = findViewById(apellidoP);
         correoET   = findViewById(email);
         telefonoET = findViewById(telefono);
+        IDCli      = findViewById(tvIDCli);
 
         btnRegistro = findViewById(R.id.registroBtn);
         btnRegistro.setOnClickListener(v -> actualizaCliente());
@@ -64,6 +66,7 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         aPaternoET.setText(CarritoSingleton.getInstance().getCliente().getcApellidos());
         correoET.setText(CarritoSingleton.getInstance().getCliente().getcEmail());
         telefonoET.setText(CarritoSingleton.getInstance().getTelefono().getcTelefono());
+        IDCli.setText("ID Cliente: " + CarritoSingleton.getInstance().getCliente().getiCliente());
 
         System.out.println("cliente" + CarritoSingleton.getInstance().getTelefono().getcTelefono());
 

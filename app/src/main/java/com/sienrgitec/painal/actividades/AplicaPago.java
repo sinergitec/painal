@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +61,7 @@ public class AplicaPago extends AppCompatActivity {
     private double deAporta = 0.00, dePropina = 0.00, vdeSubtotal = 0.00, vdeMonto =0.00,
             dePorcCom = 0.00, dePorcProp = 0.00, deImporteTotal = 0.00;
     private Constantes constantes;
+    public String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +83,12 @@ public class AplicaPago extends AppCompatActivity {
         etAporta    = findViewById(R.id.tvAporta);
         etPropina   = findViewById(R.id.tvPropina);
         etMonto     = findViewById(R.id.textView25);
-        etPassword  = findViewById(R.id.edPassword);
+       // etPassword  = findViewById(R.id.edPassword);
         btnPagar    = findViewById(R.id.btnPagoF);
 
-        btnPagar.setOnClickListener(v -> CreaCompra(v));
+        //btnPagar.setOnClickListener(v -> CreaCompra(v));
+        btnPagar.setOnClickListener(v -> PideContraseña(v));
+
 
         CargaFPagos();
         CargaComisiones();
@@ -283,8 +289,9 @@ public class AplicaPago extends AppCompatActivity {
 
     }
 
+
     private void CreaCompra(View v) {
-        String vcPass = String.valueOf(etPassword.getText());
+        String vcPass = "" ; //String.valueOf(etPassword.getText());
         Log.e("aplica pago ", vcPass);
 
         final TtOpPedido pedido =
@@ -456,7 +463,75 @@ public class AplicaPago extends AppCompatActivity {
         }
     }
 
+    private void PideContraseña(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AplicaPago.this);
+        builder.setTitle("Captura tu contraseña");
 
+        final EditText password = new EditText(AplicaPago.this);
+
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(password);
+
+
+        builder.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                email = password.getText().toString();
+
+                if(password.getText().toString().isEmpty()){
+                    Toast.makeText(AplicaPago.this, "No se pyuede continuar.Debe capturar contraseña" , Toast.LENGTH_SHORT).show();
+                    return;
+                } else{
+
+                    Log.e("else" ,"Validando contraseña");
+                    ValidaContraseña(view, email);
+                }
+            }
+        });
+        builder.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    private void ValidaContraseña(View c, String vcPassword) {
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, String> data = new HashMap<>();
+        data.put("ipcUsuario", String.valueOf(CarritoSingleton.getInstance().getCliente().getcEmail()));
+        data.put("ipcPassword",vcPassword);
+
+        final Call<Respuesta> call = service.ValidaPwCli(data);
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                Respuesta res = response.body();
+
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")) {
+                        Toast.makeText(AplicaPago.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                        return;
+                    }else {
+                        Log.e("PerfilActivity", "pw correcto");
+                        CreaCompra(c);
+                    }
+                } else {
+                    Toast.makeText(AplicaPago.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                Toast.makeText(AplicaPago.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+
+    }
 
 
 }

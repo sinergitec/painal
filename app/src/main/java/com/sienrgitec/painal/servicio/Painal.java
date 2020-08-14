@@ -139,4 +139,8 @@ public interface Painal {
     /*Carga de consulta Titlani asignado al pedido/ Adriana 26-07-20*/
     @GET("consultaTitlani")
     Call<Respuesta> consultaTitlani(@QueryMap Map<String, String> options);
+
+    @GET("ValidaPwCli")
+    Call<Respuesta> ValidaPwCli(@QueryMap Map<String, String> options);
+
 }
