@@ -159,7 +159,7 @@ public class RefActualizaActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(RefActualizaActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(RefActualizaActivity.this, ReferidosListActivity.class);
         startActivity(regresa);
     }
 }

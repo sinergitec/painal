@@ -1,6 +1,8 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,7 @@ import retrofit2.Response;
 public class HistoricoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerHistorico;
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,11 @@ public class HistoricoActivity extends AppCompatActivity {
         setContentView(R.layout.historico_pedido);
         listHistorico();
 
-        if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
-        }
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
     }
 
     private void listHistorico() {
@@ -77,5 +82,15 @@ public class HistoricoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(HistoricoActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(HistoricoActivity.this, HomeActivity.class);
+        startActivity(regresa);
     }
 }

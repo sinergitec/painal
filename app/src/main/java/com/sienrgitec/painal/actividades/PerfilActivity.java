@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 
 import static com.sienrgitec.painal.R.id.textView13;
 import static com.sienrgitec.painal.R.id.textView14;

@@ -161,7 +161,7 @@ public class ReferidosActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(ReferidosActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(ReferidosActivity.this, ReferidosListActivity.class);
         startActivity(regresa);
     }
 }

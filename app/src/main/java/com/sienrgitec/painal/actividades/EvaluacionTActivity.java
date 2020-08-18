@@ -86,7 +86,7 @@ public class EvaluacionTActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(EvaluacionTActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(EvaluacionTActivity.this, SeguimientoActivity.class);
         startActivity(regresa);
     }
 }

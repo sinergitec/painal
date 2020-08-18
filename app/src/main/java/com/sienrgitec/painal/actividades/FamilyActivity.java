@@ -155,7 +155,7 @@ public class FamilyActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(FamilyActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(FamilyActivity.this, FamilyListActivity.class);
         startActivity(regresa);
     }
 }

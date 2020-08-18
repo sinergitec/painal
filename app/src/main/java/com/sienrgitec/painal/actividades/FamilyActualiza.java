@@ -162,7 +162,7 @@ public class FamilyActualiza extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(FamilyActualiza.this, HomeActivity.class);
+        Intent regresa = new Intent(FamilyActualiza.this, FamilyListActivity.class);
         startActivity(regresa);
     }
 }

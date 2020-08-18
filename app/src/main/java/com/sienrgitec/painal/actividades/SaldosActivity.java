@@ -103,7 +103,7 @@ public class SaldosActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(SaldosActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(SaldosActivity.this, PerfilActivity.class);
         startActivity(regresa);
     }
 }

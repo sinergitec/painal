@@ -2,6 +2,7 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.List;
 public class HistoDetPedido extends AppCompatActivity {
 
     private RecyclerView recyclerHistoricoDet;
+    private ImageView back, home;
 
 
     @Override
@@ -35,5 +37,21 @@ public class HistoDetPedido extends AppCompatActivity {
         det.setList(detalle);
         recyclerHistoricoDet.setAdapter(det);
 
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(HistoDetPedido.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(HistoDetPedido.this, HistoricoActivity.class);
+        startActivity(regresa);
     }
 }

@@ -167,7 +167,7 @@ public class PerfilActualizaActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(PerfilActualizaActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(PerfilActualizaActivity.this, PerfilActivity.class);
         startActivity(regresa);
     }
 }

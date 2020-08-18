@@ -198,7 +198,7 @@ public class ListaDomicilioActivity extends AppCompatActivity {
     }
 
     private void regresaPantalla() {
-        Intent regresa = new Intent(ListaDomicilioActivity.this, HomeActivity.class);
+        Intent regresa = new Intent(ListaDomicilioActivity.this, PerfilActivity.class);
         startActivity(regresa);
     }
 
