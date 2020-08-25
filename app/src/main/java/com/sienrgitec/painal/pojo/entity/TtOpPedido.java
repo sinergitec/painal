@@ -32,7 +32,7 @@ public class TtOpPedido implements Serializable {
     @SerializedName("deSubtotal")
     @Expose
     private String deSubtotal;
-    @SerializedName("deDescuento")
+   @SerializedName("deDescuento")
     @Expose
     private String deDescuento;
     @SerializedName("deImpuesto")
@@ -63,6 +63,27 @@ public class TtOpPedido implements Serializable {
     @Expose
     private String dtEntregado;
     @SerializedName("dtModificado")
+    @Expose
+    private String dtCanceldo;
+    @SerializedName("dtCanceldo")
+    @Expose
+    private Integer iRazon;
+    @SerializedName("iRazon")
+    @Expose
+    private Boolean lReasignado;
+    @SerializedName("lReasignado")
+    @Expose
+    private String dtReasignado;
+    @SerializedName("dtReasignado")
+    @Expose
+    private String cCvePedido;
+    @SerializedName("cCvePedido")
+    @Expose
+    private String dtLlegaCte;
+    @SerializedName("dtLlegaCte")
+    @Expose
+    private String deTRecorrido;
+    @SerializedName("deTRecorrido")
     @Expose
     private String dtModificado;
     @SerializedName("cUsuCreado")
@@ -344,6 +365,134 @@ public class TtOpPedido implements Serializable {
         this.cEdoProc = cEdoProc;
     }
 
+    public String getiPedido() {
+        return iPedido;
+    }
+
+    public void setiPedido(String iPedido) {
+        this.iPedido = iPedido;
+    }
+
+    public String getiUnidad() {
+        return iUnidad;
+    }
+
+    public void setiUnidad(String iUnidad) {
+        this.iUnidad = iUnidad;
+    }
+
+    public String getiCliente() {
+        return iCliente;
+    }
+
+    public void setiCliente(String iCliente) {
+        this.iCliente = iCliente;
+    }
+
+    public String getiEstadoPedido() {
+        return iEstadoPedido;
+    }
+
+    public void setiEstadoPedido(String iEstadoPedido) {
+        this.iEstadoPedido = iEstadoPedido;
+    }
+
+    public String getiNegocios() {
+        return iNegocios;
+    }
+
+    public void setiNegocios(String iNegocios) {
+        this.iNegocios = iNegocios;
+    }
+
+    public String getDtCanceldo() {
+        return dtCanceldo;
+    }
+
+    public void setDtCanceldo(String dtCanceldo) {
+        this.dtCanceldo = dtCanceldo;
+    }
+
+    public Integer getiRazon() {
+        return iRazon;
+    }
+
+    public void setiRazon(Integer iRazon) {
+        this.iRazon = iRazon;
+    }
+
+    public Boolean getlReasignado() {
+        return lReasignado;
+    }
+
+    public void setlReasignado(Boolean lReasignado) {
+        this.lReasignado = lReasignado;
+    }
+
+    public String getDtReasignado() {
+        return dtReasignado;
+    }
+
+    public void setDtReasignado(String dtReasignado) {
+        this.dtReasignado = dtReasignado;
+    }
+
+    public String getcCvePedido() {
+        return cCvePedido;
+    }
+
+    public void setcCvePedido(String cCvePedido) {
+        this.cCvePedido = cCvePedido;
+    }
+
+    public String getDtLlegaCte() {
+        return dtLlegaCte;
+    }
+
+    public void setDtLlegaCte(String dtLlegaCte) {
+        this.dtLlegaCte = dtLlegaCte;
+    }
+
+    public String getDeTRecorrido() {
+        return deTRecorrido;
+    }
+
+    public void setDeTRecorrido(String deTRecorrido) {
+        this.deTRecorrido = deTRecorrido;
+    }
+
+    public String getcUsuCreado() {
+        return cUsuCreado;
+    }
+
+    public void setcUsuCreado(String cUsuCreado) {
+        this.cUsuCreado = cUsuCreado;
+    }
+
+    public String getcUsuModificado() {
+        return cUsuModificado;
+    }
+
+    public void setcUsuModificado(String cUsuModificado) {
+        this.cUsuModificado = cUsuModificado;
+    }
+
+    public String getcUsuCrea() {
+        return cUsuCrea;
+    }
+
+    public void setcUsuCrea(String cUsuCrea) {
+        this.cUsuCrea = cUsuCrea;
+    }
+
+    public String getcUsuModifca() {
+        return cUsuModifca;
+    }
+
+    public void setcUsuModifca(String cUsuModifca) {
+        this.cUsuModifca = cUsuModifca;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TtOpPedido{");
@@ -371,6 +520,15 @@ public class TtOpPedido implements Serializable {
         sb.append(", cUsuCrea='").append(cUsuCrea).append('\'');
         sb.append(", cUsuModifca='").append(cUsuModifca).append('\'');
         sb.append(", deTiempoLlega='").append(deTiempoLlega).append('\'');
+        sb.append(", dtCanceldo='").append(dtCanceldo).append('\'');
+        sb.append(", iRazon='").append(iRazon).append('\'');
+        sb.append(", lReasignado='").append(lReasignado).append('\'');
+        sb.append(", cCvePedido='").append(cCvePedido).append('\'');
+        sb.append(", dtLlegaCte='").append(dtLlegaCte).append('\'');
+        sb.append(", deTRecorrido='").append(deTRecorrido).append('\'');
+        sb.append(", deCargoPago='").append(deCargoPago).append('\'');
+        sb.append(", dtCreado='").append(deTRecorrido).append('\'');
+        sb.append(", dtModificado='").append(deTRecorrido).append('\'');
         sb.append('}');
         return sb.toString();
     }

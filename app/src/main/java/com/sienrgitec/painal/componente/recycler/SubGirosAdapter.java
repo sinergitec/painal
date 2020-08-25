@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.ProveedoresActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
+import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
@@ -121,7 +123,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                         for (TtCtProveedor_ proveedor : res.getResponse().getTtCtProveedor().getTtCtProveedor()) {
                             listProveedor.add(proveedor);
                             if(proveedor.getLSucursales()){
-                                TtCtProveedor_ proveedor1 = new TtCtProveedor_(proveedor.getIProveedor(), proveedor.getCClaveProv(), proveedor.getCRazonS(), proveedor.getCNegocio(), proveedor.getCRFC(), proveedor.getIGiro(), proveedor.getISubGiro(), proveedor.getCWhatsApp(), proveedor.getCPaginaWeb(), proveedor.getCEMail(), proveedor.getCTwitter(), proveedor.getCFacebook(), proveedor.getIEstadoProv(), proveedor.getLSucursales(), proveedor.getINivelClasifica(), proveedor.getLSistema(), proveedor.getCSistema(), proveedor.getCObs(), proveedor.getDtAfiliacion(), proveedor.getDtCreado(), proveedor.getDtModificado(), proveedor.getCUsuCrea(), proveedor.getCUsuModifica(), proveedor.getiDomicilio(),
+                                TtCtProveedor_ proveedor1 = new TtCtProveedor_(proveedor.getIProveedor(), proveedor.getCClaveProv(), proveedor.getcRazonSocial(), proveedor.getCNegocio(), proveedor.getCRFC(), proveedor.getIGiro(), proveedor.getISubGiro(), proveedor.getCWhatsApp(), proveedor.getCPaginaWeb(), proveedor.getCEMail(), proveedor.getCTwitter(), proveedor.getCFacebook(), proveedor.getIEstadoProv(), proveedor.getLSucursales(), proveedor.getINivelClasifica(), proveedor.getLSistema(), proveedor.getCSistema(), proveedor.getCObs(), proveedor.getDtAfiliacion(), proveedor.getDtCreado(), proveedor.getDtModificado(), proveedor.getCUsuCrea(), proveedor.getCUsuModifica(), proveedor.getiDomicilio(),
                                         proveedor.getDeEvaluacion(), proveedor.getcEvaluacion(), proveedor.getcTipoProv(), proveedor.getcDomicilio(), proveedor.getId());
                                 proveedor1.setCNegocio(proveedor.getCNegocio() + " II");
                                 listProveedor.add(proveedor1);

@@ -13,9 +13,9 @@ public class TtCtProveedor_  implements Serializable {
     @SerializedName("cClaveProv")
     @Expose
     private String cClaveProv;
-    @SerializedName("cRazonS")
+    @SerializedName("cRazonSocial")
     @Expose
-    private String cRazonS;
+    private String cRazonSocial;
     @SerializedName("cNegocio")
     @Expose
     private String cNegocio;
@@ -93,6 +93,10 @@ public class TtCtProveedor_  implements Serializable {
     @Expose
     private String cTipoProv;
 
+    @SerializedName("lPideOtrasUnidades")
+    @Expose
+    private String lPideOtrasUnidades;
+
     @SerializedName("cDomicilio")
     @Expose
     private String cDomicilio;
@@ -113,7 +117,7 @@ public class TtCtProveedor_  implements Serializable {
                           Integer iDomicilio, Double deEvaluacion, String cEvaluacion, String cTipoProv,  String cDomicilio, Object id) {
         this.iProveedor = iProveedor;
         this.cClaveProv = cClaveProv;
-        this.cRazonS = cRazonS;
+        this.cRazonSocial = cRazonSocial;
         this.cNegocio = cNegocio;
         this.cRFC = cRFC;
         this.iGiro = iGiro;
@@ -199,12 +203,12 @@ public class TtCtProveedor_  implements Serializable {
         this.cClaveProv = cClaveProv;
     }
 
-    public String getCRazonS() {
-        return cRazonS;
+    public String getcRazonSocial() {
+        return cRazonSocial;
     }
 
-    public void setCRazonS(String cRazonS) {
-        this.cRazonS = cRazonS;
+    public void setcRazonSocial(String cRazonSocial) {
+        this.cRazonSocial = cRazonSocial;
     }
 
     public String getCNegocio() {
@@ -375,12 +379,173 @@ public class TtCtProveedor_  implements Serializable {
         this.id = id;
     }
 
+    public Integer getiProveedor() {
+        return iProveedor;
+    }
+
+    public void setiProveedor(Integer iProveedor) {
+        this.iProveedor = iProveedor;
+    }
+
+    public String getcClaveProv() {
+        return cClaveProv;
+    }
+
+    public void setcClaveProv(String cClaveProv) {
+        this.cClaveProv = cClaveProv;
+    }
+
+
+    public String getcNegocio() {
+        return cNegocio;
+    }
+
+    public void setcNegocio(String cNegocio) {
+        this.cNegocio = cNegocio;
+    }
+
+    public String getcRFC() {
+        return cRFC;
+    }
+
+    public void setcRFC(String cRFC) {
+        this.cRFC = cRFC;
+    }
+
+    public Integer getiGiro() {
+        return iGiro;
+    }
+
+    public void setiGiro(Integer iGiro) {
+        this.iGiro = iGiro;
+    }
+
+    public Integer getiSubGiro() {
+        return iSubGiro;
+    }
+
+    public void setiSubGiro(Integer iSubGiro) {
+        this.iSubGiro = iSubGiro;
+    }
+
+    public String getcWhatsApp() {
+        return cWhatsApp;
+    }
+
+    public void setcWhatsApp(String cWhatsApp) {
+        this.cWhatsApp = cWhatsApp;
+    }
+
+    public String getcPaginaWeb() {
+        return cPaginaWeb;
+    }
+
+    public void setcPaginaWeb(String cPaginaWeb) {
+        this.cPaginaWeb = cPaginaWeb;
+    }
+
+    public String getcEMail() {
+        return cEMail;
+    }
+
+    public void setcEMail(String cEMail) {
+        this.cEMail = cEMail;
+    }
+
+    public String getcTwitter() {
+        return cTwitter;
+    }
+
+    public void setcTwitter(String cTwitter) {
+        this.cTwitter = cTwitter;
+    }
+
+    public String getcFacebook() {
+        return cFacebook;
+    }
+
+    public void setcFacebook(String cFacebook) {
+        this.cFacebook = cFacebook;
+    }
+
+    public Integer getiEstadoProv() {
+        return iEstadoProv;
+    }
+
+    public void setiEstadoProv(Integer iEstadoProv) {
+        this.iEstadoProv = iEstadoProv;
+    }
+
+    public Boolean getlSucursales() {
+        return lSucursales;
+    }
+
+    public void setlSucursales(Boolean lSucursales) {
+        this.lSucursales = lSucursales;
+    }
+
+    public Integer getiNivelClasifica() {
+        return iNivelClasifica;
+    }
+
+    public void setiNivelClasifica(Integer iNivelClasifica) {
+        this.iNivelClasifica = iNivelClasifica;
+    }
+
+    public Boolean getlSistema() {
+        return lSistema;
+    }
+
+    public void setlSistema(Boolean lSistema) {
+        this.lSistema = lSistema;
+    }
+
+    public String getcSistema() {
+        return cSistema;
+    }
+
+    public void setcSistema(String cSistema) {
+        this.cSistema = cSistema;
+    }
+
+    public String getcObs() {
+        return cObs;
+    }
+
+    public void setcObs(String cObs) {
+        this.cObs = cObs;
+    }
+
+    public String getcUsuCrea() {
+        return cUsuCrea;
+    }
+
+    public void setcUsuCrea(String cUsuCrea) {
+        this.cUsuCrea = cUsuCrea;
+    }
+
+    public String getcUsuModifica() {
+        return cUsuModifica;
+    }
+
+    public void setcUsuModifica(String cUsuModifica) {
+        this.cUsuModifica = cUsuModifica;
+    }
+
+    public String getlPideOtrasUnidades() {
+        return lPideOtrasUnidades;
+    }
+
+    public void setlPideOtrasUnidades(String lPideOtrasUnidades) {
+        this.lPideOtrasUnidades = lPideOtrasUnidades;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TtCtProveedor_{");
         sb.append("iProveedor=").append(iProveedor);
         sb.append(", cClaveProv='").append(cClaveProv).append('\'');
-        sb.append(", cRazonS='").append(cRazonS).append('\'');
+        sb.append(", cRazonSocial='").append(cRazonSocial).append('\'');
         sb.append(", cNegocio='").append(cNegocio).append('\'');
         sb.append(", cRFC='").append(cRFC).append('\'');
         sb.append(", iGiro=").append(iGiro);
