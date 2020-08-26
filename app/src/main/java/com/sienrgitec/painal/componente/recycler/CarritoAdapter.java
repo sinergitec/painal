@@ -45,35 +45,31 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
             cant.setText(item.getCantidadArticulo().toString());
 
-            menos.setOnClickListener(v ->  menosCantidad(item));
-            mas.setOnClickListener(v -> masCantidad(item));
+            menos.setOnClickListener(v -> cant.setText(toString().valueOf(menosCantidad(item))));
+            mas.setOnClickListener(v -> cant.setText(toString().valueOf(masCantidad(item))));
         }
     }
 
-    private void menosCantidad(Carrito cant) {
-
+    private double menosCantidad(Carrito cant) {
         double cantMen = cant.getCantidadArticulo();
-
-        System.out.println("Cantidad menos" + cantMen);
-
         double cantMenos = cantMen - 1.0;
 
-        System.out.println("Cantidad menos" + cantMenos);
-
+        if(cantMenos == 0){
+            cantMenos = 1.0;
+        }
         cant.setCantidadArticulo(cantMenos);
+        return cantMenos;
     }
 
-    private void masCantidad(Carrito cant) {
-
+    private double masCantidad(Carrito cant) {
         double cantMas = cant.getCantidadArticulo();
-
-        System.out.println("cantidadMas" + cantMas);
-
         double cantMasSuma = cantMas + 1.0;
 
-        System.out.println("cantidadMas" + cantMasSuma);
-
+        if(cantMasSuma > 20){
+            cantMasSuma = 20;
+        }
         cant.setCantidadArticulo(cantMasSuma);
 
+        return cantMasSuma;
     }
 }
