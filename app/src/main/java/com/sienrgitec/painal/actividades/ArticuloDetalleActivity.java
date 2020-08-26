@@ -56,6 +56,7 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         nombreArticulo.setText(articulo.getCDescripcion());
         descripcionArticulo.setText(articulo.getCDescripcion());
         saltoContadorGranel = articulo.getDeGramosPieza();
+        actualizaCantidadArticulo();
 
         precioPieza.setOnClickListener(v -> {
             cambiaBackground(precioPieza, R.drawable.pieza_granel_borders);
