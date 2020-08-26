@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,11 +34,13 @@ import static com.sienrgitec.painal.R.id.descripcion;
 import static com.sienrgitec.painal.R.id.email;
 import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.telefono;
+import static com.sienrgitec.painal.R.id.tvIDCli;
 
 public class PerfilActualizaActivity extends AppCompatActivity {
 
     private Button btnRegistro;
-    private EditText nombreET, aPaternoET, aMaternoET, correoET, pwET, telefonoET;
+    private EditText nombreET, aPaternoET, aMaternoET, correoET, pwET, telefonoET, IDCli;
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +51,22 @@ public class PerfilActualizaActivity extends AppCompatActivity {
         aPaternoET = findViewById(apellidoP);
         correoET   = findViewById(email);
         telefonoET = findViewById(telefono);
+        IDCli      = findViewById(tvIDCli);
 
         btnRegistro = findViewById(R.id.registroBtn);
         btnRegistro.setOnClickListener(v -> actualizaCliente());
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
         nombreET.setText(CarritoSingleton.getInstance().getCliente().getcNombre());
         aPaternoET.setText(CarritoSingleton.getInstance().getCliente().getcApellidos());
         correoET.setText(CarritoSingleton.getInstance().getCliente().getcEmail());
         telefonoET.setText(CarritoSingleton.getInstance().getTelefono().getcTelefono());
+        IDCli.setText("ID Cliente: " + CarritoSingleton.getInstance().getCliente().getiCliente());
 
         System.out.println("cliente" + CarritoSingleton.getInstance().getTelefono().getcTelefono());
 
@@ -152,4 +163,16 @@ public class PerfilActualizaActivity extends AppCompatActivity {
             });
         }
     }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(PerfilActualizaActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(PerfilActualizaActivity.this, PerfilActivity.class);
+        startActivity(regresa);
+    }
 }
+
+

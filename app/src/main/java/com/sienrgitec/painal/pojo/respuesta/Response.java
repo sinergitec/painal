@@ -2,7 +2,7 @@ package com.sienrgitec.painal.pojo.respuesta;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
+import com.sienrgitec.painal.pojo.entity.TTOpPedido_;
 import com.sienrgitec.painal.pojo.entity.TtCredEncCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv;
@@ -17,10 +17,12 @@ import com.sienrgitec.painal.pojo.entity.TtCtProveedor;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
-import com.sienrgitec.painal.pojo.entity.TtCtTelefono_;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
+import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet_;
 import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
+import com.sienrgitec.painal.pojo.entity.Tt_ctPainani;
+import com.sienrgitec.painal.pojo.entity.Tt_ctPainani_;
 
 public class Response {
 
@@ -52,6 +54,14 @@ public class Response {
     @Expose
     private TtCtTelefono ttCtTelefono;
 
+    @SerializedName("tt_opPedido")
+    @Expose
+    private TTOpPedido_ ttTtOpPedido;
+
+    @SerializedName("tt_opPedidoDet")
+    @Expose
+    private TtOpPedidoDet_ tt_opPedidoDet;
+
     @SerializedName("tt_ctContacto")
     @Expose
     private TtCtContacto tt_ctContacto;
@@ -72,7 +82,6 @@ public class Response {
     @Expose
     private Tt_CtEvaluacion tt_ctEvaluacion;
 
-
     @SerializedName("tt_credEncCPCP")
     @Expose
     private TtCredEncCPCP tt_credEncCPCP;
@@ -85,12 +94,27 @@ public class Response {
     @Expose
     private TtCtComisiones tt_ctComisiones;
 
+    @SerializedName("tt_ctPainani")
+    @Expose
+    private Tt_ctPainani tt_ctPainani;
+
     @SerializedName("oplError")
     @Expose
     private String oplError;
     @SerializedName("opcError")
     @Expose
     private String opcError;
+    @SerializedName("opdeSaldo")
+    @Expose
+    private Double opdeSaldo;
+
+    public Double getOpdeSaldo() {
+        return opdeSaldo;
+    }
+
+    public void setOpdeSaldo(Double opdeSaldo) {
+        this.opdeSaldo = opdeSaldo;
+    }
 
     public TtCtGiro getTtCtGiro() {
         return ttCtGiro;
@@ -238,6 +262,30 @@ public class Response {
         return tt_ctComisiones;
     }
 
+    public TTOpPedido_ getTtTtOpPedido() {
+        return ttTtOpPedido;
+    }
+
+    public void setTtTtOpPedido(TTOpPedido_ ttTtOpPedido) {
+        this.ttTtOpPedido = ttTtOpPedido;
+    }
+
+    public TtOpPedidoDet_ getTt_opPedidoDet() {
+        return tt_opPedidoDet;
+    }
+
+    public void setTt_opPedidoDet(TtOpPedidoDet_ tt_opPedidoDet) {
+        this.tt_opPedidoDet = tt_opPedidoDet;
+    }
+
+    public Tt_ctPainani getTt_ctPainani() {
+        return tt_ctPainani;
+    }
+
+    public void setTt_ctPainani(Tt_ctPainani tt_ctPainani) {
+        this.tt_ctPainani = tt_ctPainani;
+    }
+
     @Override
     public String toString() {
         return "Response{" +
@@ -255,6 +303,7 @@ public class Response {
                 ", tt_ctComisiones" + tt_ctComisiones +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
+                ", opdeSaldo='" + opdeSaldo + '\'' +
                 '}';
     }
 }

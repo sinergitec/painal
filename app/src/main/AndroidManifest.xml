@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sienrgitec.painal">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -50,7 +51,8 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -122,11 +124,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.EvaluacionPActivity"
-            android:parentActivityName=".actividades.HomeActivity"
+            android:parentActivityName=".actividades.SeguimientoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.EvaluacionTActivity"
-            android:parentActivityName=".actividades.HomeActivity"
+            android:parentActivityName=".actividades.SeguimientoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.ListaDomicilioActivity"
@@ -138,12 +140,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.HistoricoActivity"
+            android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.SeguimientoActivity"
+            android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".actividades.TitlaniAsignado"
+            android:parentActivityName=".actividades.HomeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".actividades.HistoDetPedido"
+            android:parentActivityName=".actividades.HistoricoActivity"
             android:screenOrientation="portrait" />
     </application>
 

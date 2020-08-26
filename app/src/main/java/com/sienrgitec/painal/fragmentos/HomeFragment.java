@@ -45,6 +45,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.sienrgitec.painal.constante.Constantes.vcMatchArt;
+import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
 
 
 /**
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView rv;
-    private TextView calleEntregar;
+    private TextView calleEntregar, tvSaldoDisp;
 
     private SearchView buscador;
     private List<TtCtGiro_> listaGiros = new ArrayList<>();
@@ -107,6 +108,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         buscador =  view.findViewById(R.id.buscadorView);
+        tvSaldoDisp = view.findViewById(R.id.tvSaldo);
+        tvSaldoDisp.setText("Saldo Disponible: " + vdeSaldo + "0");
 
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -203,7 +206,4 @@ public class HomeFragment extends Fragment {
         });
         return girosAdapter;
     }
-
-
-
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class ReferidosActivity extends AppCompatActivity {
     private Button btnReferir;
     private EditText nombreET, aPaternoET, aMaternoET, emailET, telefonoET ;
     private Switch autoriza;
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,12 @@ public class ReferidosActivity extends AppCompatActivity {
         emailET   = findViewById(email);
         telefonoET = findViewById(telefono);
         autoriza = findViewById(switch1);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
 
         btnReferir = findViewById(R.id.referirBtn);
@@ -145,5 +153,15 @@ public class ReferidosActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(ReferidosActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(ReferidosActivity.this, ReferidosListActivity.class);
+        startActivity(regresa);
     }
 }

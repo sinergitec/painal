@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
     <Button
         android:id="@+id/btnPagoF"
@@ -325,6 +325,8 @@
         app:layout_constraintStart_toEndOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/tvAporta" />
 
+
+    <!--
     <EditText
         android:id="@+id/edPassword"
         android:layout_width="wrap_content"
@@ -339,7 +341,7 @@
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tableLayout" />
-
+    -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,10 @@
 package com.sienrgitec.painal.fragmentos;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.actividades.AplicaPago;
+import com.sienrgitec.painal.actividades.NvoPagoActivity;
+import com.sienrgitec.painal.actividades.SaldosActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
 import com.sienrgitec.painal.constante.Constantes;
@@ -35,6 +41,8 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
 
 
 /**
@@ -110,10 +118,54 @@ public class CarritoFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //realizaPedido(v);
+
+                ProgressDialog nDialog;
+                nDialog = new ProgressDialog(getContext());
+                nDialog.setMessage("Alerta...");
+                nDialog.setTitle("Alerta");
+                nDialog.setIndeterminate(false);
+                nDialog.show();
+
+
+                Double totalD = 0.0;
+                for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
+                    totalD += articulo.getMonto();
+                }
+
+
+                if (totalD >= vdeSaldo){
+                    AlertDialog.Builder myBuild = new AlertDialog.Builder(getContext());
+                    myBuild.setMessage("No puedes realizar este pedido. "  +  '\n' +  "Tu saldo actual es de: " + vdeSaldo + "0" + '\n' +
+                            "Saldo Total del pedido: " + totalD + "0"
+                            +  '\n' + "Te invitamos a realizar una recarga  o a eliminar productos de la lista para continuar");
+                    myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡Saldo Insuficiente! </font>"));
+                    myBuild.setPositiveButton("Recargar Saldo", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent recarga = new Intent(getContext(), SaldosActivity.class);
+                            recarga.putExtra("cuenta", "");
+                            getContext().startActivity(recarga);
+                        }
+                    });
+                    myBuild.setNegativeButton("Eliminar Productos", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+
+                    AlertDialog dialog = myBuild.create();
+                    dialog.show();
+                    nDialog.dismiss();
+
+                    return;
+                }
+
+
+
+
                 Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
                 aplicaPago.putExtra("vdeimporte", vdeImporte);
-                //aplicaPago.putExtra("listPedido",  pedido);
                 startActivity(aplicaPago);
             }
         });

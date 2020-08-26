@@ -98,7 +98,23 @@
     <!-- Pedidos  -->
     <string name="ped">INFORMACION DEL PEDIDO</string>
     <string name="historico">HISTORICO DEL PEDIDO</string>
+    <string name="detalleH">DETALLE DEL PEDIDO</string>
     <string name="seguimiento">SEGUIMIENTO DEL PEDIDO</string>
     <string name="titlaniAsig">TITLANI ASIGNADO</string>
+
+    <!-- Historico de Pedidos  -->
+    <string name="numPedido">Número de Pedido</string>
+    <string name="fecPedido">Fecha de Pedido</string>
+    <string name="EstatusPedido">Estatus de Pedido</string>
+    <string name="totalPedido">Total del Pedido</string>
+
+    <!-- Detalle Histo  de Pedidos  -->
+    <string name="articulo">Articulo</string>
+    <string name="observacion">Observacion</string>
+    <string name="cant">Cantidad</string>
+    <string name="precio">Precio</string>
+    <string name="desc">Descuento</string>
+    <string name="total">Total</string>
+
 
 </resources>

@@ -16,14 +16,29 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="290dp">
+            android:layout_height="380dp">
+
+
+            <TextView
+                android:id="@+id/tvTipoProv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="GIRO"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
             <ImageView
                 android:id="@+id/imageView"
+                android:layout_below="@+id/tvTipoProv"
                 app:srcCompat="@android:drawable/ic_menu_mapmode"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/tvProv"
@@ -37,14 +52,11 @@
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText"/>
 
-
-
-
             <TextView
                 android:id="@+id/tvEvalua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Evalua"
+                android:hint="Evaluacion"
                 android:layout_below="@id/tvProv"
                 android:layout_marginLeft="16dp"
                 android:textSize="15sp"
@@ -54,17 +66,26 @@
             <Button
                 android:id="@+id/btnVisitar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="246dp"
-                android:layout_marginEnd="44dp"
-                android:layout_marginRight="44dp"
-                android:text="visitar"
+                android:layout_height="35dp"
+                android:layout_below="@id/tvDir"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
                 android:background="@drawable/rounded_corners"
-                android:textColor="@color/colorTextWhite"
-                android:onClick="buscaArt"/>
+                android:onClick="buscaArt"
+                android:text="visitar"
+                android:textColor="@color/colorTextWhite" />
+
+            <TextView
+                android:id="@+id/tvDir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Domicilio:"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@id/tvEvalua"
+                android:textSize="15sp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
 
 
         </RelativeLayout>

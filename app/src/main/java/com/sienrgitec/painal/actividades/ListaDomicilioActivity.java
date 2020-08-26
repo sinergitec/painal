@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,11 +44,20 @@ public class ListaDomicilioActivity extends AppCompatActivity {
     private View fragmentMapa;
     private boolean banderaMostrarMapa = false;
     private MapaFragment newFragment = new MapaFragment();
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_direcciones);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
+
         final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.buscarDireccion);
         autoCompleteTextView.setAdapter(new AutoCompleteStreet(ListaDomicilioActivity.this,android.R.layout.simple_list_item_1));
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,7 +163,6 @@ public class ListaDomicilioActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
-
     }
 
     private Address getAddressFromLatLng(LatLng latLng){
@@ -181,6 +190,16 @@ public class ListaDomicilioActivity extends AppCompatActivity {
         transaction.replace(R.id.fragmentMapa, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(ListaDomicilioActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(ListaDomicilioActivity.this, PerfilActivity.class);
+        startActivity(regresa);
     }
 
 }

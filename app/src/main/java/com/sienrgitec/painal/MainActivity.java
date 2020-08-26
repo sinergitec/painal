@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ import static com.sienrgitec.painal.R.id.loginBtn;
 import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.registro;
 import static com.sienrgitec.painal.R.id.recupera;
+import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         loading.iniciaDialogo("alert");
         String usr = usernameET.getText().toString();
         String pwd = passwordET.getText().toString();
+
+        Double vdeSaldoCli = 0.00;
 
         if(usr.isEmpty()){
             usernameET.setError("Usuario requerido");
@@ -121,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
                                             (res.getResponse().getTt_ctDomicilio().getTt_ctDomicilio().get(0));
                                 }
 
+                                vdeSaldo = res.getResponse().getOpdeSaldo();
+
+                                Log.e("Saldo---> " , "saldo " + vdeSaldoCli);
 
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);

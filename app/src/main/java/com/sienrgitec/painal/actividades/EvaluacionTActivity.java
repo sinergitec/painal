@@ -1,6 +1,8 @@
 package com.sienrgitec.painal.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class EvaluacionTActivity extends AppCompatActivity {
 
     private TextView tipoET;
     private RecyclerView recyclerEvaluacion;
+    private ImageView  back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,12 @@ public class EvaluacionTActivity extends AppCompatActivity {
         setContentView(R.layout.ver_evaluacion_titlani);
 
         tipoET   = findViewById(R.id.tipo);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
 
         obtenerTipoEvaluacion();
     }
@@ -69,5 +78,15 @@ public class EvaluacionTActivity extends AppCompatActivity {
                 Toast.makeText(EvaluacionTActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(EvaluacionTActivity.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(EvaluacionTActivity.this, SeguimientoActivity.class);
+        startActivity(regresa);
     }
 }

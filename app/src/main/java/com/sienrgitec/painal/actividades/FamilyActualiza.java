@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class FamilyActualiza extends AppCompatActivity {
     private EditText nombreET, aPaternoET, aMaternoET, edadET, parentescoET ;
     private Switch solAutoET;
     private Integer iAutorizado = 0;
+    private ImageView back, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,13 @@ public class FamilyActualiza extends AppCompatActivity {
         edadET = findViewById(edad);
         parentescoET = findViewById(parentesco);
         solAutoET = findViewById(switch2);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> regresaPantalla());
+
+        home = findViewById(R.id.imageView7);
+        home.setOnClickListener(v -> pantallaHome());
+
 
 
         Intent i = getIntent();
@@ -145,5 +154,15 @@ public class FamilyActualiza extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void pantallaHome() {
+        Intent regresa = new Intent(FamilyActualiza.this, HomeActivity.class);
+        startActivity(regresa);
+    }
+
+    private void regresaPantalla() {
+        Intent regresa = new Intent(FamilyActualiza.this, FamilyListActivity.class);
+        startActivity(regresa);
     }
 }
