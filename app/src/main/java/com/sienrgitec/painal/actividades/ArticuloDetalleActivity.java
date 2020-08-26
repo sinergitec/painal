@@ -85,7 +85,8 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         });
 
         agregarCarrito.setOnClickListener(v -> {
-            Carrito carrito = new Carrito(articulo, banderaContador ? contadorGranel : contadorPza, articulo.getDePrecioVtaPza());
+            Carrito carrito = new Carrito(articulo, banderaContador ? contadorGranel : contadorPza, articulo.getDePrecioVtaPza(),
+                    banderaContador ? "g" : "pz");
             carrito.setMonto(carrito.getCantidadArticulo() * carrito.getMonto());
             CarritoSingleton.getInstance().agregaCarrito(v.getContext(), carrito);
         });

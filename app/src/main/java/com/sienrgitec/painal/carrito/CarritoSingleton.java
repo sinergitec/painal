@@ -156,31 +156,31 @@ public class CarritoSingleton {
         carritoDBHelper.eliminarArticuloCarrito(id);
     }
 
-    public List<Carrito> getListaCarrito() {
+    public synchronized List<Carrito> getListaCarrito() {
         return listaCarrito;
     }
 
-    public TtCtCliente_ getCliente() {
+    public synchronized TtCtCliente_ getCliente() {
         return cliente;
     }
 
-    public void setCliente(TtCtCliente_ cliente) {
+    public synchronized void setCliente(TtCtCliente_ cliente) {
         this.cliente = cliente;
     }
 
-    public TtCtUsuario_ getUsuario_() {
+    public synchronized TtCtUsuario_ getUsuario_() {
         return usuario_;
     }
 
-    public void setUsuario_(TtCtUsuario_ usuario_) {
+    public synchronized void setUsuario_(TtCtUsuario_ usuario_) {
         this.usuario_ = usuario_;
     }
 
-    public TtCtTelefono_ getTelefono() {
+    public synchronized TtCtTelefono_ getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(TtCtTelefono_ telefono) {
+    public synchronized void setTelefono(TtCtTelefono_ telefono) {
         this.telefono = telefono;
     }
 
@@ -188,7 +188,7 @@ public class CarritoSingleton {
         return pilaProveedores.size();
     }
 
-    public Stack<Integer> getPilaProveedores() {
+    public synchronized Stack<Integer> getPilaProveedores() {
         return pilaProveedores;
     }
 
@@ -196,23 +196,23 @@ public class CarritoSingleton {
         return pilaDomicilios.size();
     }
 
-    public Stack<String> getPilaDomicilios() {
+    public synchronized Stack<String> getPilaDomicilios() {
         return pilaDomicilios;
     }
 
-    public List<TtCtDomicilio_> getDomicilio() {
+    public synchronized List<TtCtDomicilio_> getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(List<TtCtDomicilio_> domicilio) {
+    public synchronized void setDomicilio(List<TtCtDomicilio_> domicilio) {
         this.domicilio = domicilio;
     }
 
-    public TtCtDomicilio_ getDomicilioActual() {
+    public synchronized TtCtDomicilio_ getDomicilioActual() {
         return domicilioActual;
     }
 
-    public void setDomicilioActual(TtCtDomicilio_ domicilioActual) {
+    public synchronized void setDomicilioActual(TtCtDomicilio_ domicilioActual) {
         this.domicilioActual = domicilioActual;
     }
 }

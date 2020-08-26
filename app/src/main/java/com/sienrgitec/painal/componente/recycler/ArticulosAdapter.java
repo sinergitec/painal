@@ -49,7 +49,7 @@ public class ArticulosAdapter extends RVAdapter<TtCtArtProveedor_> {
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Carrito carrito = new Carrito(item, 1.0, item.getDePrecioVtaPza());
+                    Carrito carrito = new Carrito(item, 1.0, item.getDePrecioVtaPza(), "pz");
                     carrito.setMonto(carrito.getCantidadArticulo() * carrito.getMonto());
                     CarritoSingleton.getInstance().agregaCarrito(v.getContext(), carrito);
                 }
