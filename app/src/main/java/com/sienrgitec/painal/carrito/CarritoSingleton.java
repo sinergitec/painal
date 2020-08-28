@@ -74,7 +74,7 @@ public class CarritoSingleton {
         this.listaCarrito.add(item);
         // Persisten en caso de que se salgan de la aplicacion
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
-        carritoDBHelper.insertarPedido(item);
+        carritoDBHelper.insertarPedido(this.listaCarrito);
 
 
         /**AndrosOHG 30/07/2020**/
@@ -153,7 +153,7 @@ public class CarritoSingleton {
     public synchronized void eliminarArticuloCarrito(Context context, int id){
         listaCarrito.remove(id - 1);
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
-        carritoDBHelper.eliminarArticuloCarrito(id);
+        carritoDBHelper.eliminarArticuloCarrito(this.listaCarrito);
     }
 
     public synchronized List<Carrito> getListaCarrito() {
