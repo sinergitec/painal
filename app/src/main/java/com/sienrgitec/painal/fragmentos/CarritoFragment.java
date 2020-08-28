@@ -187,10 +187,8 @@ public class CarritoFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(rvListaCarrito);
 
-        totalArticulos.setText("Cantidad de articulos: " + sizeList);
+        totalArticulos.setText("Art Dif: " + sizeList);
         total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
-
-
     }
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -211,7 +209,7 @@ public class CarritoFragment extends Fragment {
                     Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
                     Double totalD = subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito());
 
-                    totalArticulos.setText("Cantidad de articulos: " + sizeList );
+                    totalArticulos.setText("Art Dif: " + sizeList );
                     total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
 
                     Toast.makeText(viewHolder.itemView.getContext(),"Articulo eliminado", Toast.LENGTH_SHORT).show();
