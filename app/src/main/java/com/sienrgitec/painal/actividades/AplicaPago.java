@@ -112,7 +112,7 @@ public class AplicaPago extends AppCompatActivity {
 
         LinearLayoutManager llm = new LinearLayoutManager(AplicaPago.this);
 
-        CarritoAdapter carritoAdapter = new CarritoAdapter(AplicaPago.this, null);
+        CarritoAdapter carritoAdapter = new CarritoAdapter(AplicaPago.this, null, null, null, 0.0, 0.0);
         carritoAdapter.setList(CarritoSingleton.getInstance().getListaCarrito());
     }
 
@@ -286,7 +286,6 @@ public class AplicaPago extends AppCompatActivity {
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
         etTotal.setText("$" + (vdeTotalF));
         deImporteTotal = vdeSubtotal + deAporta + dePropina;
-
     }
 
 
@@ -393,10 +392,9 @@ public class AplicaPago extends AppCompatActivity {
     private Double subTotalCarrito (List<Carrito> carritoList){
         Double totalD = 0.0;
         for (Carrito articulo: CarritoSingleton.getInstance().getListaCarrito()) {
-            totalD += articulo.getMonto();
+            totalD = totalD + articulo.getMonto();
 
         }
-
         return  totalD;
     }
 

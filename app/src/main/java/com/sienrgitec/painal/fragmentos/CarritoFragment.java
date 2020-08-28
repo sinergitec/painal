@@ -160,12 +160,8 @@ public class CarritoFragment extends Fragment {
 
                     return;
                 }
-
-
-
-
                 Intent aplicaPago = new Intent(getContext(), AplicaPago.class);
-                aplicaPago.putExtra("vdeimporte", vdeImporte);
+                aplicaPago.putExtra("vdeimporte", totalD);
                 startActivity(aplicaPago);
             }
         });
@@ -184,17 +180,15 @@ public class CarritoFragment extends Fragment {
 
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         rvListaCarrito.setLayoutManager(llm);
-        carritoAdapter = new CarritoAdapter(view.getContext(), null);
+        carritoAdapter = new CarritoAdapter(view.getContext(), null, totalArticulos, total, sizeList, totalD );
         carritoAdapter.setList(CarritoSingleton.getInstance().getListaCarrito());
         rvListaCarrito.setAdapter(carritoAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(rvListaCarrito);
 
-        totalArticulos.setText("Cantidad de articulos: " + sizeList);
+        totalArticulos.setText("Art Dif: " + sizeList);
         total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
-
-
     }
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -215,7 +209,7 @@ public class CarritoFragment extends Fragment {
                     Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
                     Double totalD = subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito());
 
-                    totalArticulos.setText("Cantidad de articulos: " + sizeList );
+                    totalArticulos.setText("Art Dif: " + sizeList );
                     total.setText(Funcionalidades.retornaDoubleEnMoneda(totalD));
 
                     Toast.makeText(viewHolder.itemView.getContext(),"Articulo eliminado", Toast.LENGTH_SHORT).show();
@@ -276,138 +270,4 @@ public class CarritoFragment extends Fragment {
     private Double totalCarrtio(Double subTotal, Double impuesto){
         return subTotal * (1+impuesto);
     }
-
-    /*
-    private void realizaPedido(View v){
-
-        final TtOpPedido pedido =
-                new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                        "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores().compareTo(Constantes.CANTIDAD_MAX_PROVEEDORES) > 0 ? CarritoSingleton.getInstance().getNumeroProveedores() - 1 : CarritoSingleton.getInstance().getNumeroProveedores()),
-                        String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
-                        String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
-                        "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
-                        "1", "1", "1", "1", "", "",
-                        "NOW", "", CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
-                        CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0");
-
-        final List<TtOpPedidoProveedor> listaOpPedidoProveedor = new ArrayList<>();
-        final List<TtOpPedidoDet> listaOpPedidoDet = new ArrayList<>();
-
-        llenaListaOpPedidoProveedorYOpPedidoDet(listaOpPedidoProveedor, listaOpPedidoDet);
-
-        final TtOpPedidoDomicilio opPedidoDomicilio = new TtOpPedidoDomicilio("0",
-                CarritoSingleton.getInstance().getDomicilio().get(0).getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "TRUE","NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea());
-
-        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1","1",
-                String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
-                "0","0","0","NOW","",
-                CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
-                "1","1050125","0");
-
-
-       final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
-            {
-                add(pedido);
-            }
-        },
-        listaOpPedidoProveedor, listaOpPedidoDet,
-         new ArrayList<TtOpPedidoDomicilio>(){
-             {
-                 add(opPedidoDomicilio);
-             }
-         },
-         new ArrayList<TtOpPedidoPago>(){
-             {
-                 add(opPedidoPago);
-             }
-         })));
-        final Painal service = ServiceGenerator.createService(Painal.class);
-        final Call<Respuesta> call = service.creaPedido(peticion);
-
-        call.enqueue(new Callback<Respuesta>() {
-            @Override
-            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                if(response.isSuccessful()){
-                    Respuesta res = response.body();
-
-                    if(res.getResponse().getOplError().equalsIgnoreCase("true")){
-                        Toast.makeText(v.getContext(), "Pedido no realizado", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(v.getContext(), "Pedido realizado", Toast.LENGTH_LONG).show();
-                        CarritoSingleton.getInstance().vaciarCarrito(v.getContext());
-                    }
-                } else {
-                    Toast.makeText(v.getContext(), "Pedido no realizado", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Respuesta> call, Throwable t) {
-                System.out.println(t.getMessage());
-                Toast.makeText(v.getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    private void llenaListaOpPedidoProveedorYOpPedidoDet(List<TtOpPedidoProveedor> listaOpPedidoProveedor, List<TtOpPedidoDet> listDetalle){
-        Integer proveedorPedido = 1;
-        for (int i = 0; i < CarritoSingleton.getInstance().getPilaDomicilios().size() ; i++) {
-            Integer partida = 1;
-            Double totalPedidoProveedor = 0.0;
-            for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
-                if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0
-                    && CarritoSingleton.getInstance().getPilaDomicilios().get(i).
-                        equals(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getiDomicilio()))){
-                    listDetalle.add(new TtOpPedidoDet(String.valueOf(partida * 4),
-                            String.valueOf(partida),
-                            String.valueOf(proveedorPedido),
-                            "TODAY",
-                            String.valueOf(item.getArticulo().getIArticulo()),
-                            item.getArticulo().getCArticulo(),
-                            item.getArticulo().getCDescripcion(),
-                            "",
-                            "FALSE",
-                            "",
-                            "16",
-                            "",
-                            String.valueOf(item.getArticulo().getDePrecioVtaPza()),
-                            "0",
-                            "0",
-                            String.valueOf(item.getArticulo().getDePrecioVtaPza()),
-                            String.valueOf(item.getCantidadArticulo()),
-                            String.valueOf(item.getMonto()),
-                            "0",
-                            "",
-                            "0",
-                            "0",
-                            "",
-                            "NOW",
-                            "",
-                            "AUTO",
-                            ""));
-                    partida ++;
-                    totalPedidoProveedor += item.getArticulo().getDePrecioVtaPza();
-                }
-            }
-
-            String [] proveedorDomicilio = CarritoSingleton.getInstance().getPilaDomicilios().get(i).split(",");
-
-            listaOpPedidoProveedor.add(new TtOpPedidoProveedor(String.valueOf(proveedorPedido * 6),String.valueOf(proveedorPedido),
-                    proveedorDomicilio[0],
-                    "TODAY","0",
-                    proveedorDomicilio[1],
-                    String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
-                    String.valueOf(totalPedidoProveedor),
-                    "16",String.valueOf(totalPedidoProveedor),
-                    "","FALSE","TRUE","NOW","FALSE",
-                    "10","0","0","FALSE","",
-                    "0","FALSE","","0","0",
-                    "NOW","","AUTO",""));
-
-            proveedorPedido ++;
-        }
-    }
-    */
 }

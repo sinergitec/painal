@@ -160,7 +160,7 @@ public class CarritoDBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             do {
                 Carrito carrito = new Carrito(recuperarArticulo(c.getInt(1)),
-                        c.getDouble(2), c.getDouble(3));
+                        c.getDouble(2), c.getDouble(3), "pz");
                 lista_pedido.add(carrito);
             } while (c.moveToNext());
         }
