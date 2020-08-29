@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.carrito.CarritoDBHelper;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
@@ -99,6 +100,11 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
             actualizaCantidadTotal_Cantidades(false);
         }
         cant.setCantidadArticulo(cantMenos);
+
+        // Persisten en caso de que se salgan de la aplicacion
+        CarritoDBHelper carritoDBHelper = new CarritoDBHelper(this.getContext());
+        carritoDBHelper.insertarPedido(CarritoSingleton.getInstance().getListaCarrito());
+
         return cantMenos;
     }
 
@@ -122,6 +128,9 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
             actualizaCantidadTotal_Cantidades(true);
         }
         cant.setCantidadArticulo(cantMasSuma);
+        // Persisten en caso de que se salgan de la aplicacion
+        CarritoDBHelper carritoDBHelper = new CarritoDBHelper(this.getContext());
+        carritoDBHelper.insertarPedido(CarritoSingleton.getInstance().getListaCarrito());
         return cantMasSuma;
     }
 
