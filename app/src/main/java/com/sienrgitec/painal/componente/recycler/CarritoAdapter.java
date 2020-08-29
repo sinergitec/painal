@@ -22,16 +22,20 @@ import com.sienrgitec.painal.util.Funcionalidades;
 public class CarritoAdapter extends RVAdapter<Carrito> {
     TextView articulos;
     TextView total;
+    TextView totalCantidad;
     double cantArt;
     double totalArt;
+    double totalCant;
 
-    public CarritoAdapter(Context context, OnViewHolderClick<Carrito> listener, TextView articulos, TextView total,
-                                                double cantArt, double totalArt) {
+    public CarritoAdapter(Context context, OnViewHolderClick<Carrito> listener, TextView articulos, TextView total, TextView totalCantidad,
+                                                double cantArt, double totalArt, double totalCant) {
         super(context, listener);
         this.articulos = articulos;
         this.total = total;
+        this.totalCantidad = totalCantidad;
         this.cantArt = cantArt;
         this.totalArt = totalArt;
+        this.totalCant =totalCant;
     }
 
     @Override
@@ -92,6 +96,7 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
         }else{
             precio.setText(actualizaPrecio((cant.getTipoUnidad().equals("g") ? cant.getArticulo().getDePrecioVtaGranel() : cant.getArticulo().getDePrecioVtaPza()) ,cantMenos, posicion, cant));
             actualizaCantidadTotal_MontoTotal((cant.getTipoUnidad().equals("g") ? cant.getArticulo().getDePrecioVtaGranel() : cant.getArticulo().getDePrecioVtaPza()), false);
+            actualizaCantidadTotal_Cantidades(false);
         }
         cant.setCantidadArticulo(cantMenos);
         return cantMenos;
@@ -114,6 +119,7 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
         }else{
             precio.setText(actualizaPrecio((cant.getTipoUnidad().equals("g") ? cant.getArticulo().getDePrecioVtaGranel() : cant.getArticulo().getDePrecioVtaPza()) ,cantMasSuma, posicion, cant));
             actualizaCantidadTotal_MontoTotal((cant.getTipoUnidad().equals("g") ? cant.getArticulo().getDePrecioVtaGranel() : cant.getArticulo().getDePrecioVtaPza()), true);
+            actualizaCantidadTotal_Cantidades(true);
         }
         cant.setCantidadArticulo(cantMasSuma);
         return cantMasSuma;
@@ -128,5 +134,18 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
         }
 
         this.total.setText(Funcionalidades.retornaDoubleEnMoneda(this.totalArt));
+    }
+
+    public void actualizaCantidadTotal_Cantidades(boolean tipoOperacion){
+
+        if(tipoOperacion){
+            this.totalCant = totalCant + 1;
+        }else{
+            this.totalCant = totalCant - 1;
+            if(this.totalCant < 1){
+                this.totalCant = 1;
+            }
+        }
+        this.totalCantidad.setText(toString().valueOf(this.totalCant));
     }
 }

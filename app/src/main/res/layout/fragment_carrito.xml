@@ -106,7 +106,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vaciar" />
+            app:layout_constraintTop_toBottomOf="@+id/vaciar"
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/textView31"
@@ -121,9 +122,9 @@
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
-            android:id="@+id/textView34"
+            android:id="@+id/cantArti"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="10dp"

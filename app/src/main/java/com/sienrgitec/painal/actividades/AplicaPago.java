@@ -112,7 +112,7 @@ public class AplicaPago extends AppCompatActivity {
 
         LinearLayoutManager llm = new LinearLayoutManager(AplicaPago.this);
 
-        CarritoAdapter carritoAdapter = new CarritoAdapter(AplicaPago.this, null, null, null, 0.0, 0.0);
+        CarritoAdapter carritoAdapter = new CarritoAdapter(AplicaPago.this, null, null, null, null, 0.0, 0.0, 0.0);
         carritoAdapter.setList(CarritoSingleton.getInstance().getListaCarrito());
     }
 
