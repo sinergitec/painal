@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         buscador =  view.findViewById(R.id.buscadorView);
         tvSaldoDisp = view.findViewById(R.id.tvSaldo);
-        tvSaldoDisp.setText("Saldo Disponible: " + vdeSaldo + "0");
+        tvSaldoDisp.setText("Saldo Disponible: " + vdeSaldo );
 
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

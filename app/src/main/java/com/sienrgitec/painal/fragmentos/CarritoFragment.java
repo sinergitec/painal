@@ -232,7 +232,7 @@ public class CarritoFragment extends Fragment {
         }
     };
 
-    private void RecuperaSaldo(View view ){
+    public void RecuperaSaldo(View view ){
 
         TextView tvSaldo = view.findViewById(R.id.saldo);
 

@@ -2,6 +2,7 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.recycler.ComparaEvaluacion;
 import com.sienrgitec.painal.fragmentos.ConfiguracionFragment;
 import com.sienrgitec.painal.R;
@@ -38,10 +40,12 @@ import retrofit2.Response;
 
 import static com.sienrgitec.painal.constante.Constantes.ctProvList;
 import static com.sienrgitec.painal.constante.Constantes.vcMatchArt;
+import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
 
 public class HomeActivity extends AppCompatActivity {
     private List<TtCtArtProveedor_> listaArts = new ArrayList<>();
     private List<TtCtProveedor_> listProvs = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,51 @@ public class HomeActivity extends AppCompatActivity {
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeFragment()).commit();
         }
+
+
+        RecuperaSaldo();
+    }
+
+
+    public void RecuperaSaldo(){
+
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, String> data = new HashMap<>();
+        data.put("ipiCliente", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()));
+
+        final Call<Respuesta> call = service.credEncCPCP(data);
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                Respuesta res = response.body();
+
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")) {
+                        //Toast.makeText(getContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+
+                    }else {
+
+                        String vcSaldo = new DecimalFormat("0.00").format(Double.parseDouble(res.getResponse().getTt_credEncCPCP().getTtCredEncCPCP().get(0).getDeSaldo()));
+                        vdeSaldo = Double.parseDouble(vcSaldo);
+
+
+                       /* SpannableString txtdeCant = new SpannableString(vdeSaldo);
+                        tvSaldo.setText("Saldo Disponible" + "\n" + txtdeCant);*/
+
+
+                    }
+                } else {
+                    Toast.makeText(getBaseContext(), res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                Toast.makeText(getBaseContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 
     /*Agregado para buscar por articulos**/
