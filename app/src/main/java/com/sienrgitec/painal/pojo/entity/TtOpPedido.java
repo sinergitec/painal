@@ -67,8 +67,8 @@ public class TtOpPedido implements Serializable {
     private String dtCanceldo;
     @SerializedName("dtCanceldo")
     @Expose
-    private Integer iRazon;
-    @SerializedName("iRazon")
+    private Boolean lRazon;
+    @SerializedName("lRazon")
     @Expose
     private Boolean lReasignado;
     @SerializedName("lReasignado")
@@ -413,12 +413,12 @@ public class TtOpPedido implements Serializable {
         this.dtCanceldo = dtCanceldo;
     }
 
-    public Integer getiRazon() {
-        return iRazon;
+    public Boolean getiRazon() {
+        return lRazon;
     }
 
-    public void setiRazon(Integer iRazon) {
-        this.iRazon = iRazon;
+    public void setiRazon(Boolean lRazon) {
+        this.lRazon = lRazon;
     }
 
     public Boolean getlReasignado() {
@@ -521,7 +521,7 @@ public class TtOpPedido implements Serializable {
         sb.append(", cUsuModifca='").append(cUsuModifca).append('\'');
         sb.append(", deTiempoLlega='").append(deTiempoLlega).append('\'');
         sb.append(", dtCanceldo='").append(dtCanceldo).append('\'');
-        sb.append(", iRazon='").append(iRazon).append('\'');
+        sb.append(", lRazon='").append(lRazon).append('\'');
         sb.append(", lReasignado='").append(lReasignado).append('\'');
         sb.append(", cCvePedido='").append(cCvePedido).append('\'');
         sb.append(", dtLlegaCte='").append(dtLlegaCte).append('\'');
