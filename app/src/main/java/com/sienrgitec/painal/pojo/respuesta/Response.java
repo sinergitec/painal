@@ -20,9 +20,9 @@ import com.sienrgitec.painal.pojo.entity.TtCtTelefono;
 import com.sienrgitec.painal.pojo.entity.TtCtUsuario;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet_;
 import com.sienrgitec.painal.pojo.entity.Tt_CtEvaluacion;
+import com.sienrgitec.painal.pojo.entity.Tt_siParametros;
 import com.sienrgitec.painal.pojo.entity.Tt_OpClienteReferidos;
 import com.sienrgitec.painal.pojo.entity.Tt_ctPainani;
-import com.sienrgitec.painal.pojo.entity.Tt_ctPainani_;
 
 public class Response {
 
@@ -93,6 +93,10 @@ public class Response {
     @SerializedName("tt_ctComisiones")
     @Expose
     private TtCtComisiones tt_ctComisiones;
+
+    @SerializedName("tt_siParametros")
+    @Expose
+    private Tt_siParametros tt_siParametros;
 
     @SerializedName("tt_ctPainani")
     @Expose
@@ -262,6 +266,11 @@ public class Response {
         return tt_ctComisiones;
     }
 
+    /*andros_hernandez 12-enero-2021 carga parametros*/
+    public Tt_siParametros getTt_siParametros() {
+        return tt_siParametros;
+    }
+
     public TTOpPedido_ getTtTtOpPedido() {
         return ttTtOpPedido;
     }
@@ -301,6 +310,7 @@ public class Response {
                 ", tt_credEncCPCP" + tt_credEncCPCP +
                 ", tt_ctFormasPago" + tt_ctFormasPago +
                 ", tt_ctComisiones" + tt_ctComisiones +
+                ", tt_siParametros" + tt_siParametros +
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
                 ", opdeSaldo='" + opdeSaldo + '\'' +

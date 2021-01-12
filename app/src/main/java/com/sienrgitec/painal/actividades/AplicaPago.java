@@ -527,8 +527,6 @@ public class AplicaPago extends AppCompatActivity {
             }
         });
 
-
-
     }
 
 

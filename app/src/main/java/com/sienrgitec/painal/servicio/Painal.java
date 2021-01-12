@@ -143,4 +143,7 @@ public interface Painal {
     @GET("ValidaPwCli")
     Call<Respuesta> ValidaPwCli(@QueryMap Map<String, String> options);
 
+    @GET("siParametros")
+    Call<Respuesta> siParametros(@QueryMap Map<String, String> options);
+
 }

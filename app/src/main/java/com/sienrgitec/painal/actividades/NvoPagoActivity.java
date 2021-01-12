@@ -16,14 +16,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.Loading;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
-import com.sienrgitec.painal.pojo.entity.TtCtClienteAutorizados_;
-import com.sienrgitec.painal.pojo.peticion.DsCtClienteAutorizados;
-import com.sienrgitec.painal.pojo.peticion.DsCtContacto;
+import com.sienrgitec.painal.pojo.entity.Tt_siParametros_;
 import com.sienrgitec.painal.pojo.peticion.Peticion;
 import com.sienrgitec.painal.pojo.peticion.Request;
 import com.sienrgitec.painal.pojo.peticion.ds_NvoPago;
@@ -32,6 +29,8 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,8 +40,10 @@ public class NvoPagoActivity extends AppCompatActivity {
 
     private EditText etcCuenta, etdMonto,etcReferencia, etcObservaciones;
     private Button btnPago;
-    private String vcMovimiento = "";
+    private String vcMovimiento = "", vcAtencionCli = "";
     private ImageView back, home;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,8 @@ public class NvoPagoActivity extends AppCompatActivity {
 
          btnPago.setOnClickListener(v -> CreaDeposito());
          etcCuenta.setText(vcCuenta);
+
+         CargaParams();
     }
 
     public void onRadioButtonClicked(View view) {
@@ -169,7 +172,7 @@ public class NvoPagoActivity extends AppCompatActivity {
 
                     /**AndrosOHG 28-07-2020**/
                     AlertDialog.Builder myBuild = new AlertDialog.Builder(NvoPagoActivity.this);
-                    myBuild.setMessage("En breve será aproada su recarga ");
+                    myBuild.setMessage("En breve será aproada tu recarga. No olvides enviar el comprobante de depósito al siguiente correo: " + vcAtencionCli);
                     myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡Solicitud Exitosa! </font>"));
                     myBuild.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
                         @Override
@@ -216,6 +219,44 @@ public class NvoPagoActivity extends AppCompatActivity {
     private void regresaPantalla() {
         Intent regresa = new Intent(NvoPagoActivity.this, HomeActivity.class);
         startActivity(regresa);
+    }
+
+    private void CargaParams(){
+        final Painal service = ServiceGenerator.createService(Painal.class);
+        Map<String, String> data = new HashMap<>();
+        data.put("ipcValor","AtencionCli");
+
+        final Call<Respuesta> call = service.siParametros(data);
+        call.enqueue(new Callback<Respuesta>() {
+            @Override
+            public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                Respuesta res = response.body();
+
+                if (response.isSuccessful()) {
+                    if (res.getResponse().getOplError().equals("true")) {
+                        Toast.makeText(NvoPagoActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                        return;
+                    }else {
+
+                        vcAtencionCli = res.getResponse().getTt_siParametros().getTtsiParametros_().get(0).getcValor();
+
+                            Log.e("que correo-->", "ac--> " + vcAtencionCli);
+
+
+
+
+                    }
+                } else {
+                    Toast.makeText(NvoPagoActivity.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Respuesta> call, Throwable t) {
+                Toast.makeText(NvoPagoActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 
 }
