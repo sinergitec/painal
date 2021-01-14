@@ -99,6 +99,20 @@ public class RegistroActivity extends AppCompatActivity {
         if(correo.isEmpty()){
             correoET.setError("Correo requerido");
             correoET.requestFocus();
+        }else{
+            String email    = correoET.getText().toString().trim();
+
+            // String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+            String emailPattern =  "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+
+            if (!email.matches(emailPattern)){
+                correoET.requestFocus();
+                correoET.setError("el email debe tener un formato valido");
+
+                return;
+
+            }
         }
 
         if(pw.isEmpty()){

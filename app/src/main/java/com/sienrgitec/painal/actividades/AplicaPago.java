@@ -181,11 +181,17 @@ public class AplicaPago extends AppCompatActivity {
     }
 
     private void CargaComisiones(){
+
+
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
         data.put("ipiPersona", String.valueOf(5));
+        data.put("ipiTotProvs", (String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()))  );
+        data.put("ipiUnidad", String.valueOf(1));
 
-        final Call<Respuesta> call = service.ctComisiones(data);
+        Log.e("Cargando comisiones", "num provs--> " + String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()));
+
+        final Call<Respuesta> call = service.ctComisionesCli(data);
         call.enqueue(new Callback<Respuesta>() {
             @Override
             public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
@@ -398,7 +404,7 @@ public class AplicaPago extends AppCompatActivity {
         return  totalD;
     }
 
-    private Double totalCarrtio(Double subTotal, Double impuesto){
+    private Double totalCarrtio(Double subTotal,   Double impuesto){
         return subTotal * (1+impuesto);
     }
 

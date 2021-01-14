@@ -115,8 +115,8 @@ public interface Painal {
     Call<Respuesta> ctFormasPago(@QueryMap Map<String, String> options);
 
     /*Carga ctComisiones / Andros 10-06-20 */
-    @GET("ctComisiones")
-    Call<Respuesta> ctComisiones(@QueryMap Map<String, String> options);
+    @GET("ctComisionesCli")
+    Call<Respuesta> ctComisionesCli(@QueryMap Map<String, String> options);
 
     @GET("validaUbicacion")
     Call<Respuesta> validaUbicacion(@QueryMap Map<String, String> options);
