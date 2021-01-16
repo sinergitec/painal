@@ -53,11 +53,13 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
             TextView descripcion = (TextView)viewHolder.getView(R.id.descripcion);
             TextView precio = (TextView)viewHolder.getView(R.id.precio);
             TextView cant = (TextView)viewHolder.getView(R.id.cantPed);
+            TextView prov = (TextView)viewHolder.getView(R.id.textView34);
 
             ImageView menos = (ImageView)viewHolder.getView(R.id.imageView6);
             ImageView mas = (ImageView)viewHolder.getView(R.id.imageView9);
 
             descripcion.setText(item.getArticulo().getCDescripcion());
+            prov.setText("Prov. : " + item.getArticulo().getcProveedor());
             precio.setText(Funcionalidades.retornaDoubleEnMoneda(item.getMonto()));
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
             cant.setText(item.getCantidadArticulo().toString());

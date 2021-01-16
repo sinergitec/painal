@@ -412,8 +412,11 @@ public class AplicaPago extends AppCompatActivity {
         Integer proveedorPedido = 1;
         for (int i = 0; i < CarritoSingleton.getInstance().getPilaDomicilios().size() ; i++) {
             Integer partida = 1;
-            Double totalPedidoProveedor = 0.0;
+            Double totalPedidoProveedor = 0.0, vdeTotArt = 0.0;
             for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
+
+                Log.e("pagopago-->0 ", "cANT " + item.getCantidadArticulo() );
+
                 if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0
                         && CarritoSingleton.getInstance().getPilaDomicilios().get(i).
                         equals(String.valueOf(item.getArticulo().getIProveedor())+ "," + String.valueOf(item.getArticulo().getIDomicilio()))){
@@ -445,7 +448,8 @@ public class AplicaPago extends AppCompatActivity {
                             CarritoSingleton.getInstance().getCliente().getcUsuCrea(),
                             CarritoSingleton.getInstance().getCliente().getcUsuCrea()));
                     partida ++;
-                    totalPedidoProveedor += item.getArticulo().getDePrecioVtaPza();
+                    totalPedidoProveedor += item.getArticulo().getDePrecioVtaPza() * item.getCantidadArticulo();
+                    vdeTotArt += vdeTotArt + item.getCantidadArticulo();
                 }
             }
 
@@ -455,13 +459,16 @@ public class AplicaPago extends AppCompatActivity {
                     proveedorDomicilio[0],
                     "TODAY","0",
                     proveedorDomicilio[1],
-                    String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
+                    String.valueOf(vdeTotArt), //String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
+                    String.valueOf(totalPedidoProveedor / 1.16),
+                    "16",
                     String.valueOf(totalPedidoProveedor),
-                    "16",String.valueOf(totalPedidoProveedor),
                     "","FALSE","TRUE","NOW","FALSE",
                     "10","0","0","FALSE","",
                     "0","FALSE","","0","0",
-                    "NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea(),"0","0"));
+                    "NOW","",
+                    CarritoSingleton.getInstance().getCliente().getcUsuCrea(),
+                    CarritoSingleton.getInstance().getCliente().getcUsuCrea(),"0","0"));
 
             proveedorPedido ++;
         }

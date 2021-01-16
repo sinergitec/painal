@@ -118,9 +118,20 @@ public class TtCtArtProveedor_ implements Serializable {
     @SerializedName("cSubClasificacion")
     @Expose
     private String cSubClasificacion;
+    @SerializedName("cProveedor")
+    @Expose
+    private String cProveedor;
     @SerializedName("Id")
     @Expose
     private Object id;
+
+    public String getcProveedor() {
+        return cProveedor;
+    }
+
+    public void setcProveedor(String cProveedor) {
+        this.cProveedor = cProveedor;
+    }
 
     public Integer getIProveedor() {
         return iProveedor;
