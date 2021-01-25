@@ -2,13 +2,19 @@ package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.DownloadImageTask;
@@ -37,19 +43,19 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
 
             CardView cardView = (CardView) viewHolder.getView(R.id.cv);
             TextView  title = (TextView)viewHolder.getView(R.id.title);
-            TextView  subTitle = (TextView)viewHolder.getView(R.id.subTitle);
-            ImageView photo = (ImageView)viewHolder.getView(R.id.photo);
+            ImageView photo = (ImageView) viewHolder.getView(R.id.imageView12);
+            /*TextView  subTitle = (TextView)viewHolder.getView(R.id.subTitle);
+            */
 
-
-            cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
+            //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCGiro());
-            subTitle.setText("");
-            //new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
-            if(item.getCGiro().equals("RESTAURANTES")){
+            //subTitle.setText("");
+            new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/cangrejito/" + item.getCGiro() + "1.png");
+           /* if(item.getCGiro().equals("RESTAURANTES")){
                 photo.setImageResource(R.drawable.ic_mesarestaurante);
             } else if (item.getCGiro().equals("MERCADOS")){
                 photo.setImageResource(R.drawable.ic_market);
-            }
+            }*/
         }
     }
 

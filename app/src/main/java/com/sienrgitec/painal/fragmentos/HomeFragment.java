@@ -1,9 +1,13 @@
 package com.sienrgitec.painal.fragmentos;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,18 +18,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.ArticuloActivity;
 import com.sienrgitec.painal.actividades.HomeActivity;
 import com.sienrgitec.painal.actividades.ListaDomicilioActivity;
 import com.sienrgitec.painal.actividades.SubGirosActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.GirosAdapter;
+import com.sienrgitec.painal.pojo.entity.TtCtGiro;
 import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
 import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 import com.sienrgitec.painal.pojo.error.ErrorUtils;
@@ -61,6 +69,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rv;
     private TextView calleEntregar, tvSaldoDisp;
+    private RelativeLayout rlBtnGiro;
 
     private SearchView buscador;
     private List<TtCtGiro_> listaGiros = new ArrayList<>();
@@ -107,6 +116,7 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         buscador =  view.findViewById(R.id.buscadorView);
         tvSaldoDisp = view.findViewById(R.id.tvSaldo);
         tvSaldoDisp.setText("Saldo Disponible: " + vdeSaldo );
@@ -147,13 +157,16 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful()){
                     Respuesta res = response.body();
                     rv = view.findViewById(R.id.rv);
-                    LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                    rv.setLayoutManager(llm);
+                    //rlBtnGiro = (RelativeLayout) view.findViewById(R.id.rlbtn);
+                    //LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                    GridLayoutManager grid = new GridLayoutManager(getActivity(), 3);
+                    rv.setLayoutManager(grid);
                     GirosAdapter girosAdapter = generaObjGirosAdapter(res.getResponse().getTtCtSubGiro().getTtCtSubGiro());
                     listaGiros.addAll(res.getResponse().getTtCtGiro().getTtCtGiro());
+                    rv.setAdapter(girosAdapter);
                     listaSubGiros.addAll(res.getResponse().getTtCtSubGiro().getTtCtSubGiro());
                     girosAdapter.setList(res.getResponse().getTtCtGiro().getTtCtGiro());
-                    rv.setAdapter(girosAdapter);
+
                 } else {
                     try {
                         Errors error = ErrorUtils.parseError(response);

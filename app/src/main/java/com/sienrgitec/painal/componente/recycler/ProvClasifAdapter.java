@@ -76,7 +76,7 @@ public class ProvClasifAdapter extends RVAdapter<TtCtCategoriaProv_> {
                     Map<String, String> data = new HashMap<>();
                     data.put("ipiProveedor", String.valueOf(subCatProv.getIProveedor()));
                     data.put("ipiCategoria", String.valueOf(subCatProv.getICategoria()));
-                    data.put("ipisubCategoria", String.valueOf(subCatProv.getISubCategoria()));
+                    data.put("ipiSubCategoria", String.valueOf(subCatProv.getISubCategoria()));
                     data.put("ipiClasificacion", "1");
                     data.put("ipiSubClasificacion", "1");
                     final Call<Respuesta> call = service.consultaArticulos(data);

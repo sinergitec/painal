@@ -25,9 +25,32 @@ public class TtCtGiro_ {
     @SerializedName("cUsuModifica")
     @Expose
     private String cUsuModifica;
+    @SerializedName("cFoto")
+    @Expose
+    private String cFoto;
+    @SerializedName("cRutaImg")
+    @Expose
+    private String cRutaImg;
     @SerializedName("Id")
     @Expose
     private Object id;
+
+
+    public String getcFoto() {
+        return cFoto;
+    }
+
+    public void setcFoto(String cFoto) {
+        this.cFoto = cFoto;
+    }
+
+    public String getcRutaImg() {
+        return cRutaImg;
+    }
+
+    public void setcRutaImg(String cRutaImg) {
+        this.cRutaImg = cRutaImg;
+    }
 
     public Integer getIGiro() {
         return iGiro;

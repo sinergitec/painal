@@ -22,7 +22,10 @@
             android:id="@+id/imageButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+
+            />
     </androidx.cardview.widget.CardView>
 
     <TextView

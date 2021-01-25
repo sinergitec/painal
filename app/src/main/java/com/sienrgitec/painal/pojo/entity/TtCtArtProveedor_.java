@@ -121,9 +121,34 @@ public class TtCtArtProveedor_ implements Serializable {
     @SerializedName("cProveedor")
     @Expose
     private String cProveedor;
+
+    @SerializedName("cFoto")
+    @Expose
+    private String cFoto;
+
+
+    public String getbImagen() {
+        return bImagen;
+    }
+
+    public void setbImagen(String bImagen) {
+        this.bImagen = bImagen;
+    }
+
+    public String getcFoto() {
+        return cFoto;
+    }
+
+    public void setcFoto(String cFoto) {
+        this.cFoto = cFoto;
+    }
+
     @SerializedName("Id")
     @Expose
     private Object id;
+
+
+
 
     public String getcProveedor() {
         return cProveedor;
