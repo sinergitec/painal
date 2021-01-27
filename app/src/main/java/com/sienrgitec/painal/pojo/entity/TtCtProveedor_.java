@@ -105,6 +105,10 @@ public class TtCtProveedor_  implements Serializable {
     @Expose
     private Object id;
 
+    @SerializedName("cFoto")
+    @Expose
+    private String cFoto;
+
 
 
     public TtCtProveedor_(){
@@ -114,7 +118,7 @@ public class TtCtProveedor_  implements Serializable {
     public TtCtProveedor_(Integer iProveedor, String cClaveProv, String cRazonS, String cNegocio, String cRFC, Integer iGiro, Integer iSubGiro, String cWhatsApp,
                           String cPaginaWeb, String cEMail, String cTwitter, String cFacebook, Integer iEstadoProv, Boolean lSucursales, Integer iNivelClasifica,
                           Boolean lSistema, String cSistema, String cObs, Object dtAfiliacion, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica,
-                          Integer iDomicilio, Double deEvaluacion, String cEvaluacion, String cTipoProv,  String cDomicilio, Object id) {
+                          Integer iDomicilio, Double deEvaluacion, String cEvaluacion, String cTipoProv,  String cDomicilio,String cFoto, Object id) {
         this.iProveedor = iProveedor;
         this.cClaveProv = cClaveProv;
         this.cRazonSocial = cRazonSocial;
@@ -143,9 +147,18 @@ public class TtCtProveedor_  implements Serializable {
         this.cEvaluacion = cEvaluacion;
         this.cTipoProv = cTipoProv;
         this.cDomicilio = cDomicilio;
+        this.cFoto = cFoto;
         this.id = id;
     }
 
+
+    public String getcFoto() {
+        return cFoto;
+    }
+
+    public void setcFoto(String cFoto) {
+        this.cFoto = cFoto;
+    }
 
     public String getcDomicilio() {
         return cDomicilio;

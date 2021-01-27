@@ -37,6 +37,19 @@ public class TtCtSubCategoriaProv implements Serializable {
     @Expose
     private Object id;
 
+    @SerializedName("cFoto")
+    @Expose
+    private String cFoto;
+
+
+    public String getcFoto() {
+        return cFoto;
+    }
+
+    public void setcFoto(String cFoto) {
+        this.cFoto = cFoto;
+    }
+
     public Integer getIProveedor() {
         return iProveedor;
     }

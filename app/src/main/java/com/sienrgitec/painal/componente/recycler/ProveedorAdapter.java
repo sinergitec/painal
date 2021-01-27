@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.componente.recycler;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,12 @@ public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
             ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
             title.setText(item.getCNegocio());
-            new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+            new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/proveedores/" + item.getcFoto());
+
+
+
+
+            Log.e("ProvAdapter","url--> " + "http://192.168.1.13:80/multimedia/painal/proveedores/" + item.getcFoto());
         }
     }
 }

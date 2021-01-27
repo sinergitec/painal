@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".actividades.ctProveedores"></activity>
+        <activity android:name=".actividades.ctSubClasif"></activity>
+        <activity android:name=".actividades.ctProveedores" />
         <activity android:name=".actividades.AplicaPago">
 
             <!--
@@ -51,8 +52,7 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -150,7 +150,6 @@
             android:name=".actividades.TitlaniAsignado"
             android:parentActivityName=".actividades.HomeActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".actividades.HistoDetPedido"
             android:parentActivityName=".actividades.HistoricoActivity"

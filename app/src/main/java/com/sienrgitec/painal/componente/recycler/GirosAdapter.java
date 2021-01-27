@@ -50,7 +50,11 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
             //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCGiro());
             //subTitle.setText("");
-            new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/cangrejito/" + item.getCGiro() + "1.png");
+            if(item.getcFoto()!="") {
+                new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/giro/" + item.getcFoto());
+
+                Log.e("adapter--> ", "url--> " + "http://192.168.1.13:80/multimedia/painal/cangrejito/" + item.getcFoto() );
+            }
            /* if(item.getCGiro().equals("RESTAURANTES")){
                 photo.setImageResource(R.drawable.ic_mesarestaurante);
             } else if (item.getCGiro().equals("MERCADOS")){

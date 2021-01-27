@@ -2,10 +2,12 @@ package com.sienrgitec.painal.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,13 +45,35 @@ public class ProveedoresActivity  extends AppCompatActivity {
                 .getSerializableExtra("listSubCatProv");
 
         rvCatProv = findViewById(R.id.rvCatProv);
-        LinearLayoutManager llm = new LinearLayoutManager(ProveedoresActivity.this);
-        rvCatProv.setLayoutManager(llm);
+        /*LinearLayoutManager llm = new LinearLayoutManager(ProveedoresActivity.this);
+        rvCatProv.setLayoutManager(llm);*/
+        GridLayoutManager grid = new GridLayoutManager(ProveedoresActivity.this, 3);
+        rvCatProv.setLayoutManager(grid);
+
+
         ProvClasifAdapter subGirosAdapter = new ProvClasifAdapter(ProveedoresActivity.this, listSubCatProv, null);
         subGirosAdapter.setList(listCatProv);
         rvCatProv.setAdapter(subGirosAdapter);
 
+
+        subGirosAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("provs", "prov-->");
+                Intent vistaNueva = new Intent(ProveedoresActivity.this, ctSubClasif.class);
+                vistaNueva.putExtra("list", (Serializable) listSubCatProv);
+                vistaNueva.putExtra("ipiCat",listCatProv.get(rvCatProv.getChildAdapterPosition(v)).getiCategoria());
+                vistaNueva.putExtra("ipiProv",listCatProv.get(rvCatProv.getChildAdapterPosition(v)).getiProveedor());
+                startActivity(vistaNueva);
+            }
+        });
+
         buscador = findViewById(R.id.buscadorView);
+
+
+
+
+
 
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,6 +102,9 @@ public class ProveedoresActivity  extends AppCompatActivity {
         }
         return listaFiltrada;
     }
+
+
+
 
     private ProvClasifAdapter generaObjCategoriaAdapter(List<TtCtCategoriaProv_> listaCatArt){
         ProvClasifAdapter provClasifAdapter = new ProvClasifAdapter(ProveedoresActivity.this, listSubCatProv, new RVAdapter.OnViewHolderClick() {

@@ -35,6 +35,18 @@ public class TtCtCategoriaProv_ implements Serializable {
     @Expose
     private Object id;
 
+    @SerializedName("cFoto")
+    @Expose
+    private Object cFoto;
+
+    public Object getcFoto() {
+        return cFoto;
+    }
+
+    public void setcFoto(Object cFoto) {
+        this.cFoto = cFoto;
+    }
+
     public Integer getiProveedor() {
         return iProveedor;
     }
