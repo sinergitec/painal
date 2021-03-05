@@ -13,6 +13,8 @@ import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtProveedor_;
 
+import static com.sienrgitec.painal.constante.Constantes.vcUrlImg;
+
 public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
 
     public ProveedorAdapter(Context context, OnViewHolderClick listener) {
@@ -34,12 +36,9 @@ public class ProveedorAdapter extends RVAdapter<TtCtProveedor_> {
             ImageView photo = (ImageView)viewHolder.getView(R.id.imgMosaic);
 
             title.setText(item.getCNegocio());
-            new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/proveedores/" + item.getcFoto());
+            new DownloadImageTask(photo).execute(vcUrlImg + "/proveedores" + item.getcRutaImg() + "/"  +  item.getcFoto());
+            //new DownloadImageTask(photo).execute(vcUrlImg + "/" + item.getcRutaImg() + "/" + item.getcFoto());
 
-
-
-
-            Log.e("ProvAdapter","url--> " + "http://192.168.1.13:80/multimedia/painal/proveedores/" + item.getcFoto());
         }
     }
 }

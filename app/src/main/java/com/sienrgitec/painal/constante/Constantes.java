@@ -15,8 +15,10 @@ public class Constantes {
     public static String vcCuenta = "";
     public static String vcMatchArt = "";
     public static Double vdeSaldo = 0.00;
+    public static String vcUrlImg = "";
 
 
     public static ArrayList<TtCtProveedor_> ctProvList      = new ArrayList<>();
+    public static Integer viBorraProv = 0;
 
 }

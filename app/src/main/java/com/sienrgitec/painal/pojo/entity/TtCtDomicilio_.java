@@ -24,12 +24,12 @@ public class TtCtDomicilio_ implements Serializable {
     @SerializedName("cCalle")
     @Expose
     private String cCalle;
-    @SerializedName("cNumeroExt")
+    @SerializedName("cNumExt")
     @Expose
-    private String cNumeroExt;
-    @SerializedName("cNumeroInt")
+    private String cNumExt;
+    @SerializedName("cNumInt")
     @Expose
-    private String cNumeroInt;
+    private String cNumInt;
     @SerializedName("cColonia")
     @Expose
     private String cColonia;
@@ -84,8 +84,8 @@ public class TtCtDomicilio_ implements Serializable {
         this.itipoDomicilio = itipoDomicilio;
         this.cDomicilio = cDomicilio;
         this.cCalle = cCalle;
-        this.cNumeroExt = cNumeroExt;
-        this.cNumeroInt = cNumeroInt;
+        this.cNumExt = cNumeroExt;
+        this.cNumInt = cNumeroInt;
         this.cColonia = cColonia;
         this.cMpioDeleg = cMpioDeleg;
         this.cEstado = cEstado;
@@ -142,20 +142,20 @@ public class TtCtDomicilio_ implements Serializable {
         this.cCalle = cCalle;
     }
 
-    public String getCNumeroExt() {
-        return cNumeroExt;
+    public String getcNumExt() {
+        return cNumExt;
     }
 
-    public void setCNumeroExt(String cNumeroExt) {
-        this.cNumeroExt = cNumeroExt;
+    public void setcNumExt(String cNumExt) {
+        this.cNumExt = cNumExt;
     }
 
-    public String getCNumeroInt() {
-        return cNumeroInt;
+    public String getcNumInt() {
+        return cNumInt;
     }
 
-    public void setCNumeroInt(String cNumeroInt) {
-        this.cNumeroInt = cNumeroInt;
+    public void setcNumInt(String cNumInt) {
+        this.cNumInt = cNumInt;
     }
 
     public String getCColonia() {
@@ -287,8 +287,8 @@ public class TtCtDomicilio_ implements Serializable {
         sb.append(", itipoDomicilio='").append(itipoDomicilio).append('\'');
         sb.append(", cDomicilio='").append(cDomicilio).append('\'');
         sb.append(", cCalle='").append(cCalle).append('\'');
-        sb.append(", cNumeroExt='").append(cNumeroExt).append('\'');
-        sb.append(", cNumeroInt='").append(cNumeroInt).append('\'');
+        sb.append(", cNumExt='").append(cNumExt).append('\'');
+        sb.append(", cNumInt='").append(cNumInt).append('\'');
         sb.append(", cColonia='").append(cColonia).append('\'');
         sb.append(", cMpioDeleg='").append(cMpioDeleg).append('\'');
         sb.append(", cEstado='").append(cEstado).append('\'');
@@ -308,6 +308,6 @@ public class TtCtDomicilio_ implements Serializable {
     }
 
     public String calleYNumero(){
-        return this.cCalle + " " + (cNumeroExt != null ? cNumeroExt : "SN");
+        return this.cCalle + " " + (cNumExt != null ? cNumExt : "SN");
     }
 }

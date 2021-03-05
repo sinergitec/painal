@@ -1,7 +1,10 @@
 package com.sienrgitec.painal.fragmentos;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -9,6 +12,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -28,7 +34,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sienrgitec.painal.MainActivity;
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.actividades.RegistroActivity;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
 import com.sienrgitec.painal.pojo.entity.TtCtDomicilio_;
 import com.sienrgitec.painal.pojo.peticion.DsCtDomicilio;
@@ -73,6 +81,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     private Marker marcador;
 
 
+
     public MapaFragment() {
         // Required empty public constructor
     }
@@ -93,6 +102,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         final TextView alias = view.findViewById(R.id.alias);
         final Button guardar = view.findViewById(R.id.guardarDireccion);
         guardar.setOnClickListener(v -> {
+
+            Log.e("mi numero", "exterior->0 " + numeroExterior);
+
             TtCtDomicilio_ ttCtDomicilio = new TtCtDomicilio_(
                     String.valueOf(CarritoSingleton.getInstance().getUsuario_().getiPersona()),
                     String.valueOf(0),
@@ -124,6 +136,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                 }
             })));
 
+
+
+
             final Map<String, String> data = new HashMap<String, String>();
             data.put("ipdeLatitud",String.valueOf(this.latitud));
             data.put("ipdeLongitud",String.valueOf(this.longitud));
@@ -146,7 +161,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                                             Toast.makeText(v.getContext(), "Dirección creada", Toast.LENGTH_LONG).show();
                                             CarritoSingleton.getInstance().setDomicilioActual(ttCtDomicilio);
                                         } else {
-                                            Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
+                                            MuestraMensaje("Error al crear Domicilio: " +  respuesta.getResponse().getOpcError());
                                         }
                                     } else {
                                         Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
@@ -161,7 +177,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                             });
 
                         } else {
-                            Toast.makeText(v.getContext(), "Fuera de zona permitida", Toast.LENGTH_LONG).show();
+                            /*Toast.makeText(v.getContext(), "Fuera de zona permitida", Toast.LENGTH_LONG).show();*/
+                            MuestraMensaje("Por el momento el servicio no está disponible en tu localidad");
+
+
+
+
                         }
                     } else {
                         Toast.makeText(v.getContext(), "No se creo la dirección", Toast.LENGTH_LONG).show();
@@ -289,5 +310,38 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
         }
     };
+
+    public void MuestraMensaje (String ipcMensaje){
+
+
+        /**AndrosOHg 28-07-2020**/
+        ProgressDialog nDialog;
+        nDialog = new ProgressDialog(getContext());
+        nDialog.setMessage("Cargando...");
+        nDialog.setTitle("Mapas");
+        nDialog.setIndeterminate(false);
+        nDialog.show();
+        /**--------------------**/
+
+
+        /**AndrosOHG 03-02-2021**/
+        AlertDialog.Builder myBuild = new AlertDialog.Builder(getContext());
+        myBuild.setMessage(ipcMensaje);
+        myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡AVISO! </font>"));
+        myBuild.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+
+        AlertDialog dialog = myBuild.create();
+        dialog.show();
+        nDialog.dismiss();
+
+        /**--------------------**/
+
+    }
 
 }

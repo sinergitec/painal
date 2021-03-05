@@ -126,9 +126,20 @@ public class TtCtArtProveedor_ implements Serializable {
     @Expose
     private String cFoto;
 
+    @SerializedName("cRutaImg")
+    @Expose
+    private String cRutaImg;
 
     public String getbImagen() {
         return bImagen;
+    }
+
+    public String getcRutaImg() {
+        return cRutaImg;
+    }
+
+    public void setcRutaImg(String cRutaImg) {
+        this.cRutaImg = cRutaImg;
     }
 
     public void setbImagen(String bImagen) {
@@ -502,6 +513,8 @@ public class TtCtArtProveedor_ implements Serializable {
         sb.append(", cSubCategoria='").append(cSubCategoria).append('\'');
         sb.append(", cClasificacion='").append(cClasificacion).append('\'');
         sb.append(", cSubClasificacion='").append(cSubClasificacion).append('\'');
+        sb.append(", cRutaImg='").append(cRutaImg).append('\'');
+        sb.append(", cFoto='").append(cFoto).append('\'');
         sb.append(", id=").append(id);
         sb.append('}');
         return sb.toString();

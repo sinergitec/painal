@@ -35,6 +35,7 @@ import static com.sienrgitec.painal.R.id.password;
 import static com.sienrgitec.painal.R.id.registro;
 import static com.sienrgitec.painal.R.id.recupera;
 import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
+import static com.sienrgitec.painal.constante.Constantes.vcUrlImg;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,8 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 vdeSaldo = res.getResponse().getOpdeSaldo();
-
-                                Log.e("Saldo---> " , "saldo " + vdeSaldoCli);
+                                vcUrlImg = res.getResponse().getOpcUrlImg();
 
                                 Intent inicio = new Intent(MainActivity.this, HomeActivity.class);
                                 startActivity(inicio);

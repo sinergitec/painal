@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
+import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.componente.recycler.ProvClasifAdapter;
 import com.sienrgitec.painal.componente.recycler.ctSubCatAdapter;
 import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
+import com.sienrgitec.painal.pojo.entity.TtCtCategoriaProv_;
+import com.sienrgitec.painal.pojo.entity.TtCtSubCategoria;
 import com.sienrgitec.painal.pojo.entity.TtCtSubCategoriaProv;
 import com.sienrgitec.painal.pojo.error.ErrorUtils;
 import com.sienrgitec.painal.pojo.error.Errors;
@@ -38,6 +42,7 @@ public class ctSubClasif extends AppCompatActivity {
 
     private List<TtCtSubCategoriaProv> listSubCatFinal = new ArrayList<>();
     private RecyclerView rvSubCatArt;
+    private SearchView buscador;
 
 
 
@@ -76,7 +81,54 @@ public class ctSubClasif extends AppCompatActivity {
                 CargaArticulos(listSubCatFinal.get(rvSubCatArt.getChildAdapterPosition(v)).getISubCategoria());
             }
         });
+
+        buscador = findViewById(R.id.buscadorView);
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ctSubCatAdapter provClasifAdapter = generaObjCategoriaAdapter(listSubCat);
+                provClasifAdapter.setList(buscaItem(query));
+                rvSubCatArt.setAdapter(provClasifAdapter);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ctSubCatAdapter provClasifAdapter = generaObjCategoriaAdapter(listSubCat);
+                provClasifAdapter.setList(buscaItem(newText));;
+                rvSubCatArt.setAdapter(provClasifAdapter);
+                return true;
+            }
+        });
     }
+
+    private List<TtCtSubCategoriaProv> buscaItem(String valorBuscado){
+        List<TtCtSubCategoriaProv> listaFiltrada = new ArrayList<>();
+
+
+        for (TtCtSubCategoriaProv catArticulo: listSubCatFinal) {
+
+            if(catArticulo.getCSubCategoria().trim().toUpperCase().contains(valorBuscado.trim().toUpperCase()))
+                listaFiltrada.add(catArticulo);
+        }
+        return  listaFiltrada;
+    }
+
+    private ctSubCatAdapter generaObjCategoriaAdapter(List<TtCtSubCategoriaProv> listaCatArt){
+        ctSubCatAdapter provClasifAdapter = new ctSubCatAdapter(ctSubClasif.this, listSubCatFinal, new RVAdapter.OnViewHolderClick() {
+            @Override
+            public void onClick(View view, int position, Object item) {
+                //List<TtCtCategoriaProv_> listCat = new ArrayList<TtCtCategoriaProv_>();
+
+
+                CargaArticulos(((TtCtSubCategoriaProv) item).getISubCategoria());
+
+            }
+        });
+        return provClasifAdapter;
+    }
+
+
 
     public void CargaArticulos(Integer ipiSubCategoria){
         final Painal service = ServiceGenerator.createService(Painal.class);

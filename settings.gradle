@@ -1,2 +1,4 @@
+include ':conektasdk'
+include ':conektasdk'
 include ':app'
 rootProject.name='painal'

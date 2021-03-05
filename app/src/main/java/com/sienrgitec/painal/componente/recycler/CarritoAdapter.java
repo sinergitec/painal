@@ -3,6 +3,7 @@ package com.sienrgitec.painal.componente.recycler;
 import android.content.Context;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.sienrgitec.painal.componente.DownloadImageTask;
 import com.sienrgitec.painal.componente.RVAdapter;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.util.Funcionalidades;
+
+import static com.sienrgitec.painal.constante.Constantes.vcUrlImg;
 
 public class CarritoAdapter extends RVAdapter<Carrito> {
     TextView articulos;
@@ -61,8 +64,14 @@ public class CarritoAdapter extends RVAdapter<Carrito> {
             descripcion.setText(item.getArticulo().getCDescripcion());
             prov.setText("Prov. : " + item.getArticulo().getcProveedor());
             precio.setText(Funcionalidades.retornaDoubleEnMoneda(item.getMonto()));
-            new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+            if(item.getArticulo().getcFoto()!=null){
+                new DownloadImageTask(photo).execute(vcUrlImg  + item.getArticulo().getcRutaImg() + "/" + item.getArticulo().getcFoto() );
+            }else{
+                new DownloadImageTask(photo).execute(vcUrlImg  + "/" + "sinvistaprevia.png" );
+            }
+
             cant.setText(item.getCantidadArticulo().toString());
+
 
             menos.setOnClickListener(v -> cant.setText(toString().valueOf(menosCantidad(item, precio,viewHolder.getAdapterPosition()))));
             mas.setOnClickListener(v -> cant.setText(toString().valueOf(masCantidad(item,precio,viewHolder.getAdapterPosition()))));

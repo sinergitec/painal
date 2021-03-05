@@ -2,6 +2,7 @@ package com.sienrgitec.painal.actividades;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.componente.Loading;
+import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
 import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
@@ -27,6 +29,7 @@ import static com.sienrgitec.painal.R.id.recupera;
 public class IngresaPasswordActivity extends AppCompatActivity {
     private Button btnConsulta;
     private EditText password;
+    Constantes constantes;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -68,7 +71,9 @@ public class IngresaPasswordActivity extends AppCompatActivity {
                             if (res.getResponse().getTtCtUsuario() != null
                                     && res.getResponse().getTtCtUsuario().getTtCtUsuario().size() > 0) {
                                 openDialog1(res);
+
                             }
+
                         }
                     }else{
                         openDialog2(res);

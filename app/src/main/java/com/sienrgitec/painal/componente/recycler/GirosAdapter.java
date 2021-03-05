@@ -24,6 +24,8 @@ import com.sienrgitec.painal.pojo.entity.TtCtGiro_;
 
 import java.util.Random;
 
+import static com.sienrgitec.painal.constante.Constantes.vcUrlImg;
+
 public class GirosAdapter extends RVAdapter<TtCtGiro_> {
 
     public GirosAdapter(Context context, OnViewHolderClick listener){
@@ -44,22 +46,16 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
             CardView cardView = (CardView) viewHolder.getView(R.id.cv);
             TextView  title = (TextView)viewHolder.getView(R.id.title);
             ImageView photo = (ImageView) viewHolder.getView(R.id.imageView12);
-            /*TextView  subTitle = (TextView)viewHolder.getView(R.id.subTitle);
-            */
+
 
             //cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
             title.setText(item.getCGiro());
-            //subTitle.setText("");
             if(item.getcFoto()!="") {
-                new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/giro/" + item.getcFoto());
 
-                Log.e("adapter--> ", "url--> " + "http://192.168.1.13:80/multimedia/painal/cangrejito/" + item.getcFoto() );
+
+                new DownloadImageTask(photo).execute(vcUrlImg + "/giro/" + item.getcFoto());
+
             }
-           /* if(item.getCGiro().equals("RESTAURANTES")){
-                photo.setImageResource(R.drawable.ic_mesarestaurante);
-            } else if (item.getCGiro().equals("MERCADOS")){
-                photo.setImageResource(R.drawable.ic_market);
-            }*/
         }
     }
 

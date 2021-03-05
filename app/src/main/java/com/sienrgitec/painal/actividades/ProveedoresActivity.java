@@ -33,6 +33,7 @@ public class ProveedoresActivity  extends AppCompatActivity {
     private List<TtCtCategoriaProv_> listCatProv  = new ArrayList<>();
     private List<TtCtSubCategoriaProv> listSubCatProv = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +46,13 @@ public class ProveedoresActivity  extends AppCompatActivity {
                 .getSerializableExtra("listSubCatProv");
 
         rvCatProv = findViewById(R.id.rvCatProv);
-        /*LinearLayoutManager llm = new LinearLayoutManager(ProveedoresActivity.this);
-        rvCatProv.setLayoutManager(llm);*/
         GridLayoutManager grid = new GridLayoutManager(ProveedoresActivity.this, 3);
         rvCatProv.setLayoutManager(grid);
 
 
         ProvClasifAdapter subGirosAdapter = new ProvClasifAdapter(ProveedoresActivity.this, listSubCatProv, null);
         subGirosAdapter.setList(listCatProv);
+
         rvCatProv.setAdapter(subGirosAdapter);
 
 
@@ -69,11 +69,6 @@ public class ProveedoresActivity  extends AppCompatActivity {
         });
 
         buscador = findViewById(R.id.buscadorView);
-
-
-
-
-
 
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -96,11 +91,17 @@ public class ProveedoresActivity  extends AppCompatActivity {
 
     private List<TtCtCategoriaProv_> buscaItem(String valorBuscado){
         List<TtCtCategoriaProv_> listaFiltrada = new ArrayList<>();
+
+
         for (TtCtCategoriaProv_ catArticulo: listCatProv) {
+
             if(catArticulo.getcCategoria().trim().toUpperCase().contains(valorBuscado.trim().toUpperCase()))
                 listaFiltrada.add(catArticulo);
+
+
         }
-        return listaFiltrada;
+
+        return  listaFiltrada;
     }
 
 
@@ -110,14 +111,15 @@ public class ProveedoresActivity  extends AppCompatActivity {
         ProvClasifAdapter provClasifAdapter = new ProvClasifAdapter(ProveedoresActivity.this, listSubCatProv, new RVAdapter.OnViewHolderClick() {
             @Override
             public void onClick(View view, int position, Object item) {
-                List<TtCtCategoriaProv_> listCat = new ArrayList<TtCtCategoriaProv_>();
-                for (TtCtCategoriaProv_ cat : listCat) {
-                    if(cat.getiCategoria() == ((TtCtCategoriaProv_) item).getiCategoria())
-                        listCat.add(cat);
-                }
-                Intent vistaNueva = new Intent(ProveedoresActivity.this, ArticuloActivity.class);
-                vistaNueva.putExtra("list", (Serializable) listCat);
+                //List<TtCtCategoriaProv_> listCat = new ArrayList<TtCtCategoriaProv_>();
+
+
+                Intent vistaNueva = new Intent(ProveedoresActivity.this, ctSubClasif.class);
+                vistaNueva.putExtra("list", (Serializable) listSubCatProv);
+                vistaNueva.putExtra("ipiCat",((TtCtCategoriaProv_) item).getiCategoria());
+                vistaNueva.putExtra("ipiProv",((TtCtCategoriaProv_) item).getiProveedor());
                 startActivity(vistaNueva);
+
             }
         });
         return provClasifAdapter;

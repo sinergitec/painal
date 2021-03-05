@@ -21,7 +21,7 @@ import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 public class ArticuloDetalleActivity extends AppCompatActivity {
 
     private TextView nombreArticulo;
-    private EditText descripcionArticulo;
+    private EditText descripcionArticulo, etObs, etPresentacion;
     private Button precioPieza;
     private Button precioGranel;
     private Button agregarElemento;
@@ -44,7 +44,6 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         setContentView(R.layout.articulo_detalle);
 
 
-        Log.e("articulo det", "articulodet");
         nombreArticulo = findViewById(R.id.articulo);
         descripcionArticulo = findViewById(R.id.descripcion);
         precioPieza = findViewById(R.id.piezas);
@@ -54,10 +53,14 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         quitarElemento = findViewById(R.id.quitar);
         agregarCarrito = findViewById(R.id.agregar2);
 
+        etObs = findViewById(R.id.observaciones);
+        etPresentacion = findViewById(R.id.etPresentacion);
+
         Intent i = getIntent();
         articulo = (TtCtArtProveedor_) i.getSerializableExtra("articulo");
         nombreArticulo.setText(articulo.getCDescripcion());
         descripcionArticulo.setText(articulo.getCDescripcion());
+        etPresentacion.setText("Presentacion: " + articulo.getCPresentacion());
         saltoContadorGranel = articulo.getDeGramosPieza();
         actualizaCantidadArticulo();
 
@@ -86,11 +89,13 @@ public class ArticuloDetalleActivity extends AppCompatActivity {
         });
 
         agregarCarrito.setOnClickListener(v -> {
+            String vcObsArt = etObs.getText().toString();
             Carrito carrito = new Carrito(articulo, banderaContador ? contadorGranel : contadorPza, articulo.getDePrecioVtaPza(),
-                    banderaContador ? "g" : "pz");
+                    banderaContador ? "g" : "pz", vcObsArt);
 
             Log.e("Piezas , ", "Piezas " + contadorPza);
             carrito.setMonto(contadorPza * carrito.getMonto());
+            carrito.setObs(etObs.getText().toString());
             CarritoSingleton.getInstance().agregaCarrito(v.getContext(), carrito);
         });
 

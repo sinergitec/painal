@@ -112,6 +112,18 @@ public class Response {
     @Expose
     private Double opdeSaldo;
 
+    @SerializedName("opcUrlImg")
+    @Expose
+    private String opcUrlImg;
+
+    public String getOpcUrlImg() {
+        return opcUrlImg;
+    }
+
+    public void setOpcUrlImg(String opcUrlImg) {
+        this.opcUrlImg = opcUrlImg;
+    }
+
     public Double getOpdeSaldo() {
         return opdeSaldo;
     }
@@ -314,6 +326,7 @@ public class Response {
                 ", oplError='" + oplError + '\'' +
                 ", opcError='" + opcError + '\'' +
                 ", opdeSaldo='" + opdeSaldo + '\'' +
+                ", opcUrlImg='" + opcUrlImg + '\'' +
                 '}';
     }
 }

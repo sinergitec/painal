@@ -34,6 +34,7 @@ public class ProvSubClasifAdapter extends RVAdapter<TtCtSubCategoriaProv> {
 
             title.setText(item.getCSubCategoria());
             new DownloadImageTask(photo).execute("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+
         }
     }
 }

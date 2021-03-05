@@ -119,5 +119,11 @@
 
     <string name="artDif">Art Dif</string>
 
+    <!--Datos TC-->
+    <string name="nombreT">NOMBRE QUE APARECE EN LA TARJETA</string>
+    <string name="numetoTC">NUMERO DE TAJETA</string>
+    <string name="mesTC">MES</string>
+    <string name="yearTC">AÑO</string>
+    <string name="segTC"></string>
 
 </resources>

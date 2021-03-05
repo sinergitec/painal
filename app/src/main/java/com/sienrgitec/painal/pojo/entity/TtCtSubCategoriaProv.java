@@ -41,6 +41,18 @@ public class TtCtSubCategoriaProv implements Serializable {
     @Expose
     private String cFoto;
 
+    @SerializedName("cRutaImg")
+    @Expose
+    private String cRutaImg;
+
+
+    public String getcRutaImg() {
+        return cRutaImg;
+    }
+
+    public void setcRutaImg(String cRutaImg) {
+        this.cRutaImg = cRutaImg;
+    }
 
     public String getcFoto() {
         return cFoto;

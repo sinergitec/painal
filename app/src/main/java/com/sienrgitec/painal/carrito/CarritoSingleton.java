@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Stack;
 
 import static com.sienrgitec.painal.constante.Constantes.vdeSaldo;
+import static com.sienrgitec.painal.constante.Constantes.viBorraProv;
 
 public class CarritoSingleton {
 
@@ -38,6 +39,10 @@ public class CarritoSingleton {
     private List<TtCtDomicilio_> domicilio = new ArrayList<TtCtDomicilio_>();
     private Stack<Integer> pilaProveedores = new Stack<>();
     private Stack<String> pilaDomicilios = new Stack<>();
+
+    private Stack<String> pilaDomBorra  = new Stack<>();
+    private Stack<Integer> pilaProvBorra = new Stack<>();
+
 
     private CarritoSingleton(){
         if (sSoleInstance != null){
@@ -151,9 +156,46 @@ public class CarritoSingleton {
     }
 
     public synchronized void eliminarArticuloCarrito(Context context, int id){
+        int viProveedor = (this.listaCarrito.get(id - 1 ).getArticulo().getIProveedor());
         listaCarrito.remove(id - 1);
         CarritoDBHelper carritoDBHelper = new CarritoDBHelper(context);
         carritoDBHelper.eliminarArticuloCarrito(this.listaCarrito);
+
+        ValidaPilasPedido(viProveedor);
+
+    }
+
+    public void ValidaPilasPedido(Integer ipiProveedor){
+
+        pilaDomBorra.clear();
+        pilaProvBorra.clear();
+
+        boolean vlTieneArt = true;
+        int viDom = 0;
+
+        for(Carrito objArts: this.listaCarrito ){
+            Log.e("dentro del for", "provs" + objArts.getArticulo().getIProveedor());
+            if(objArts.getArticulo().getIProveedor() == ipiProveedor){
+                Log.e("validaProv", "si existo " );
+            }else{
+                Log.e("validaProv", "no existo");
+                vlTieneArt = false;
+                viDom =  objArts.getArticulo().getIDomicilio();
+            }
+        }
+
+        if(vlTieneArt == false){
+            Constantes.viBorraProv = ipiProveedor;
+
+            pilaProvBorra.push(ipiProveedor);
+            pilaDomBorra.push(String.valueOf(ipiProveedor)+ "," + String.valueOf(viDom));
+
+            pilaProveedores.removeAll(pilaProvBorra);
+            pilaDomicilios.removeAll(pilaDomBorra);
+
+        }
+
+
     }
 
     public synchronized List<Carrito> getListaCarrito() {

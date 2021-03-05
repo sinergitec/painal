@@ -3,6 +3,7 @@ package com.sienrgitec.painal.componente.recycler;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.sienrgitec.painal.constante.Constantes.vcUrlImg;
+
 public class ProvClasifAdapter extends RVAdapter<TtCtCategoriaProv_> implements View.OnClickListener {
 
     private List<TtCtSubCategoriaProv> listaSub = new ArrayList<>();
@@ -65,21 +68,18 @@ public class ProvClasifAdapter extends RVAdapter<TtCtCategoriaProv_> implements 
             TextView  title = (TextView)viewHolder.getView(R.id.title);
             ImageView photo = (ImageView) viewHolder.getView(R.id.imageView12);
 
-           // cardView.setCardBackgroundColor(Color.parseColor(Constantes.ARRAY_COLORS[ new Random().nextInt(Constantes.ARRAY_COLORS.length) ]));
+
             title.setText(item.getcCategoria());
 
             if(item.getcFoto()!=""){
-                new DownloadImageTask(photo).execute("http://192.168.1.13:80/multimedia/painal/cangrejito/" + item.getcFoto());
+
+                new DownloadImageTask(photo).execute(vcUrlImg + item.getcRutaImg()     + "/"   + item.getcFoto());
+
+            }else{
+                new DownloadImageTask(photo).execute(vcUrlImg + "/" + item.getcRutaImg() + "/" + "sinvistaprevia.png");
             }
 
 
-
-            /*CardView cardView = (CardView) viewHolder.getView(R.id.cv);
-            TextView title = (TextView) viewHolder.getView(R.id.titile);
-            TextView subTitle = (TextView) viewHolder.getView(R.id.subTitle);
-
-            final RecyclerView rv = (RecyclerView) viewHolder.getView(R.id.rvH);
-            subTitle.setText("");
             title.setText(item.getcCategoria());
             List<TtCtSubCategoriaProv> listaSubAux = new ArrayList<>();
             for (TtCtSubCategoriaProv itemSubCat : this.listaSub) {
@@ -87,57 +87,7 @@ public class ProvClasifAdapter extends RVAdapter<TtCtCategoriaProv_> implements 
                     listaSubAux.add(itemSubCat);
                 }
             }
-            LinearLayoutManager llm = new LinearLayoutManager(viewHolder.getView().getContext(), LinearLayoutManager.HORIZONTAL, false);
-            rv.setLayoutManager(llm);
-            ProvSubClasifAdapter provSubClasifAdapter = new ProvSubClasifAdapter(viewHolder.getView().getContext(), new RVAdapter.OnViewHolderClick(){
-                @Override
-                public void onClick(View view, int position, Object item2) {
-                    final Painal service = ServiceGenerator.createService(Painal.class);
-                    final TtCtSubCategoriaProv subCatProv = (TtCtSubCategoriaProv) item2;
-                    Map<String, String> data = new HashMap<>();
-                    data.put("ipiProveedor", String.valueOf(subCatProv.getIProveedor()));
-                    data.put("ipiCategoria", String.valueOf(subCatProv.getICategoria()));
-                    data.put("ipiSubCategoria", String.valueOf(subCatProv.getISubCategoria()));
-                    data.put("ipiClasificacion", "1");
-                    data.put("ipiSubClasificacion", "1");
-                    final Call<Respuesta> call = service.consultaArticulos(data);
 
-                    call.enqueue(new Callback<Respuesta>() {
-                        @Override
-                        public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                            if(response.isSuccessful()){
-                                Respuesta res = response.body();
-
-                                if(res.getResponse().getTtCtArtProveedor() != null &&
-                                        res.getResponse().getTtCtArtProveedor().getTtCtArtProveedor() != null &&
-                                        res.getResponse().getTtCtArtProveedor().getTtCtArtProveedor().size() > 0){
-                                    Intent vistaNueva = new Intent(viewHolder.getView().getContext(), ArticuloActivity.class);
-                                    vistaNueva.putExtra("list", (Serializable) res.getResponse().getTtCtArtProveedor().getTtCtArtProveedor());
-                                    viewHolder.getView().getContext().startActivity(vistaNueva);
-                                } else {
-                                    Toast.makeText(viewHolder.getView().getContext(), "Sin articulos disponibles", Toast.LENGTH_LONG).show();
-                                }
-                            } else {
-                                try {
-                                    Errors error = ErrorUtils.parseError(response);
-                                    Toast.makeText(viewHolder.getView().getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(viewHolder.getView().getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Respuesta> call, Throwable t) {
-                            Toast.makeText(viewHolder.getView().getContext(), "Error Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-                }
-            });
-            provSubClasifAdapter.setList(listaSubAux);
-            rv.setAdapter(provSubClasifAdapter);*/
         }
     }
 

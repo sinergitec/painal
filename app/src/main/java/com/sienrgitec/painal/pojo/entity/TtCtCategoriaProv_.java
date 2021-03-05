@@ -39,6 +39,19 @@ public class TtCtCategoriaProv_ implements Serializable {
     @Expose
     private Object cFoto;
 
+    @SerializedName("cRutaImg")
+    @Expose
+    private Object cRutaImg;
+
+
+    public Object getcRutaImg() {
+        return cRutaImg;
+    }
+
+    public void setcRutaImg(Object cRutaImg) {
+        this.cRutaImg = cRutaImg;
+    }
+
     public Object getcFoto() {
         return cFoto;
     }

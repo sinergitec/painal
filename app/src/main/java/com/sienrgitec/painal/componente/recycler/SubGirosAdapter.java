@@ -124,7 +124,7 @@ public class SubGirosAdapter extends RVAdapter<TtCtSubGiro_> {
                             listProveedor.add(proveedor);
                             if(proveedor.getLSucursales()){
                                 TtCtProveedor_ proveedor1 = new TtCtProveedor_(proveedor.getIProveedor(), proveedor.getCClaveProv(), proveedor.getcRazonSocial(), proveedor.getCNegocio(), proveedor.getCRFC(), proveedor.getIGiro(), proveedor.getISubGiro(), proveedor.getCWhatsApp(), proveedor.getCPaginaWeb(), proveedor.getCEMail(), proveedor.getCTwitter(), proveedor.getCFacebook(), proveedor.getIEstadoProv(), proveedor.getLSucursales(), proveedor.getINivelClasifica(), proveedor.getLSistema(), proveedor.getCSistema(), proveedor.getCObs(), proveedor.getDtAfiliacion(), proveedor.getDtCreado(), proveedor.getDtModificado(), proveedor.getCUsuCrea(), proveedor.getCUsuModifica(), proveedor.getiDomicilio(),
-                                        proveedor.getDeEvaluacion(), proveedor.getcEvaluacion(), proveedor.getcTipoProv(), proveedor.getcDomicilio(), proveedor.getcFoto(), proveedor.getId());
+                                        proveedor.getDeEvaluacion(), proveedor.getcEvaluacion(), proveedor.getcTipoProv(), proveedor.getcDomicilio(), proveedor.getcFoto(), proveedor.getcRutaImg(), proveedor.getId());
                                 proveedor1.setCNegocio(proveedor.getCNegocio() + " II");
                                 listProveedor.add(proveedor1);
                             }

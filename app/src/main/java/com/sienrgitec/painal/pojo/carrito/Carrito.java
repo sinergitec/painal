@@ -12,17 +12,18 @@ public class Carrito implements Serializable {
     private TtCtArtProveedor_ articulo;
     private Double cantidadArticulo = 0.0 ;
     private Double monto = 0.0 ;
-    private String tipoUnidad;
+    private String tipoUnidad, Obs;
 
     public Carrito (){
 
     }
 
-    public Carrito(TtCtArtProveedor_ articulo, Double cantidadArticulo, Double monto, String tipoUnidad) {
+    public Carrito(TtCtArtProveedor_ articulo, Double cantidadArticulo, Double monto, String tipoUnidad, String ipcObs) {
         this.articulo = articulo;
         this.cantidadArticulo = cantidadArticulo;
         this.monto = monto;
         this.tipoUnidad = tipoUnidad;
+        this.Obs = ipcObs;
     }
 
     public TtCtArtProveedor_ getArticulo() {
@@ -49,6 +50,14 @@ public class Carrito implements Serializable {
         this.monto = monto;
     }
 
+    public String getObs() {
+        return Obs;
+    }
+
+    public void setObs(String obs) {
+        Obs = obs;
+    }
+
     public String getTipoUnidad() {
         return tipoUnidad;
     }
@@ -64,6 +73,7 @@ public class Carrito implements Serializable {
         sb.append(", cantidadArticulo=").append(cantidadArticulo);
         sb.append(", monto=").append(monto);
         sb.append(", tipoUnidad='").append(tipoUnidad).append('\'');
+        sb.append(", Obs='").append(Obs).append('\'');
         sb.append('}');
         return sb.toString();
     }

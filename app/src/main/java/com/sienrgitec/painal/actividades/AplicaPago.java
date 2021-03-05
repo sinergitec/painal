@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.util.Log;
@@ -55,13 +57,14 @@ import retrofit2.Response;
 public class AplicaPago extends AppCompatActivity {
 
     private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal, etPassword;
-    private Button btnPagar;
+    private Button btnPagar, btnComCP, btnComT;
     RelativeLayout rlEstadoProc, rlPropinas, rlTitlani;
     private Integer iFormaPago = 0, iComision = 0, iTitlaniP = 0;
     private double deAporta = 0.00, dePropina = 0.00, vdeSubtotal = 0.00, vdeMonto =0.00,
-            dePorcCom = 0.00, dePorcProp = 0.00, deImporteTotal = 0.00;
+            dePorcCom = 0.00, dePorcProp = 0.00, deImporteTotal = 0.00, vdeValorCom = 0.00, vdeComMin = 0;
     private Constantes constantes;
     public String email = "";
+    private EditText etOPorcCP, etOPorcT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,27 +88,92 @@ public class AplicaPago extends AppCompatActivity {
         etMonto     = findViewById(R.id.textView25);
        // etPassword  = findViewById(R.id.edPassword);
         btnPagar    = findViewById(R.id.btnPagoF);
+        etOPorcCP   = findViewById(R.id.pacp);
+        etOPorcT    = findViewById(R.id.patl);
 
         //btnPagar.setOnClickListener(v -> CreaCompra(v));
         btnPagar.setOnClickListener(v -> PideContraseña(v));
+        btnComCP = findViewById(R.id.button3);
+        btnComT  = findViewById(R.id.button4);
+
 
 
         CargaFPagos();
         CargaComisiones();
 
         etContacto.setText("Contacto: " + String.valueOf(CarritoSingleton.getInstance().getCliente().getcNombre()));
-        etDomicilio.setText(CarritoSingleton.getInstance().getDomicilioActual().getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilioActual().getCNumeroExt()
+        etDomicilio.setText(CarritoSingleton.getInstance().getDomicilioActual().getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilioActual().getcNumExt()
                 + " " + CarritoSingleton.getInstance().getDomicilioActual().getCColonia());
         etSubtotal.setText(vdeSubtotal + "0");
         etTotal.setText(vdeSubtotal + "0");
 
+
+        btnComCP.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(iComision == 6){
+                    dePorcCom =  Double.parseDouble(etOPorcCP.getText().toString());
+                    vdeValorCom = Double.parseDouble(etOPorcCP.getText().toString());
+
+                    Log.e("mis valores", vdeValorCom + " <--vdeValorCom - vdeComMin--> " + vdeComMin);
+
+                    if(vdeValorCom < vdeComMin){
+                        MuestraMensaje();
+                        return;
+                    }else{
+                        CalculaAportacion(vdeValorCom);
+                    }
+                }
+                /**/
+                    CalculaAportacion(vdeValorCom);
+
+            }
+        });
+        btnComT.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(iComision == 6){
+                    dePorcProp =  Double.parseDouble(etOPorcT.getText().toString());
+                    if(dePorcProp < vdeComMin){
+                        MuestraMensaje();
+                        return;
+                    }
+                }
+
+                    CalculaPropina(Double.parseDouble(etOPorcT.getText().toString()));
+
+            }
+        });
+
+    }
+
+    public void MuestraMensaje(){
+        /**AndrosOHg 28-07-2020**/
+        ProgressDialog nDialog;
+        nDialog = new ProgressDialog(AplicaPago.this);
+        nDialog.setMessage("Cargando...");
+        nDialog.setTitle("Mapas");
+        nDialog.setIndeterminate(false);
+        nDialog.show();
+        /**--------------------**/
+
+
+        /**AndrosOHG 03-02-2021**/
+        androidx.appcompat.app.AlertDialog.Builder myBuild = new androidx.appcompat.app.AlertDialog.Builder(AplicaPago.this);
+        myBuild.setMessage("El porcentaje minimo a aportar no puede ser menor al " + vdeComMin + "%.");
+        myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡AVISO! </font>"));
+        myBuild.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+
+        androidx.appcompat.app.AlertDialog dialog = myBuild.create();
+        dialog.show();
+        nDialog.dismiss();
     }
 
     private void cargaInfoCarrito(){
-
-        // Se invoca al llenado de la lista
-
-        // Se invoca al llenado de la lista
         CarritoSingleton.getInstance().consultaItemCarrito(AplicaPago.this);
         Integer sizeList = CarritoSingleton.getInstance().getListaCarrito().size();
         Double totalD = subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito());
@@ -182,14 +250,12 @@ public class AplicaPago extends AppCompatActivity {
 
     private void CargaComisiones(){
 
-
         final Painal service = ServiceGenerator.createService(Painal.class);
         Map<String, String> data = new HashMap<>();
         data.put("ipiPersona", String.valueOf(5));
         data.put("ipiTotProvs", (String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()))  );
         data.put("ipiUnidad", String.valueOf(1));
 
-        Log.e("Cargando comisiones", "num provs--> " + String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores()));
 
         final Call<Respuesta> call = service.ctComisionesCli(data);
         call.enqueue(new Callback<Respuesta>() {
@@ -212,45 +278,61 @@ public class AplicaPago extends AppCompatActivity {
 
                         for (final TtCtComisiones_ objCtComision : res.getResponse().getTtCtComisiones().getTtCtComisiones_()) {
 
+
+                            if(vdeComMin == 0){
+                                vdeComMin = objCtComision.getDeValor();
+                            }
+
                             viPago = viPago + 1;
-
-
-
                             String cantArtString = new DecimalFormat("0").format(objCtComision.getDeValor());
 
-
-
-
                             RadioButton rbAgregaP = new RadioButton(AplicaPago.this);
-                            rbAgregaP.setText(cantArtString + "%");
-                            //rbAgregaP.setText(objCtComision.getDeValor().toString() + "0");
+                            rbAgregaP.setText(objCtComision.getcComision());
                             rbAgregaP.setHeight(75);
-                            //rbAgregaP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
-
 
                             RadioButton rbTitlaniP = new RadioButton(AplicaPago.this);
-                            rbTitlaniP.setText(cantArtString + "%");
-                            //rbTitlaniP.setText(objCtComision.getDeValor().toString() + "0");
+                            rbTitlaniP.setText(objCtComision.getcComision());
                             rbTitlaniP.setHeight(75);
-                            //rbTitlaniP.setLayoutParams(new RadioGroup.LayoutParams(125, 70)); //150
 
                             rgPropinas.addView(rbAgregaP);
                             rgTitlani.addView(rbTitlaniP);
 
                             rbAgregaP.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
+
+
+                                    if(objCtComision.getcComision().equals("OTRO")){
+                                        etOPorcCP.setVisibility(View.VISIBLE);
+                                        btnComCP.setVisibility(View.VISIBLE);
+
+                                    }else{
+                                        etOPorcCP.setVisibility(View.INVISIBLE);
+                                        btnComCP.setVisibility(View.INVISIBLE);
+
+                                        dePorcCom =  objCtComision.getDeValor();
+                                        vdeValorCom =  objCtComision.getDeValor();
+
+                                        CalculaAportacion(objCtComision.getDeValor());
+                                    }
                                     iComision =  objCtComision.getiComision();
-                                    dePorcCom =  objCtComision.getDeValor();
-                                    CalculaAportacion(objCtComision.getDeValor());
+
                                 }
                             });
 
                             rbTitlaniP.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     iTitlaniP  =  objCtComision.getiComision();
-                                    dePorcProp =  objCtComision.getDeValor();
-                                    CalculaPropina(objCtComision.getDeValor());
+                                    if(objCtComision.getcComision().equals("OTRO")){
+                                        etOPorcT.setVisibility(View.VISIBLE);
+                                        btnComT.setVisibility(View.VISIBLE);
+                                    }else{
+                                        etOPorcT.setVisibility(View.INVISIBLE);
+                                        btnComT.setVisibility(View.INVISIBLE);
 
+                                        dePorcProp =  objCtComision.getDeValor();
+                                        CalculaPropina(objCtComision.getDeValor());
+
+                                    }
                                 }
                             });
 
@@ -411,11 +493,10 @@ public class AplicaPago extends AppCompatActivity {
     private void llenaListaOpPedidoProveedorYOpPedidoDet(List<TtOpPedidoProveedor> listaOpPedidoProveedor, List<TtOpPedidoDet> listDetalle){
         Integer proveedorPedido = 1;
         for (int i = 0; i < CarritoSingleton.getInstance().getPilaDomicilios().size() ; i++) {
+
             Integer partida = 1;
             Double totalPedidoProveedor = 0.0, vdeTotArt = 0.0;
             for (Carrito item: CarritoSingleton.getInstance().getListaCarrito()) {
-
-                Log.e("pagopago-->0 ", "cANT " + item.getCantidadArticulo() );
 
                 if(CarritoSingleton.getInstance().getPilaProveedores().get(i).compareTo(item.getArticulo().getIProveedor()) == 0
                         && CarritoSingleton.getInstance().getPilaDomicilios().get(i).
@@ -427,7 +508,7 @@ public class AplicaPago extends AppCompatActivity {
                             String.valueOf(item.getArticulo().getIArticulo()),
                             item.getArticulo().getCArticulo(),
                             item.getArticulo().getCDescripcion(),
-                            "",
+                            item.getObs(),
                             "FALSE",
                             "",
                             "16",
@@ -455,26 +536,37 @@ public class AplicaPago extends AppCompatActivity {
 
             String [] proveedorDomicilio = CarritoSingleton.getInstance().getPilaDomicilios().get(i).split(",");
 
-            listaOpPedidoProveedor.add(new TtOpPedidoProveedor(String.valueOf(proveedorPedido * 6),String.valueOf(proveedorPedido),
-                    proveedorDomicilio[0],
-                    "TODAY","0",
-                    proveedorDomicilio[1],
-                    String.valueOf(vdeTotArt), //String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
-                    String.valueOf(totalPedidoProveedor / 1.16),
-                    "16",
-                    String.valueOf(totalPedidoProveedor),
-                    "","FALSE","TRUE","NOW","FALSE",
-                    "10","0","0","FALSE","",
-                    "0","FALSE","","0","0",
-                    "NOW","",
-                    CarritoSingleton.getInstance().getCliente().getcUsuCrea(),
-                    CarritoSingleton.getInstance().getCliente().getcUsuCrea(),"0","0"));
 
-            proveedorPedido ++;
+
+
+
+
+
+                    listaOpPedidoProveedor.add(new TtOpPedidoProveedor(String.valueOf(proveedorPedido * 6), String.valueOf(proveedorPedido),
+                            proveedorDomicilio[0],
+                            "TODAY", "0",
+                            proveedorDomicilio[1],
+                            String.valueOf(vdeTotArt), //String.valueOf(partida.compareTo(1) > 0 ? partida - 1 : partida),
+                            String.valueOf(totalPedidoProveedor / 1.16),
+                            "16",
+                            String.valueOf(totalPedidoProveedor),
+                            "", "FALSE", "TRUE", "NOW", "FALSE",
+                            "10", "0", "0", "FALSE", "",
+                            "0", "FALSE", "", "0", "0",
+                            "NOW", "",
+                            CarritoSingleton.getInstance().getCliente().getcUsuCrea(),
+                            CarritoSingleton.getInstance().getCliente().getcUsuCrea(), "0", "0"));
+
+                    proveedorPedido++;
+
         }
     }
 
     private void PideContraseña(View view){
+        Log.e("pide pw","--> " + etAporta);
+
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(AplicaPago.this);
         builder.setTitle("Captura tu contraseña");
 

@@ -110,6 +110,9 @@ public class TtCtProveedor_  implements Serializable {
     private String cFoto;
 
 
+    @SerializedName("cRutaImg")
+    @Expose
+    private String cRutaImg;
 
     public TtCtProveedor_(){
 
@@ -118,7 +121,7 @@ public class TtCtProveedor_  implements Serializable {
     public TtCtProveedor_(Integer iProveedor, String cClaveProv, String cRazonS, String cNegocio, String cRFC, Integer iGiro, Integer iSubGiro, String cWhatsApp,
                           String cPaginaWeb, String cEMail, String cTwitter, String cFacebook, Integer iEstadoProv, Boolean lSucursales, Integer iNivelClasifica,
                           Boolean lSistema, String cSistema, String cObs, Object dtAfiliacion, String dtCreado, String dtModificado, String cUsuCrea, String cUsuModifica,
-                          Integer iDomicilio, Double deEvaluacion, String cEvaluacion, String cTipoProv,  String cDomicilio,String cFoto, Object id) {
+                          Integer iDomicilio, Double deEvaluacion, String cEvaluacion, String cTipoProv,  String cDomicilio,String cFoto,String cRutaImg, Object id) {
         this.iProveedor = iProveedor;
         this.cClaveProv = cClaveProv;
         this.cRazonSocial = cRazonSocial;
@@ -148,9 +151,17 @@ public class TtCtProveedor_  implements Serializable {
         this.cTipoProv = cTipoProv;
         this.cDomicilio = cDomicilio;
         this.cFoto = cFoto;
+        this.cRutaImg = cRutaImg;
         this.id = id;
     }
 
+    public String getcRutaImg() {
+        return cRutaImg;
+    }
+
+    public void setcRutaImg(String cRutaImg) {
+        this.cRutaImg = cRutaImg;
+    }
 
     public String getcFoto() {
         return cFoto;

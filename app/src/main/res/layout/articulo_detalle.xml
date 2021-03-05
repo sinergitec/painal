@@ -49,15 +49,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
         android:text="Observaciones"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+        app:layout_constraintTop_toBottomOf="@+id/etPresentacion" />
 
     <EditText
         android:id="@+id/observaciones"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -105,6 +104,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="Granel"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/piezas"
             app:layout_constraintTop_toTopOf="parent" />
@@ -162,5 +162,25 @@
         </TableRow>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/etPresentacion"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_corners_white"
+        android:ems="10"
+        android:enabled="false"
+        android:gravity="start|top"
+        android:hint="Presentación"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

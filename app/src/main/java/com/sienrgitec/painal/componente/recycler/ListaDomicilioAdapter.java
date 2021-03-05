@@ -35,7 +35,7 @@ public class ListaDomicilioAdapter extends RVAdapter<TtCtDomicilio_> {
             TextView aliasDireccion = (TextView) viewHolder.getView(R.id.aliasDireccion);
 
 
-            aliasDireccion.setText(item.getCCalle() + " " + (item.getCNumeroExt() != null ? item.getCNumeroExt() : "SN"));
+            aliasDireccion.setText(item.getCCalle() + " " + (item.getcNumExt() != null ? item.getcNumExt() : "SN"));
             if(!item.getIDomicilio().equals(CarritoSingleton.getInstance().getDomicilioActual().getIDomicilio())){
                domicilioActual.setVisibility(View.INVISIBLE);
             }
