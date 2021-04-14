@@ -21,10 +21,14 @@ import android.widget.Toast;
 
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.pojo.respuesta.Respuesta;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import io.conekta.conektasdk.Card;
 import io.conekta.conektasdk.Conekta;
@@ -37,6 +41,10 @@ public class DatosTC extends AppCompatActivity  {
 
     private EditText etNombreT, etTarjeta, etMesT, etYearT, etSeg;
     private Button btnAceptarT, btnCancelarT;
+
+    public DatosTC() throws JSONException {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +191,7 @@ public class DatosTC extends AppCompatActivity  {
                 Log.e("antes de try ", "data" + data);
                 try {
                     etNombreT.setText("Token id: " + data.getString("id"));
+
                 } catch (Exception error) {
                     AlertDialog.Builder myBuild = new AlertDialog.Builder(DatosTC.this);
                     myBuild.setMessage("Error: " + data);
@@ -203,9 +212,13 @@ public class DatosTC extends AppCompatActivity  {
         });
         token.create(card);//Create token
 
-
-
     }
+
+
+
+
+
+
 
 
 

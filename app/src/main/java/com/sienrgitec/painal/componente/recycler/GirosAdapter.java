@@ -54,7 +54,7 @@ public class GirosAdapter extends RVAdapter<TtCtGiro_> {
 
 
                 new DownloadImageTask(photo).execute(vcUrlImg + "/giro/" + item.getcFoto());
-
+                Log.e("giros:"," --> " + vcUrlImg + "/giro/" + item.getcFoto());
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.sienrgitec.painal.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -24,13 +26,20 @@ import android.widget.Toast;
 
 import com.sienrgitec.painal.R;
 import com.sienrgitec.painal.carrito.CarritoSingleton;
+import com.sienrgitec.painal.componente.RVAdapter;
+import com.sienrgitec.painal.componente.recycler.ArticulosAdapter;
 import com.sienrgitec.painal.componente.recycler.CarritoAdapter;
+import com.sienrgitec.painal.componente.recycler.SubGirosAdapter;
+import com.sienrgitec.painal.componente.recycler.ctFPagosAdapter;
 import com.sienrgitec.painal.constante.Constantes;
 import com.sienrgitec.painal.pojo.carrito.Carrito;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP;
 import com.sienrgitec.painal.pojo.entity.TtCredDetCPCP_;
+import com.sienrgitec.painal.pojo.entity.TtCredEncCPCP_;
+import com.sienrgitec.painal.pojo.entity.TtCtArtProveedor_;
 import com.sienrgitec.painal.pojo.entity.TtCtComisiones_;
 import com.sienrgitec.painal.pojo.entity.TtCtFormasPago_;
+import com.sienrgitec.painal.pojo.entity.TtCtSubGiro_;
 import com.sienrgitec.painal.pojo.entity.TtOpPedido;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDet;
 import com.sienrgitec.painal.pojo.entity.TtOpPedidoDomicilio;
@@ -44,6 +53,7 @@ import com.sienrgitec.painal.servicio.Painal;
 import com.sienrgitec.painal.servicio.ServiceGenerator;
 import com.sienrgitec.painal.util.Funcionalidades;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,65 +64,90 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.lang.Double.parseDouble;
+
 public class AplicaPago extends AppCompatActivity {
 
-    private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal, etPassword;
-    private Button btnPagar, btnComCP, btnComT;
+    private TextView etContacto, etDomicilio, etMonto, etAporta, etPropina, etSubtotal, etTotal, etPassword, etPorPagar;
+    private Button btnPagar, btnComCP, btnComT, btnAgregaPago;
     RelativeLayout rlEstadoProc, rlPropinas, rlTitlani;
     private Integer iFormaPago = 0, iComision = 0, iTitlaniP = 0;
     private double deAporta = 0.00, dePropina = 0.00, vdeSubtotal = 0.00, vdeMonto =0.00,
             dePorcCom = 0.00, dePorcProp = 0.00, deImporteTotal = 0.00, vdeValorCom = 0.00, vdeComMin = 0;
     private Constantes constantes;
     public String email = "";
-    private EditText etOPorcCP, etOPorcT;
+    private EditText etOPorcCP, etOPorcT, etMontoPaga;
+
+    private RecyclerView rvPagos;
+    private List<TtCtFormasPago_> listPagos = new ArrayList<>();
+
+    final List<TtOpPedidoPago> listaCreaPagos = new ArrayList<>();
+    final List<TtCredDetCPCP_> listaCreaPagoC = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aplica_pago);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         Intent i = getIntent();
         vdeSubtotal = getIntent().getExtras().getDouble("vdeimporte");
 
         cargaInfoCarrito(  );
 
-        rlEstadoProc = findViewById(R.id.edoproc);
+//        rlEstadoProc = findViewById(R.id.edoproc);
         rlPropinas  = findViewById(R.id.edoprop);
         rlTitlani   = findViewById(R.id.edtitlani);
-        etContacto  = findViewById (R.id.textView28);
-        etDomicilio = findViewById(R.id.textView29);
+
+        /* etContacto  = findViewById (R.id.textView28);
+        etDomicilio = findViewById(R.id.textView29);*/
+
         etSubtotal  = findViewById(R.id.textView21);
         etTotal     = findViewById(R.id.tvTotal);
-        etAporta    = findViewById(R.id.tvAporta);
-        etPropina   = findViewById(R.id.tvPropina);
-        etMonto     = findViewById(R.id.textView25);
-       // etPassword  = findViewById(R.id.edPassword);
+        etAporta    = findViewById(R.id.tvAportaCP);
+        etPropina   = findViewById(R.id.tvSelecPTL);
+
+       // etMonto     = findViewById(R.id.textView25);
+
+
         btnPagar    = findViewById(R.id.btnPagoF);
         etOPorcCP   = findViewById(R.id.pacp);
         etOPorcT    = findViewById(R.id.patl);
 
         //btnPagar.setOnClickListener(v -> CreaCompra(v));
         btnPagar.setOnClickListener(v -> PideContraseña(v));
-        btnComCP = findViewById(R.id.button3);
-        btnComT  = findViewById(R.id.button4);
+        btnComCP = findViewById(R.id.btnAportaCP);
+        btnComT  = findViewById(R.id.btnAportaTl);
+        rvPagos = findViewById(R.id.rvfpagos);
 
-
+        etPorPagar = findViewById(R.id.textView36);
+        btnAgregaPago = findViewById(R.id.button5);
+        etMontoPaga = findViewById(R.id.etMontoPaga);
 
         CargaFPagos();
         CargaComisiones();
 
-        etContacto.setText("Contacto: " + String.valueOf(CarritoSingleton.getInstance().getCliente().getcNombre()));
+        /*etContacto.setText("Contacto: " + String.valueOf(CarritoSingleton.getInstance().getCliente().getcNombre()));
         etDomicilio.setText(CarritoSingleton.getInstance().getDomicilioActual().getCCalle() + " "  + CarritoSingleton.getInstance().getDomicilioActual().getcNumExt()
-                + " " + CarritoSingleton.getInstance().getDomicilioActual().getCColonia());
+                + " " + CarritoSingleton.getInstance().getDomicilioActual().getCColonia());*/
         etSubtotal.setText(vdeSubtotal + "0");
         etTotal.setText(vdeSubtotal + "0");
+        etPorPagar.setText(String.valueOf(vdeSubtotal));
 
+
+        btnAgregaPago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ValidaMonto();
+            }
+        });
 
         btnComCP.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(iComision == 6){
-                    dePorcCom =  Double.parseDouble(etOPorcCP.getText().toString());
-                    vdeValorCom = Double.parseDouble(etOPorcCP.getText().toString());
+                    dePorcCom =  parseDouble(etOPorcCP.getText().toString());
+                    vdeValorCom = parseDouble(etOPorcCP.getText().toString());
 
                     Log.e("mis valores", vdeValorCom + " <--vdeValorCom - vdeComMin--> " + vdeComMin);
 
@@ -131,17 +166,72 @@ public class AplicaPago extends AppCompatActivity {
         btnComT.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(iComision == 6){
-                    dePorcProp =  Double.parseDouble(etOPorcT.getText().toString());
+                    dePorcProp =  parseDouble(etOPorcT.getText().toString());
                     if(dePorcProp < vdeComMin){
                         MuestraMensaje();
                         return;
                     }
                 }
 
-                    CalculaPropina(Double.parseDouble(etOPorcT.getText().toString()));
+                    CalculaPropina(parseDouble(etOPorcT.getText().toString()));
 
             }
         });
+
+    }
+
+
+
+    public void ValidaMonto(){
+       Double vdePorPagar = 0.0, vdeCantPaga = 0.0;
+
+       Log.e("pagando-->" ,etMontoPaga.getText().toString());
+
+       vdePorPagar = parseDouble(etPorPagar.getText().toString().trim());
+       vdeCantPaga = parseDouble(etMontoPaga.getText().toString().trim());
+
+        if(vdeCantPaga > vdePorPagar){
+
+            return;
+        }
+
+        etPorPagar.setText(new DecimalFormat("0.00").format(vdePorPagar - vdeCantPaga));
+
+
+
+
+       TtOpPedidoPago nvoPago = new TtOpPedidoPago();
+       nvoPago.setIPedido("0");
+       nvoPago.setIPartida("0");
+       nvoPago.setIFormaPago(String.valueOf(iFormaPago));
+       nvoPago.setDeMonto(String.valueOf(vdeCantPaga));
+       nvoPago.setDeProcComision(String.valueOf(dePorcCom));
+       nvoPago.setDeComision("");
+       nvoPago.setDePorcPropina("");
+       nvoPago.setDtCreado("NOW");
+       nvoPago.setDtModificado("NOW");
+       nvoPago.setCUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+       nvoPago.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+       nvoPago.setICliente(String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()));
+       nvoPago.setIOrigenFP("");
+       nvoPago.setCCuenta(constantes.vcCuenta);
+       nvoPago.setDePropina(String.valueOf(dePropina));
+        listaCreaPagos.add(nvoPago);
+
+
+      /*  if (iFormaPago.equals(1)) {
+            TtCredDetCPCP_ objFPago = new TtCredDetCPCP_();
+            objFPago.setcCuenta(constantes.vcCuenta);
+            objFPago.setcMov("PAGO");
+            objFPago.setDeMonto(String.valueOf(vdeCantPaga));
+            objFPago.setcReferencia("");
+            objFPago.setcObs("");
+            objFPago.setlAutorizado(false);
+            objFPago.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+            objFPago.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+            listaCreaPagoC.add(onjPago);
+        }*/
+
 
     }
 
@@ -158,7 +248,7 @@ public class AplicaPago extends AppCompatActivity {
 
         /**AndrosOHG 03-02-2021**/
         androidx.appcompat.app.AlertDialog.Builder myBuild = new androidx.appcompat.app.AlertDialog.Builder(AplicaPago.this);
-        myBuild.setMessage("El porcentaje minimo a aportar no puede ser menor al " + vdeComMin + "%.");
+        myBuild.setMessage("El porcentaje  a aportar no puede ser menor al " + vdeComMin + "%.");
         myBuild.setTitle(Html.fromHtml("<font color ='#FF0000'> ¡AVISO! </font>"));
         myBuild.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             @Override
@@ -201,38 +291,30 @@ public class AplicaPago extends AppCompatActivity {
                         Toast.makeText(AplicaPago.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
 
                     }else {
-                        int vxMod = 0, vyMod = 0,viPago = 0;
-                        RadioGroup rgEstadoP = new RadioGroup(AplicaPago.this);
-                        rgEstadoP.setOrientation(RadioGroup.HORIZONTAL);
+
+
 
                         for (final TtCtFormasPago_ objctFPago : res.getResponse().getTt_ctFormasPago().getTtCtFormasPago()) {
-
-                            viPago = viPago + 1;
-
-                            RadioButton rbEdoProceso = new RadioButton(AplicaPago.this);
-                            rbEdoProceso.setText(objctFPago.getcFormaPago());
-                            rbEdoProceso.setHeight(75);
-                            //rbEdoProceso.setLayoutParams(new RadioGroup.LayoutParams(180, 95)); //150
-
-
-                            rgEstadoP.addView(rbEdoProceso);
-
-                            if (viPago % 3 == 0) {
-                                vxMod = 0;
-                                vyMod = vyMod + 35;
-                            } else {
-                                vxMod = vxMod + 80;
-                            }
-
-                            rbEdoProceso.setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    iFormaPago =  objctFPago.getiFormaPago();
-
-                                }
-                            });
-
+                            listPagos.add(objctFPago);
                         }
-                        rlEstadoProc.addView(rgEstadoP);
+
+
+                        GridLayoutManager grid = new GridLayoutManager(AplicaPago.this, 2);
+                        rvPagos.setLayoutManager(grid);
+
+                        ctFPagosAdapter pagosAdapter = new ctFPagosAdapter(AplicaPago.this, listPagos,null);
+                        pagosAdapter.setList(listPagos);
+                        rvPagos.setAdapter(pagosAdapter);
+
+
+                        pagosAdapter.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Log.e("Seleccion--> ",listPagos.get(rvPagos.getChildAdapterPosition(v)).getcFormaPago());
+                                iFormaPago = listPagos.get(rvPagos.getChildAdapterPosition(v)).getiFormaPago();
+                            }
+                        });
+
                     }
                 } else {
                     Toast.makeText(AplicaPago.this, res.getResponse().getOpcError(), Toast.LENGTH_LONG).show();
@@ -270,11 +352,11 @@ public class AplicaPago extends AppCompatActivity {
                     }else {
                         int vxMod = 0, vyMod = 0,viPago = 0;
                         RadioGroup rgPropinas = new RadioGroup(AplicaPago.this);
-                        rgPropinas.setOrientation(RadioGroup.HORIZONTAL);
+                        rgPropinas.setOrientation(RadioGroup.VERTICAL);
 
 
                         RadioGroup rgTitlani = new RadioGroup(AplicaPago.this);
-                        rgTitlani.setOrientation(RadioGroup.HORIZONTAL);
+                        rgTitlani.setOrientation(RadioGroup.VERTICAL);
 
                         for (final TtCtComisiones_ objCtComision : res.getResponse().getTtCtComisiones().getTtCtComisiones_()) {
 
@@ -362,6 +444,8 @@ public class AplicaPago extends AppCompatActivity {
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
         etTotal.setText("$" + (vdeTotalF));
         deImporteTotal = vdeSubtotal + deAporta + dePropina;
+       // etPorPagar.setText(String.valueOf(deImporteTotal));
+        etPorPagar.setText(new DecimalFormat("0.00").format(deImporteTotal));
 
     }
 
@@ -374,6 +458,7 @@ public class AplicaPago extends AppCompatActivity {
         String vdeTotalF = new DecimalFormat("0.00").format(vdeSubtotal + deAporta + dePropina);
         etTotal.setText("$" + (vdeTotalF));
         deImporteTotal = vdeSubtotal + deAporta + dePropina;
+        etPorPagar.setText(new DecimalFormat("0.00").format(deImporteTotal));
     }
 
 
@@ -385,8 +470,10 @@ public class AplicaPago extends AppCompatActivity {
                 new TtOpPedido("0", "1", String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                         "TODAY", "1", String.valueOf(CarritoSingleton.getInstance().getNumeroProveedores().compareTo(Constantes.CANTIDAD_MAX_PROVEEDORES) > 0 ? CarritoSingleton.getInstance().getNumeroProveedores() - 1 : CarritoSingleton.getInstance().getNumeroProveedores()),
                         String.valueOf(CarritoSingleton.getInstance().getListaCarrito().size()),
+                        String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()) / 1.16),
+                        "0",
+                        String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()) * .16),
                         String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
-                        "0", "16", String.valueOf(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito())),
                         String.valueOf(dePorcCom), String.valueOf(deAporta), String.valueOf(dePorcProp), String.valueOf(dePropina), "", "",
                         "NOW", "", CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getCliente().getcUsuCrea(), CarritoSingleton.getInstance().getUsuario_().getcUsuario(),
                         CarritoSingleton.getInstance().getUsuario_().getcUsuario(), "0", "0","0");
@@ -401,24 +488,62 @@ public class AplicaPago extends AppCompatActivity {
                 CarritoSingleton.getInstance().getDomicilioActual().getIDomicilio(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "TRUE","NOW","",CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea());
 
-        final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1",String.valueOf(iFormaPago),
+        /*final TtOpPedidoPago opPedidoPago = new TtOpPedidoPago("0","1",String.valueOf(iFormaPago),
                 String.valueOf(totalCarrtio(subTotalCarrito(CarritoSingleton.getInstance().getListaCarrito()), 16.0)),
                 String.valueOf(dePorcCom),String.valueOf(deAporta),String.valueOf(dePorcProp),"NOW","",
                 CarritoSingleton.getInstance().getCliente().getcUsuCrea(),CarritoSingleton.getInstance().getCliente().getcUsuCrea(),String.valueOf(CarritoSingleton.getInstance().getCliente().getiCliente()),
                 "1",constantes.vcCuenta,String.valueOf(dePropina));
+*/
+        final List<TtOpPedidoPago> opPedidoPago = new ArrayList<>();
+
+        for(TtOpPedidoPago misPagos: listaCreaPagos){
+            TtOpPedidoPago nvoPado = new TtOpPedidoPago();
+
+            nvoPado.setCCuenta(misPagos.getCCuenta());
+            nvoPado.setCUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+            nvoPado.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
+            nvoPado.setDeComision(misPagos.getDeComision());
+            nvoPado.setDeMonto(misPagos.getDeMonto());
+            nvoPado.setDePorcPropina(misPagos.getDeProcComision());
+            nvoPado.setDeProcComision(misPagos.getDeProcComision());
+            nvoPado.setDePropina(misPagos.getDePorcPropina());
+            nvoPado.setDtCreado(misPagos.getDtCreado());
+            nvoPado.setDtModificado(misPagos.getDtModificado());
+            nvoPado.setICliente(misPagos.getICliente());
+            nvoPado.setIFormaPago(misPagos.getIFormaPago());
+            nvoPado.setIOrigenFP(misPagos.getIFormaPago());
+            nvoPado.setIPartida(misPagos.getIPartida());
+            nvoPado.setIPedido(misPagos.getIPedido());
+            opPedidoPago.add(nvoPado);
+
+        }
+
+        /*final List<TtCredDetCPCP_> pagoComunidad = new ArrayList<>();
+
+        for(TtCredDetCPCP_ objPagoComunidad : listaCreaPagoC){
+            TtCredDetCPCP_ pagoNvoComunidad = new TtCredDetCPCP_();
+            pagoNvoComunidad.setcCuenta(objPagoComunidad.getcCuenta());
+            pagoNvoComunidad.setcMov(objPagoComunidad.getcMov());
+            pagoNvoComunidad.setDeMonto(objPagoComunidad.getDeMonto());
+            pagoNvoComunidad.setcReferencia(objPagoComunidad.getcReferencia());
+            pagoNvoComunidad.setcObs(objPagoComunidad.getcObs());
+            pagoNvoComunidad.setlAutorizado(objPagoComunidad.getlAutorizado());
+            pagoNvoComunidad.setcUsuCrea(objPagoComunidad.getcUsuCrea());
+            pagoNvoComunidad.setcUsuModifica(objPagoComunidad.getcUsuModifica());
+            pagoComunidad.add(pagoNvoComunidad);
 
 
+        }*/
 
         final TtCredDetCPCP_ objFPago = new TtCredDetCPCP_();
         objFPago.setcCuenta(constantes.vcCuenta);
         objFPago.setcMov("PAGO");
-        objFPago.setDeMonto(String.valueOf(deImporteTotal));
+        objFPago.setDeMonto(String.valueOf(50));
         objFPago.setcReferencia("");
         objFPago.setcObs("");
         objFPago.setlAutorizado(false);
         objFPago.setcUsuCrea(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
         objFPago.setcUsuModifica(CarritoSingleton.getInstance().getCliente().getcUsuCrea());
-
 
 
         final Peticion peticion = new Peticion(new Request(new DsNvoPedido(new ArrayList<TtOpPedido>() {
@@ -433,11 +558,12 @@ public class AplicaPago extends AppCompatActivity {
                         add(opPedidoDomicilio);
                     }
                 },
-                new ArrayList<TtOpPedidoPago>(){
+                /*new ArrayList<TtOpPedidoPago>(){
                     {
                         add(opPedidoPago);
                     }
-                },
+                },*/
+                opPedidoPago,
                 new ArrayList<TtCredDetCPCP_>(){
                     {
                         add(objFPago);
@@ -565,6 +691,10 @@ public class AplicaPago extends AppCompatActivity {
     private void PideContraseña(View view){
         Log.e("pide pw","--> " + etAporta);
 
+        if(Double.valueOf(etPorPagar.getText().toString()) > 0){
+            Log.e("No se uede finalizar", " la venta. No se completó el pago");
+            return;
+        }
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AplicaPago.this);
@@ -633,6 +763,8 @@ public class AplicaPago extends AppCompatActivity {
         });
 
     }
+
+
 
 
 }
